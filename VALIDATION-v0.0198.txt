@@ -1,0 +1,27 @@
+FAMS Region II — v0.0198 Validation Report
+
+Release scope: Step 3.1 — AICS and MAIFIP record creation/editing endpoints.
+
+Checks performed
+- PHP syntax lint across the full source tree.
+- Permission-matrix regression suite: 52 passed, 0 failed, including new source assertions for POST capability checks, row-locked record reloads, office/facility scope validation, workflow-state validation, optimistic record-version checks, and HTTP method allowlists.
+- Endpoint registry JSON parsing and 80-route inventory validation.
+- Endpoint registry regression suite: 4 passed, 0 failed.
+- Authorization-model tests: 16 passed, 0 failed. Dashboard reporting-action tests: 12 passed, 0 failed. Reporting-period layout tests: 9 passed, 0 failed. Payload-fingerprint tests: 4 passed, 0 failed. Repository-contract tests: 6 passed, 0 failed. Shared transaction-runtime tests: 4 passed, 0 failed.
+- ZIP integrity test.
+- PHP lint: 132 files passed. Endpoint registry JSON: valid; 80 routes retained (35 AICS, 44 MAIFIP, 1 portal).
+
+Security behavior now enforced in source
+- AICS record create/edit: authenticated request, capability check, CSRF verification, GET/POST allowlist, office-scoped edit decision, locked-status rule, record-version check, and transactional row lock. SWAD office reassignment is blocked for non-LPGMA users.
+- MAIFIP record create/edit: role/session gate, capability check, CSRF verification, GET/POST allowlist, facility-qualified record lookup, locked-status rule, record-version check, and transactional row lock. The update statement retains a WAITING-only condition for non-admin users.
+
+Not verified in this environment
+- Authenticated HTTP requests against a running application.
+- Missing/expired CSRF requests against live sessions.
+- Database-backed role/type changes during a live request.
+- Cross-office and cross-facility identifier replay against staging data.
+- Actual INSERT/UPDATE/audit effects, rollback behavior, and concurrent browser submissions.
+- Browser visual/interaction regression.
+
+Environment limitation
+- This package validation environment does not provide the application's MySQL/MariaDB staging database or dedicated test accounts. Do not interpret static source checks as proof of live endpoint security.

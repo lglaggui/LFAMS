@@ -1,0 +1,42 @@
+FAMS Region II Unified — v0.0168 Validation & Cascade Audit
+
+Implemented corrections:
+- Facility-card wrapping now targets the active shared-shell markup (.fams-brand-facility-copy span), rather than the retired class targeted by the earlier patch.
+- The facility-name wrapping contract is centralized in shared-shell.css and also covers legacy sidebar partials.
+- Replaced separate edge-arrow and edge-wheel handlers with one controller; it resolves the actual scrollable ancestor and refreshes arrow state after scroll/resize.
+- The TRCR2 masterlist viewport is explicitly selected by .fams-record-viewport (and its .table-wrap / .wide-table classes); the dedicated .fams-data-list-table-wrap selector is also supported.
+- Removed stale retired facility-name truncation declarations from core/uniform.css and obsolete old-card blocks from core/shared-shell.css.
+
+Targeted source assertions:
+PASS — Active facility card uses shared brand copy span
+PASS — Facility full-name wrapping is canonical
+PASS — Facility card container does not clip wrapped text
+PASS — Legacy uniform truncation selectors removed
+PASS — Legacy facility text covered by same shared wrapping contract
+PASS — Single combined horizontal navigation controller
+PASS — TRCR2 records viewport included in horizontal selector
+PASS — Actual scrollable ancestor resolution used
+PASS — Boundary state evaluated in both directions
+PASS — Scroll and resize refresh arrow state
+PASS — ResizeObserver refreshes viewport sizing
+PASS — Version and cache keys updated
+
+CSS cascade debt scan (literal !important count; indicates legacy override volume, not by itself proof of a runtime conflict):
+- core/uniform.css: 2,302 !important declarations across 1,265 lines
+- core/shared-shell.css: 750 !important declarations across 1,304 lines
+- core/shared-components.css: 419 !important declarations across 1,062 lines
+- maifip/assets/app.css: 5,271 !important declarations across 5,290 lines
+- aics/assets/app.css: 5,088 !important declarations across 5,262 lines
+
+Audit finding:
+- The shared shell and its geometry still contain historical responsive/role-specific declarations. Those were not globally deleted because some represent intentional breakpoints or role variations.
+- The AICS and MAIFIP app.css files remain the largest legacy cascade hotspots. A full destructive flattening of thousands of !important declarations without live page-by-page visual regression testing would risk breaking existing screens. The two reported behaviors were corrected at their actual source and centralized instead of adding another late override.
+
+Static validation:
+- PHP: 113 files checked; 0 syntax errors.
+- JavaScript: 14 files checked; 0 syntax errors.
+- CSS: 8 stylesheets parsed; 0 parser errors.
+- ZIP integrity is checked after packaging.
+
+Not performed:
+- Live authenticated TRCR2 browser session, real user pointer/scroll interaction, Apache/PHP/MySQL workflow testing, and cross-device visual regression.

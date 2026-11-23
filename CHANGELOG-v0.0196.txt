@@ -1,0 +1,13 @@
+FAMS REGION II — v0.0196
+Unified Authorization Architecture — Step 1
+
+- Added canonical authorization model and workspace-specific role scope policy catalog to core/access_control.php.
+- Added fams_authorization_role_policy() for safe lookup; unknown workspace/role combinations return null.
+- Documented the authorization decision order and the distinction between role, capability, scope, ownership, and workflow state.
+- Explicitly preserved AICS district-wide SWAD read visibility while retaining office-scoped mutations.
+- Explicitly preserved MAIFIP active-facility read/write boundaries and distinct facility workflow rules.
+- Added 16 authorization architecture regression assertions.
+- Bumped AICS and MAIFIP application version identifiers to 0.0196.
+- No database migration, permission-row change, or endpoint behavior change in this phase.
+
+Validation: see VALIDATION-v0.0196-STEP1.txt.

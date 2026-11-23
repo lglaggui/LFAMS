@@ -1,0 +1,12 @@
+FAMS Region II Unified v0.0089
+
+Changes
+- Standardized profile expansion/collapse timing to ease-in-out across shared profile-card transition rules. Shared shell JS remains the sole interaction/state controller.
+- Added server-side pagination to MAIFIP FAMS masterlist (25 rows/page), with total filtered count and first/previous/next/last controls.
+- MAIFIP masterlist search now debounces proactive searches, cancels stale response updates, refreshes pagination and record count, and updates the URL without full page reloads.
+- Standardized responsive masterlist pagination styling in shared components.
+- Strengthened AICS own-account management: unique username validation, 10-character minimum for password changes, and consistent revert-to-default-avatar control.
+- Updated version and cache token to 0.0089.
+
+Validation scope
+- Static PHP/JS/CSS checks and ZIP integrity only. Live database, browser interaction, production hosting and visual regression testing were not performed.

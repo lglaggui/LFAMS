@@ -1,0 +1,28 @@
+FAMS REGION II — ENDPOINT AND DATA-ACCESS REVIEW v0.0195
+
+ENDPOINT SECURITY
+- The source contains a maintained endpoint registry with 80 registered entry points (35 AICS, 44 MAIFIP, 1 portal), as recorded by the v0.0193 inventory audit.
+- The registry records expected login, capability, CSRF, ownership scope, and review status metadata. It is not a runtime router or centralized authorization middleware.
+- The existing source-level permission matrix now passes 47 assertions. Coverage includes role baselines, fail-closed unknown/custom types, inactive and cross-workspace types, session refresh failures, ticket review, deletion/restoration, imports, offline sync, and record-version safeguards.
+- Existing endpoint source audits remain the baseline for route-specific checks. This release revalidates registry structure and permission invariants; it does not claim a fresh penetration test or authenticated HTTP audit of all 80 routes.
+
+REPOSITORY / TRANSACTION STATE
+- Shared narrow adapters remain in core/workspace_repositories.php:
+  * AICS: office-scoped and district-read lookup, optimistic version updates, AICS-specific field allowlist.
+  * MAIFIP: active-facility-scoped lookup and optimistic version updates, MAIFIP-specific field allowlist.
+- Current migrated status-update callers use these adapters. The repository contract suite passes six scope/version/allowlist checks.
+- Shared transaction primitives pass four runtime tests for commit, rollback, nested savepoint release, and rollback-to-savepoint.
+- Direct SQL remains in other workflows. Next safe migration targets: record form updates, ticket review, imports/offline sync, account administration, office/facility administration, report queries, and exports. Migrate one workflow at a time, preserving authorization checks and each workspace's distinct scope.
+
+NEXT REQUIRED STAGING MATRIX
+1. For each active AICS role and each SWAD office: attempt direct GET/POST access, cross-office ID replay, CSRF omission/expiry, expired session, ticket approval/rejection, delete/restore, and export access.
+2. For each active MAIFIP role and each facility: attempt cross-facility ID replay, CSRF omission/expiry, expired session, ticket approval/rejection, import/offline conflict resolution, delete/restore, and export access.
+3. Verify inactive/custom user types and permission changes against the staging database.
+4. Run concurrent updates and idempotency replay tests using disposable MySQL fixtures.
+5. Record expected and actual HTTP status, response contract, database effect, audit event, and rollback outcome.
+
+NON-GOALS / SAFETY
+- Do not merge AICS office ownership with MAIFIP facility ownership.
+- Do not treat UI visibility as authorization.
+- Do not replace workspace-specific business rules with generic repository shortcuts.
+- Do not promote static tests as security certification.

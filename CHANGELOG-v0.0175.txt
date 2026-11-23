@@ -1,0 +1,53 @@
+FAMS REGION II — v0.0175
+ACTION LOGS, MASTERLISTS, TABLE STANDARDIZATION & DATA-INTEGRITY HARDENING
+
+Baseline: v0.0174
+Package: Full htdocs source
+
+IMPLEMENTED
+
+1. Shared action-log experience
+   - Replaced duplicated AICS and MAIFIP logs pages with one shared audit-log view and shared query runtime.
+   - Standardized the action-log layout, filter controls, summary metrics, event table, and pagination.
+   - Increased page size to 50 events and retained stable newest-first ordering by created_at and id.
+   - Added event ID, full timestamp, role, action category, description, record ID, IP, host, and browser/device fields.
+   - Search now consistently covers username, role, action, description, record ID, IP, host, and user-agent fields.
+   - Date inputs are validated; reversed valid date ranges are normalized; the end date is inclusive.
+   - Direct page and export access are governed by the workspace view_action_logs permission rather than an additional hard-coded admin/manager gate.
+
+2. Action-log export and capture
+   - Replaced text export with UTF-8 CSV export in both workspaces.
+   - CSV export applies the same filters as the on-screen log and includes event IDs and all available client fields.
+   - Added spreadsheet-formula injection protection and a clear 25,000-row export cap notice.
+   - AICS audit writes now capture the browser/device user-agent where available.
+   - Shared audit writer normalizes action/description length and line breaks; workspace-specific storage remains intact.
+
+3. Shared data-table framework
+   - Added core/shared-tables.css and core/shared-tables.js and loaded them through the common application shell.
+   - Ordinary HTML data tables in both workspaces receive a shared table class and consistent typography, header, row, hover, empty-state, amount, focus, and action alignment styles.
+   - Existing explicit table wrappers receive consistent sizing, focusability, horizontal scrollbar treatment, and responsive behavior.
+   - The existing wide-table-only edge navigation continues to operate only on explicit wrappers containing a genuinely wider table.
+   - Spreadsheet/worksheet editors (.sheet-table, DOH worksheet, and dedicated sheet-editor tables) are explicitly excluded so their cell editing, resizing, merges, and print layouts are preserved.
+   - Consolidated duplicate action-log filter and pagination CSS from both workspace app.css files into the shared stylesheet.
+
+4. Permission and data-integrity hardening
+   - AICS and MAIFIP action-log pages and CSV exports now use the shared view_action_logs permission as their server-side authorization gate.
+   - Dashboard-layout save endpoint now requires POST, validates JSON/payload size and layout structure, and verifies a CSRF token.
+   - PSGC address-directory refresh endpoints in both workspaces now require POST and a valid CSRF header; MAIFIP administrator UI sends the token.
+   - Existing record ownership, office/facility scope, ticket approval, and role-specific business rules were retained.
+   - Existing CSRF checks on record-sheet and DOH dashboard mutations were retained.
+
+5. Versioning and cache control
+   - AICS and MAIFIP application version updated to 0.0175.
+   - Shared table stylesheet/script and shared shell asset cache versions updated to v0.0175.
+   - Login page version label and asset references updated.
+
+PRESERVED
+- No assistance records, account rows, chat messages, notifications, audit history, or workspace-specific business tables were merged, deleted, or rewritten.
+- No database migration is required for this release.
+- AICS and MAIFIP retain separate audit tables and workspace-specific data access adapters behind the shared audit implementation.
+- Specialized editable worksheet tables remain page-specific.
+
+VALIDATION LIMITS
+- PHP syntax, JavaScript syntax, CSS brace checks, audit-filter unit checks, shared audit-view rendering, and isolated Chromium table/edge-scroll/responsive fixtures were run.
+- Live MySQL integration, authenticated role-by-role testing, and production-host verification were not available in this build session.

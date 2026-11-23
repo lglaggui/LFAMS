@@ -1,0 +1,11 @@
+FAMS Region II v0.0069 — Sidebar, Facility Selector, and Header Profile Fixes
+
+Changes:
+- Unified navigation region width, horizontal padding, section gaps, labels, and link dimensions through the shared shell stylesheet.
+- Replaced the MAIFIP facility selector's three-line glyph with a clean chevron-down SVG.
+- Styled the MAIFIP facility selector with integrated navy and ice-blue states.
+- Made the MAIFIP facility logo container and contained image round.
+- Fixed the header profile presence indicator to an 8px circle with fixed dimensions.
+- Added right-side padding to the header profile card to separate its contents from the right edge.
+
+Validation: PHP syntax checks and ZIP integrity check performed. Browser visual validation and live database tests remain pending.

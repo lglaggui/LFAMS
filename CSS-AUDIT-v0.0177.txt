@@ -1,0 +1,25 @@
+FAMS REGION II — CSS CASCADE / FLATTENING AUDIT v0.0177
+
+SCOPE
+- Compared the actual v0.0176 ZIP source with the v0.0177 working source.
+- Parsed all CSS rules and declaration blocks with tinycss2.
+- Removed only cascade-safe duplicate rules / declarations; no broad !important deletion or stylesheet reordering was performed.
+
+SAFE FLATTENING COMPLETED
+- AICS app.css: 3 adjacent repeated selector pairs consolidated; 2 superseded .masterlist-delete-form rules removed; repeated logo-shadow rule consolidated into its base rule.
+- MAIFIP app.css: 3 adjacent repeated selector pairs consolidated; repeated logo-shadow rule consolidated; duplicate mobile logout-label declaration removed.
+- core/uniform.css: one duplicate reduced-motion sidebar rule removed.
+- No remaining adjacent duplicate selector blocks or byte-identical rule blocks were detected in the audited CSS files.
+
+DIRECT SOURCE COUNTS (v0.0176 → v0.0177)
+- aics/assets/app.css: 3,650 → 3,645 rules; 5,021 → 5,020 !important declarations.
+- maifip/assets/app.css: 3,453 → 3,449 rules; 4,826 → 4,824 !important declarations.
+- core/uniform.css: 751 → 750 rules; 2,302 → 2,301 !important declarations.
+- Other existing shared stylesheets were retained without broad cascade changes.
+- New core/shared-ux.css: 23 rules; 4 !important declarations for invalid-state and reduced-motion safeguards.
+- Total parsed CSS: 8,822 → 8,835 rules (includes the new shared UX stylesheet); total !important declarations: 13,506 → 13,506.
+
+IMPORTANT LIMITATION
+- The legacy cascade remains complex: 13,506 !important declarations remain across the complete CSS set.
+- AICS and MAIFIP app.css also share many selector names but have different rule ordering and workspace-specific overrides. Extracting or merging those rules into one shared file without authenticated visual regression coverage could change the cascade. This release does not claim a complete stylesheet flattening.
+- The previous v0.0176 audit file's per-file !important totals were lower than a direct recount of the actual v0.0176 archive. The baseline numbers above are recounted from the ZIP source itself.

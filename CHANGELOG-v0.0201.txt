@@ -1,0 +1,16 @@
+FAMS Region II — v0.0201
+Step 3.4: Record deletion and restoration enforcement
+
+Security and workflow changes
+- AICS direct deletion now requires the AICS edit_records capability, verifies the record's office scope after locking the record row, and preserves the rule that non-admin LPGMA users may directly archive only WAITING records. The complete record payload, active-row deletion, and audit event remain in one shared transaction.
+- The legacy AICS records.php restore action is explicitly rejected. Restoration is available only through the administrator Deleted Entries workflow, avoiding a parallel restore implementation with weaker locking.
+- AICS and MAIFIP restoration endpoints now reject invalid archive identifiers before attempting sequence allocation.
+- Both restoration workflows validate archived payload field names against the live destination table schema before constructing the INSERT. Unknown archived fields fail closed.
+- AICS restore remains administrator-only, uses the shared AICS control-number sequence lock, locks the archive row, assigns a fresh control number and submission date, resets the record to WAITING, marks the archive restored, and writes its audit event in one transaction.
+- MAIFIP direct deletion explicitly requires MAIFIP edit_records capability and remains POST-only with CSRF, facility-qualified row locking, and the existing admin/WAITING-editor rule. Archiving, deletion, and audit logging remain atomic.
+- MAIFIP restore remains administrator-only, uses the facility-scoped sequence lock, locks the archive row within the selected facility, validates payload columns, assigns a new facility control number/date, resets status to WAITING, and marks/audits restoration transactionally.
+- Ticket-approved AICS and MAIFIP deletions retain their separate approval paths while using the same shared archive table and full record payload. Base-record-version checks, ticket locks, and transactional archive/delete/audit behavior are preserved. MAIFIP archive JSON encoding now fails the transaction rather than silently storing an invalid payload.
+- MAIFIP masterlist delete confirmations now accurately explain that records move to Trash and linked workflow history is retained; deletion is not described as irreversible permanent removal.
+- Endpoint registry records v0.0201 deletion/restoration source review and explicitly leaves authenticated runtime verification pending.
+
+No production data or database was modified.

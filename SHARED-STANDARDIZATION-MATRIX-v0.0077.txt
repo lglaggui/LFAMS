@@ -1,0 +1,36 @@
+FAMS REGION II — SHARED BEHAVIOR AND SYSTEM DIFFERENTIATION MATRIX
+Version: 0.0077
+
+DESIGN PRINCIPLE
+MAIFIP and AICS should share the same shell, reusable UI components, interaction patterns, accessibility behavior, and quality standards. They must not share or cross-use system-specific data, authorization rules, facility rules, fund logic, or workflow states unless an explicit common rule is intended.
+
+SHARED BETWEEN MAIFIP AND AICS
+- Header, logo/branding placement, profile card, avatar geometry, profile expansion/collapse, notification control appearance, typography, labels, button hierarchy, focus states, contrast, spacing, responsive behavior, footer design, sidebar navigation presentation, scrollbars, popup dialog shell, form-control styling, confirmation patterns, flash/toast styling, shared shell state handling, and cache/version conventions.
+- Profile identity should be consistent for central LPGMA accounts when switching workspaces. System-specific local accounts continue to display their own valid identity.
+- Switching workspaces should preserve the current page when a matching destination page exists, along with browser/page-view and sidebar navigation scroll positions. If a page has no valid counterpart or the user lacks access, use the destination's permitted fallback page.
+- Popups should display only popup content and its own form controls. Header, sidebar, footer, dashboard shell, and background page navigation must not appear inside the popup iframe.
+- Common behavior should be implemented once in core/shared-shell.js and shared CSS/PHP partials where practical, not duplicated as independent MAIFIP/AICS versions.
+
+MAIFIP-SPECIFIC
+- DOH Region II / MAIFIP program labels, facility/facility-group configuration, MAIFIP assistance records and fund values, MAIFIP-specific eligibility and record workflows, and role/permission checks defined by MAIFIP.
+- MAIFIP's central LPGMA user identity remains sourced from the central users table; MAIFIP's local facility/record rules remain authoritative for its pages.
+- MAIFIP facilities and their facility selector/permissions are MAIFIP-specific. Do not impose SWAD office grouping on MAIFIP.
+
+AICS / SWAD-SPECIFIC
+- DSWD AICS / SWAD labels, SWAD office hierarchy and office membership, AICS/SWAD assistance records, Region II fund behavior, AICS/SWAD eligibility and entry-validity rules, ticket/fund/account workflows, and AICS-specific authorization rules.
+- LPGMA central accounts may be bridged into AICS for workspace access, but AICS local/SWAD accounts remain distinct and must retain their own identity and permissions.
+- SWAD office dropdowns, office-based views, local office groups, and SWAD-only user restrictions are AICS/SWAD-specific. Do not expose MAIFIP facilities in SWAD selectors or groups.
+
+OTHER FACILITIES / USER TYPES
+- Shared shell appearance and common interactions apply to all facilities.
+- The active facility determines available records, fund scope, office/facility selector options, actions, and permission checks. UI parity must never grant a facility access to another facility's data.
+- System administrators, facility administrators/managers, encoders/staff, and social workers retain the capabilities assigned by their own system's role matrix. A role with a similar display label across systems is not automatically equivalent.
+- Social-worker restrictions, such as dashboard visibility or status-update-only access, remain system-specific where the configured role matrix requires it.
+- Local facility accounts must not be silently converted to central LPGMA accounts or have their role rewritten merely to make the shared UI match.
+
+POPUP RULE
+- Any shared-shell URL opened with popup=1 is rendered as a content-only iframe view: shell sidebar, topbar/profile, footer, global popup overlay, and page-shell padding are hidden/reset.
+- Popup-specific form controls, validation messages, and actions remain visible. Pages that deliberately render their own popup document continue to use their existing content-only path.
+
+VALIDATION LIMITATION
+This matrix documents the intended architecture and the source changes in this version. It does not imply that every MAIFIP/AICS feature has already been proven behaviorally identical in a live browser. Chat parity and all permission/workflow edge cases require separate runtime and database-backed verification.

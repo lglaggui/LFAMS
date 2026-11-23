@@ -1,0 +1,8 @@
+FAMS Unified v0.0105
+
+- Dashboard analytics now redirects non-LPGMA facility users to the FAMS masterlist; system entry routes follow the same rule.
+- MAIFIP masterlist adds Bill Amount immediately before GL Amount.
+- MAIFIP Bill Amount is required in both new-entry and edit forms and validated server-side.
+- MAIFIP table column widths updated: Submission and GL Amount reduced by 20% relative to prior allocations, with the released width assigned to Status; Bill Amount is added at 90% of the prior GL Amount width.
+- Added small left/right table padding and horizontal overflow support.
+- AICS version labels updated to 0.0105; AICS entry/ticket workflow parity work remains limited to the existing shared form/popup structure pending the completion of the user's truncated popup instruction.

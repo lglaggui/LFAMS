@@ -1,0 +1,11 @@
+FAMS Region II v0.0071 — Shared Item Standardization
+
+Changes:
+- Sidebar profile third row now consistently displays the user's office/facility rather than username.
+- Shared navigation labels are uppercase across both workspaces.
+- Header fund summary title, labels, values, and utilization text are centered; label/value presentation is uppercase and shared.
+- Facility dropdown options use the facility-card navy background and light-blue text, with a contrasting selected option.
+- Notification bell dimensions, border, base color, hover color, and active behavior are standardized in the shared shell; AICS legacy orange hover styling was aligned to the common navy palette.
+- Version/cache-busting updated to 0.0071.
+
+Validation performed: PHP syntax checks, JavaScript syntax checks, CSS brace balance, and ZIP integrity. Browser/live database verification remains outstanding.

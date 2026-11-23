@@ -1,0 +1,15 @@
+FAMS Region II Unified — v0.0113
+
+Both systems
+- Confirmed account-management routing: administrators enter user.php; non-administrators are routed to account.php and cannot access user.php.
+
+MAIFIP
+- Replaced the “Submit Ticket” text action in the masterlist with a compact ticket icon, retaining an accessible label and tooltip.
+- Reduced the Patient column width by 10% from the v0.0112 configured width.
+- Preserved the v0.0112 reductions for Status (20%), Guardian (10%), Remarks (10%), and Submission (10%).
+
+AICS
+- LPGMA-linked users display “LPGMA Office” rather than “Unassigned” when their office mapping is missing. Detection uses identity_source=LPGMA_BRIDGED or an lpgma_ username prefix.
+
+Validation
+- Static syntax and ZIP integrity checks are run for this release. Live browser, database, and hosting workflow testing is not included.

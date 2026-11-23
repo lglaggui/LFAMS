@@ -1,0 +1,32 @@
+FAMS Region II — v0.0199 Validation
+Step 3.2: Record Status Change Enforcement
+
+Package/source checks:
+- PHP syntax: 133 PHP files passed.
+- Endpoint registry: 4 checks passed; 80 routes retained.
+- Status endpoint enforcement: 9 checks passed.
+- Authorization model: 16 checks passed.
+- Permission matrix: 52 checks passed.
+- Dashboard reporting action: 12 checks passed.
+- Payload fingerprint: 4 checks passed.
+- Reporting-period layout: 9 checks passed.
+- Repository contracts: 6 checks passed.
+- Shared transaction runtime: 4 checks passed.
+- ZIP integrity: checked after packaging.
+
+Implemented source controls:
+- AICS status writes now recheck update capability and office scope against the locked current row, require an exact positive record version, and preserve finalized-record restrictions.
+- MAIFIP status writes now recheck capability and facility-qualified row scope under lock, require an unchanged record version, and preserve finalized-record restrictions.
+- Unsupported HTTP methods are rejected explicitly; CSRF remains required for all status writes.
+- Record update, status-history insert, and audit write are in one transaction.
+- AICS automatic expiry cancellation now locks eligible WAITING rows, uses version-guarded updates, and writes status history and an explicitly attributed system audit event transactionally.
+
+Not run / requires staging:
+- MySQL concurrency test was intentionally not run because no FAMS_TEST_DSN for a database named test/staging was configured. The test runner refused execution as designed.
+- No live authenticated HTTP requests, missing/expired CSRF request tests, real cross-office/facility replay tests, or persisted DB assertions were possible in this environment.
+- No production database was accessed or modified.
+
+Known follow-on status mutation paths:
+- Ticket resolution status transitions remain assigned to Step 3.3.
+- Spreadsheet-import status transitions remain assigned to Step 3.6.
+These routes are not represented as completed by this release.

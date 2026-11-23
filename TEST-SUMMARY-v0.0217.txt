@@ -1,0 +1,14 @@
+FAMS v0.0217 Test Summary
+
+- 25 PHP test scripts passed.
+- 1 MySQL concurrency integration test excluded: requires explicit isolated staging DSN and opt-in.
+- 1 concurrency worker excluded: child process, not a standalone test; no test DSN available.
+- 21 JavaScript files passed node --check.
+- 5 reporting-period visual viewport checks passed.
+- Monthly reconciliation contract: 17/17.
+- Fund opening classification: 15/15.
+- Fund ledger anchor: 16/16.
+- Monthly sheet standardization: 11/11.
+- Data lifecycle audit: 26/26.
+
+Database-backed tests remain pending an isolated MariaDB/MySQL staging environment.

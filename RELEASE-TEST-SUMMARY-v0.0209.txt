@@ -1,0 +1,11 @@
+FAMS v0.0209 Release Test Summary
+
+PHP syntax: 147 passed
+JavaScript syntax: 19 passed
+PHP test suites: 19 passed / 1 skipped / 0 failed (20 discovered)
+New data lifecycle assertions: 26 passed / 0 failed
+Deletion/restoration assertions: 19 passed / 0 failed
+MySQL concurrency: skipped by safety guard (no explicit staging/test DSN)
+ZIP integrity: passed
+
+No staging DB, production DB, or live authenticated environment was used.

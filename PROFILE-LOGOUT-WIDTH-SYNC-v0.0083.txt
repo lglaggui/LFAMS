@@ -1,0 +1,11 @@
+FAMS Region II Unified v0.0083 — Profile/logout width synchronization
+
+Changes:
+- Shared profile measurement temporarily disables CSS transitions while measuring widths, avoiding mid-animation measurements of the logout control.
+- Expanded logout width is measured with the label fully visible and natural-content width, including icon, text, gap, padding and border.
+- Expanded profile target width explicitly includes that full logout width plus avatar, expanded identity content, gaps and card chrome.
+- Collapsed width measurement likewise runs without transitions so a shrinking label cannot leave stale reserved width.
+- Card width transition duration now matches the logout label transition duration.
+- Version and shared asset cache tokens bumped to 0.0083.
+
+Validation performed: syntax checks and archive integrity only. Live browser interaction testing and production database/hosting testing have not been performed.

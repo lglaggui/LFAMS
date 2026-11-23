@@ -1,0 +1,7 @@
+FAMS Region II v0.0095 — Account Management Parity
+
+- Tightened MAIFIP masterlist cell padding and action spacing to match the compact AICS table density.
+- Added an Accounts & Access heading with My Account and New Account controls to MAIFIP administrator account management.
+- Replaced the AICS shared-account registry presentation with a Registration & Access table using MAIFIP-style identity, access, status, and action columns.
+- Shared LPGMA account identity and access remain centrally managed in MAIFIP; the AICS table directs administrators to the central registry to preserve synchronization.
+- Updated MAIFIP and AICS version labels to 0.0095.

@@ -1,0 +1,25 @@
+FAMS Region II Unified — v0.0213
+FUND LEDGER RECONCILIATION AND CALCULATION CORRECTIONS
+
+AICS
+- Added a dedicated Region II fund-ledger calculation service.
+- Treats the latest effective BEGINNING BALANCE record as an opening anchor, not as a new monthly fund download.
+- Calculates period opening balances from the anchor plus subsequent additions less releases, with a legacy cumulative fallback only when no anchor exists.
+- Updated monthly report, dashboard, header, and fund-management totals to use the same ledger position.
+- Prevents historic pre-anchor disbursements from being subtracted again after a carry-forward opening balance has been recorded.
+
+MAIFIP
+- Removed the unsafe fallback that substituted the first fund transaction whenever the opening balance was zero or negative.
+- Uses the latest dated BEGINNING BALANCE per active facility as its opening anchor.
+- Corrected opening-balance roll-forward to avoid adding/subtracting prior months twice.
+- Bounds the anchor month to the effective anchor date; partial-month historical summary fallback is not applied.
+- Includes same-day non-opening additions and released amounts after the anchor date in subsequent roll-forward periods.
+- Added a facility-scoped ledger position calculation for dashboard, header, and fund-management totals.
+- Reconciles historic monthly summary fallback only for months without live released records.
+- Removed unused all-fund SUM calculations from monthly report and print entry points.
+
+VALIDATION / SAFETY
+- Added static fund-ledger regression assertions.
+- No database migration executed; the user's supplied AICS SQL migration is treated as already applied.
+- No production database was accessed or modified.
+- Live MySQL integration, authenticated browser, and Excel interoperability testing remain unavailable in this environment.

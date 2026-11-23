@@ -1,0 +1,29 @@
+FAMS REGION II — TRANSACTION / CONCURRENCY INVENTORY v0.0192
+
+SHARED TRANSACTION SERVICE
+- core/shared_runtime.php owns transaction boundaries; nested calls use savepoints.
+- AICS and MAIFIP endpoints use fams_shared_transaction() or fams_shared_idempotent_transaction() for migrated multi-step mutations.
+- Idempotency claims are made in the same transaction as the business mutation; schema DDL is prepared before opening the business transaction.
+
+MIGRATED WORKFLOWS
+- AICS: record create/edit, status updates, ticket create/edit/decision/delete, revision/delete/reassignment ticket submissions, imports, editable sheet saves, account operations, archive/delete, restore, address cache seed.
+- MAIFIP: record create/edit, status updates, ticket create/edit/review/delete, revision/delete request submissions, imports, editable sheet operations, account operations/email approval, facility administration, archive/delete, restore, offline synchronization, offline conflict resolution, address cache seed.
+
+V0.0192 TICKET VERSION BINDING
+- AICS revision and office-reassignment proposals store _base_record_version. Approval locks the record and requires an exact version match before applying changes.
+- AICS deletion requests store the source version. Approval refuses to archive a record that changed after the request.
+- MAIFIP revision and deletion proposals store the source version. Ticket editing refreshes that version while holding ticket and record locks.
+- MAIFIP ticket approval/deletion approval requires the stored version to match the locked record. Old proposals without a version are blocked rather than applied unsafely.
+
+CONCURRENCY CONTRACT
+- Ticket state transitions must re-read and lock the ticket row and update only while it remains OPEN / pending.
+- Record changes must lock or compare-and-swap record_version and increment it on successful mutation.
+- Sequence allocation uses workspace-specific locks and must remain consistent across create/import/offline/restore.
+- Related audit, notification, status-history, archive, and sync-log writes belong in the same transaction as the primary mutation.
+
+REMAINING STAGING VERIFICATION
+- Run maintenance/tests/mysql_concurrency_test.php against a disposable MySQL copy.
+- Exercise two-process create/import/ticket submission and duplicate retries.
+- Exercise simultaneous approvals, stale ticket proposals, stale record forms, offline sync, and conflict resolution.
+- Verify rollback removes all related records, notifications, audit rows, status-history rows, and idempotency claims.
+- Rehearse migrations and restore from backup before production deployment.

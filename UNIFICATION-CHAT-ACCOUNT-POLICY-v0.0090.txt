@@ -1,0 +1,9 @@
+FAMS Region II Unified v0.0090
+
+Changes:
+- Standardized password minimum to 6 characters across MAIFIP and AICS account creation, account edits, password resets, and self-service password changes.
+- Fixed cross-system return routing: non-admin LPGMA users switching from MAIFIP users.php to AICS now land on account.php, avoiding the admin-only AICS users.php access denial. Admin users continue to land on users.php.
+- Both chat pages now load one shared JavaScript chat controller and the same MAIFIP chat stylesheet. The relative chat API and directory endpoints resolve within each workspace, so only the server-provided user/office directory and underlying workspace data differ.
+
+Static validation only; test cross-workspace sessions, chat operations, and account changes against the target database before production deployment.
+- Removed the obsolete AICS-only chat controller after both pages switched to core/shared-chat.js.

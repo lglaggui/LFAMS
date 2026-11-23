@@ -1,0 +1,37 @@
+FAMS Region II Unified — v0.0169 Validation & Cascade Audit
+
+TRCR2 edge-scroll correction:
+- Replaced class-allowlisted ancestor resolution with nearest-real-scrollport resolution based on actual scrollWidth/clientWidth and computed overflow. This avoids attaching the arrows to an outer wrapper when an inner element is the true horizontal scrollport.
+- Normalized scroll positions to a logical left-to-right coordinate and detected browser RTL scrollLeft models (default, negative, reverse).
+- Arrow visibility, edge-wheel movement, and arrow-button scrolling use the same normalized coordinate.
+- Scroll, viewport/content resize, and content mutations refresh the arrow state.
+- Retained one shared controller and one canonical arrow presentation rule.
+
+AICS masterlist cleanup:
+- Removed multiple competing container-geometry declarations for .masterlist-table-wrap.
+- Consolidated its display, width, overflow-x, overflow-y, touch-scrolling, and overscroll settings into one canonical rule.
+- Preserved the table's existing column and responsive styling rules.
+
+Version: AICS APP_VERSION/FAMS_VERSION 0.0169; MAIFIP APP_VERSION 0.0169; shared cache keys v0169.
+
+Static validation:
+- PHP: 113 files passed php -l; no syntax errors.
+- JavaScript: 14 files present; shared-shell.js, AICS app.js, and MAIFIP app.js passed node --check.
+- CSS: 8 stylesheets parsed; no top-level parser errors.
+- Targeted edge-scroll and canonical-wrapper assertions: PASS.
+
+Cascade audit (repeated selector/property declarations with differing values; counts are indicators, not proof every declaration is harmful):
+- core/uniform.css: 253 selector/property pairs have multiple declared values in the cascade scan.
+- core/shared-shell.css: 42 selector/property pairs have multiple declared values in the cascade scan.
+- core/shared-components.css: 88 selector/property pairs have multiple declared values in the cascade scan.
+- aics/assets/app.css: 1313 selector/property pairs have multiple declared values in the cascade scan.
+- maifip/assets/app.css: 1257 selector/property pairs have multiple declared values in the cascade scan.
+
+Remaining cascade debt:
+- AICS and MAIFIP app.css remain the largest legacy override hotspots. Some repeated declarations are intentionally scoped to responsive breakpoints, page layouts, or roles; a broad automatic deletion risks changing workflows and layouts.
+- Several historical AICS table column-width declarations still overlap. They are not all removed in this targeted edge-scroll release; they should be flattened in a separate table-layout pass with visual regression coverage.
+
+Not performed:
+- Authenticated TRCR2 browser interaction test (no live account/session was available in this build environment).
+- Apache/PHP/MySQL workflow testing.
+- Full visual regression across all roles, pages, and screen sizes.

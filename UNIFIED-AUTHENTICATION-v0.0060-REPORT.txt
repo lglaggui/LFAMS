@@ -1,0 +1,33 @@
+FAMS REGION II — UNIFIED AUTHENTICATION IMPLEMENTATION
+Version: 0.0064
+Build date: 2026-10-23
+
+Implemented in this build
+-------------------------
+1. Added one canonical login route at /auth/login.php.
+2. Root /index.php now routes unauthenticated visitors to the unified login and sends authenticated users to their authorized workspace.
+3. Central `users` accounts are classified as LPGMA or MAIFIP by role/facility and routed automatically.
+4. Local `aics_users` accounts are classified as SWAD and routed directly to the AICS dashboard.
+5. LPGMA users land on /portal/select-system.php and can select MAIFIP or AICS without entering credentials again.
+6. Legacy /aics/login.php and /maifip/login.php URLs now redirect to the canonical login page.
+7. Both legacy workspace logout routes terminate the same PHP session through /auth/logout.php.
+8. Updated application version labels to 0.0064.
+9. Added CSRF protection to the unified login and LPGMA workspace selection forms.
+10. Preserved the shared database and workspace-specific operational tables. MAIFIP facility activation is checked where the facility registry is available.
+
+Routing policy
+--------------
+- LPGMA roles (admin, manager, encoder, representative, staff) with LPGMA identity: workspace selector.
+- MAIFIP facility accounts, including social_worker accounts: MAIFIP dashboard (social workers go to records).
+- Local AICS/SWAD accounts: AICS dashboard.
+- LPGMA-bridged AICS shadow accounts are resolved back to the authoritative LPGMA identity and shown the workspace selector.
+
+Validation
+----------
+- PHP syntax checks: all 92 PHP files passed PHP 8.4 lint.
+- Live database authentication, browser session behavior, facility-specific permissions, and end-to-end switching still require testing against the deployment database.
+- No live site or production database was modified by this local build.
+
+Deployment note
+---------------
+Back up the existing application and database before deploying. Confirm core/database.php credentials and test the three account classes in staging before replacing the live application.

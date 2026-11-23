@@ -1,0 +1,34 @@
+FAMS Region II Unified — Release Manifest v0.0215
+Release: Fund Ledger Classification and 2026 Opening-Balance Baseline
+
+Package contents
+- Complete unified htdocs source tree at archive root.
+- CHANGELOG-v0.0215.txt
+- VALIDATION-v0.0215.txt
+- PHP-LINT-v0.0215.txt
+- TEST-SUMMARY-v0.0215.txt
+- MIGRATION-v0.0215-2026-FUND-OPENING-CLASSIFICATION.sql
+- Existing v0.0214 MAIFIP fund-adjustment migration and supporting release history.
+- maintenance/tests/fund_opening_2026_test.php
+- Updated AICS and MAIFIP source version markers: 0.0215.
+
+Primary code changes
+- aics/fund.php: reserve BEGINNING BALANCE from ordinary download entry/edit.
+- aics/fund_ledger.php: 2026 baseline, zero opening fallback, and current-period anchor classification validation.
+- maifip/fund.php: reserve BEGINNING BALANCE from ordinary download entry/edit.
+- maifip/helpers.php: full-period duplicate classification checks, 2026 baseline, zero opening fallback, and month-by-month historical summary fallback for ledger position.
+- maintenance/tests/: updated version assertions and added 2026 opening-classification source tests.
+
+Migration order
+1. Back up the database.
+2. If not already applied, review and apply MIGRATION-v0.0214-MAIFIP-FUND-ADJUSTMENTS.sql.
+3. Review preflight output in MIGRATION-v0.0215-2026-FUND-OPENING-CLASSIFICATION.sql.
+4. Resolve multiple 2025 carryovers and adjust source-name predicates if needed.
+5. Apply v0.0215 migration manually in staging first.
+6. Run database-backed ledger reconciliation and authorization tests before production deployment.
+
+Verification
+- 153 PHP files linted successfully.
+- 21 JavaScript files passed syntax checks.
+- 24 source-level test files passed.
+- Database-backed MySQL test not run; staging DSN and pdo_mysql driver unavailable.

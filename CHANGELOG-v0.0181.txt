@@ -1,0 +1,23 @@
+FAMS Region II Unified — v0.0181
+Global layout tokens and safe package optimization
+
+GLOBAL LAYOUT STANDARDIZATION
+- Expanded canonical shared-shell spacing tokens for card padding, card radius, control gaps, and form/grid rhythm.
+- Reused shared card-padding tokens in the global Pageview card rules without changing established desktop/tablet/mobile values.
+- Applied common minimum-width and grid-gap behavior to common form, filter, dashboard, statistics, and card grids.
+- Preserved workspace-specific business rules, forms, table columns, and popup/print exceptions.
+
+PACKAGE SIZE / ASSET DEDUPLICATION
+- Replaced repeated LPGMA brand image references with the canonical shared core asset.
+- Replaced MAIFIP DOH seal references with the canonical shared DOH image.
+- Removed exact duplicate LPGMA, DOH, and DSWD image copies after verifying byte-for-byte identity and updating references.
+- Moved identical AICS/MAIFIP address cascade code into core/shared-address-cascade.js and updated page and service-worker references.
+- Losslessly recompressed PNG files only when decoded pixels remained identical.
+
+SAFETY
+- No database schema or data changes.
+- No assistance workflow or permission changes intended.
+- No JPEG recompression or image downscaling performed.
+- No broad deletion of potentially used files.
+
+Validation details are in maintenance/VALIDATION-v0.0181.txt and maintenance/ASSET-AUDIT-v0.0181.txt.

@@ -1,0 +1,11 @@
+FAMS Region II Unified — v0.0212
+Monthly Editable Worksheet Standardization
+Baseline: v0.0211
+
+- Added core/shared-sheet.js as a shared controller for editable worksheet dimension persistence.
+- Standardized persisted column widths and row heights for AICS and MAIFIP monthly report worksheets.
+- Isolated saved dimensions by workspace and reporting period; MAIFIP dimensions are additionally isolated by active facility.
+- Preserved MAIFIP manager read-only mode in the shared dimension controller.
+- Extended the shared worksheet stylesheet with common geometry, numeric alignment, and resize affordances.
+- Kept AICS and MAIFIP report columns, calculations, data sources, signatory content, and role-specific behavior separate.
+- No database schema changes, migrations, or production data operations.

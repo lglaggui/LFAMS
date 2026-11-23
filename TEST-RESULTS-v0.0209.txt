@@ -1,0 +1,250 @@
+PASS maintenance/tests/account_permission_enforcement_test.php
+PASS Custom user types cannot inherit Administrator base role
+PASS Account assignment blocks custom Administrator types
+PASS Central workspace-admin policy exists
+PASS Cross-workspace admin requires central LPGMA identity
+PASS Target workspace capability is checked independently
+PASS Both user-type pages authorize selected target workspace
+PASS POST target workspace is reauthorized
+PASS Both workspace sessions retain a user-type policy fingerprint
+PASS Changed role or permission policy invalidates existing session
+PASS MAIFIP administrator cannot demote their own account
+PASS Account administration retains transactional writes
+11 checks; 0 failures
+PASS maintenance/tests/authorization_model_test.php
+PASS: authorization model has a supported version
+PASS: authorization model denies by default
+PASS: UI visibility is explicitly not authorization
+PASS: authorization decisions follow the required evaluation order
+PASS: AICS scope is office-based
+PASS: MAIFIP scope is facility-based
+PASS: AICS preserves cross-office SWAD read visibility
+PASS: MAIFIP reads remain within active facility context
+PASS: AICS staff mutation scope remains office-qualified
+PASS: AICS social worker mutation scope remains assigned-office-only
+PASS: MAIFIP social worker mutation scope remains facility-qualified
+PASS: known AICS role policy resolves
+PASS: MAIFIP encoder remains workspace-specific
+PASS: MAIFIP-only encoder role cannot leak into AICS
+PASS: unknown workspace fails closed in policy lookup
+PASS: shared enforcement requirements are explicitly catalogued
+
+Authorization model tests: 16 passed, 0 failed.
+PASS maintenance/tests/control_number_lock_audit_test.php
+PASS: AICS sequence lock: aics/record_form.php
+PASS: AICS shared allocator: aics/record_form.php
+PASS: AICS sequence lock: aics/import_sheet.php
+PASS: AICS shared allocator: aics/import_sheet.php
+PASS: AICS sequence lock: aics/trash.php
+PASS: AICS shared allocator: aics/trash.php
+PASS: MAIFIP facility sequence lock: maifip/record_form.php
+PASS: MAIFIP facility sequence lock: maifip/import_sheet.php
+PASS: MAIFIP facility sequence lock: maifip/offline_sync.php
+PASS: MAIFIP facility sequence lock: maifip/trash.php
+PASS: AICS ticket sequence lock: aics/tickets.php
+PASS: AICS ticket allocator: aics/tickets.php
+PASS: AICS ticket sequence lock: aics/delete_ticket_request.php
+PASS: AICS ticket allocator: aics/delete_ticket_request.php
+PASS: AICS ticket sequence lock: aics/office_reassignment_ticket.php
+PASS: AICS ticket allocator: aics/office_reassignment_ticket.php
+PASS: AICS ticket sequence lock: aics/revision_ticket.php
+PASS: AICS ticket allocator: aics/revision_ticket.php
+PASS: AICS unique control-number index migration guard exists
+PASS: AICS ticket allocator uses next AUTO_INCREMENT rather than MAX(id)+1
+PASS: AICS allocator reconciles source_no and control-number suffix
+PASS: AICS allocator checks exact control-number collision
+
+Checks: 22; failed: 0
+PASS maintenance/tests/dashboard_reporting_action_test.php
+PASS: aics dashboard uses compact report icon action
+PASS: aics report icon has accessible name
+PASS: aics report icon has descriptive tooltip
+PASS: aics report action preserves selected year and month
+PASS: aics report action includes screen-reader text
+PASS: maifip dashboard uses compact report icon action
+PASS: maifip report icon has accessible name
+PASS: maifip report icon has descriptive tooltip
+PASS: maifip report action preserves selected year and month
+PASS: maifip report action includes screen-reader text
+PASS: report icon has visible keyboard focus treatment
+PASS: report icon has standardized SVG sizing and stroke
+
+Dashboard reporting action tests: 12 passed, 0 failed.
+PASS maintenance/tests/data_lifecycle_audit_test.php
+Data lifecycle audit: 26 checks, 0 failures
+PASS maintenance/tests/database_integrity_contract_test.php
+PASS MAIFIP duplicate pairs checked before adding unique key
+PASS MAIFIP replacement index created before legacy unique index removal
+PASS MAIFIP migration does not mark completion after failure
+PASS Integrity auditor is CLI-only
+PASS Integrity auditor requires exact database confirmation
+PASS Integrity auditor uses read-only transaction
+PASS Integrity auditor reports aggregate counts only
+PASS Status history adapter requires active transaction
+PASS Status history adapter preserves workspace-specific tables
+PASS Workspace audit adapters use transaction-aware writer
+PASS MAIFIP status mutation uses shared history writer
+PASS Archived deletions are excluded from unresolved orphan counts
+PASS Integrity auditor does not mutate schema or data
+Assertions: 13; Failed: 0
+PASS maintenance/tests/deletion_restoration_enforcement_test.php
+Deletion/restoration enforcement: 19/19 passed
+PASS maintenance/tests/endpoint_registry_test.php
+PASS: endpoint manifest has a supported version
+PASS: workspace endpoint inventory contains expected routes
+PASS: every route has unique path and required review metadata
+PASS: manifest explicitly warns it is not runtime authorization enforcement
+PASS maintenance/tests/endpoint_security_reconciliation_test.php
+PASS: reconciled endpoint manifest version is current
+PASS: registry contains the 81 application entry points
+PASS: all registered endpoint paths are unique
+PASS: every registered endpoint maps to an existing PHP file
+PASS: portal route points to the real selector endpoint
+PASS: config-loaded media helper is not exposed as an endpoint
+PASS: shared CSV cell neutralizer loads
+PASS: CSV neutralizer protects formula prefixes and preserves numeric/null values
+PASS: all registered CSV export handlers use the shared formula neutralizer
+PASS: AICS export retains authorized Region II centralized visibility
+PASS: MAIFIP export remains facility-scoped
+PASS: offline sync retains batch cap, replay key, and version checks
+PASS: offline conflict resolution retains facility lock, version check, and CSRF
+PASS: AICS browser-generated Excel neutralizes text cells while preserving the numeric amount column
+PASS: MAIFIP browser-generated Excel neutralizes formula-like text cells
+PASS: export event AICS is POST-only
+PASS: export event AICS requires capability + CSRF and records an audit event
+PASS: export event MAIFIP is POST-only
+PASS: export event MAIFIP requires capability + CSRF and records an audit event
+PASS maintenance/tests/import_export_sync_enforcement_test.php
+PASS: AICS import requires an actual uploaded file and an allowed extension
+PASS: MAIFIP import validates upload provenance and size
+PASS: AICS imports cannot bypass status-transition workflow
+PASS: MAIFIP imports cannot bypass status-transition workflow
+PASS: AICS import retains idempotency and office edit checks
+PASS: MAIFIP import retains idempotency and facility edit checks
+PASS: Offline synchronization separates create and edit capabilities
+PASS: Offline synchronization caps batch size
+PASS: Offline sync retains replay, version and facility controls
+PASS: Conflict resolution locks facility record and validates current version
+PASS: AICS bulk export requires export capability
+PASS: MAIFIP bulk export requires capability and facility scope
+Checks: 12; Failed: 0
+PASS maintenance/tests/import_preview_concurrency_test.php
+PASS: AICS preview captures matched record ID and version
+PASS: AICS apply rejects a new or changed record match after preview
+PASS: AICS update uses version compare-and-swap and checks affected rows
+PASS: MAIFIP preview captures matched record ID and version
+PASS: MAIFIP recheck refreshes match/version metadata
+PASS: MAIFIP apply rejects stale or changed record matches
+PASS: MAIFIP browser recheck carries refreshed match/version metadata into apply payload
+PASS: MAIFIP update is facility- and version-scoped
+Checks: 8; Failed: 0
+SKIP (safety guard; no staging DB configured) maintenance/tests/mysql_concurrency_test.php
+REFUSED: Set FAMS_ALLOW_DB_TESTS=1 and a FAMS_TEST_DSN whose database name contains test or staging.
+PASS maintenance/tests/payload_fingerprint_test.php
+PASS: associative order and security tokens do not affect payload fingerprint
+PASS: business-field changes produce a different payload fingerprint
+PASS: ordered batch rows preserve order in fingerprint
+PASS: fingerprint is a SHA-256 digest
+RESULT: 4 passed, 0 failed
+PASS maintenance/tests/permission_matrix_test.php
+PASS: permission catalog has the expected 15 capabilities
+PASS: AICS administrator baseline grants the complete catalog
+PASS: AICS manager is read-only for records and account administration
+PASS: AICS social worker retains limited record/status/ticket access
+PASS: MAIFIP administrator baseline grants the complete catalog
+PASS: MAIFIP manager is read-only for records and account administration
+PASS: MAIFIP social worker retains limited record/status/ticket access
+PASS: AICS staff can create records but cannot administer accounts
+PASS: MAIFIP encoder can create records but cannot administer accounts
+PASS: MAIFIP staff has its own create-record baseline
+PASS: AICS does not inherit MAIFIP encoder privileges
+PASS: known AICS staff can create records in fallback mode
+PASS: known AICS staff cannot manage accounts in fallback mode
+PASS: MAIFIP manager cannot edit records in fallback mode
+PASS: unknown custom user type fails closed without registry access
+PASS: administrator cannot authorize an unknown permission key
+PASS: unknown workspace fails closed
+PASS: custom role cannot inherit administrator access from a session base-role label
+PASS: built-in AICS administrator retains fallback privileges
+PASS: MAIFIP encoder privileges do not transfer into AICS
+PASS: database user-type lookup is strictly workspace-scoped
+PASS: inactive database user types are rejected
+PASS: missing and cross-workspace database types fail closed
+PASS: AICS account-refresh failure invalidates stale session
+PASS: MAIFIP account-refresh failure invalidates stale session
+PASS: MAIFIP ticket decisions require server-side manage_tickets capability
+PASS: AICS ticket decisions require server-side manage_tickets capability
+PASS: offline sync separates create and edit capabilities
+PASS: offline conflict application requires edit capability
+PASS: MAIFIP deletion-ticket endpoint requires submit_tickets capability
+PASS: AICS restoration requires record-edit capability and administrator role
+PASS: MAIFIP restoration requires record-edit capability and administrator role
+PASS: AICS editable-sheet API requires login and record-edit capability
+PASS: offline conflict list is permission- and facility-scoped
+PASS: public media endpoint accepts only whitelisted public media keys
+PASS: MAIFIP ticket review locks pending tickets and advances record versions
+PASS: AICS revision tickets are bound to the record version seen at submission
+PASS: AICS office-reassignment proposals include a base record version
+PASS: AICS delete requests are version-bound before approval
+PASS: MAIFIP standalone delete requests include a base record version
+PASS: MAIFIP revision and deletion approvals reject stale or legacy proposals without a base version
+PASS: MAIFIP ticket edits re-lock ticket and record and commit with audit logging
+PASS: AICS record editing uses optimistic record-version checks
+PASS: MAIFIP record editing uses optimistic record-version checks
+PASS: AICS record mutations recheck capability, office scope, and workflow state under a row lock
+PASS: MAIFIP record mutations recheck capability, facility scope, and workflow state under a row lock
+PASS: AICS and MAIFIP record forms reject unsupported HTTP methods
+PASS: AICS non-LPGMA users cannot move records outside their assigned SWAD office
+PASS: MAIFIP edit SQL independently prevents non-admin updates to non-WAITING records
+PASS: AICS and MAIFIP account administration use the shared transaction service
+PASS: AICS import enforces office ownership and WAITING-only edits for non-admins
+PASS: MAIFIP import enforces facility and record-status ownership before updates
+
+Permission matrix tests: 52 passed, 0 failed.
+PASS maintenance/tests/reporting_period_layout_test.php
+PASS: AICS report action is inside the selected-period card
+PASS: AICS report action is outside the year/month form
+PASS: AICS has exactly one selected-period report action
+PASS: MAIFIP report action is inside the selected-period card
+PASS: MAIFIP report action is outside the year/month form
+PASS: MAIFIP has exactly one selected-period report action
+PASS: selected-period action is anchored to the right
+PASS: action label can wrap without overflowing its card
+PASS: action sizing includes padding and border
+PASS maintenance/tests/repository_contract_test.php
+PASS: AICS office lookup is ID-and-office scoped
+PASS: AICS scoped updates include expected record version
+PASS: MAIFIP facility lookup is ID-and-facility scoped
+PASS: MAIFIP updates include facility and expected version
+PASS: AICS repository has a field allowlist
+PASS: MAIFIP repository has a separate field allowlist
+PASS maintenance/tests/staging_preflight_test.php
+PASS preflight is CLI-only
+PASS explicit staging marker required
+PASS database name must be staging/test
+PASS database connection gated by safe prerequisites
+PASS preflight performs read-only database queries
+PASS DB config reads host from environment
+PASS DB config reads database name from environment
+PASS DB config reads credentials from environment
+8 checks; 0 failures
+PASS maintenance/tests/status_endpoint_enforcement_test.php
+PASS: AICS rechecks capability and office scope inside the locked transaction
+PASS: AICS status updates lock the row, reject stale versions, and preserve finalized-record restrictions
+PASS: AICS status history and audit writes occur with the transactional update
+PASS: AICS and MAIFIP reject unsupported HTTP methods explicitly
+PASS: MAIFIP requires POST, CSRF, and a status capability check
+PASS: MAIFIP rechecks facility scope, row version, and finalized-record restrictions under lock
+PASS: MAIFIP status history and audit writes are in the same transaction
+PASS: AICS automatic expiry uses a transaction, row locks, and version-guarded updates
+PASS: AICS automatic expiry records history and an audit event
+9 checks; 0 failures.
+PASS maintenance/tests/ticket_lifecycle_enforcement_test.php
+Ticket lifecycle static checks: 12; passed: 12; failed: 0
+PASS maintenance/tests/transaction_runtime_test.php
+PASS: top-level transaction commits and returns callback result
+PASS: top-level transaction rolls back when callback throws
+PASS: nested transaction releases savepoint without committing outer transaction
+PASS: nested transaction rolls back to savepoint and preserves outer transaction
+
+Shared transaction tests: 4 passed, 0 failed.

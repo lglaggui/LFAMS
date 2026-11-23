@@ -1,0 +1,11 @@
+FAMS Region II Unified — v0.0127
+
+- Header: explicit responsive grid placement keeps Fund Summary centered in its dedicated column on desktop and centered on its own row on narrower displays, with profile card layered above adjacent content.
+- Shared profile card: delayed pointer-leave collapse and hover/focus recheck reduce accidental collapse during width animation or brief pointer transitions.
+- AICS records: full-width table layout class added; action header/cell now appears for non-admin LPGMA workspace users.
+- Non-admin LPGMA record actions: Submit Ticket is an accessible icon button; former Print action becomes a delete-request icon that opens a required-reason popup and creates a DELETE REQUEST ticket. It does not delete the record directly.
+- AICS deletion request is handled by a dedicated ticket creation endpoint and includes the record control number and reason.
+- SWAD social-worker status selector remains an inline dropdown and continues to route through the authorized status editor with release-date/cancellation validation and ticket routing for finalized records.
+- Version labels updated to 0.0127.
+
+Validation is static (PHP/JS syntax, CSS structure, archive integrity). Live browser, database, and hosting tests are not included.

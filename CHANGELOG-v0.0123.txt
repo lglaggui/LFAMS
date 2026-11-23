@@ -1,0 +1,14 @@
+FAMS Region II Unified — v0.0123
+
+MAIFIP Monthly Report
+- Fixed empty-state table handling: placeholder rows are excluded from editable data extraction, preventing toolbar actions from throwing when a month has no released records.
+- Add Row clears the empty-state placeholder before calculating row numbers.
+- Monthly summary amount remains visible for summary-only historical months with no record-level released entries; once rows are present, totals use the edited table rows.
+- Raised toolbar stacking order, established its own stacking context, and added hover/active/focus/busy interaction feedback.
+- Added pointer-event safeguards to the empty-state row so it cannot intercept interaction.
+
+MAIFIP Monthly Cumulative Computation
+- Opening-balance roll-forward now uses live released-record totals when present, and only falls back to a stored monthly summary when record-level releases are absent, aligning the cumulative calculation with the monthly reporting summary precedence.
+- Fund Summary disbursed amount continues to represent all-time RELEASED assistance for the selected facility; cancelled/waiting records are excluded. This is distinct from a single-month report total.
+
+Validation scope: PHP syntax, JavaScript syntax where available, CSS brace balance, archive integrity, and targeted static checks. Live database/browser/hosting tests were not performed.

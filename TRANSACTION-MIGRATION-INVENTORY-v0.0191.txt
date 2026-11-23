@@ -1,0 +1,37 @@
+FAMS REGION II — TRANSACTION / CONCURRENCY INVENTORY v0.0191
+
+SHARED SERVICE
+- core/shared_runtime.php is the transaction boundary service used by AICS and MAIFIP.
+- Nested calls use savepoints; only the transaction owner commits or rolls back.
+- Idempotency schema creation occurs before business transactions because MySQL DDL can implicitly commit.
+- Idempotency claims must occur inside the same transaction as the associated business mutation.
+
+MIGRATED / HARDENED IN v0.0191
+- AICS record creation, ticket submissions, ticket decisions, ticket edits/deletes, imports, sheet edits, status changes, account operations, archive/delete, and restore.
+- MAIFIP record creation/edits, ticket submissions, ticket decisions, ticket deletion/bulk deletion, account operations, email-change requests/reviews, facility administration, imports, status changes, archive/delete, restore, offline synchronization, and offline conflict resolution.
+- AICS and MAIFIP address-cache seed operations now use the shared transaction service.
+- Audit writes for the migrated workflows are inside the same transaction as the business mutation.
+
+IDEMPOTENCY COVERAGE
+- AICS and MAIFIP record creation.
+- AICS generic, revision, delete-request, and office-reassignment ticket submissions.
+- MAIFIP revision/delete ticket submissions.
+- AICS and MAIFIP sheet-import apply operations.
+- MAIFIP offline synchronization uses its own unique client_change_id ledger, with the ledger row committed atomically with the record mutation.
+
+CONCURRENCY CONTROLS
+- Facility-wide sequence locks serialize MAIFIP record number allocation across online create, offline create, import, and restore flows.
+- AICS sequence lock serializes control-number allocation across create, import, and restore flows.
+- Ticket rows are locked and state transitions are guarded by the current OPEN status.
+- AICS and MAIFIP record_version compare-and-swap checks prevent stale form/offline writes from silently overwriting newer values.
+- Offline conflict resolution rechecks the current server version while holding the record lock.
+
+REMAINING / REQUIRED STAGING WORK
+- Run MySQL migrations and test all compatibility paths on a copy of the production schema.
+- Run the included two-process idempotency race test against staging.
+- Exercise simultaneous create/import/restore requests per facility and verify no duplicate control numbers.
+- Exercise simultaneous ticket review, stale AICS/MAIFIP form submissions, and offline conflict resolution.
+- Run authenticated HTTP tests for all role/user-type combinations, direct URL access, CSRF, record ownership, and cross-office/cross-facility identifier replay.
+- Review any newly added or third-party endpoints before release.
+
+The remaining manual transaction references in endpoint files are defensive rollback checks only; business transactions are routed through fams_shared_transaction. The service itself owns begin/commit/rollback.

@@ -1,0 +1,10 @@
+FAMS Region II v0.0073 — shared state and report refinement
+
+Implemented:
+- Session-scoped shell state keyed by the signed-in identity. Captures the current sidebar selection, sidebar navigation scroll position, pageview scrollTop, and window scrollY. Restores state after explicit facility/workspace switching; ordinary navigation is not forced back to the previous page position.
+- Standardized selected reporting period and monthly report styling through shared component CSS.
+- Refined the shared fund-summary card within the 460px maximum width with clearer contrast, balance emphasis, and utilization styling.
+- Increased editable-sheet toolbar stacking order, isolated its stacking context, ensured button pointer events are enabled, and allowed toolbar wrapping so the controls remain selectable.
+- Updated application version to 0.0073.
+
+Validation scope: syntax and archive checks only. Browser interactions, live database values, and cross-workspace scroll restoration still require runtime testing. No production database migration is included.

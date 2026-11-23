@@ -1,0 +1,32 @@
+<?php
+declare(strict_types=1);
+$root=dirname(__DIR__,2);
+$helpers=file_get_contents($root.'/maifip/helpers.php');
+$worksheet=file_get_contents($root.'/maifip/monthly_report.php');
+$print=file_get_contents($root.'/maifip/monthly_report_print.php');
+$export=file_get_contents($root.'/maifip/monthly_report_export.php');
+$settings=file_get_contents($root.'/maifip/monthly_report_settings.php');
+$css=file_get_contents($root.'/maifip/assets/app.css');
+$aicsCss=file_get_contents($root.'/aics/assets/app.css');
+$checks=[];
+$checks['shared reconciliation helper exists']=str_contains($helpers,'function maifip_monthly_fund_reconciliation');
+$checks['shared helper uses authoritative monthly summary']=str_contains($helpers,'$summary = reporting_disbursement_summary($pdo, $year, $month);');
+$checks['shared helper calculates ending balance from same components']=str_contains($helpers,'\'ending_balance\'=>round($opening + $downloads + $adjustments - $released,2)');
+$checks['signed net fund downloads are preserved without zero-floor clipping']=str_contains($helpers,'return round((float)$st->fetchColumn(),2);') && !str_contains($helpers,'return max(0.0,(float)$st->fetchColumn());');
+$fundEntry=file_get_contents(dirname(__DIR__,2).'/maifip/fund.php');
+$checks['MAIFIP fund entry accepts signed reversal amounts']=str_contains($fundEntry,'!is_finite($amount)') && !str_contains($fundEntry,'$amount<0') && !str_contains($fundEntry,'name="downloaded_amount" min="0"');
+$checks['monthly worksheet labels signed total as net downloads']=str_contains($worksheet,'NET FUND DOWNLOADS');
+$checks['print report labels signed total as net downloads']=str_contains($print,'NET FUND DOWNLOADS');
+$checks['worksheet consumes shared helper']=str_contains($worksheet,'maifip_monthly_fund_reconciliation($pdo,$year,$month)');
+$checks['worksheet carries canonical ending balance']=str_contains($worksheet,'$remaining=$fundReconciliation[\'ending_balance\'];');
+$checks['print consumes shared helper']=str_contains($print,'maifip_monthly_fund_reconciliation($pdo,$year,$month)');
+$checks['print does not subtract detail-only amount for ending balance']=str_contains($print,'$remaining=$fundReconciliation[\'ending_balance\'];');
+$checks['CSV consumes shared helper']=str_contains($export,'maifip_monthly_fund_reconciliation($pdo,$year,$month)');
+$checks['CSV exports all fund reconciliation components']=str_contains($export,"['Opening Balance'") && str_contains($export,"['Net Fund Downloads'") && str_contains($export,"['Fund Adjustments'") && str_contains($export,"['Less: Released Assistance'") && str_contains($export,"['Ending Balance'");
+$checks['MAIFIP facility adjustment derives facility from authenticated context']=str_contains($helpers,'$facility=active_data_facility($pdo);') && str_contains($helpers,'function add_monthly_report_adjustment');
+$checks['adjustment endpoint requires role and CSRF']=str_contains($settings,"require_role(['admin','encoder']);") && str_contains($settings,'hash_equals((string)($_SESSION[\'csrf_token\']??\'\'), $token)');
+$checks['MAIFIP Fund Source wraps within its own column']=str_contains($css,'.fund-download-row span:last-child{white-space:normal;overflow-wrap:anywhere;');
+$checks['AICS Fund Source wraps within its own column']=str_contains($aicsCss,'.fund-download-row span:last-child{white-space:normal;overflow-wrap:anywhere;');
+$failed=[]; foreach($checks as $label=>$ok){echo ($ok?'PASS':'FAIL')." - {$label}\n";if(!$ok)$failed[]=$label;}
+echo count($checks).' checks; '.count($failed).' failures'.PHP_EOL;
+exit($failed?1:0);

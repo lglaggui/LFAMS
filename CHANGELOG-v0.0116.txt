@@ -1,0 +1,8 @@
+FAMS Region II Unified v0.0116
+
+- Help & Support checkmark/info icons use centered flex alignment and consistent line-height to prevent glyphs appearing off-center or outside their icon containers.
+- MAIFIP and AICS users.php now immediately redirect non-administrators to account.php; administrator-only user management remains protected.
+- Both account.php pages show an administrator-only “← Back to Users Management” action at the top-right, linking to user.php.
+- Logout and back-navigation labels use horizontal and vertical centering.
+
+Validation scope: static syntax and archive integrity checks only; no live browser, database, or hosting workflow test performed.

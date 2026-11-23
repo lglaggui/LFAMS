@@ -1,0 +1,27 @@
+FAMS v0.0210 — Session Invalidation Contract
+
+Authoritative version fields
+- users.auth_version: central MAIFIP and LPGMA identities.
+- aics_users.auth_version: local AICS identities and synchronized LPGMA bridge shadows.
+
+Migration behavior
+- core/account_runtime.php checks INFORMATION_SCHEMA and adds the INT UNSIGNED NOT NULL DEFAULT 1 column when absent.
+- Duplicate-column races are tolerated only when the post-ALTER verification confirms the column exists.
+- The migration runs before account authentication/session refresh and outside business transactions.
+
+Session verification
+- MAIFIP requests compare the session auth_version with users.auth_version, and reject inactive, rejected, removed, or disabled-type accounts.
+- AICS requests compare the session auth_version with aics_users.auth_version. LPGMA_BRIDGED identities additionally verify the central users row, its active/approval state, and its authoritative auth_version.
+- Portal selection validates the central LPGMA identity and version before showing workspace choices or accepting a workspace selection.
+- Permission-policy fingerprints remain in place as an independent invalidation mechanism.
+
+Version increments
+- Local AICS account edits, password changes, and active-state changes increment aics_users.auth_version in the same transaction as the mutation and audit event.
+- MAIFIP account approval/rejection, password changes, active-state changes, and administrator/self profile changes increment users.auth_version in the mutation transaction.
+- Removing an account invalidates sessions because the authoritative account lookup no longer finds the row.
+- LPGMA bridge synchronization copies the central auth_version; AICS bridge session refresh independently checks the central account on every request.
+
+Expected behavior
+- Other active sessions for a changed account are rejected on their next request.
+- The administrator's current session remains active when self-service changes are permitted and updates its local version after commit.
+- No cross-workspace permission inheritance is introduced.

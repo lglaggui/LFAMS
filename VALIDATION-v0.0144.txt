@@ -1,0 +1,21 @@
+FAMS Region II Unified — v0.0144 Validation Report
+
+Source baseline: v0.0143 ticket authorization / waiting status package.
+Release: v0.0144 edge-arrow navigation and unified account forms.
+
+Implemented:
+- Contextual fixed left/right arrow controls appear when the pointer reaches the left/right edge of a horizontally scrollable table viewport. Clicking scrolls horizontally by approximately 72% of the viewport width with smooth scrolling. Buttons have accessible labels, keyboard focus styling, and hide when not relevant.
+- Account-management popup/form styling standardized across AICS and MAIFIP for card surfaces, headings, spacing, labels, input controls, focus states, action rows, and mobile layouts.
+- Replaced unclear password replacement glyph with a consistent SVG key icon in AICS and MAIFIP account management.
+- Updated application and shared asset cache versions to 0.0144.
+
+Static validation:
+- PHP files checked: 108; syntax errors: 0.
+- JavaScript files checked with Node.js: 13; syntax errors: 0.
+- CSS files checked: 7; brace-balance mismatches: 0.
+- ZIP integrity: checked after packaging.
+
+Not performed:
+- No live browser interaction tests were performed.
+- No database-backed role, account edit, or password replacement workflows were exercised.
+- Edge-arrow appearance/position should be visually verified in Chrome at desktop and narrow viewport widths.

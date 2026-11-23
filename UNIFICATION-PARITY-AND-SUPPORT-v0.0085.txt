@@ -1,0 +1,27 @@
+FAMS REGION II UNIFICATION & SUPPORT UPDATE — v0.0085
+
+COMMON IMPLEMENTATION ADDED / STRENGTHENED
+- Shared Help & Support FAQ search logic: core/help-support.js.
+- Shared dashboard reporting-period AJAX behavior: core/shared-dashboard-period.js.
+- Both workspaces now load the shared reporting-period handler from core/shared_shell_end.php.
+- MAIFIP no longer has a separate reporting-period submit handler in assets/app.js.
+- AICS dashboard fragment response now uses the same wrapper structure as MAIFIP for reliable partial refresh.
+- Shared Help & Support controls use common contrast, focus, spacing, and button rules in core/shared-components.css.
+- AICS Help & Support expanded to include account/access, records/status, office scope, reports/funds, Chat, sheet tools, and troubleshooting guidance.
+
+INTENDED SIMILARITIES
+- Header/sidebar/footer/profile and shared navigation shell.
+- Reporting-period interaction and view replacement behavior.
+- Help & Support search/filter interactions and shared visual language.
+- Common button/input focus, contrast, and responsive layout rules.
+- General ticket, export, report-sheet, notification, and chat interaction patterns where a feature exists in both systems.
+
+INTENDED DIFFERENTIATION
+- MAIFIP: facility-scoped medical assistance records and facility-scoped fund/report values; facility management and MAIFIP-specific import/offline workflows.
+- AICS/SWAD: centralized Region II fund, SWAD office hierarchy, office membership, AICS record model, AICS-specific validity and ticket rules.
+- AICS chat uses AICS-specific account/message/read-state/history tables; MAIFIP chat remains on MAIFIP tables. Shared behavior must not cross-link data.
+- MAIFIP-specific features such as its current CSV/sheet importer, facility management, and offline synchronization were not copied wholesale because they rely on different schemas and workflows. They require AICS-specific implementations and schema/security review before being enabled.
+
+VALIDATION SCOPE
+- Source syntax and archive checks only; no live DB/browser/hosting test is implied.
+- After deployment, test reporting-period changes in both systems, FAQ search in both systems, and role/office visibility before production use.

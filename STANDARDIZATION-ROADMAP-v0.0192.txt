@@ -1,0 +1,66 @@
+FAMS REGION II — STANDARDIZATION / UNIFICATION / SOLIDIFICATION ROADMAP
+Baseline: v0.0192
+
+ARCHITECTURAL RULE
+Maintain one platform with two workspace adapters. Share infrastructure and contracts; do not collapse distinct AICS and MAIFIP business rules or record schemas into one generic workflow.
+
+COMPLETED FOUNDATION
+- Shared database connection, session bridge, navigation/shell, permission registry, transaction/idempotency service, account primitives, audit writer, notifications, and selected shared UI components.
+- Workspace-scoped role definitions and permission evaluation fail closed for unknown/inactive user types.
+- AICS office ownership and MAIFIP active-facility ownership checks remain separate adapters.
+- Record-version checks cover primary forms, status changes, editable sheet, offline sync/conflict resolution, imports, and ticket review paths.
+- Ticket approvals now compare proposals to the record version observed at submission.
+
+NEXT DEVELOPMENT ORDER
+1. Endpoint contract and route registry
+   - Create a machine-readable manifest for endpoint, workspace, HTTP method, login, capability, CSRF, ownership scope, and idempotency requirement.
+   - Add shared request/response helpers, but preserve AICS and MAIFIP response/redirect behavior during migration.
+   - Add authenticated HTTP tests for direct URL access and every role/user-type combination.
+
+2. Repository / data-access adapters
+   - Extract AICS office-scoped and MAIFIP facility-scoped record/ticket/account queries into separate adapters.
+   - Make scoped lookups the default; avoid raw identifier-only update/delete methods.
+   - Keep SQL parameterized and business rules in workspace adapters.
+
+3. Idempotency completeness
+   - Extend idempotency coverage to all retryable writes, including ticket edits/decisions, account approvals, batch operations, and import replay.
+   - Add payload fingerprints: reusing a key with a different payload must return a conflict, not a duplicate-success response.
+   - Define retention/cleanup and duplicate-attempt monitoring.
+
+4. Concurrency and database integrity
+   - Inventory every control-number allocator and keep one locking strategy per workspace/facility/year.
+   - Add safe unique constraints after duplicate-data reconciliation.
+   - Require record_version compare-and-swap for every record mutation, including bulk and admin actions.
+   - Document consistent lock ordering to reduce deadlocks.
+
+5. Authorization and privacy
+   - Test CSRF, expired sessions, inactive accounts/types, custom permissions, cross-office/facility identifier replay, exports, print pages, chat, media, and downloads.
+   - Preserve district-wide AICS visibility without granting district-wide edit authority.
+   - Review third-party and newly added endpoints before each release.
+
+6. UI / CSS / JavaScript consolidation
+   - Inventory duplicate selectors, overrides, repeated components, and inline scripts.
+   - Consolidate tokens/components first; retain workspace-specific layouts and forms.
+   - Modularize scripts behind clear workspace entry points and remove only confirmed-unused assets.
+   - Add desktop/tablet/mobile visual regression snapshots.
+
+7. Database / release engineering
+   - Move runtime DDL into ordered, repeatable migrations with preflight and rollback notes.
+   - Add schema-diff, migration rehearsal, backup verification, and restore rehearsal.
+   - Include a release manifest with version, file hashes, migration level, test results, and known limitations.
+
+STAGING EXIT CRITERIA
+- Two-process duplicate create/import/ticket submissions produce one committed business operation.
+- Reusing an idempotency key with different data is rejected.
+- Forced exceptions roll back business, audit, notification, archive, status-history, and idempotency rows together.
+- Concurrent ticket decisions permit exactly one state transition.
+- Stale forms and offline payloads cannot overwrite newer records.
+- Cross-office/facility ID replay is denied without leaking record contents.
+- All role/permission combinations pass authenticated HTTP tests.
+- Backup restore and migration rehearsal succeed on a copy of production data.
+
+SAFETY NON-GOALS
+- Do not merge AICS and MAIFIP beneficiary/patient tables merely for code symmetry.
+- Do not change historical identifiers or silently reassign records.
+- Do not run destructive migrations against production without a verified backup and staging rehearsal.
+- Do not claim production readiness based only on static lint or source-level tests.

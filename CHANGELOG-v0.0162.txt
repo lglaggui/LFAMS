@@ -1,0 +1,12 @@
+FAMS Region II Unified — v0.0162
+
+AICS / SWAD visibility
+- SWAD social worker and staff masterlists now ignore office and status query filters, so records from every SWAD office and every status remain included in the shared masterlist.
+- Existing search text and assistance-type filtering remain available; default result pagination is preserved.
+- Existing record-level edit, status-update, deletion, and ticket permissions remain unchanged and office-scoped.
+
+MAIFIP masterlist
+- Added the Action column header and matching empty-state column for facility social-worker accounts as well as other roles.
+- Removed the role-specific no-action-column table layout and standardized the nine-column widths across roles.
+
+Version constants updated to 0.0162.

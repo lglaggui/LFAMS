@@ -1,0 +1,11 @@
+LFAMS v0.0051 — SIDEBAR / DASHBOARD / FUND SUMMARY REFINEMENT
+
+Changes:
+- The top sidebar logo in both MAIFIP and AICS/SWAD is now the LPGMA owner/administrator logo. The AICS/SWAD facility card retains DSWD branding.
+- MAIFIP facility switcher text is constrained to its own grid column and ellipsized; the facility selector overlay is kept within the card.
+- Sidebar profile avatar and profile text use separate fixed/minmax grid columns to prevent overlap.
+- Header fund summary uses a compact 3-KPI layout and a short utilization row with a slim progress bar, bounded width, and responsive behavior.
+- AICS dashboard section cards use consistent borders, spacing, section-heading rhythm, and responsive inner sizing to better match the MAIFIP monthly disbursement panel pattern.
+- Version bumped to 0.0051. Existing database tables, workflows and role logic were not intentionally changed.
+
+Validation: PHP syntax and archive integrity are checked during packaging. This report does not claim live browser, production database, or pixel-diff testing.

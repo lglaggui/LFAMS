@@ -1,0 +1,26 @@
+FAMS Region II Unified v0.0207
+Control-number allocation and transaction lock-order hardening
+
+Release status: Source-level hardening complete; database concurrency verification remains pending.
+
+Included:
+- Unified AICS control-number allocator for create/import/restore.
+- AICS guarded unique control_number index creation, skipped safely when legacy duplicates exist.
+- AICS ticket sequence serialization and AUTO_INCREMENT-based ticket number allocation.
+- Preserved facility-scoped MAIFIP sequence lock coverage across create/import/offline-create/restore.
+- 22 new source assertions and lock-order audit report.
+
+Validation:
+- 144 PHP files linted successfully.
+- JavaScript syntax checks passed.
+- 17 PHP test suites exited successfully.
+- ZIP integrity passed at packaging time.
+- MySQL concurrency test was refused by its safety guard because no explicit test/staging DSN was configured.
+
+Known limitations:
+- Static tests cannot prove zero deadlocks or validate actual database indexes.
+- Existing duplicate AICS control numbers prevent the unique index from being added automatically; review and resolve legacy duplicates before enabling a database-level unique index.
+- AICS ticket_no unique index is recommended after checking for legacy duplicates.
+- Real concurrent create/import/restore and ticket-review workloads still need a disposable test database. This is not a staging deployment requirement for continuing source development; it is a limitation on runtime verification.
+
+No production database was connected to or modified.

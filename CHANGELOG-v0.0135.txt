@@ -1,0 +1,9 @@
+FAMS Unified v0.0135
+
+- Added AICS record revision ticket form based on the record-edit popup, prefilled with current record values.
+- Revision submissions store proposed changes separately and do not modify the masterlist at submission time.
+- AICS administrators apply proposed field changes only when approving a revision ticket; rejection leaves the record unchanged and records the decision note.
+- Added backward-compatible runtime ticket-column migrations and fresh-install schema fields.
+- Routed AICS record correction/status ticket actions to the revision form.
+
+Validation: static syntax and archive checks only; live database/browser testing was not performed.

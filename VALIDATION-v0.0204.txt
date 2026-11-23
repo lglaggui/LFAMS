@@ -1,0 +1,30 @@
+FAMS Region II — v0.0204 Validation Report
+
+Source package: v0.0203
+Release: v0.0204
+
+Source-level validation performed:
+- Endpoint inventory reconciled to 81 actual application entry points.
+- All 81 registered endpoint paths exist and are unique.
+- Portal selector path corrected; non-endpoint media helper excluded.
+- Route-by-route source marker evidence generated for auth, CSRF, methods, permission, scope, idempotency, transactions/locks and audit.
+- Shared CSV formula neutralizer tested against =, +, -, @ and leading-whitespace formula prefixes; numeric and null values preserved.
+- CSV exports in AICS/MAIFIP record, masterlist, audit-log and monthly-report flows use shared neutralization.
+- AICS Region II export visibility and MAIFIP facility export scope retained.
+- Offline sync batch cap, client change replay key, base-version validation and facility-scoped conflict resolution source checks retained.
+- AICS editable masterlist CSV export now emits an audit event.
+- Browser-generated AICS/MAIFIP sheet export and print/PDF actions call workspace-specific POST+CSRF+export-capability audit endpoints before file generation.
+
+Automated test results (rerun on this package):
+- endpoint_security_reconciliation_test.php: 19 checks passed; results recorded in PHP-LINT-v0.0204.txt / release validation bundle.
+- Existing regression tests plus Step 4 reconciliation: 188 source-level assertions passed across account permissions, authorization model, dashboard reporting action, deletion/restoration, endpoint registry, endpoint security reconciliation, import/export/offline sync, payload fingerprint, permission matrix, reporting period layout, repository contract, status endpoint, ticket lifecycle and transaction runtime.
+
+Not performed / release blockers for production-readiness:
+- No authenticated HTTP tests with separate AICS, MAIFIP and LPGMA accounts. See STAGING-VERIFICATION-PLAN-v0.0204.txt for the prepared execution matrix.
+- No MySQL/MariaDB staging database test; PDO MySQL is unavailable in the build environment.
+- No live CSRF expiry, cross-office/cross-facility identifier replay, concurrent import, multi-session role-change or export-download verification.
+- No host-level cron/queue/external worker inventory.
+- No production data was accessed or changed.
+
+Conclusion:
+The source-level reconciliation and targeted export hardening are complete. The authorization foundation remains NOT PRODUCTION-READY / NOT STAGING-VERIFIED until the authenticated staging gate in ENDPOINT-SECURITY-RECONCILIATION-v0.0204.txt is executed and signed off.

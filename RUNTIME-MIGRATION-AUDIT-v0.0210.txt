@@ -1,0 +1,10 @@
+FAMS v0.0210 — Runtime Migration and Failure-Handling Audit
+
+Changes made
+1. core/account_runtime.php: adds and verifies users.auth_version and aics_users.auth_version; only tolerates a duplicate-column race after verification.
+2. core/chat_runtime.php: chat compatibility columns are verified after ALTER; only duplicate-column races are tolerated; other DDL failures surface.
+3. core/access_control.php: required user-type registry/role-schema initialization failures are logged and rethrown as a safe initialization error rather than silently ignored.
+4. MAIFIP offline-sync migration continues to log and throw on schema failure; AICS record and archive schema migrations continue to fail visibly when verification fails.
+5. Optional read-only UI lookups retain fallbacks where safe; they are not critical schema migrations.
+
+No automatic destructive repair was introduced. No historical duplicate IDs, account rows, audit rows, tickets, or assistance records were rewritten by this release.

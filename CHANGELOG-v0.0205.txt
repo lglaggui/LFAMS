@@ -1,0 +1,9 @@
+FAMS Region II — v0.0205
+Step 4.1: Staging environment and deployment verification preparation
+
+- Updated shared database connection constants to prefer deployment environment variables while preserving legacy fallback defaults for existing installations.
+- Added a CLI-only, read-only staging preflight with an explicit APP_ENV=staging guard and staging/test database-name safety check before attempting a DB connection.
+- Preflight checks PHP version/extensions, key deployment files, endpoint registry JSON, avatar directories, selected PHP limits, database identity, InnoDB table count and database character set when safe prerequisites are met.
+- Added staging deployment, database isolation, Apache environment, test identity, web-SAPI verification, rollback and exit-criteria instructions.
+- Updated AICS and MAIFIP application version markers to 0.0205.
+- No schema migrations, production data changes, account creation or database writes were performed.

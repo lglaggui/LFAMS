@@ -1,0 +1,28 @@
+FAMS Region II Unified — Release Manifest v0.0213
+
+Release: v0.0213 — Fund Ledger Reconciliation and Calculation Corrections
+Baseline: v0.0212 — Monthly Sheet Standardization
+Archive layout: complete htdocs source tree at ZIP root
+Package: FAMS-Region-II-Unified-htdocs-v0.0213-FUND-LEDGER-CORRECTIONS.zip
+
+Key source changes:
+- aics/fund_ledger.php (new AICS ledger calculation service)
+- aics/monthly_report.php
+- aics/dashboard.php
+- aics/partials/header.php
+- aics/fund.php
+- maifip/helpers.php
+- maifip/dashboard.php
+- maifip/partials/header.php
+- maifip/fund.php
+- maifip/monthly_report.php and monthly_report_print.php (remove unused aggregate queries)
+
+Documentation: CHANGELOG-v0.0213.txt; VALIDATION-v0.0213.txt
+Regression test: maintenance/tests/fund_ledger_anchor_test.php (16 checks, 0 failures)
+
+Database: no migration included or executed. The AICS beginning-balance row supplied by the user is treated as existing data.
+Production safety: no production database access or modification.
+
+Validation summary: 152 PHP files linted; 21 JavaScript files checked; 11 CSS files parsed; 23 of 25 maintenance test files passed; 2 DB concurrency tests refused by their staging safety gate; ZIP integrity passed.
+
+SHA-256 is supplied in the adjacent PACKAGE-SHA256-v0.0213.txt file.

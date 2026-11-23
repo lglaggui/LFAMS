@@ -1,0 +1,8 @@
+FAMS Region II Unified — v0.0125
+
+- Fixed the MAIFIP header Fund Summary disbursed amount so it uses the same reporting_disbursement_summary() calculation as MAIFIP Fund.php.
+- Header and Fund.php now use the current reporting year through the current month, including live RELEASED record totals and historical monthly-summary fallback for months without released record-level entries.
+- Kept the header facility-specific allotment sum and recalculates remaining balance/utilization from the matching allotment and disbursed values.
+- Updated application and shared asset cache versions to 0.0125.
+
+Validation scope: PHP syntax, targeted source checks, and ZIP integrity. No live browser, database, or hosting tests were performed.

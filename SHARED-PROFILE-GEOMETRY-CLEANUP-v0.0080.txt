@@ -1,0 +1,9 @@
+FAMS Region II Unified v0.0080 — Shared profile geometry cleanup
+
+Changes:
+- The shared profile handler now explicitly restores the logout control to a 30px icon-only width before measuring the collapsed card. This prevents the expanded logout label width from being counted in the collapsed card width.
+- Expansion width is capped to the available viewport width (up to 460px), while the profile remains right-anchored so the card grows toward the left. Expanded identity text truncates instead of overflowing the card.
+- The logout button remains at the right edge, with its label hidden while collapsed and shown only while expanded.
+- Updated shared stylesheet/script cache tokens and application version to 0.0080.
+
+Validation in this package: syntax checks and archive integrity are performed before delivery. Browser interaction and production database/live-site testing have not been performed.

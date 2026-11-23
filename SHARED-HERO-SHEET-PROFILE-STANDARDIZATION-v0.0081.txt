@@ -1,0 +1,10 @@
+FAMS Region II Unified v0.0081
+
+Changes
+- Profile expansion now sizes to the actual expanded contents, with the viewport's available width as the only cap (rather than a fixed 460px cap).
+- Added core/shared-sheet.css as the shared visual source for MAIFIP fams_sheet_editor.php and AICS masterlist_sheet.php: toolbar layout, button labels and states, focus contrast, editable-cell contrast, resizing handles and guides, responsive controls, and print behavior.
+- Standardized MAIFIP column/row resize event handling on pointer events, matching the pointer-based interaction model in AICS.
+- Refined the shared dashboard hero banner in core/uniform.css for both workspaces with consistent gradient, restrained decorative geometry, typography, action button contrast, and responsive stacking.
+- Bumped application version and shared shell cache tokens to 0.0081 / 20261026-v0081.
+
+Validation intended: PHP syntax, JavaScript syntax, CSS brace balance, ZIP integrity. Live browser and database testing not performed.

@@ -1,0 +1,11 @@
+FAMS Region II Unified — v0.0172
+MAIFIP Masterlist Scroll Reconstruction
+
+- Rebuilt MAIFIP masterlist markup to use the same .table-wrap.masterlist-table-wrap scroll owner used by AICS.
+- Removed historical MAIFIP masterlist CSS rules that conflicted over table width, viewport sizing, and overflow behavior.
+- Removed nested horizontal scrolling from status/action cells; only the outer masterlist wrapper scrolls horizontally.
+- Replaced the edge-navigation controller with a deterministic resolver that prioritizes .masterlist-table-wrap and refuses to treat descendant cells as separate scrollports.
+- Right/left edge arrows are recalculated from the wrapper's actual remaining scroll distance after scroll, scrollend, resize, and content changes.
+- Preserved MAIFIP's nine-column structure and financial/status/action content.
+
+Validation scope: static PHP/JavaScript/CSS checks and a Chromium browser fixture that verified right-arrow visibility before the edge, automatic hiding at the exact right boundary, left-arrow availability at the opposite edge, and absence of nested cell scrollports. Production login/database workflow and hosted deployment require separate live verification.

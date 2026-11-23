@@ -1,0 +1,7 @@
+FAMS v0.0211 — Application and Database Validation Review
+
+- MAIFIP monthly_report_settings.downloaded_balance is DECIMAL(15,2). The endpoint now accepts only non-negative decimal values with at most 13 integer digits and 2 fractional digits; it also checks the maximum representable value.
+- Year and month are validated as numeric strings and bounded to 2000–2100 and 1–12.
+- The update and audit row are atomic. The existing unique facility/year/month key continues to enforce one setting per facility and reporting period.
+- Existing database integrity contract tests continue to pass for control-number uniqueness, migration ordering, transaction-bound history and read-only integrity-auditor behavior.
+- This pass did not add or modify production database constraints. Live schema/index consistency cannot be confirmed without an isolated test/staging database.

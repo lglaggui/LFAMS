@@ -1,0 +1,23 @@
+Release: FAMS Region II Unified
+Version: 0.0207
+Base: v0.0206
+Package: Full htdocs source ZIP; archive contents begin at htdocs root
+Primary scope: AICS + MAIFIP control-number allocation and lock-order audit
+
+Version markers:
+- aics/config.php: APP_VERSION 0.0207; FAMS_VERSION 0.0207
+- maifip/app_version.php: APP_VERSION 0.0207
+
+Key files:
+- aics/helpers.php
+- aics/record_form.php
+- aics/import_sheet.php
+- aics/trash.php
+- aics/tickets.php
+- aics/delete_ticket_request.php
+- aics/office_reassignment_ticket.php
+- aics/revision_ticket.php
+- maintenance/tests/control_number_lock_audit_test.php
+- LOCK-ORDER-AUDIT-v0.0207.txt
+
+No database dump or production data is included.

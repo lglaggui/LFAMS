@@ -1,0 +1,16 @@
+FAMS Region II Unified — v0.0124
+
+MAIFIP fund computation
+- Fund Summary now matches facility keys using trimmed, case-insensitive comparisons to avoid missing SIMC rows because of inconsistent spacing/case.
+- Disbursed assistance counts only RELEASED records with a valid release date.
+- Monthly cumulative calculations now apply the same normalized facility matching to beginning balance, monthly downloads, live released records, monthly settings, and stored historical summaries.
+- Existing rule retained: live released records take precedence for a month when records exist; a saved historical summary is used only when no released records exist for that month.
+
+Shared profile card and stylesheet cleanup
+- Removed legacy profile-specific selectors from the MAIFIP and AICS app stylesheets and shared uniform stylesheet; profile styles are now maintained in core/shared-components.css.
+- Standardized expansion/collapse to a 640ms eased width transition and aligned JavaScript cleanup to 760ms so the final state is not applied before the animation finishes.
+- Added reduced-motion support and updated shared asset cache-busting to v0.0124.
+
+Validation
+- PHP syntax, JavaScript syntax, CSS parser, and ZIP integrity checks only.
+- No live database/browser/hosting test performed. Fund totals should be verified against the production ledger before financial use.

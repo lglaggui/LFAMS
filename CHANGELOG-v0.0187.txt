@@ -1,0 +1,29 @@
+FAMS REGION II UNIFIED — v0.0187
+Permission enforcement and endpoint hardening
+
+Baseline: v0.0186-PERMISSION-TESTS (which was built from v0.0184 plus the initial permission test suite). This release does not contain the previously described v0.0185 JavaScript/CSS consolidation work; that package was not available as a verifiable source archive.
+
+Implemented:
+1. Made database-backed user-type resolution strictly workspace-scoped. AICS roles can no longer fall back to a similarly named MAIFIP role, or vice versa.
+2. Removed the administrator shortcut from the database-backed permission evaluator. Administrators must have an active workspace-specific user-type row and the requested capability in its permission JSON.
+3. Missing, disabled, malformed, or cross-workspace user types fail closed.
+4. Session refresh for AICS and MAIFIP now invalidates the current session on database refresh errors instead of retaining stale session privileges.
+5. Account synchronization now rejects users whose workspace-specific user-type definition is missing or disabled.
+6. MAIFIP ticket list/delete/reject/bulk-delete operations now require the relevant server-side ticket capabilities. AICS ticket approval/rejection decisions require manage_tickets in addition to the existing administrator policy.
+7. Added explicit capability checks to AICS/MAIFIP fund, office/facility, account, and user-type management endpoints.
+8. MAIFIP offline synchronization now distinguishes create_records from edit_records per operation. Offline conflict application requires edit_records; conflict viewing requires view_records.
+9. MAIFIP deletion-ticket submission requires submit_tickets.
+10. Record restoration in both workspaces requires edit_records plus the existing administrator restriction.
+11. MAIFIP administrator record-edit and account-management helper shortcuts now respect the permission matrix.
+12. Expanded maintenance/tests/permission_matrix_test.php to 32 deterministic policy and static endpoint-invariant checks.
+
+Preserved:
+- Existing database schema and user data; no migration or SQL changes are included.
+- Workspace-specific record ownership checks and facility scoping in existing query paths.
+- Existing ticket status and approval workflows, with added capability gates.
+- Existing Android app directory placeholder and all existing deployment files.
+
+Important testing limitation:
+- The working PHP CLI has no PDO database drivers installed. Database-backed MySQL integration tests, real disabled-account login tests, multi-office/facility data tests, and authenticated direct-URL/API HTTP tests could not be executed here.
+- The regression suite's 32 passes comprise deterministic fallback-policy tests and static source invariants; they are not a substitute for staging tests against the production MySQL schema.
+- No live browser, production database, or hosting environment was accessed.

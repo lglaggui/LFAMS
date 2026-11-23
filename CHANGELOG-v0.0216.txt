@@ -1,0 +1,24 @@
+FAMS Region II Unified — v0.0216
+Fund Breakdown Wrapping and Unified MAIFIP Monthly Reconciliation
+
+Changes
+- Fund Breakdown: long Fund Source contents now wrap within their own column in both AICS and MAIFIP dashboard layouts. The text no longer pushes into or visually overlaps the next column.
+- Added maifip_monthly_fund_reconciliation() as the authoritative monthly fund calculation contract. It returns opening balance, actual fund downloads, audited adjustments, released assistance, ending balance, client count, and the disbursement source.
+- MAIFIP monthly worksheet, print view, and CSV export now consume the same shared calculation result. The print view no longer calculates the ending balance from live detail rows when the worksheet is using a historical monthly-summary fallback.
+- MAIFIP worksheet and print balance headers now display adjustments as a separate line item.
+- MAIFIP CSV now includes the complete fund reconciliation block, the selected disbursement source, and a separate comparison of detail totals/client counts against the authoritative monthly summary.
+- MAIFIP Excel export includes opening balance, fund downloads, adjustments, released assistance, ending balance, and total clients from the worksheet state. Edits made in the worksheet continue to be reflected in that export.
+- Preserved the existing facility authorization pattern: adjustment endpoint accepts no facility identifier, derives facility from authenticated active-facility context, requires the permitted role, and validates CSRF.
+- Synchronized AICS and MAIFIP application version markers to 0.0216.
+
+Calculation policy
+- Live released assistance records remain authoritative whenever a month contains released detail rows.
+- A saved monthly_disbursement_summary is used only when the month has no live released rows, preserving historical imported-summary reporting.
+- Opening balance + fund downloads + adjustments - released assistance = ending balance.
+- Record-level detail reconciliation is shown separately; a historical summary with no live details does not get replaced by zero in the fund calculation.
+
+Scope and limitations
+- This release does not alter AICS fund accounting rules or add an AICS adjustment ledger.
+- Unsaved worksheet edits are local to the worksheet and are not reflected in the separate server-generated print route until the source records/summary are updated. The Excel export reflects the current worksheet edits.
+- Facility authorization has source-level contract checks only; runtime tests with facility-specific accounts and forged facility requests remain pending.
+- No database-backed reconciliation was run. The environment has no PDO MySQL or SQLite driver and no authorized staging DSN. No production database was accessed or modified.

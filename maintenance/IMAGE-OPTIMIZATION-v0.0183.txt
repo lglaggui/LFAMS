@@ -1,0 +1,14 @@
+FAMS v0.0183 — IMAGE OPTIMIZATION AUDIT
+
+Facility and shared branding PNGs were converted to lossless WebP only after verifying identical decoded RGBA pixels and identical dimensions. Runtime references were updated before original PNGs were removed. No image was downscaled or visually altered.
+
+maifip/assets/branding/cdh-logo.png -> maifip/assets/branding/cdh-logo.webp: 787,956 -> 471,840 bytes (saved 316,116)
+maifip/assets/branding/cimc-logo.png -> maifip/assets/branding/cimc-logo.webp: 365,394 -> 277,764 bytes (saved 87,630)
+maifip/assets/branding/cvmc-logo.png -> maifip/assets/branding/cvmc-logo.webp: 1,295,937 -> 803,740 bytes (saved 492,197)
+maifip/assets/branding/simc-logo.png -> maifip/assets/branding/simc-logo.webp: 1,037,322 -> 656,446 bytes (saved 380,876)
+core/branding/doh-logo.png -> core/branding/doh-logo.webp: 2,499,558 -> 1,600,934 bytes (saved 898,624)
+core/branding/lpgma-shared-logo.png -> core/branding/lpgma-shared-logo.webp: 588,847 -> 406,578 bytes (saved 182,269)
+
+Total verified savings: 2,357,712 bytes (2.25 MiB).
+
+The remaining JPG/PNG/WEBP assets were retained where there was no safe exact duplicate or conversion with a demonstrated benefit.

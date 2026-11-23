@@ -1,0 +1,11 @@
+FAMS Region II Unified — v0.0147
+
+SWAD status editor and ticket access follow-up
+
+- AICS status editor accepts record IDs from both id and record query keys, and from id and record_id POST keys, matching the system's popup routes and forms.
+- AICS masterlist scopes SWAD social workers to their assigned office and initializes the current-user context before evaluating workspace permissions; this prevents showing actions for records the worker is not authorized to edit or ticket.
+- MAIFIP status update endpoint accepts the legacy staff role as well as admin, manager, encoder, and social_worker. Facility scope and the non-admin WAITING-only restriction remain enforced.
+- AICS edit/delete ticket denial messages now identify the office-assignment scope rule so incorrect legacy record assignments can be diagnosed instead of showing an ambiguous authorization failure. No cross-office access is granted.
+- Both applications use APP_VERSION 0.0147 for cache invalidation.
+
+Validation: PHP syntax, JavaScript syntax, CSS brace balance, archive integrity, and targeted source assertions. Live database/browser role tests remain necessary.

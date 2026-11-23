@@ -1,0 +1,24 @@
+FAMS v0.0214 — Source Validation
+
+Source baseline: v0.0213 FUND LEDGER CORRECTIONS
+Scope: source-only; no live/staging DB connection
+
+Passed:
+- PHP syntax lint: all 152 PHP files.
+- JavaScript syntax check: MAIFIP monthly report inline script.
+- PHP syntax checks explicitly repeated for aics/fund_ledger.php, maifip/helpers.php, maifip/monthly_report.php, maifip/monthly_report_print.php, and maifip/monthly_report_settings.php.
+- Static review confirms the MAIFIP monthly report settings writer no longer writes monthly_report_settings.downloaded_balance.
+- Static review confirms adjustment writes require POST, valid CSRF token, admin/encoder role, non-zero signed amount, and a non-empty reason; adjustment write and critical audit event share a transaction.
+- Static review confirms AICS and MAIFIP opening-balance calculations check for multiple applicable BEGINNING BALANCE rows before selecting an anchor.
+- Static review confirms adjustment totals are facility-scoped and included in MAIFIP carry-forward and current fund-position arithmetic.
+
+Not run / not claimed:
+- MySQL/MariaDB migration execution or rollback test.
+- Database-backed duplicate-anchor fixtures.
+- Browser UI interaction / permission matrix tests.
+- Concurrent adjustment write tests.
+- PDF/Excel rendering and interoperability tests.
+- Full AICS/MAIFIP cross-surface accounting reconciliation against real data.
+
+Deployment prerequisite:
+- Back up the database, then manually review and apply MIGRATION-v0.0214-MAIFIP-FUND-ADJUSTMENTS.sql before deploying this source package.

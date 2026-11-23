@@ -1,0 +1,48 @@
+FAMS - ACCESS FROM A PHONE ON THE SAME LOCAL NETWORK
+
+If FAMS is running on a Windows/XAMPP laptop and the phone cannot open the site using the laptop IP, the issue is normally the network path to Apache rather than the FAMS PHP application.
+
+1. CONNECT BOTH DEVICES TO THE SAME NETWORK
+   - Laptop and phone must be connected to the same Wi-Fi/router.
+   - Do not use a guest Wi-Fi that isolates wireless clients.
+
+2. FIND THE LAPTOP IPv4 ADDRESS
+   - Open Command Prompt on the laptop.
+   - Run: ipconfig
+   - Look under the active Wi-Fi/Ethernet adapter for IPv4 Address, for example 192.168.1.25.
+
+3. OPEN FAMS FROM THE PHONE
+   - If Apache uses port 80: http://192.168.1.25/lsfams55/
+   - If Apache uses another port, include it: http://192.168.1.25:8080/lsfams55/
+   - Replace the example IP/folder with the actual laptop IP and project folder.
+
+4. TEST APACHE BEFORE TESTING FAMS
+   - On the phone open: http://LAPTOP_IP/
+   - If the XAMPP/Apache page does not load, fix Apache/network access first.
+
+5. WINDOWS FIREWALL
+   - Allow Apache HTTP Server / httpd.exe through Windows Defender Firewall for the Private network.
+   - If using a custom port such as 8080, allow inbound TCP traffic for that port.
+   - Do not disable the firewall globally.
+
+6. APACHE LISTEN ADDRESS
+   - In XAMPP Apache httpd.conf, confirm Apache is listening on the intended port, e.g.:
+       Listen 80
+     or:
+       Listen 0.0.0.0:80
+   - Avoid a configuration that listens only on 127.0.0.1.
+
+7. APACHE DIRECTORY ACCESS
+   - The htdocs directory must allow requests from the local network.
+   - If an Apache configuration contains "Require local" for the project directory, change it to the appropriate local-network access rule, such as "Require all granted", only for the intended local development site.
+
+8. DATABASE
+   - FAMS connects to MySQL on the laptop itself. The phone does NOT need direct access to MySQL.
+   - Keep the database host as localhost/127.0.0.1 on the laptop.
+
+9. IMPORTANT
+   - This setup is intended for a trusted local network/development environment.
+   - Do not expose the FAMS application directly to the public Internet without proper HTTPS, authentication hardening, firewall rules, backups, and deployment security.
+
+V5.18 NOTE
+The XLSX importer no longer depends solely on PHP ZipArchive or the Windows `unzip` command. It includes a pure-PHP ZIP/XLSX fallback, so a standard XAMPP Windows installation can read the Google Sheets XLSX export even when ZipArchive and unzip.exe are unavailable.

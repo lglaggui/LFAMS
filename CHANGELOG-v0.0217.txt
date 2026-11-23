@@ -1,0 +1,17 @@
+FAMS Region II Unified — v0.0217
+MAIFIP Signed Fund Movements and Negative Download Reconciliation
+
+MAIFIP fund ledger
+- Removed the zero-floor from get_monthly_report_downloaded_balance(). The helper now returns the signed net sum of ordinary fund-download rows, rounded to cents.
+- Negative ordinary fund entries are now accepted by the MAIFIP fund entry form and server-side validation. Positive amounts represent additions; negative amounts represent reversals or corrections.
+- Renamed the monthly report amount label to NET FUND DOWNLOADS so the displayed figure is not mistaken for gross receipts.
+- Updated the Fund Management labels and guidance to describe signed fund movements.
+- Kept the existing DECIMAL(14,2) database column; it is signed by default, so no schema migration is required.
+- Preserved the shared monthly reconciliation formula: opening balance + signed net fund downloads + signed adjustments - released assistance.
+- The worksheet, print view, and CSV export continue to consume the same authoritative reconciliation result.
+
+Validation
+- Added contract checks for signed net totals, negative entry acceptance, and net-download labels.
+- Updated release-version assertions to 0.0217.
+- No AICS business logic or fund calculation was changed.
+- No database migration or production database operation was performed.

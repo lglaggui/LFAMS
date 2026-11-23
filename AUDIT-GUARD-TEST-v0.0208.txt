@@ -1,0 +1,2 @@
+Set FAMS_AUDIT_DSN and FAMS_AUDIT_CONFIRM_DB to the exact disposable/local database name.
+Exit code: 2 (expected 2; no connection attempted)

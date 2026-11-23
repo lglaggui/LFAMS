@@ -1,0 +1,26 @@
+FAMS v0.0200 — Ticket Lifecycle Enforcement Review
+
+Reviewed routes
+AICS
+- aics/tickets.php
+- aics/revision_ticket.php
+- aics/delete_ticket_request.php
+- aics/office_reassignment_ticket.php
+MAIFIP
+- maifip/ticket_create.php
+- maifip/ticket_edit.php
+- maifip/ticket_review.php
+- maifip/tickets.php (read/listing path retained; decision endpoints remain in ticket_review.php)
+
+Enforcement findings and changes
+1. Creation: MAIFIP revision/delete submissions now lock the linked record inside the idempotent transaction and compare the current record_version with the version captured before POST processing. AICS revision/delete/reassignment submissions perform the same locked recheck and revalidate office scope.
+2. Editing: MAIFIP ticket edits require the requester, active facility, OPEN state, and unchanged original base record version. A stale proposal is not silently assigned the latest version; the requester must prepare a new ticket from current record data.
+3. Approval/rejection: AICS decisions remain restricted to users with manage_tickets and administrator role. The pending ticket is selected FOR UPDATE and updated only from OPEN/IN PROGRESS; replayed decisions fail. MAIFIP decisions remain restricted by manage_tickets capability and administrator role, and decision writes require an OPEN ticket under row lock.
+4. Record consistency: Both workspaces retain optimistic record-version checks when applying ticket proposals. MAIFIP status transitions write status_history. AICS approved revision tickets now write aics_status_history when status changes.
+5. Audit retention: AICS reviewed tickets and record-linked delete/revision workflow tickets cannot be removed through the generic ticket-delete action. MAIFIP resolved/rejected tickets remain in revision_tickets history.
+6. Audit events and notifications remain in the existing transaction boundaries.
+
+Important limitations
+- This was a static source review plus local regression checks, not authenticated staging verification.
+- Live user-role combinations, facility/office replay attempts, CSRF expiration, double-submit concurrency, transaction rollback after injected database failures, and real status-history/audit rows must still be exercised against a designated MySQL staging database.
+- The registry continues to label method, CSRF, and scope runtime verification as pending. This release does not claim every legacy ticket path has been runtime-proven.

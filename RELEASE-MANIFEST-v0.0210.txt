@@ -1,0 +1,56 @@
+FAMS Region II Unified — Release Manifest v0.0210
+Release: Security, Auditability and Operational Resilience
+Baseline: v0.0209
+Package type: Complete htdocs deployment package; application contents are at ZIP root.
+
+Version markers
+- aics/config.php: APP_VERSION 0.0210; FAMS_VERSION 0.0210
+- maifip/app_version.php: APP_VERSION 0.0210
+
+Major changed source files
+- core/account_runtime.php
+- core/shared_runtime.php
+- core/audit_runtime.php
+- core/unified.php
+- core/access_control.php
+- core/chat_runtime.php
+- auth/login.php
+- auth/logout.php
+- portal/select-system.php
+- index.php
+- aics/config.php
+- aics/helpers.php
+- aics/users.php
+- aics/account.php
+- aics/status_update.php
+- aics/switch.php
+- aics/chat.php
+- maifip/app_version.php
+- maifip/helpers.php
+- maifip/users.php
+- maifip/account.php
+- maifip/status_update.php
+- maintenance/tests/security_resilience_test.php
+- maintenance/tests/permission_matrix_test.php
+- maintenance/tests/status_endpoint_enforcement_test.php
+
+Release documentation
+- CHANGELOG-v0.0210.txt
+- VALIDATION-v0.0210.txt
+- SECURITY-SESSION-INVALIDATION-v0.0210.txt
+- TRANSACTION-RETRY-POLICY-v0.0210.txt
+- RUNTIME-MIGRATION-AUDIT-v0.0210.txt
+- PHP-LINT-v0.0210.txt
+- JS-CHECK-v0.0210.txt
+- TEST-RESULTS-v0.0210.txt
+- TEST-SUMMARY-v0.0210.txt
+- RELEASE-TEST-SUMMARY-v0.0210.txt
+- VISUAL-TEST-v0.0210.txt
+- RELEASE-MANIFEST-v0.0210.txt
+- PACKAGE-SHA256-v0.0210.txt (provided alongside the ZIP, not embedded in itself)
+
+Safety and compatibility
+- No production database was accessed or modified.
+- No staging environment was used.
+- No user/beneficiary/patient/ticket records were modified during source development.
+- Database schema migrations are application runtime migrations and have source-level verification only; actual execution against the target database remains unverified.

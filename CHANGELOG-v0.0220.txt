@@ -1,0 +1,23 @@
+FAMS REGION II UNIFIED — v0.0220
+Shared UI Consistency Pass
+
+CHANGES
+1. Added core/shared-ui-consistency.css as a shared presentation layer for AICS and MAIFIP.
+2. Loaded the shared stylesheet from both workspace app.css files so it also applies to standalone popup pages that do not render the shared shell.
+3. Standardized common dashboard/KPI card geometry, shared panel headings, form control sizing and focus/invalid/disabled states, filter alignment, table header/body rhythm, empty-state typography, popup form action wrapping, and mobile gutters.
+4. Added responsive rules for narrow screens and respected prefers-reduced-motion.
+5. Synchronized AICS and MAIFIP APP_VERSION markers to 0.0220 for cache refresh.
+6. Added a UI consistency contract test and updated existing release-version assertions to v0.0220.
+
+SCOPE / NON-CHANGES
+- Presentation-only changes. No workflow, business logic, permissions, record ownership, database schema, or fund calculations intentionally changed.
+- No production database connection, migration, or data mutation occurred.
+- Workspace-specific AICS and MAIFIP styles remain in place; the shared layer only establishes common presentation baselines.
+
+VALIDATION
+- PHP lint: 157 PHP files passed.
+- JavaScript syntax: 21 files passed (Node.js --check).
+- CSS parsing: 12 stylesheets, 0 parser errors.
+- PHP source-contract tests: 28 passed.
+- MySQL concurrency test: safely refused; requires FAMS_ALLOW_DB_TESTS=1 and an explicitly configured isolated test/staging DSN.
+- Browser screenshot/visual regression: not run in this environment.

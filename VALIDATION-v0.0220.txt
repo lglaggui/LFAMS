@@ -1,0 +1,18 @@
+FAMS REGION II UNIFIED — v0.0220 VALIDATION REPORT
+
+SOURCE BASELINE
+- FAMS-Region-II-Unified-htdocs-v0.0219-CONTEXTUAL-ICONS.zip
+
+RESULTS
+- PHP lint: 157 files, all passed.
+- JavaScript syntax: 21 files, all passed using Node.js --check.
+- CSS parsing: 12 stylesheets, 0 parser errors using tinycss2.
+- PHP source-contract tests: 28 passed, 0 failed.
+- Database concurrency test: not run; test guard refused execution because no approved FAMS_TEST_DSN and FAMS_ALLOW_DB_TESTS=1 were configured.
+- ZIP integrity: checked after packaging.
+
+SCOPE
+- Shared CSS consistency layer loaded from both AICS and MAIFIP workspace stylesheets, including standalone popup pages.
+- No database-backed behavior was exercised.
+- No browser screenshot or visual regression was performed. CSS parser success is not a substitute for browser rendering review.
+- No production database was accessed or modified.

@@ -1,0 +1,65 @@
+FAMS REGION II — UNIFIED AUTHORIZATION ARCHITECTURE
+Release: v0.0196 / Step 1
+Status: Architecture foundation implemented; endpoint-by-endpoint enforcement is a later phase.
+
+PURPOSE
+Establish a shared authorization vocabulary and explicit policy model for AICS and MAIFIP without merging their business rules or changing existing account permissions.
+
+AUTHORIZATION DECISION ORDER
+1. Authenticated and current session.
+2. Workspace-specific user type / base role.
+3. Capability granted by the active workspace user-type definition.
+4. Workspace data scope.
+5. Record ownership / assignment.
+6. Current workflow state and permitted transition.
+Any failed or indeterminate check must deny the operation. UI visibility is never authorization.
+
+ROLE VS CAPABILITY VS SCOPE VS WORKFLOW
+- Role: the workspace-specific user classification and baseline.
+- Capability: a named operation such as view_records, edit_records, manage_tickets.
+- Scope: the office/facility boundary within which a record may be accessed or changed.
+- Ownership: whether the current user is the permitted actor for the specific record or request.
+- Workflow: whether the record/ticket state permits the requested transition.
+
+AICS POLICY
+- Scope dimension: office_id.
+- Read visibility: workspace-wide AICS records, preserving SWAD cross-office visibility.
+- Mutations: remain office-qualified; AICS administrator authority is subject to the existing administrator policy; staff mutations remain LPGMA-or-assigned-office; social-worker mutations remain assigned-SWAD-office-only.
+- Workflow: WAITING direct-edit rules remain distinct from RELEASED/CANCELLED and other locked-record ticket/administrator paths.
+- SWAD district-wide visibility does not grant cross-office edit, status, delete, or ticket-approval authority.
+
+MAIFIP POLICY
+- Scope dimension: facility.
+- Read visibility: active facility context.
+- Mutations: remain facility-qualified; LPGMA-side editing and facility-side status/ticket rules remain distinct.
+- Workflow: non-administrator edits remain subject to WAITING-only and existing ticket controls; status updates follow the existing facility-side capability rules.
+- Facility switching/context selection does not itself grant permissions beyond the authenticated user's authorized facility access.
+
+WORKSPACE ROLE REGISTRIES
+AICS built-ins: admin, manager, staff, social_worker.
+MAIFIP built-ins: admin, manager, encoder, social_worker, staff.
+User-type lookup remains system_key + role_key scoped. Unknown, disabled, malformed, or cross-workspace types fail closed. Custom permission JSON can narrow its base-role baseline but cannot elevate beyond it. Administrator privileges cannot be assigned to custom user types.
+
+SHARED ENFORCEMENT REQUIREMENTS
+- Server-side capability checks on every protected operation.
+- Server-side workspace scope and record ownership checks.
+- Workflow-state validation before mutation.
+- CSRF protection for state-changing requests.
+- Explicit HTTP method allowlists; safe methods must not mutate state.
+- Audit logging for sensitive operations.
+- Transaction boundaries for multi-step writes.
+- Deny by default for unknown permissions, workspaces, roles, and unresolved policy state.
+
+IMPLEMENTATION IN THIS STEP
+- Added a canonical, machine-readable policy catalog in core/access_control.php.
+- Added a safe role-policy lookup that returns null for unknown workspace/role pairs.
+- Added dedicated tests for workspace separation, scope dimensions, cross-office read visibility, office/facility mutation boundaries, and deny-by-default behavior.
+- Updated both workspace version constants to 0.0196.
+- No database schema or user permission rows were changed.
+- No existing endpoint behavior was intentionally changed in Step 1. Existing workspace helpers remain the enforcement points until the endpoint migration phase.
+
+VALIDATION LIMITATIONS
+These are deterministic CLI/source-level tests. This step does not constitute authenticated HTTP testing, a penetration test, a production database audit, or security certification. Database-backed verification of custom user types and live account scopes remains a staging requirement.
+
+NEXT STEP
+Step 2: reconcile the policy model against the 80-entry endpoint registry and assign a precise login, capability, method, CSRF, scope, ownership, workflow, and test requirement to every endpoint before changing endpoint behavior.

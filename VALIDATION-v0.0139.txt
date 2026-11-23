@@ -1,0 +1,25 @@
+FAMS Region II Unified — v0.0139 Validation Report
+Date: 2026-10-28
+Source: FAMS-Region-II-Unified-htdocs-v0.0138-PROFILE-PAGINATION-FIX.zip
+
+Implemented:
+- Global feedback alerts elevated above app overlays and strengthened for visibility.
+- Removed the nonfunctional AICS edit-popup Update Status button.
+- Non-admin users with record access can edit WAITING records without submitting a ticket.
+- RELEASED/CANCELLED records route non-admin edits/status changes through the ticket workflow.
+- Assistance-type changes synchronize assistance_type_raw to the newly selected type; the masterlist no longer displays the legacy type as a second line.
+- AICS masterlist configured widths reduced: Submission 30%, Beneficiary 10%, Address 30%, Assistance 20%, GL Amount 20% compared with the prior configured widths.
+
+Automated checks:
+- PHP syntax: passed for all PHP files in package.
+- JavaScript syntax: passed for core/shared-shell.js, aics/assets/app.js, and maifip/assets/app.js.
+- CSS brace-balance: passed for all 7 CSS files.
+- Source ZIP integrity: passed before edits; final ZIP integrity checked after packaging.
+- Static check: no remaining "Update Status" button label in AICS pages.
+
+Not performed:
+- Live browser/UI verification.
+- Live database tests of WAITING status edits and finalized-record ticket routing.
+- Pixel-level measurement of rendered table widths across viewport sizes.
+
+Deployment recommendation: back up the current application and database, deploy to staging, and verify AICS success/error feedback layering, SWAD role access, ticket routing for RELEASED/CANCELLED records, assistance type editing, and masterlist column layout before production deployment.

@@ -1,0 +1,40 @@
+FAMS Region II Unified — Release Manifest v0.0211
+Release: Final Application-Wide Consistency and Resilience Review
+Baseline: v0.0210
+
+Package layout
+- Complete htdocs source tree is at the ZIP archive root.
+- Includes AICS, MAIFIP, authentication, portal, shared core, maintenance utilities, automated tests, and release documentation.
+- Root .htaccess, aics/config.php, and maifip/app_version.php are included.
+
+Version markers
+- AICS APP_VERSION: 0.0211
+- AICS FAMS_VERSION: 0.0211
+- MAIFIP APP_VERSION: 0.0211
+
+Source inventory
+- PHP files: 149
+- JavaScript files: 19
+- CSS files: 11
+- Registered endpoint routes: 81
+
+Release documentation
+- CHANGELOG-v0.0211.txt
+- VALIDATION-v0.0211.txt
+- ENDPOINT-SECURITY-REVIEW-v0.0211.txt
+- AUDIT-COVERAGE-REVIEW-v0.0211.txt
+- DATA-VALIDATION-REVIEW-v0.0211.txt
+- FRONTEND-CASCADE-REVIEW-v0.0211.txt
+- PHP-LINT-v0.0211.txt
+- JS-CHECK-v0.0211.txt
+- CSS-CHECK-v0.0211.txt
+- TEST-RESULTS-v0.0211.txt
+- RELEASE-TEST-SUMMARY-v0.0211.txt
+- VISUAL-TEST-v0.0211.txt
+
+Deployment safety
+- No production database access or modification was performed.
+- No database migration was executed in this build environment.
+- - ZIP archive integrity check: passed (unzip -t).
+- ZIP archive layout: application files and folders are at the archive root; no extra wrapper directory.
+- Deploy to a backed-up staging copy first and run the dedicated MySQL concurrency suite against an isolated test/staging DSN before production rollout.

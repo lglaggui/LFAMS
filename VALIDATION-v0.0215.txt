@@ -1,0 +1,47 @@
+FAMS v0.0215 — Source Validation and Release Notes
+
+Baseline
+- Source baseline: complete v0.0214 unified htdocs package.
+- Release: v0.0215 — Fund Ledger Classification and 2026 Opening-Balance Baseline.
+
+Implemented
+- AICS and MAIFIP ordinary fund-download forms reject the reserved BEGINNING BALANCE label.
+- Ordinary fund-download forms cannot modify existing opening-balance rows, even if a user changes the batch label in the submitted request.
+- The current fund ledger uses January 1, 2026 as its single effective opening date.
+- A verified 2025 REMAINING BALANCE row is the opening amount. If none exists, the 2026 calculation baseline is zero.
+- 2026+ ordinary fund additions are summed separately from the opening balance.
+- MAIFIP downloaded-balance calculations check the entire selected reporting-month boundary for invalid additional opening labels, including labels dated later in the same month.
+- AICS and MAIFIP current-ledger calculations reject multiple or wrongly dated 2026 opening labels instead of silently selecting one.
+- MAIFIP keeps its facility-scoped ledger and its completed-month summary fallback when no live released detail rows exist.
+- Application version markers synchronized to 0.0215.
+- Added a manual retroactive correction script with preflight queries, reclassification, zero-anchor insertion, and postflight checks.
+
+Automated source checks
+- PHP syntax: 153 PHP files passed `php -l`.
+- JavaScript syntax: 21 JavaScript files passed `node --check`.
+- Static/source test suite: 24 test files passed.
+- New 2026 opening-classification test: 15 checks, 0 failures.
+- Existing fund-ledger anchor test: 16 checks, 0 failures.
+- ZIP integrity: verified after packaging.
+
+Database and runtime limitations
+- The MySQL concurrency test was refused by its safety gate because FAMS_ALLOW_DB_TESTS=1 and a test/staging FAMS_TEST_DSN were not supplied.
+- The runtime has PDO but neither pdo_mysql nor pdo_sqlite. Database-backed duplicate-anchor fixtures, conflicting amounts/dates, reconciliation against actual records, and live facility-authorization tests could not be run.
+- No database was connected, modified, migrated, or queried. No production data was changed.
+- The v0.0215 migration is provided for manual review and execution after a database backup. It has not been applied.
+
+Important migration review
+- The migration identifies a valid carryover by an explicit fund_source containing "2025 REMAINING BALANCE". Review the preflight SELECT output before running it. If your genuine carryover uses a different source description, update the SQL predicate before execution.
+- Resolve any multiple identified 2025 carryover rows per workspace/facility before running the migration.
+- Run the v0.0214 MAIFIP adjustment-table migration first if that table has not already been created, then run the v0.0215 classification migration.
+- The AICS zero-anchor insert omits created_by and relies on the existing table's default/null behavior. If the database schema requires a non-null created_by value, supply an authorized administrator user ID in that INSERT before execution.
+
+Not finalized / next verification
+- Database-backed reconciliation is still pending.
+- MAIFIP monthly report, print, Excel, and CSV do not yet all consume one shared monthly calculation result; the previously identified historical-summary fallback parity issue remains for a separate pass.
+- AICS continues its existing no-adjustment accounting policy; MAIFIP retains the audited adjustment ledger.
+- Cross-facility authorization is source-level protected by the existing active-facility resolver and endpoint checks, but runtime forged-request tests remain pending.
+
+Release status
+- Source package and static tests are ready for staging review.
+- Do not mark the fund ledger fully reconciled or production-verified until the migrations are reviewed/applied in staging and the database-backed test matrix passes.

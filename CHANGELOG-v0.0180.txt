@@ -1,0 +1,55 @@
+FAMS REGION II — UNIFIED SOURCE
+VERSION 0.0180
+
+VISUAL REGRESSION + PAGEVIEW / CSS CASCADE STANDARDIZATION
+
+1. SHARED PAGEVIEW GEOMETRY
+- Standardized AICS and MAIFIP Pageview padding on all four edges using one shared responsive gutter variable.
+- Desktop (>1100px): 28px on every edge.
+- Medium/tablet (768–1100px): 22px on every edge.
+- Compact tablet/mobile (561–800px): 16px on every edge.
+- Narrow mobile (<=560px): 12px on every edge.
+- Pageview outer margins are explicitly zero on all axes.
+- First and last direct content children have zero block-axis margins so their margins do not stack on top of the Pageview gutter.
+- Footer inset follows the same horizontal gutter; the fixed footer's reserved height remains part of the main-column layout.
+- Popup and print Pageviews retain their intentional zero-padding exception.
+
+2. MEASURED HEADER RESERVATION FIX
+- Added the AICS main-content selector to the canonical shared-shell reservation rule.
+- This removes the higher-specificity legacy AICS 76px/68px guessed top offset that could override the actual measured header height.
+- Both AICS and MAIFIP now reserve the runtime-measured fixed header height before Pageview begins.
+
+3. PAGE RHYTHM / WORKSPACE ALIGNMENT
+- Shared page heading gap: 12px.
+- Shared page heading bottom spacing: 16px.
+- Shared toolbar/filter/action-row gap: 10px.
+- Common card/panel inset: 18px desktop, 16px medium/tablet, 13px narrow mobile.
+- Removed an obsolete AICS dashboard width cap/centering rule that competed with the shared full-width dashboard layout.
+- Kept program-specific page components, table column definitions, form behavior, and business workflows intact.
+
+4. CSS CASCADE CLEANUP
+- Removed superseded AICS and MAIFIP Pageview frame declarations now owned by core/shared-shell.css.
+- Removed obsolete MAIFIP static-footer flow declarations that conflicted with the shared fixed footer.
+- Removed dead responsive card-padding and heading-gap declarations superseded by the shared contract.
+- CSS direct parsed totals: 8,800 rules / 13,462 !important in v0.0179; 8,773 rules / 13,385 !important in v0.0180.
+- Net: 27 fewer rules and 77 fewer !important declarations.
+- No empty CSS rules or byte-identical duplicate rule blocks detected in the audited CSS.
+
+5. PAGE-BY-PAGE VISUAL REGRESSION FIXTURES
+- Built representative static HTML fixtures using the actual workspace stylesheets and page component classes for:
+  Dashboard, Masterlist, Reporting, Ticket Management, Action Logs, Account Management, and Forms.
+- Tested both AICS and MAIFIP at 1440, 1024, 800, 768, 767, 560, and 390px widths.
+- 14 page/workspace fixtures x 7 viewport widths = 98 browser scenarios.
+- Verified equal Pageview edge padding, zero Pageview margins, measured-header reservation, footer positioning, and no document-level horizontal overflow.
+- Additional 98 responsive contract checks verified the Pageview and common card/panel inset values.
+- Wide masterlist table behavior remains contained within its table wrapper.
+
+6. VERSIONING
+- AICS APP_VERSION and FAMS_VERSION: 0.0180.
+- MAIFIP APP_VERSION: 0.0180.
+- MAIFIP static cache: fams-v0.0180-static.
+
+SCOPE / LIMITATIONS
+- This is a source-level visual regression pass using representative static fixtures and the actual CSS cascade. It is not a live authenticated PHP/browser run of every page.
+- No production database, user sessions, permissions, fund calculations, or assistance workflows were modified or tested against a live database.
+- 13,385 !important declarations remain across the audited CSS files. Full legacy cascade flattening is not complete; further removals should continue in authenticated page-specific batches.

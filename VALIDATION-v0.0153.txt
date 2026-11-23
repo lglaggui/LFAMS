@@ -1,0 +1,26 @@
+FAMS Region II Unified — v0.0153 Validation Report
+Date: 2026-10-29
+
+Package scope
+- MAIFIP DOH Region II dashboard page, client-side editable worksheet, dashboard stylesheet, workbook-derived JSON template, supplied workbook source copy, portal/MAIFIP DOH logo assets, shared navigation, and application version.
+
+Static validation
+- PHP syntax: 113 PHP files checked; no syntax errors reported.
+- JavaScript syntax: maifip/assets/doh-dashboard.js passed `node --check`.
+- Workbook template: 47 rows x 8 columns, 38 merged ranges; column widths and row heights loaded from the supplied workbook; merge bounds validated.
+- Targeted assertions: dashboard route/nav, permissions, CSRF, database persistence, add/reset/export controls, and logo assets passed.
+- ZIP integrity: verified after package creation.
+
+Security / behavior
+- Dashboard visibility requires LPGMA facility and MAIFIP view_dashboard permission.
+- Editing/reset requires MAIFIP manage_funds permission.
+- Writes require CSRF validation, bounded JSON size, fixed 8-column rows, bounded row count, and validated merge ranges.
+- Edits and resets are recorded through the existing action-log helper.
+- First visit creates the singleton dashboard data table and seeds it from the supplied workbook-derived template; no manual SQL import is required.
+
+Limitations
+- A live XAMPP/MySQL session was not available, so database migration and save/reset round trips were not tested against a running database.
+- A headless browser smoke test did not complete in the available environment; visual pixel matching and interactive behavior should be confirmed in the user's staging browser.
+- The dashboard is a close HTML recreation of the uploaded worksheet, not a literal Excel renderer. Export uses Excel-compatible HTML (.xls) to preserve merged cells and displayed formatting.
+- CSS brace balance: all CSS files passed a basic brace-balance check.
+- ZIP archive integrity: `unzip -t` completed with no compressed-data errors.

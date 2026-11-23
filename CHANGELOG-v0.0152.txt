@@ -1,0 +1,9 @@
+FAMS Region II Unified — v0.0152
+
+- Added the supplied Department of Health seal to MAIFIP sidebar branding with a contained, accessible image and label.
+- Standardized Disable user type action to a recognizable toggle-off switch icon; Enable remains a check icon.
+- Added a cross-system margin/padding standardization layer focused on popup shells, popup form bodies, cards, grids, form controls, action rows, notices, mobile insets, and consistent spacing tokens.
+- Updated application version references to 0.0152.
+- Existing role restrictions and server-side actions were preserved.
+
+Validation scope: static PHP/JS syntax checks, CSS brace checks, version/branding/icon assertions, and ZIP integrity. No live browser or MySQL tests were performed.

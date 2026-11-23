@@ -1,0 +1,20 @@
+FAMS Region II Unified — v0.0082
+
+Changes
+- Increased the shared header profile's content-driven expansion width. The shared controller measures the actual expanded text and logout control; width is limited by the viewport rather than a fixed 420/460px design cap. MAIFIP and AICS share the same controller and CSS.
+- AICS dashboard reporting-period action now reads “Display Selected Period Report” and opens a new AICS-only printable release report for the selected month/year.
+- Added consistent padding and separator treatment to the MAIFIP FAMS masterlist section heading.
+- Migrated AICS chat front-end interactions to the current MAIFIP chat controller: AJAX polling, unread counts/read cursors, message editing/deletion, edit trail, admin clear-selected-chat, emoji picker, long-press actions, jump-to-latest, search, collapsible office groups, and directory refresh.
+- Added AICS-specific chat API and unread helper using isolated aics_users, aics_user_messages, aics_user_message_trails, aics_chat_read_state, and aics_notifications tables. The MAIFIP API and its user_messages table are not used by AICS.
+- AICS chat directory retains SWAD Region II, province, office, and All Users groups. No separate LPGMA office group is presented.
+- Updated application version/cache token to 0.0082.
+
+Validation
+- PHP syntax checks passed for all 99 PHP files.
+- JavaScript syntax checks passed for all project JavaScript files, including the new AICS chat controller.
+- CSS brace-balance checks passed.
+- ZIP integrity checked after packaging.
+
+Limitations
+- No production database was available for runtime SQL verification.
+- No live browser interaction testing or hosted deployment was performed.

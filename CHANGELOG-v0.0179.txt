@@ -1,0 +1,47 @@
+FAMS REGION II — CHANGELOG v0.0179
+VISUAL CONSISTENCY & CSS FLATTENING PASS
+
+1. SHARED PAGEVIEW GEOMETRY
+- Consolidated full-page AICS and MAIFIP outer page spacing under the shared shell stylesheet.
+- Pageview top, right, bottom and left padding now use one shared gutter value at every responsive breakpoint:
+  Desktop (>1100px): 28px.
+  Medium (801–1100px): 22px.
+  Tablet (561–800px): 16px.
+  Narrow mobile (<=560px): 12px.
+- Footer horizontal inset follows the same gutter, keeping the footer content aligned with the page content.
+- The fixed footer remains 34px high; the main column continues to reserve its height separately from the equal Pageview padding.
+- Popup pages retain their compact zero-padding Pageview and main-content exception.
+
+2. AICS / MAIFIP ALIGNMENT
+- Standardized page heading and section heading spacing under shared tokens: 12px internal gap and 16px bottom spacing.
+- Standardized toolbar, filter, search and action-row gaps at 10px.
+- Standardized common card/panel padding: 18px desktop, 16px medium/tablet, 13px narrow mobile.
+- Included AICS dashboard blocks and hero surfaces in the shared card inset contract while preserving their distinct colors, typography and component layouts.
+- Applied common min-width and box-sizing safeguards to pageview children and work surfaces.
+
+3. RESPONSIVE SHELL STANDARDIZATION
+- Desktop sidebar remains 250px.
+- Tablet rail is now consistently 80px in both AICS and MAIFIP from 768px through 1100px.
+- Mobile drawer behavior starts at 767px and below; main content, header and footer align to the full viewport width.
+- Removed the conflicting legacy AICS 761–800px full-width drawer override.
+
+4. CSS FLATTENING
+- Removed the superseded v0.0164 viewport block; v0.0165 shared viewport geometry is the canonical base.
+- Removed redundant AICS and MAIFIP Pageview padding declarations from workspace stylesheets and core/uniform.css. Popup and print exceptions remain.
+- Removed obsolete AICS/MAIFIP generic Pageview frame declarations and repeated card/heading/toolbar padding or gap declarations where the shared shell now owns the rule.
+- Removed empty CSS rules left by the cleanup.
+- Kept context-specific table, dashboard, popup, chat and workflow styling intact.
+- No blanket removal of !important declarations was attempted; legacy high-specificity rules still exist and require further authenticated page-by-page regression before deeper deletion.
+
+5. RELEASE CONSISTENCY
+- AICS APP_VERSION and FAMS_VERSION: 0.0179.
+- MAIFIP APP_VERSION: 0.0179.
+- MAIFIP service-worker cache: fams-v0.0179-static.
+- No database schema, assistance records, permissions, or business workflows were changed.
+
+VALIDATION SCOPE
+- Static PHP, JavaScript and CSS checks passed.
+- Chromium layout fixtures were checked at 1440, 1024, 800, 768, 767, 560 and 390 CSS pixels for AICS and MAIFIP, including combined AICS+MAIFIP styles.
+- Wide-table fixture checks confirmed horizontal scrolling stays inside the table wrapper without creating document-level horizontal overflow.
+- Popup fixture retained zero outer padding.
+- These are isolated browser fixtures, not authenticated tests of every live FAMS page or a production database.

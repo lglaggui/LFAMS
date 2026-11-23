@@ -1,0 +1,22 @@
+FAMS v0.0209 — Validation Report
+
+Source baseline: v0.0208
+Release objective: Data Lifecycle and Audit Trail Hardening
+
+Static/source validation
+- PHP syntax: 147 PHP files passed PHP 8.4.24 lint.
+- JavaScript syntax: 19 JavaScript files passed Node.js syntax checks.
+- Automated PHP suites: 20 discovered; 19 passed, 1 skipped by the explicit MySQL safety guard, 0 failed.
+- New data lifecycle audit: 26 checks passed, 0 failed.
+- Deletion/restoration enforcement: 19 checks passed, 0 failed.
+- ZIP integrity: verified after packaging.
+
+The skipped MySQL concurrency suite explicitly refused to run because FAMS_ALLOW_DB_TESTS=1 and a FAMS_TEST_DSN naming a staging/test database were not supplied. This is an intentional safety refusal, not a test failure.
+
+Not performed
+- No MySQL/MariaDB connection, schema migration execution, row-level duplicate/orphan scan, FK validation against a live schema, concurrent transaction simulation, deadlock injection, authenticated browser test, or production deployment test.
+- No production database access or modification.
+
+Important residual risk
+- MAIFIP duplicate facility/control-number pairs, if present in the installed database, deliberately defer creation of the composite unique index until reviewed. The migration preserves existing data and does not silently normalize or delete duplicates.
+- Actual migration compatibility depends on the deployed schema and DB account's ALTER/CREATE privileges. A failed critical migration now fails visibly rather than being marked complete.

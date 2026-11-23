@@ -1,0 +1,7 @@
+FAMS Region II Unified v0.0115
+
+- Avatar crop zoom range updated to 0.1x–5x across MAIFIP and AICS avatar editors.
+- MAIFIP crop controls now permit zooming out below 1x for both self-account and administrator user-avatar editing.
+- MAIFIP My Account navigation label changed to “← Back to Users Management”.
+- Revert-to-default avatar controls remain disabled only when no custom avatar is stored; custom-avatar users can activate the revert action.
+- Version labels updated to 0.0115.

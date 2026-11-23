@@ -1,0 +1,9 @@
+FAMS Region II Unified — v0.0142
+
+Changes
+- SWAD/MAIFIP facility users can change the status of WAITING records directly, without a ticket, within their assigned facility scope.
+- Finalized RELEASED/CANCELLED records remain locked for non-admin users and require the ticket workflow.
+- MAIFIP account editing now accepts configured and legacy facility keys, includes inactive/current facility values in the edit selector, normalizes submitted role/facility values, and provides specific validation messages instead of a generic valid-user-details error.
+- Updated shared application version to 0.0142.
+
+Validation note: static syntax and archive checks only; live browser/database tests remain necessary.

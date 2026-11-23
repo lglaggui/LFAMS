@@ -1,0 +1,6 @@
+FAMS Region II Unified — v0.0159
+
+- Ensured full-page content starts below the fixed shell header, with a responsive mobile offset.
+- Added a dedicated Add Entry icon to the Masterlist heading card for authorized LPGMA users in AICS/SWAD and MAIFIP.
+- The icon uses the same recognizable plus glyph, prominent styling, keyboard focus, accessible label, and help tooltip in both systems.
+- Existing create-record permission checks and existing record-form flows are retained.

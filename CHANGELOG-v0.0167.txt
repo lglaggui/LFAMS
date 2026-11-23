@@ -1,0 +1,11 @@
+FAMS Region II Unified — v0.0167
+TRCR2 / shared table edge-scroll correction
+
+- Reworked the shared horizontal table edge-arrow controller.
+- The right arrow now appears only when the active table viewport has remaining horizontal content to the right; the left arrow follows the equivalent rule.
+- Reaching a physical scroll boundary hides the unavailable arrow immediately instead of leaving it visible during the pointer-leave delay.
+- Scroll and resize events re-evaluate the active viewport so arrow visibility follows the actual scroll position and available width.
+- Applied centrally to the shared shell, covering AICS and MAIFIP table viewports, including the TRCR2 facility workspace.
+- Updated application versions and shared-shell cache keys to v0.0167.
+
+Validation scope: JavaScript syntax, PHP syntax, CSS brace balance, and targeted source assertions. Live browser/device and Apache/MySQL workflow tests were not performed.

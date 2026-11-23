@@ -1,0 +1,11 @@
+FAMS UNIFIED — VERSION 0.0136
+Date: 2026-10-28
+
+- Standardized common Edit, Delete, and Submit Ticket actions as icon-only controls across the shared MAIFIP/AICS shell. Controls retain accessible names and hover tooltips.
+- Added simple inline SVG icons, consistent hit targets, focus-visible outlines, and distinct destructive/request colors.
+- AICS tickets approved by an administrator are automatically removed from the active ticket table when the requester is a non-admin; action logs remain.
+- MAIFIP revision tickets for record updates approved by an administrator are automatically removed after the record update and resolution commit when the requester is a non-admin; action logs remain.
+- Approved MAIFIP delete-entry requests continue to be handled by the existing record deletion/cascade flow.
+- Refined common action styles and bumped app/cache versions.
+
+Validation scope: static PHP/JavaScript/CSS checks and ZIP integrity only. Live database/browser workflow testing is not represented as completed.

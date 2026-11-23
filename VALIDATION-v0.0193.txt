@@ -1,0 +1,22 @@
+FAMS REGION II — VALIDATION REPORT v0.0193
+
+Static validation performed in the build environment:
+- PHP files linted: 129; syntax errors: 0.
+- JavaScript files checked with node --check: 19; errors: 0.
+- CSS files parsed with tinycss2: 11; parser errors: 0.
+- Shared transaction tests: 4 passed, 0 failed.
+- Permission matrix tests: 47 passed, 0 failed.
+- Payload fingerprint tests: 4 passed, 0 failed.
+- Endpoint registry tests: 4 passed, 0 failed.
+- Repository contract tests: 6 passed, 0 failed.
+- Total automated source-level assertions: 65 passed, 0 failed.
+- Endpoint registry generated: 80 routes (35 AICS, 44 MAIFIP, 1 portal).
+- CSS duplicate-selector audit completed; only one confirmed redundant selector removed in this increment.
+- MG Tracking / Android application folders and files: none in the FAMS working tree.
+
+NOT RUN / LIMITATIONS
+- pdo_mysql is not installed in this build environment; MySQL schema migration, payload conflict behavior against InnoDB, rollback, and simultaneous-process tests were not executed here. The MySQL staging harness was not run because no staging DSN is available.
+- No authenticated browser/HTTP regression tests or visual screenshots were run.
+- Endpoint registry is inventory-only pending route-by-route method/capability verification; it is not universal runtime authorization enforcement.
+- Repository adapters are used for both workspaces' status-update writes. Other existing direct SQL workflows remain for incremental migration.
+- No production database migration or destructive data change was performed.

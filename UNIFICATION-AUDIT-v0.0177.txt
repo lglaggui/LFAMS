@@ -1,0 +1,41 @@
+FAMS REGION II — TECHNICAL RELIABILITY & UX AUDIT v0.0177
+
+PERFORMANCE
+- Both AICS and MAIFIP masterlists already perform server-side pagination at 25 records per page; retained and verified the existing LIMIT/OFFSET page retrieval.
+- Both live search implementations use request cancellation / stale-response protection and now share a 260 ms debounce interval.
+- Both live search paths now expose aria-busy while requests are pending and display a non-sensitive user-facing error toast when a request fails.
+- Added an optional, idempotent composite-index migration for facility/office/date/status masterlist access, audit-log filtering, and chronological chat retrieval.
+- The migration is not executed automatically. It is supplied separately so the administrator can back up the database and run it once.
+- No live database was available; index creation and EXPLAIN plans require validation against the deployed schema and data distribution.
+
+ASSET RELIABILITY
+- Shared shell styles/scripts and shared worksheet styles use APP_VERSION as the cache-busting token.
+- Service-worker cache generation advanced to v0.0177 so stale static assets are not retained across this release.
+
+ERROR HANDLING
+- PHP errors are logged through the hosting PHP error-log configuration and hidden from browser output by default.
+- FAMS_DEBUG may be defined true before core/unified.php only for controlled local development. Production should keep it false.
+
+IMAGE HANDLING
+- Existing server-side avatar validation retained: JPG/PNG/WebP only, maximum 2 MB, dimensions no larger than 6000×6000. Client crop/size checks remain in place.
+
+BACKUP / RESTORE
+- Added XAMPP/phpMyAdmin backup and restore guidance.
+- Added a protected maintenance directory containing the optional SQL index migration. No backup data or credentials are included.
+
+ACCESSIBILITY / UX
+- Added shared success/info/warning/error toast UI with ARIA live roles and dismiss action.
+- Added skip-to-main-content link for keyboard users.
+- Added visible focus indicators, invalid-field styling, reduced-motion handling, and unsaved-change warnings for edited POST forms, including protection against AJAX/partial-navigation link clicks.
+- Search/GET, chat, status-change, and worksheet forms are excluded from dirty-form warnings.
+- Added delegated confirmation support for forms/links marked data-confirm; existing explicit inline confirmations remain intact.
+
+STYLESHEET CONSOLIDATION
+- Safe duplicate rule flattening is documented in CSS-AUDIT-v0.0177.txt.
+- No broad !important removal, CSS layer conversion, or cross-workspace stylesheet extraction was attempted because the current legacy cascade needs authenticated page-by-page regression coverage.
+
+DATABASE / DEPLOYMENT LIMITATIONS
+- No live MySQL integration test was performed.
+- No production backup/restore was executed.
+- Optional index migration must be reviewed and run after a fresh backup.
+- No existing data or business workflow was intentionally changed.

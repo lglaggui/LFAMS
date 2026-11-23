@@ -1,0 +1,42 @@
+FAMS v0.0216 — Validation Report
+
+Baseline
+- Source baseline: v0.0215 Fund Opening Classification package.
+- Release: v0.0216 — Fund Breakdown Wrapping and Unified MAIFIP Monthly Reconciliation.
+
+Implemented
+- Fund Source text wraps inside its own grid column in both AICS and MAIFIP dashboards.
+- MAIFIP worksheet, print view, and CSV now call the same maifip_monthly_fund_reconciliation() helper.
+- The shared helper applies the established disbursement precedence: live RELEASED detail rows when present; saved monthly summary only when no live RELEASED rows exist.
+- Ending balance is calculated as opening balance + actual fund downloads + audited adjustments - authoritative released assistance.
+- Print no longer subtracts only live detail amounts when a historical monthly summary is authoritative.
+- Worksheet and print display adjustments separately.
+- CSV exports opening balance, downloads, adjustments, released assistance, ending balance, source selection, detail released total, detail client count, and authoritative client count.
+- Excel export includes the full fund balance components and retains worksheet-local edits.
+- Existing MAIFIP facility authorization structure remains unchanged and has source-level assertions.
+
+Automated checks
+- PHP syntax: 154 PHP files passed php -l.
+- JavaScript syntax: 21 JavaScript files passed node --check.
+- Static test suite: 25 test scripts passed.
+- MySQL concurrency test: safely refused; requires FAMS_ALLOW_DB_TESTS=1 and FAMS_TEST_DSN with a test/staging database name.
+- New monthly reconciliation contract test: 13 checks, 0 failures.
+- Fund ledger anchor test: 16 checks, 0 failures.
+- 2026 opening classification test: 15 checks, 0 failures.
+- Monthly sheet standardization test: 11 checks, 0 failures.
+- Data lifecycle audit test: 26 checks, 0 failures.
+
+Database/runtime limitations
+- PHP runtime has PDO but no pdo_mysql or pdo_sqlite driver.
+- No authorized staging DSN or facility-specific test accounts were provided.
+- No live SQL fixture tests, conflicting historical-summary fixture tests, or forged cross-facility adjustment requests were executed.
+- No database was connected, migrated, queried, or modified. No production data was changed.
+
+Parity interpretation
+- The server-generated worksheet initial state, print view, CSV, and Excel export use the same disbursement source precedence and fund balance formula.
+- Excel export reflects local worksheet edits. The separate server-generated print route does not receive unsaved browser-local worksheet edits; it reflects the current database state. This is intentional and should be clear to users.
+- Detail totals/client counts are reported separately from historical summary totals when the historical fallback has no corresponding detail rows.
+
+Release status
+- Source changes and static validation are complete.
+- Not production-verified. Run the reconciliation matrix and facility-authorization tests against an authorized staging database before production deployment.

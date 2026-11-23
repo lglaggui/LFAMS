@@ -1,0 +1,10 @@
+FAMS Region II Unified — v0.0141
+
+- Added edge-wheel navigation for wide tables: wheel gestures at the left/right edge move the table horizontally in that direction.
+- Enforced ticket-based edits/status requests for non-LPGMA AICS office users, including direct URL access to record/status editors.
+- Kept direct WAITING edits and status changes available to authorized LPGMA users; administrators retain full access.
+- Compactified MAIFIP Account Management actions with icon-only controls and accessible tooltips/labels.
+- Reduced MAIFIP Access and Status columns and allocated more room to Actions.
+- Bumped application cache version to 0.0141.
+
+Validation scope: PHP/JavaScript syntax, CSS brace checks, and ZIP integrity. Live browser/database workflow tests are not included.

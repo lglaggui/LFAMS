@@ -1,0 +1,9 @@
+FAMS Region II Unified — v0.0139
+
+- Elevated success/error alerts above all application layers with stronger contrast, padding, and shadow.
+- Removed the nonfunctional Update Status button from AICS edit-entry popups.
+- Allowed authorized SWAD staff/social workers to edit WAITING records without a ticket; RELEASED/CANCELLED records route through ticket workflow for non-admin users.
+- When assistance type is changed, the masterlist now displays only the current selection; updates synchronize assistance_type_raw with the new type.
+- Reduced AICS masterlist widths: Submission by 30%, Beneficiary by 10%, Address by 30%, Assistance by 20%, and GL Amount by 20% relative to the previous configured percentages.
+
+Validation note: static syntax/structure and ZIP checks are performed for this package; live browser/database workflow testing must be completed in staging.

@@ -1,0 +1,15 @@
+FAMS REGION II UNIFIED — v0.0088
+
+Changes
+- Unified profile card animation timing to ease-in-out and removed CSS-only hover expansion that competed with the shared-shell.js profile controller. The shared shell remains the single interaction controller for both systems.
+- Fixed AICS chat API calling the MAIFIP-only sync_current_user_from_db() function; added AICS-local account refresh based on aics_users. This was a fatal runtime defect in the chat API.
+- Changed chat API CSRF failures to structured JSON HTTP 419 responses so the chat client can explain token expiry and request refresh instead of reporting invalid JSON.
+- Removed the duplicate SWAD Region II office-group entry: only active child offices under SWAD Region II are offered as office groups; the region-wide group remains separate.
+- Removed repeated chat schema DDL from AICS chat page rendering; the API is the schema owner.
+- Added shared compact, fixed-layout masterlist table geometry for both systems and improved overflow handling.
+- Added AICS chat avatar fallback for broken user-avatar images (facility logos are not incorrectly replaced).
+- Removed one unreferenced duplicate DSWD logo SVG asset.
+- Updated version labels to 0.0088.
+
+Validation notes
+Static PHP/JS/CSS checks and archive integrity are run for this package. No production database or browser session is available in this environment; hosting behavior must still be checked on the deployed site.

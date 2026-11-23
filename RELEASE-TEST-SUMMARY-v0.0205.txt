@@ -1,0 +1,8 @@
+FAMS v0.0205 — RELEASE TEST SUMMARY
+- 141 PHP files syntax-checked successfully.
+- Source-level test suites executed successfully; see TEST-RESULTS-v0.0205.txt for suite details.
+- Staging preflight guard test: 8/8 passed.
+- Endpoint registry parsed: 81 routes.
+- Staging preflight intentionally blocked in this build environment because pdo_mysql and mbstring are missing and no staging DB is configured.
+- MySQL concurrency test intentionally refused to run without FAMS_ALLOW_DB_TESTS=1 and an explicit DSN whose database name contains staging/test.
+- No live database, production data, or production credentials were used.

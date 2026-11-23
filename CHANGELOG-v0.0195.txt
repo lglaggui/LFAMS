@@ -1,0 +1,34 @@
+FAMS REGION II — UNIFIED RELEASE v0.0195
+REPORT ACTION PLACEMENT, SECURITY/REPOSITORY REVIEW, REGRESSION HARNESS
+Baseline: v0.0194
+
+IMPLEMENTED
+- Moved “Display Selected Period Report” out of the year/month controls and into the Selected Reporting Period card in both AICS and MAIFIP dashboards.
+- Anchored the report action to the right edge of the selected-period card, respecting the card's internal padding.
+- Added bounded sizing and safe text wrapping so the action remains inside the card at desktop, tablet, and mobile widths.
+- Kept AICS and MAIFIP year/month selection behavior and report URL parameters independent and unchanged.
+- Added source-level reporting-card placement tests and a reusable Chromium visual smoke test at five viewport widths.
+- Updated both workspace version markers to 0.0195.
+
+SECURITY / ENDPOINT REVIEW
+- Retained the existing 80-route endpoint inventory and its explicit warning that it is an audit manifest, not runtime authorization middleware.
+- Re-ran the 47-assertion permission matrix covering workspace separation, inactive/custom user types, ticket decisions, imports, offline sync, restoration, and account scopes.
+- Re-ran endpoint registry metadata validation.
+- No universal endpoint dispatcher was introduced: endpoint-by-endpoint capability and ownership checks remain the authoritative enforcement model.
+
+REPOSITORY / TRANSACTION REVIEW
+- Re-ran repository contract checks for AICS office scope, MAIFIP facility scope, optimistic record versions, and workspace-specific field allowlists.
+- Re-ran shared transaction runtime tests for commit, rollback, nested savepoints, and rollback-to-savepoint.
+- Preserved separate AICS and MAIFIP repository adapters and business rules.
+- Remaining raw SQL is inventoried for staged migration; this release does not perform a risky wholesale rewrite of record, ticket, import, account, report, and export queries.
+
+REGRESSION TESTING
+- Added maintenance/tests/reporting_period_layout_test.php.
+- Added maintenance/tests/reporting_period_visual_test.py using installed Chromium and Playwright.
+- Visual smoke test passed at 1440, 1024, 768, 390, and 360 CSS-pixel viewport widths: no horizontal overflow, report action remains inside the selected-period card, and action remains right-aligned.
+- Full PHP syntax lint and existing static contract tests passed; see VALIDATION-v0.0195.txt.
+
+LIMITATIONS
+- Authenticated end-to-end tests against a live/disposable MySQL database were not run because this environment has no MySQL server or PHP pdo_mysql driver.
+- The visual test covers the actual shared reporting CSS and representative dashboard structure, not authenticated dashboard data rendering. It is a repeatable smoke test, not yet a pixel-diff comparison against approved baselines.
+- The endpoint registry is not proof of runtime enforcement. A staged role-by-role direct-request matrix and CSRF/session tests remain required.

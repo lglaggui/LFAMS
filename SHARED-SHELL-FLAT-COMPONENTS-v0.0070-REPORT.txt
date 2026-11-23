@@ -1,0 +1,12 @@
+FAMS Region II v0.0070 — Shared shell component refactor
+
+Changes:
+- Replaced duplicated CSS rules for shared sidebar navigation, MAIFIP facility selector, header fund summary, and header presence dot with a single canonical component definition in core/shared-shell.css.
+- Removed the old rules for these component selectors from core/uniform.css and core/shared-shell.css before adding the canonical definitions.
+- Standardized vertical navigation padding to 12px top and 10px bottom for both systems.
+- Replaced facility selector chevron with a three-horizontal-line SVG glyph.
+- Facility logo is circular; selector colors use integrated navy and light-blue styling.
+- Header fund summary uses a shared maximum width of 460px in both workspaces.
+- Header presence indicator uses fixed 8x8px circular dimensions.
+
+Validation: PHP and JS syntax checks and ZIP integrity checks are run during packaging. Browser/database verification is not claimed.

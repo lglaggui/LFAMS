@@ -1,0 +1,32 @@
+FAMS v0.0181 — Asset and package optimization audit
+
+LOSSLESS PNG RECOMPRESSION
+- core/branding/dswd-official-logo.png: 174,109 -> 103,452 bytes (70,657 saved)
+- maifip/assets/branding/cimc-logo.png: 459,702 -> 365,394 bytes (94,308 saved)
+- maifip/assets/branding/cvmc-logo.png: 1,739,654 -> 1,295,937 bytes (443,717 saved)
+- maifip/assets/branding/simc-logo-sticker.png: 22,220 -> 21,878 bytes (342 saved)
+- maifip/assets/branding/lpgma-logo-sticker.png: 63,744 -> 62,140 bytes (1,604 saved)
+- maifip/assets/branding/site-admin-avatar.png: 436,982 -> 436,939 bytes (43 saved)
+- maifip/assets/branding/simc-logo.png: 1,050,527 -> 1,037,322 bytes (13,205 saved)
+- maifip/assets/branding/lpgma-logo-sticker-v514.png: 58,386 -> 57,036 bytes (1,350 saved)
+- maifip/assets/avatars/default-site-admin-avatar.png: 436,982 -> 436,939 bytes (43 saved)
+Total PNG recompression savings: 625,269 bytes. Pixel data verified identical after recompression.
+
+EXACT DUPLICATE FILES REMOVED AFTER REFERENCE REDIRECTION
+- core/branding/lpgma-logo-isabela-district.png -> core/branding/lpgma-shared-logo.png
+- aics/assets/branding/lpgma-logo-sticker-v518.png -> core/branding/lpgma-shared-logo.png
+- maifip/assets/branding/lpgma-logo-sticker-v518.png -> core/branding/lpgma-shared-logo.png
+- maifip/assets/branding/doh-seal.jpg -> core/branding/doh-logo.jpg
+- aics/assets/branding/dswd-official-logo.png -> core/branding/dswd-official-logo.png (unused duplicate copy)
+- aics/assets/branding/dswd-official-logo.svg -> core/branding/dswd-official-logo.svg (unused duplicate copy)
+- aics/assets/address-cascade.js and maifip/assets/address-cascade.js -> core/shared-address-cascade.js
+
+Combined uncompressed savings from exact duplicate files: 2,291,952 bytes.
+
+PACKAGE SIZE COMPARISON
+- v0.0180: approximately 15.65 MB compressed; 22.76 MB uncompressed.
+- v0.0181: approximately 12.79 MB compressed; 19.85 MB uncompressed.
+- Compressed package reduction: approximately 2.86 MB (18.3%).
+- Total uncompressed content reduction: approximately 2.90 MB.
+
+No JPEGs were recompressed and no images were downscaled. No database, backup, or uploaded user data was deleted.

@@ -1,0 +1,26 @@
+FAMS REGION II UNIFIED — VALIDATION v0.0186
+
+Source baseline: v0.0184
+Release focus: permission regression foundation
+
+Automated permission tests:
+- 17 passed
+- 0 failed
+- Covers catalog size, built-in role baselines for AICS and MAIFIP, manager restrictions, Social Worker restrictions, staff/encoder distinctions, cross-system role separation, no-DB fallback, unknown custom role denial, unknown permission denial for administrators, and unknown workspace denial.
+
+Static validation:
+- PHP syntax: 121 files checked, 0 failures (PHP 8.4.24 CLI).
+- JavaScript syntax: 19 files checked with Node.js --check, 0 failures.
+- CSS parsing: 11 files parsed with tinycss2, 0 parser errors.
+- Permission regression suite: 17 passed, 0 failed.
+- ZIP integrity: verified with unzip -t after packaging.
+
+Not performed:
+- Authenticated browser tests.
+- Live PHP/MySQL integration or production database tests.
+- Database-backed custom user-type permission/activation tests.
+- Full role x endpoint x operation regression suite.
+- Record-scope, office/facility, ticket workflow, CSRF, upload, or concurrency security audit.
+- Production deployment.
+
+No SQL files or database changes are included in this release.

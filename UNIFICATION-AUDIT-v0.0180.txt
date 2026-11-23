@@ -1,0 +1,25 @@
+FAMS REGION II — WORKSPACE VISUAL CONSISTENCY AUDIT v0.0180
+
+The AICS and MAIFIP full-page workspaces now use the same final Pageview frame from core/shared-shell.css.
+
+Shared behavior standardized:
+- Pageview edge padding and zero outer margins.
+- Runtime-measured header reservation.
+- Fixed footer placement and horizontal inset.
+- Page heading, toolbar, filter, and action-row rhythm.
+- Common card/panel insets at responsive breakpoints.
+- Responsive sidebar/content column geometry.
+
+Program-specific differences remain intentionally separate:
+- AICS / SWAD and MAIFIP data fields and business rules.
+- Assistance record table columns and widths.
+- Role/facility/office permissions.
+- Program-specific forms, reporting fields, and ticket actions.
+
+Regression coverage:
+- Dashboard, Masterlist, Reporting, Ticket Management, Action Logs, Account Management, Forms.
+- Both workspaces.
+- 7 viewport widths: 1440, 1024, 800, 768, 767, 560, 390px.
+- 98 browser fixture scenarios passed.
+
+This report describes source-level visual fixtures, not a full authenticated production test. Live DB and role-based end-to-end testing remain outstanding.

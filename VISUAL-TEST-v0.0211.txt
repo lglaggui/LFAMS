@@ -1,0 +1,5 @@
+PASS desktop 1440x1000: {'scrollWidth': 1440, 'innerWidth': 1440, 'cardRight': 1386, 'buttonRight': 1369, 'buttonLeft': 1162.9375, 'cardLeft': 742, 'buttonInside': True, 'buttonAtRight': True}
+PASS tablet-wide 1024x900: {'scrollWidth': 1024, 'innerWidth': 1024, 'cardRight': 970, 'buttonRight': 955, 'buttonLeft': 748.9375, 'cardLeft': 54, 'buttonInside': True, 'buttonAtRight': True}
+PASS tablet 768x1024: {'scrollWidth': 768, 'innerWidth': 768, 'cardRight': 714, 'buttonRight': 699, 'buttonLeft': 492.9375, 'cardLeft': 54, 'buttonInside': True, 'buttonAtRight': True}
+PASS mobile 390x844: {'scrollWidth': 390, 'innerWidth': 390, 'cardRight': 336, 'buttonRight': 321, 'buttonLeft': 114.9375, 'cardLeft': 54, 'buttonInside': True, 'buttonAtRight': True}
+PASS small-mobile 360x800: {'scrollWidth': 360, 'innerWidth': 360, 'cardRight': 306, 'buttonRight': 291, 'buttonLeft': 84.9375, 'cardLeft': 54, 'buttonInside': True, 'buttonAtRight': True}

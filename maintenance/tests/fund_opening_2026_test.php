@@ -1,0 +1,26 @@
+<?php
+$root=dirname(__DIR__,2); $checks=0; $failures=[];
+$assert=function(bool $ok,string $label) use (&$checks,&$failures):void{$checks++;if(!$ok)$failures[]=$label;};
+$aicsFund=(string)file_get_contents($root.'/aics/fund.php');
+$aicsLedger=(string)file_get_contents($root.'/aics/fund_ledger.php');
+$maifipFund=(string)file_get_contents($root.'/maifip/fund.php');
+$maifipHelpers=(string)file_get_contents($root.'/maifip/helpers.php');
+$migration=(string)file_get_contents($root.'/MIGRATION-v0.0215-2026-FUND-OPENING-CLASSIFICATION.sql');
+$assert(str_contains($aicsFund,'strtoupper(trim($batch))===\'BEGINNING BALANCE\''),'AICS ordinary fund entry rejects reserved opening-balance label');
+$assert(str_contains($aicsFund,'strtoupper(trim($existingBatch))===\'BEGINNING BALANCE\''),'AICS ordinary editor cannot modify an opening-balance row');
+$assert(str_contains($maifipFund,'strtoupper(trim($batch))===\'BEGINNING BALANCE\''),'MAIFIP ordinary fund entry rejects reserved opening-balance label');
+$assert(str_contains($maifipFund,'strtoupper(trim((string)$existing->fetchColumn()))===\'BEGINNING BALANCE\''),'MAIFIP ordinary editor cannot modify an opening-balance row');
+$assert(str_contains($aicsLedger,"date_downloaded='2026-01-01'"),'AICS recognizes only January 1, 2026 as the current opening date');
+$assert(str_contains($aicsLedger,'$base=$anchor ? (float)$anchor[\'downloaded_amount\'] : 0.0'),'AICS defaults to a zero opening amount when no carryover exists');
+$assert(str_contains($aicsLedger,"date_downloaded>='2026-01-01' AND date_downloaded<?"),'AICS rejects additional 2026 opening anchors through the selected period');
+$assert(str_contains($maifipHelpers,"date_downloaded='2026-01-01'"),'MAIFIP recognizes only January 1, 2026 as the current opening date');
+$assert(str_contains($maifipHelpers,'$base=$janRows ? (float)$janRows[0] : 0.0'),'MAIFIP defaults to a zero opening amount when no carryover exists');
+$assert(str_contains($maifipHelpers,"date_downloaded>='2026-01-01' AND UPPER(TRIM(COALESCE(batch_no,'')))='BEGINNING BALANCE'"),'MAIFIP checks 2026 opening labels globally across the full ledger');
+$assert(str_contains($maifipHelpers,'Multiple MAIFIP BEGINNING BALANCE records') || str_contains($maifipHelpers,'Invalid MAIFIP opening-balance classification'),'MAIFIP has explicit opening-classification error');
+$assert(str_contains($migration,"CONCAT('FUND DOWNLOAD #', id)"),'Retroactive migration reclassifies ordinary 2026 opening-labelled rows');
+$assert(str_contains($migration,'2025 REMAINING BALANCE - NO CARRYOVER; ZERO OPENING BALANCE'),'Retroactive migration creates explicit zero opening rows');
+$assert(str_contains($migration,"fund_source,''))) NOT LIKE '%2025%REMAINING BALANCE%'"),'Migration preserves explicitly identified 2025 carryovers');
+$assert(str_contains((string)file_get_contents($root.'/aics/config.php'),'0.0220') && str_contains((string)file_get_contents($root.'/maifip/app_version.php'),'0.0220'),'Release version markers are synchronized');
+echo '2026 fund opening classification tests: '.$checks.' checks; '.count($failures).' failures'.PHP_EOL;
+foreach($failures as $failure) echo 'FAIL: '.$failure.PHP_EOL;
+exit($failures?1:0);

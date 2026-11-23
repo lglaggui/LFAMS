@@ -1,0 +1,19 @@
+FAMS Region II Unified v0.0210 — Validation Report
+
+Validation performed in the isolated source workspace. No staging server or production database was used.
+
+- PHP syntax: 148 PHP files passed php -l.
+- JavaScript syntax: 19 JavaScript files passed node --check.
+- Automated PHP test suites: 20 passed, 0 unexpected failures.
+- MySQL concurrency integration suite: 1 refused by its safety guard because FAMS_ALLOW_DB_TESTS=1 and an explicit test/staging FAMS_TEST_DSN were not configured. This is not counted as a pass.
+- New security resilience checks: 16 passed, 0 failed.
+- Status endpoint enforcement checks: 9 passed, 0 failed.
+- Permission matrix: 52 passed, 0 failed.
+- Reporting visual regression checks: 5 passed across desktop, tablet, and mobile viewport sizes.
+- ZIP integrity: verified separately after packaging.
+
+Limitations
+- No authenticated browser tests.
+- No MySQL/MariaDB integration or concurrency/deadlock simulation.
+- No real account revocation test against a connected database.
+- Runtime auth_version migrations have source-level and test-double verification only; the actual database schema has not been inspected or altered.

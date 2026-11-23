@@ -1,0 +1,18 @@
+FAMS Region II Unified v0.0086 — Admin, switching, ticket, and Help icon update
+
+Changes:
+- Removed the New Ticket action button from AICS tickets.php as requested; ticket handling and record-linked ticket workflows remain intact.
+- Added cross-workspace route aliases so MAIFIP facility_management.php maps to AICS offices.php and AICS offices.php maps to MAIFIP facility_management.php. AICS account.php maps to MAIFIP users.php and fund_settings.php legacy names map to fund.php where applicable.
+- Preserved return_page through MAIFIP's switch forwarding handler.
+- Rebuilt AICS logs.php to follow MAIFIP's audit-log workflow: date range, user/action dropdowns, broad search, 30-row pagination, page selector, first/previous/next/last, IP/host/browser columns, and filtered text export.
+- Added AICS export_logs.php reading only aics_action_logs.
+- Improved AICS users.php list layout with searchable filters (name/username/email/office, role, status, office), paginated local accounts, central LPGMA registry display, and consistent table/toolbar controls. Account create/edit/toggle handlers and central-account protections retained.
+- Added accessible inline SVG topic icons to Help & Support section headings in MAIFIP and AICS.
+- Updated version to 0.0086 and cache tokens.
+
+Data/permissions:
+- AICS logs remain sourced from aics_action_logs; MAIFIP logs remain sourced from action_logs.
+- AICS account management still requires administrator role; AICS logs are available to admin and manager, matching shared navigation and MAIFIP logs access.
+- The switch destination mapping only changes the destination route; it does not merge data or permissions.
+
+Validation to be run after patch packaging. Live browser/database tests not performed.

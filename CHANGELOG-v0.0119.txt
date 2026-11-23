@@ -1,0 +1,15 @@
+FAMS Region II Unified v0.0119
+Date: 2026-10-27
+
+AICS Facility/Office Management
+- Suppressed the redundant short-name line when it duplicates the office name (case-insensitive).
+- Completed the Configured Offices table header with an Actions label.
+- Replaced Edit/Enable/Disable/Remove button text with compact icons and accessible titles/labels.
+
+MAIFIP and AICS ticket pages
+- Standardized the page heading, ticket-management table frame, header/cell typography, borders, row striping, hover state, column sizing behavior, and action button presentation.
+- Kept AICS ticket fields and underlying AICS support-ticket workflow intact because its data model differs from MAIFIP revision tickets.
+- Updated version labels to 0.0119.
+
+Validation scope
+- Static PHP syntax, CSS brace balance, and ZIP integrity checks only. No live browser, database, or hosting tests were performed.

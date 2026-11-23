@@ -1,0 +1,36 @@
+Runtime Migration and Lifecycle Audit — v0.0209
+
+Scope reviewed
+- AICS and MAIFIP runtime CREATE/ALTER/DROP statements and their callers.
+- Archive/delete/restore flows, ticket approval/rejection/deletion references, account removal, status history and audit writes.
+- Critical schema paths loaded from both workspace configs and ticket/chat endpoints.
+
+Critical changes
+1. AICS identity bridge columns, record version/validity fields, avatar columns, archive history column and ticket reference snapshot now use schema checks and do not swallow DDL failures.
+2. AICS ticket compatibility DDL checks current columns and fails visibly when the required migration cannot complete.
+3. MAIFIP action-log schema verification is performed before business transactions. It refuses to run DDL while a transaction is active and validates all required columns before marking itself complete.
+4. MAIFIP facility and facility-scoped schema upgrades fail visibly and remain retryable. Monthly-report settings are initialized before the facility-data migration.
+5. MAIFIP monthly-summary and monthly-report composite unique indexes are created and verified before their legacy unique indexes are dropped. An unexpected index definition is rejected.
+6. MAIFIP offline-sync schema failures now stop the affected request rather than silently continuing with incomplete idempotency/version schema.
+7. MAIFIP facility/control-number migration preserves legacy duplicate pairs for review; it does not delete them. A duplicate-pair finding deliberately defers the unique index, while normal allocation remains protected by the facility sequence lock.
+8. MAIFIP ticket-reference DDL failures stop ticket actions rather than allowing unresolved schema state to pass silently.
+9. Chat unread-column migration verifies the resulting column after a possible concurrent ALTER failure.
+10. Media seeding is explicitly optional: failures are logged and retried later. The media upgrade path does not perform runtime CREATE/ALTER/DROP; explicit upgrade SQL remains authoritative.
+
+Data lifecycle behavior
+- A shared helper requires an active transaction, captures the record row plus all matching status-history rows, and inserts both snapshots into fams_deleted_records.
+- Ticket rows are detached from the deleted record's live ID before deletion, with control-number/facility snapshots retained. This prevents dangling workflow references and preserves a human-readable historical link.
+- AICS and MAIFIP approved deletion workflows use the same archive adapter as direct deletion.
+- Restore remains restore-as-new: archived status history is retained as historical evidence and is not replayed onto the newly created record.
+- Account removal remains a hard-delete operation to preserve the existing account-management behavior. The removal audit event now snapshots the target account's immutable local ID and identifying display fields before deletion. Historical action-log username/role text remains available independently of the account row.
+
+Non-blocking fallback catches intentionally retained
+- Read-only facility metadata/catalog lookups fall back to the built-in facility labels if optional metadata tables are unavailable.
+- Client-hostname reverse lookup, optional dashboard/notification counts and logout audit are non-critical UI/telemetry paths; these do not mutate business records or schema.
+- Optional media seed/legacy avatar migration logs errors and retries on a later request; the app does not claim the optional media migration completed after a failed attempt.
+
+Safety and limits
+- No database connection was available for this run. No duplicate scan against actual database rows, FK inventory, DDL execution, lock/deadlock simulation, or rollback integration test was performed.
+- The read-only database integrity auditor from v0.0208 remains the tool for identifying actual legacy duplicate/orphan counts when a separate test database is available.
+- MySQL DDL auto-commits. All schema upgrades execute before business transactions; the code does not pretend DDL is transactionally reversible.
+- No speculative foreign keys or cascading delete rules were added.

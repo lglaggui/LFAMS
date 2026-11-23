@@ -1,0 +1,15 @@
+FAMS Region II Unified v0.0118 — 2026-10-27
+
+MAIFIP masterlist
+- Further reduced Address by 15%, Submission by 5%, Guardian by 5%, Action by 5%, and Remarks by 10%, based on the latest effective column widths.
+
+MAIFIP chat
+- Enforced initially collapsed office/group dropdowns using hidden-state CSS that overrides legacy display rules.
+
+Account page
+- Lightened the MAIFIP account card background slightly for contrast against the page-view background.
+
+Tickets
+- Standardized the MAIFIP and AICS ticket list table surface, header, cell typography, borders, alternating rows, and hover styling. AICS and MAIFIP retain their respective ticket data models and workflows.
+
+Version labels updated to 0.0118 in MAIFIP and AICS. Static syntax/integrity checks only; live browser/database workflows were not tested.

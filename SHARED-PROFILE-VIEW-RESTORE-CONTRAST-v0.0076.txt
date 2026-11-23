@@ -1,0 +1,9 @@
+FAMS Region II Unified v0.0076 — shared profile, view restoration, contrast
+
+Changes:
+- Profile interaction remains in the shared core/shared-shell.js for both workspaces. Hover expansion is desktop-only; touch devices toggle by tapping. Click no longer immediately collapses a profile opened by hover. Runtime width uses important priority to avoid legacy AICS width overrides defeating expansion.
+- Workspace switch links carry a safe return_page basename. The shared switch endpoint validates the requested PHP page against the destination workspace and falls back to its dashboard when no matching page exists. This preserves page routes where the two workspaces share the same page filename.
+- Shared profile surface, name/role/status typography, labels, and secondary button contrast refined in core/shared-components.css.
+- Version and asset cache query updated to 0.0076 / v0076.
+
+Validation: syntax checks and ZIP integrity are run at packaging. This is not a live-browser or production database test.

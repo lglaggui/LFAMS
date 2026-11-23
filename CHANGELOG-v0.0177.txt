@@ -1,0 +1,30 @@
+FAMS REGION II — CHANGELOG v0.0177
+
+PERFORMANCE AND RELIABILITY
+- Standardized AICS and MAIFIP live-masterlist debounce interval at 260 ms.
+- Added aria-busy state while live masterlist results are loading and polite announcements for updated result counts.
+- Confirmed server-side pagination remains enabled in both masterlists (25 rows per page).
+- Added user-facing toast feedback when live masterlist requests fail; stale/aborted requests remain silent.
+- Confirmed both masterlists already use server-side pagination (25 rows per page); retained their existing data-scope rules.
+- Added an idempotent optional composite-index migration for common facility/office/date/status, audit-log, and chat access paths.
+- Added database backup/restore operating guidance.
+- Centralized application asset cache-busting on APP_VERSION for shared shell CSS/JS and shared-sheet styles.
+- Retained server-side avatar image type, size, and dimension validation (2 MB, JPG/PNG/WebP, max 6000x6000).
+
+USER EXPERIENCE AND ACCESSIBILITY
+- Added shared accessible toast notifications (polite status / assertive errors), dismiss controls, and mobile positioning.
+- Added a keyboard skip-to-main-content link.
+- Added visible keyboard focus styles and invalid-field emphasis.
+- Added unsaved-change warnings for edited POST forms and guarded both full-page and AJAX/partial in-app navigation; search, chat, status, and worksheet forms are excluded.
+- Added delegated data-confirm handling for explicitly marked destructive forms and links.
+- Respects reduced-motion preferences.
+- Configured PHP errors to be logged by the host and hidden from end users by default; FAMS_DEBUG can be enabled explicitly for controlled local development.
+
+CSS CONSOLIDATION
+- Flattened adjacent repeated selector blocks in AICS and MAIFIP app.css where declarations could be merged without changing cascade order.
+- Removed a superseded identical filter declaration from the formal logo rule.
+- Did not bulk-delete legacy !important declarations or reorder non-adjacent repeated selectors; those require page-by-page visual regression testing.
+
+DATABASE
+- No schema changes are applied automatically. Run maintenance/UPGRADE-v0.0177-PERFORMANCE-INDEXES.sql once after backup if desired.
+- Existing assistance records and business workflows are unchanged.

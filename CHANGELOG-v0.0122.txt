@@ -1,0 +1,15 @@
+FAMS Region II Unified — v0.0122
+
+Monthly reporting standardization
+- Renamed the MAIFIP monthly_sheet_editor.php page to monthly_report.php and updated dashboard links.
+- Kept AICS reporting page named monthly_report.php.
+- Standardized MAIFIP report toolbar toward the AICS toolbar layout: edit toggle, add row, reset edits, Excel export, PDF/print, back, and save-signatories-as-default controls.
+- Improved MAIFIP toolbar click handling by removing duplicate delegated/capture click handlers and retaining one delegated handler.
+- Added editable signatory designations alongside names.
+- Added a pin/save control for facility-specific signatory defaults in browser local storage; existing signatories remain the initial defaults.
+- Updated MAIFIP account photo button label to the requested “Postion / Crop”.
+- Updated application version labels to 0.0122.
+
+Validation scope
+- PHP syntax and archive integrity checks are performed for this package.
+- Live browser, database, PDF/Excel rendering, and hosting tests have not been performed.

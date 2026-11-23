@@ -1,0 +1,14 @@
+FAMS Region II Unified v0.0148
+
+Change: SWAD office reassignment through AICS revision tickets.
+- Added destination SWAD office selector to the revision-ticket form.
+- Validates destination against active SWAD subfacilities at submission.
+- Includes requested office_id in the proposed record changes.
+- Administrator approval validates destination again and applies office_id with the approved record changes.
+- Ticket description records the requested destination for clear review context.
+
+Security/behavior:
+- Submission does not change the live masterlist office assignment.
+- Only approval applies the new office assignment.
+- Existing record-access checks still require the requester to access the source record.
+- Destination must be an active SWAD subfacility; LPGMA or invalid offices cannot be selected.

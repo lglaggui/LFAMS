@@ -1,0 +1,25 @@
+FAMS Region II Unified — v0.0149 Validation Report
+Date: 2026-10-29
+
+Implemented
+- Shared user-type registry and capability-based permission matrix for AICS/SWAD and MAIFIP.
+- Administrator-only user-type management pages in both workspaces.
+- Create/edit/enable/disable/remove workflows for custom user types; built-in Administrator is protected and cannot be removed or disabled.
+- Role-template guardrails: custom types cannot inherit Administrator privileges, and matrix permissions are intersected with the underlying role template so they cannot elevate privileges.
+- Account forms use active registry types and validate type-to-office/facility assignment.
+- Role fields can store custom type keys; added an upgrade SQL file for deployments that need manual schema changes.
+- SWAD office-scope and MAIFIP facility-scope reminders and actionable denial messages.
+- Tightened AICS editable-sheet UI/API, ticket, print, export, and record-scope handling for social workers.
+- Application version labels updated to 0.0149.
+
+Static validation
+- PASS: PHP syntax check — 111 PHP files, no syntax errors.
+- PASS: JavaScript syntax check — 13 JavaScript files, no syntax errors.
+- PASS: CSS structural check — 7 CSS files, balanced braces.
+- PASS: permission baseline assertions — SWAD Social Worker has status/ticket permissions without direct-edit permission; Manager template is read-only; Administrator baseline is full access.
+- PASS: targeted source assertions for CRUD actions, matrix persistence, role-column migration, office/facility guidance, AICS office scoping, and version labels.
+- PASS: ZIP integrity check performed after packaging.
+
+Not performed
+- No live browser/interaction testing was possible in this environment.
+- No live MySQL/XAMPP database migration or multi-account authorization test was performed. Test the package against a backup/staging database before replacing a production deployment, especially the first-run user-type table creation and ENUM-to-VARCHAR role-column conversion.

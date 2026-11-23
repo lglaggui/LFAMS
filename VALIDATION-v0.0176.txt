@@ -1,0 +1,39 @@
+FAMS REGION II — VALIDATION REPORT v0.0176
+
+SOURCE CHECKS
+- PHP files checked: 120
+- PHP syntax errors: 0
+- JavaScript files checked: 17
+- JavaScript syntax errors: 0
+- CSS files checked: 10
+- CSS parser errors (including nested at-rules/declarations): 0
+
+BROWSER FIXTURE CHECKS (isolated Chromium; not the authenticated production site)
+- Reporting period changed once: passed.
+- Reporting period changed a second time after dashboard fragment replacement: passed.
+- Third-party/live database calls were mocked; two refresh requests used the correct year/month parameters.
+- Dashboard KPI grid: 4 columns at desktop width and 2 columns at mobile width: passed.
+- Reporting-period control layout: 2 columns at desktop width and 1 column at mobile width: passed.
+- KPI cards use automatic grid placement rather than inherited 12-column spans: passed.
+- Monthly/daily chart stroke color follows the shared token, including daily-chart legacy important rule: passed.
+
+STATIC ASSERTIONS
+- AICS and MAIFIP dashboard root wrappers use the shared fams-dashboard marker.
+- Both dashboards contain seven standardized KPI cards.
+- Both reporting forms use delegated data-dashboard-period-form marker.
+- Per-dashboard direct change listeners were removed.
+- Shared dashboard stylesheet is loaded after workspace and shared table styles.
+- MAIFIP CSV export uses reporting_disbursement_summary() and includes a reconciled summary row.
+- MAIFIP worksheet loads the shared sheet stylesheet and uses shared worksheet hooks.
+- Both application version constants are 0.0176.
+
+DATABASE / SECURITY / DEPLOYMENT LIMITATIONS
+- No live MySQL database integration test was performed.
+- No authenticated browser test across LPGMA, SWAD, and MAIFIP facility roles was performed.
+- No live production deployment test was performed.
+- No schema migration is required for this release.
+
+PACKAGE
+- Full htdocs/ directory included in ZIP.
+- ZIP integrity test: passed.
+- MAIFIP editable worksheet Excel export preserves the historical-summary fallback total/count only for an initially empty historical-summary worksheet; deliberate deletion of all detail rows exports zero: static check passed.

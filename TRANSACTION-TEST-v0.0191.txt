@@ -1,0 +1,6 @@
+PASS: top-level transaction commits and returns callback result
+PASS: top-level transaction rolls back when callback throws
+PASS: nested transaction releases savepoint without committing outer transaction
+PASS: nested transaction rolls back to savepoint and preserves outer transaction
+
+Shared transaction tests: 4 passed, 0 failed.

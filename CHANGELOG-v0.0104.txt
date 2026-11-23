@@ -1,0 +1,9 @@
+FAMS Region II Unified — v0.0104
+
+- Narrowed the MAIFIP status dropdowns (WAITING, RELEASED, CANCELLED) to fit inside the compact Status column while preserving readable options when opened.
+- Added horizontal overflow handling to the MAIFIP Action cell so action controls can be scrolled into view rather than clipped.
+- Kept action links on one line and prevented them from spilling over neighboring table cells.
+- Reinforced wrapping of long Patient and Remarks content so table entries do not visually run into other columns.
+- Updated MAIFIP and AICS version labels to 0.0104.
+
+Validation scope: source-level checks only; no live browser, database, or hosting test was performed.

@@ -1,0 +1,21 @@
+FAMS Region II Unified — v0.0140
+Date: 2026-10-29
+
+PROFILE DISPLAY
+- Added additional measured width reserve for the expanded profile copy to prevent names from touching/clipping at the right edge.
+- Increased logout control height and line-height to preserve lower-case descenders such as “g” and improve vertical centering.
+- Added shared profile typography/padding safeguards for both AICS and MAIFIP.
+
+SEARCH AND INPUT USABILITY
+- Added a shared input-assist layer for both systems and popup forms.
+- Added anticipatory native datalist suggestions to search inputs using values already available on the current page, including table cells and filter options. Suggestions are convenience-only and do not replace server-side filtering or access checks.
+- Added browser autofill semantics for common identity/contact/password fields and suitable telephone input modes.
+- Improved first-invalid-field focus and scrolling on form submission, with accessible invalid states and native validation messages.
+- Added consistent focus-visible and invalid-field styling.
+
+VERSIONING
+- Updated AICS and MAIFIP application version to 0.0140.
+- Updated shared stylesheet/script cache keys.
+
+SCROLLBAR GUIDANCE
+- Existing masterlist top/bottom synchronized horizontal scrollbars retained in this build. They can help with very wide tables when users are far from the bottom, but should be treated as a deliberate convenience rather than duplicated by default on ordinary tables.

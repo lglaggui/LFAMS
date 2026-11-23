@@ -1,0 +1,20 @@
+FAMS Region II Unified — v0.0145
+Issue-check and account role-dropdown repair
+
+FIXES
+- MAIFIP Edit Account role options now include data-office-role="1" for manager, encoder, and admin, and data-medical-role="1" for social_worker. The facility-aware dropdown controller depends on these attributes. Their absence caused all edit-role options to be hidden/disabled, blocking usertype changes and triggering validation errors.
+- AICS and MAIFIP APP_VERSION values synchronized to 0.0145. The previous package had AICS at 0.0144 while MAIFIP's app_version.php remained at 0.0141, allowing stale browser asset caches and inconsistent version reporting.
+- Added CHANGELOG-v0.0145.txt.
+
+STATIC ISSUE-CHECK RESULTS
+- PHP syntax: 108 PHP files checked; 0 failures.
+- JavaScript syntax: 13 JavaScript files checked with Node.js; 0 failures.
+- CSS structure: 7 CSS files checked for balanced braces; 0 failures.
+- Account role metadata: verified all four edit-role options have the expected facility scope metadata.
+- Release version consistency: AICS and MAIFIP both report APP_VERSION 0.0145.
+- ZIP integrity: checked after packaging.
+- No database schema changes introduced.
+
+LIMITATIONS
+- This is a static source/package issue-check pass. Browser rendering, live database updates, real account-role saves, permission workflows, and cross-facility account scenarios were not exercised against a running installation.
+- Back up the current application and database before deployment. Verify role changes using an administrator account in a staging/XAMPP environment first.

@@ -1,0 +1,9 @@
+FAMS Region II Unified — v0.0128
+
+Changes
+- Profile expansion sizing now explicitly calculates the full logout-label width as part of the expanded profile width.
+- AICS records masterlist uses an intrinsic-width table inside its horizontal-scroll viewport so the header remains aligned with all columns and the final action column.
+- SWAD staff and social workers receive a status dropdown for records belonging to their assigned office; existing status-update endpoint and authorization checks remain in place.
+
+Validation note
+- Static syntax and archive integrity checks are performed for this package. Live browser, database, and hosting behavior still require deployment testing.

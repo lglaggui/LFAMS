@@ -1,0 +1,8 @@
+FAMS Region II v0.0097
+
+- Guarded the AICS record form release_date display with empty() to prevent Undefined array key warnings on new assistance records.
+- Added an AICS quotation input and persistence for create/edit; existing databases receive a best-effort additive quotation column migration.
+- Standardized the AICS masterlist amount header to GL Amount. MAIFIP already labels this field GL Amount and its record form already includes Bill Amount.
+- Added a consolidated shared-shell hover/focus transition layer while retaining existing component visual colors.
+
+Validation: run PHP lint, JS syntax checks, CSS balance and ZIP integrity. Live database/browser testing has not been performed.

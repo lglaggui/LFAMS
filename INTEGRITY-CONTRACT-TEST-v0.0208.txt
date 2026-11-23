@@ -1,0 +1,14 @@
+PASS MAIFIP duplicate pairs checked before adding unique key
+PASS MAIFIP replacement index created before legacy unique index removal
+PASS MAIFIP migration does not mark completion after failure
+PASS Integrity auditor is CLI-only
+PASS Integrity auditor requires exact database confirmation
+PASS Integrity auditor uses read-only transaction
+PASS Integrity auditor reports aggregate counts only
+PASS Status history adapter requires active transaction
+PASS Status history adapter preserves workspace-specific tables
+PASS Workspace audit adapters use transaction-aware writer
+PASS MAIFIP status mutation uses shared history writer
+PASS Archived deletions are excluded from unresolved orphan counts
+PASS Integrity auditor does not mutate schema or data
+Assertions: 13; Failed: 0

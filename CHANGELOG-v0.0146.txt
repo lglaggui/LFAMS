@@ -1,0 +1,11 @@
+FAMS Region II Unified — v0.0146
+
+Permission and workflow audit fixes
+- AICS status_update.php now selects office_id so the existing office-scoped authorization check can correctly authorize SWAD staff/social workers for WAITING status updates.
+- AICS status popup detection now checks for the literal popup=1 value, avoiding false popup mode when popup=0 is posted.
+- AICS deletion-ticket submission no longer requires LPGMA workspace identity; it checks that the authenticated non-admin user is authorized to access the selected record.
+- MAIFIP delete-request endpoint now includes social_worker in the allowed submitter roles, matching the revision-ticket workflow.
+- Both applications use version 0.0146 for cache-busting consistency.
+
+Scope of validation
+- Static source checks only. Live browser, session, and database-backed workflow tests remain necessary.

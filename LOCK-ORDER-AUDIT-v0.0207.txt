@@ -1,0 +1,42 @@
+FAMS v0.0207 — Control-number and transaction lock-order audit
+
+SCOPE
+Static source audit of v0.0206 plus the v0.0207 changes. No live MySQL/MariaDB connection, EXPLAIN, performance_schema lock inspection, or concurrent DB workload was available. Findings are code-path observations, not proof of runtime deadlock freedom.
+
+CONTROL-NUMBER ALLOCATION
+AICS
+- Record create, import apply, and restore-as-new use GET_LOCK('fams:aics:control-sequence', ...) before opening their write transaction and release it in finally/success/error handling.
+- These paths now call aics_next_control_number() inside the transaction. It reconciles source_no and the numeric suffix, then checks the exact candidate for collision.
+- AICS control numbers are global to the AICS workspace; the sequence lock is intentionally global, not office-scoped.
+- A guarded unique index uq_aics_control_number is attempted once per request. If legacy duplicates are detected, the code logs the issue and does not attempt to rewrite data or create the index. Operators must review duplicates before relying on the database unique-key backstop.
+
+MAIFIP
+- Record create, import apply, offline CREATE sync, and restore-as-new use the same facility-keyed advisory-lock naming convention: fams:maifip:<sha256 facility prefix>.
+- This preserves independent number sequences per facility while serializing concurrent writers within a facility.
+- MAIFIP already has a facility+control_number unique-key guard in ensure_control_number_schema().
+- Offline UPDATE does not allocate a control number and therefore does not take the sequence lock.
+
+AICS TICKETS
+- General, deletion, office-reassignment, and revision ticket creation now share fams:aics:ticket-sequence.
+- The lock is acquired before the idempotent transaction and released after commit/rollback.
+- Ticket number allocation reads INFORMATION_SCHEMA.TABLES.AUTO_INCREMENT instead of MAX(id)+1. This avoids reusing a lower ticket number if the highest ticket row was deleted while AUTO_INCREMENT has advanced.
+- If AUTO_INCREMENT metadata is unavailable, the allocator falls back to MAX(id)+1; the shared lock still serializes the application's ticket-creation routes. A unique ticket_no index remains a recommended database backstop after checking legacy duplicates.
+
+LOCK ORDER OBSERVATIONS / RESIDUAL RISKS
+1. Sequence-writing paths follow advisory sequence lock -> transaction -> row reads/writes -> commit -> advisory lock release. The same connection is used for GET_LOCK, transaction, and RELEASE_LOCK.
+2. Import paths acquire the sequence lock before their transaction; import preview reads are outside the transaction and are revalidated against locked current rows during apply.
+3. Record update paths lock the target record row and then update that same row with a version predicate. They do not acquire sequence locks.
+4. Ticket-review paths generally lock the ticket row before the linked record row. Ticket-submission paths lock the linked record row before inserting a new ticket. The insert is a different ticket row, so the static review did not establish a direct same-row cycle; however, FK/index behavior and concurrent review/submission interactions require real InnoDB testing.
+5. Offline sync and conflict resolution lock their idempotency/log row before the linked record. Other record workflows can lock a record and then insert audit/history rows. Because FK definitions and engine-level lock acquisition cannot be proven from PHP source alone, these remain candidates for staging concurrency tests.
+6. Some workflows perform lazy schema/index checks. DDL can implicitly commit and take metadata locks. Do not run first-time schema/index setup concurrently with bulk operations or during a critical release window. The AICS unique-index guard runs only when an allocator path first invokes it in a request.
+7. MySQL advisory locks are connection-scoped and are not transaction-scoped. A lost connection releases the lock automatically. Every normal success/failure path must release explicitly; current reviewed paths use finally or guarded cleanup.
+
+RECOMMENDED FOLLOW-UP
+- Run a database-backed duplicate scan for AICS control_number and aics_tickets.ticket_no before enabling unique indexes.
+- Add/confirm UNIQUE(aics_assistance_records.control_number) and UNIQUE(aics_tickets.ticket_no) after duplicate review.
+- Run parallel create/import/restore tests for the same AICS year and same MAIFIP facility/year; verify distinct numbers and no partial transactions.
+- Run concurrent ticket submission/review and offline sync/conflict-resolution tests while collecting InnoDB deadlock diagnostics.
+- If deadlocks occur, standardize parent/child row-lock ordering based on actual FK/index definitions and retry only transactions that are safe/idempotent.
+
+LIMITATIONS
+This audit does not certify zero deadlocks, does not prove the schema's actual unique indexes, and does not test a live database. No production database was connected to or modified.

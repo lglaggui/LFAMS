@@ -1,0 +1,88 @@
+FAMS v0.0205 — SOURCE-LEVEL TEST RUN
+
+Suites discovered: 16
+Assertions counted from test output: 166 passed; 0 failed.
+Database concurrency suite: skipped/refused safely because no explicit isolated staging DSN and FAMS_ALLOW_DB_TESTS=1 were supplied.
+
+account_permission_enforcement_test.php: exit=0
+  PASS Both workspace sessions retain a user-type policy fingerprint
+  PASS Changed role or permission policy invalidates existing session
+  PASS MAIFIP administrator cannot demote their own account
+  PASS Account administration retains transactional writes
+  11 checks; 0 failures
+authorization_model_test.php: exit=0
+  PASS: MAIFIP-only encoder role cannot leak into AICS
+  PASS: unknown workspace fails closed in policy lookup
+  PASS: shared enforcement requirements are explicitly catalogued
+  
+  Authorization model tests: 16 passed, 0 failed.
+dashboard_reporting_action_test.php: exit=0
+  PASS: maifip report action includes screen-reader text
+  PASS: report icon has visible keyboard focus treatment
+  PASS: report icon has standardized SVG sizing and stroke
+  
+  Dashboard reporting action tests: 12 passed, 0 failed.
+deletion_restoration_enforcement_test.php: exit=0
+  Deletion/restoration enforcement: 18/18 passed
+endpoint_registry_test.php: exit=0
+  PASS: endpoint manifest has a supported version
+  PASS: workspace endpoint inventory contains expected routes
+  PASS: every route has unique path and required review metadata
+  PASS: manifest explicitly warns it is not runtime authorization enforcement
+endpoint_security_reconciliation_test.php: exit=0
+  PASS: MAIFIP browser-generated Excel neutralizes formula-like text cells
+  PASS: export event AICS is POST-only
+  PASS: export event AICS requires capability + CSRF and records an audit event
+  PASS: export event MAIFIP is POST-only
+  PASS: export event MAIFIP requires capability + CSRF and records an audit event
+import_export_sync_enforcement_test.php: exit=0
+  PASS: Offline sync retains replay, version and facility controls
+  PASS: Conflict resolution locks facility record and validates current version
+  PASS: AICS bulk export requires export capability
+  PASS: MAIFIP bulk export requires capability and facility scope
+  Checks: 12; Failed: 0
+mysql_concurrency_test.php: NOT RUN — REFUSED: Set FAMS_ALLOW_DB_TESTS=1 and a FAMS_TEST_DSN whose database name contains test or staging.
+payload_fingerprint_test.php: exit=0
+  PASS: associative order and security tokens do not affect payload fingerprint
+  PASS: business-field changes produce a different payload fingerprint
+  PASS: ordered batch rows preserve order in fingerprint
+  PASS: fingerprint is a SHA-256 digest
+  RESULT: 4 passed, 0 failed
+permission_matrix_test.php: exit=0
+  PASS: AICS and MAIFIP account administration use the shared transaction service
+  PASS: AICS import enforces office ownership and WAITING-only edits for non-admins
+  PASS: MAIFIP import enforces facility and record-status ownership before updates
+  
+  Permission matrix tests: 52 passed, 0 failed.
+reporting_period_layout_test.php: exit=0
+  PASS: MAIFIP report action is outside the year/month form
+  PASS: MAIFIP has exactly one selected-period report action
+  PASS: selected-period action is anchored to the right
+  PASS: action label can wrap without overflowing its card
+  PASS: action sizing includes padding and border
+repository_contract_test.php: exit=0
+  PASS: AICS scoped updates include expected record version
+  PASS: MAIFIP facility lookup is ID-and-facility scoped
+  PASS: MAIFIP updates include facility and expected version
+  PASS: AICS repository has a field allowlist
+  PASS: MAIFIP repository has a separate field allowlist
+staging_preflight_test.php: exit=0
+  PASS preflight performs read-only database queries
+  PASS DB config reads host from environment
+  PASS DB config reads database name from environment
+  PASS DB config reads credentials from environment
+  8 checks; 0 failures
+status_endpoint_enforcement_test.php: exit=0
+  PASS: MAIFIP rechecks facility scope, row version, and finalized-record restrictions under lock
+  PASS: MAIFIP status history and audit writes are in the same transaction
+  PASS: AICS automatic expiry uses a transaction, row locks, and version-guarded updates
+  PASS: AICS automatic expiry records history and an audit event
+  9 checks; 0 failures.
+ticket_lifecycle_enforcement_test.php: exit=0
+  Ticket lifecycle static checks: 12; passed: 12; failed: 0
+transaction_runtime_test.php: exit=0
+  PASS: top-level transaction rolls back when callback throws
+  PASS: nested transaction releases savepoint without committing outer transaction
+  PASS: nested transaction rolls back to savepoint and preserves outer transaction
+  
+  Shared transaction tests: 4 passed, 0 failed.

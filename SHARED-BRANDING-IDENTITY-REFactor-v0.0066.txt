@@ -1,0 +1,16 @@
+FAMS REGION II v0.0066 — SHARED BRANDING AND PROFILE IDENTITY
+
+Changes
+- Replaced workspace-specific sidebar branding markup with core/shared_sidebar_brand.php, a single shared renderer for both MAIFIP and AICS.
+- The LPGMA logo uses one source asset, one dedicated container class, and one dedicated image class with a single sizing declaration. No old sidebar-logo classes are used by the new branding markup.
+- The sidebar navigation was already rendered from core/shared_navigation.php and continues to use that shared source.
+- Rebuilt the sidebar profile card with dedicated class names and one set of sizing/type rules; no legacy sidebar-profile-strict classes are used.
+- Central LPGMA identity resolution now keys off the central LPGMA user id and validates the central role. Full name, username, email, role, and avatar therefore resolve from the central users row in either workspace.
+- For LPGMA identities, the small profile line is the central username and the organization line is stable (LPGMA Isabela District); local SWAD/facility accounts retain their local context.
+- Shared avatar markup no longer emits generic avatar-frame/user-avatar classes that were affected by legacy workspace CSS. Administrator and regular-user default avatar selection is retained.
+- Version bumped to 0.0066.
+
+Validation
+- PHP syntax and archive integrity checks are performed on this package.
+- No live database migration is included. AICS shadow rows are retained for operational foreign-key compatibility, while central users remains authoritative for LPGMA identity.
+- Browser visual QA and live database workflow testing remain outstanding.

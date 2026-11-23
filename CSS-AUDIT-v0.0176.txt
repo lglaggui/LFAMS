@@ -1,0 +1,13 @@
+FAMS v0.0176 — CSS cascade audit
+
+This release centralizes dashboard/reporting rules and removes only byte-identical duplicate blocks. It does not claim the legacy cascade is fully flattened.
+
+Current measured inventory:
+- AICS app.css: 3,956 !important declarations; 747 repeated selector blocks.
+- MAIFIP app.css: 3,824 !important declarations; 714 repeated selector blocks.
+- core/uniform.css: 1,749 !important declarations; 107 repeated selector blocks.
+- core/shared-shell.css: 695 !important declarations; 13 repeated selector blocks.
+- core/shared-components.css: 392 !important declarations; 33 repeated selector blocks.
+- core/shared-dashboard.css: 26 !important declarations; 0 repeated selector blocks.
+
+Repeated selector blocks may intentionally override earlier declarations. Safe removal requires component-level regression coverage; this release did not delete them wholesale.

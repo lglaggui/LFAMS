@@ -1,0 +1,35 @@
+FAMS REGION II — UNIFICATION AUDIT v0.0176
+Scope: Dashboard/reporting standardization and targeted CSS consolidation
+Baseline: v0.0175
+
+DASHBOARD / REPORTING
+- AICS and MAIFIP now use the same dashboard root marker and shared dashboard stylesheet.
+- Both workspaces use the same 7-card KPI layout and common responsive sizing, typography, number alignment, reporting controls, chart line/point/grid colors, and chart legend.
+- KPI labels distinguish all-time record totals and waiting records from selected-year released and cancelled counts/amounts; daily, selected-month, and selected-year disbursement values remain visible.
+- All-time released amount queries now filter status='RELEASED'. Previously those dashboard totals included all statuses.
+- Reporting-period changes are handled by delegated document-level listeners. Replacing the dashboard fragment no longer removes the change handler, so repeated year/month changes continue to refresh.
+- MAIFIP monthly CSV export uses reporting_disbursement_summary() precedence (live record rows first, stored monthly summary only as fallback) and appends a summary row to reconcile with dashboard and worksheet totals.
+- MAIFIP editable report worksheet now uses the shared worksheet stylesheet and matching sheet-page/toolbar/card hooks. Facility-specific worksheet fields and editing behavior remain intact.
+
+CSS CONSOLIDATION
+- Added core/shared-dashboard.css as the authoritative shared dashboard/reporting presentation layer, loaded after workspace styles.
+- Moved repeated reporting-period card/control rules out of both app.css files.
+- Centralized chart, KPI, and shared z-index tokens in core/uniform.css.
+- Removed four byte-identical duplicate CSS blocks (one in AICS app.css and three in shared-components.css).
+- Did not indiscriminately remove legacy !important declarations or repeated selectors with differing declarations. Those require page-by-page visual regression testing before safe removal.
+
+REMAINING LEGACY CASCADE INVENTORY (after this targeted pass)
+- aics/assets/app.css: 3,956 !important declarations; 747 repeated selector blocks.
+- maifip/assets/app.css: 3,824 !important declarations; 714 repeated selector blocks.
+- core/uniform.css: 1,749 !important declarations; 107 repeated selector blocks.
+- core/shared-shell.css: 695 !important declarations; 13 repeated selector blocks.
+- core/shared-components.css: 392 !important declarations; 33 repeated selector blocks.
+- core/shared-dashboard.css: 26 !important declarations; 0 repeated selector blocks.
+Note: repeated selector blocks are not necessarily exact duplicates; many are later cascade adjustments. They were not automatically deleted.
+
+DATA / WORKFLOW PRESERVATION
+- No database schema migration was added.
+- No assistance records, account records, fund entries, messages, or audit history were merged or deleted.
+- AICS and MAIFIP cancellation-date/business rules remain workspace-specific.
+- AICS and MAIFIP report worksheet data structures remain distinct.
+- MAIFIP editable worksheet Excel export now carries the historical fallback summary into its footer when the worksheet contains no record-level rows; if the user deliberately deletes all listed rows, the edited export total remains zero.

@@ -1,0 +1,34 @@
+FAMS Region II Unified — v0.0188
+Dashboard Refinement & Shared Transaction Foundation
+
+BASELINE
+- Built cumulatively from the available v0.0187 package.
+
+DASHBOARD / REPORTING PERIOD
+- Refined the Reporting Period panel in both AICS and MAIFIP with a consistent, clearer panel treatment, stronger selected-period hierarchy, and accessible field labels.
+- Kept the delegated shared reporting-period refresh workflow used by both workspaces; corrected its fallback message so it accurately describes the dashboard reload.
+- Retained the selected year/month query state and report link behavior.
+
+MAIFIP FUND SUMMARY
+- Relocated the MAIFIP fund summary presentation from the shared topbar area into the MAIFIP Dashboard Hero Banner.
+- Added a compact three-metric summary (allotment, disbursed assistance, remaining fund) and utilization progress indicator.
+- Added a responsive layout so the hero summary stacks cleanly on narrower screens.
+- Kept the AICS shared topbar fund summary unchanged; MAIFIP no longer renders that topbar summary on non-dashboard pages.
+
+SHARED BACKEND / DATA INTEGRITY
+- Added fams_shared_transaction() to core/shared_runtime.php. It provides atomic top-level transactions and savepoint-based nested transactions, preserving an outer transaction when nested work succeeds or fails.
+- Migrated AICS record archive and restore operations to the shared transaction service.
+- Strengthened AICS restore against duplicate restoration by conditionally marking the archive row restored and requiring exactly one affected row.
+- Strengthened AICS archive against a stale/deleted source row by requiring exactly one deleted row before commit.
+- Migrated MAIFIP status changes to the shared transaction service.
+- MAIFIP status updates now lock and re-check the target record within the transaction, reject stale status changes, and write the audit event in the same transaction as the status/history update.
+- MAIFIP audit compatibility schema checks run before the business transaction to avoid MySQL DDL implicit-commit behavior inside the transaction.
+
+VERSION / TESTS
+- Bumped AICS and MAIFIP application asset versions to 0.0188.
+- Added maintenance/tests/transaction_runtime_test.php with PDO-double tests for commit, rollback, nested savepoint release, and nested rollback.
+- Existing permission-matrix test retained.
+
+SCOPE NOTE
+- This is the first implementation increment of the broader Phase 4/5 architecture and data-integrity program, not a claim that all endpoints have been migrated. Idempotency keys, global concurrent-edit/version checks, consistent pagination/export visibility, and a full endpoint/ownership audit remain subsequent work.
+- No database schema migration or data rewrite is included.

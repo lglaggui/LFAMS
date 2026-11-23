@@ -1,0 +1,90 @@
+FAMS REGION II — STEP 4.1 STAGING DEPLOYMENT & VERIFICATION
+Release baseline: v0.0204 | Package: v0.0205
+
+SCOPE
+This release prepares the application for a controlled, isolated staging deployment. It does not create a hosting account, provision a database server, import a database, create user accounts, or connect to production. The included preflight is read-only and will refuse to connect unless APP_ENV=staging and LFAMS_DB_NAME contains staging, stage, or test.
+
+NON-NEGOTIABLE SAFETY RULES
+1. Use a separate staging hostname or local-only XAMPP virtual host.
+2. Use a dedicated staging database and dedicated least-privilege database user. Never reuse production credentials.
+3. Do not point staging at the production database, even temporarily.
+4. Use synthetic beneficiary/client/patient/guardian data. If a schema copy is needed, export schema only; any data fixture must be independently generated or fully anonymized under an approved process.
+5. Disable email, SMS, external notifications, payment/third-party integrations, and scheduled production jobs in staging.
+6. Restrict staging by VPN/IP allowlist or HTTP authentication; require HTTPS for remote staging.
+7. Do not make maintenance/diagnostic scripts web-accessible. The maintenance directory is denied by its .htaccess; keep that protection enabled.
+
+PACKAGE LAYOUT
+Extract the ZIP so its contents are the document root (htdocs contents at archive root). For XAMPP, use a separate directory such as C:\\xampp\\htdocs\\fams-staging rather than overwriting the live FAMS directory. Configure a separate Apache VirtualHost if possible.
+
+PHP / APACHE REQUIREMENTS
+- PHP 8.1 or newer; use the same PHP build for Apache and CLI.
+- Required extensions: PDO, pdo_mysql, fileinfo, mbstring.
+- Confirm zip, gd and openssl based on enabled import/media/TLS features; preflight reports these as warnings if absent.
+- Enable HTTPS on remote staging; secure session cookies require HTTPS.
+- Set upload_max_filesize and post_max_size to a value consistent with the application's approved upload limit; post_max_size must exceed upload_max_filesize. Set memory_limit and max_execution_time for expected spreadsheet imports, then validate with representative files.
+- Use UTC or a documented timezone consistently between PHP and database; the application-facing business timezone should be explicitly agreed before test execution.
+- Ensure Apache rewrite and .htaccess overrides are enabled where required. Do not remove root or maintenance access restrictions.
+
+DATABASE ISOLATION
+1. Create a database with a name such as lfams_staging_2026 (the preflight requires a name containing staging/stage/test).
+2. Create a unique DB account scoped only to that database. Grant only the privileges needed for the application's documented schema setup and runtime; do not grant global privileges or FILE/SUPER. If schema migrations require DDL, use a temporary deployment account for setup, then reduce runtime privileges after setup if compatible.
+3. Obtain the approved schema/migration source from the system owner. The v0.0205 application ZIP does not contain a complete canonical database dump or a guaranteed clean-install migration bundle. Do not assume that copying PHP files creates the schema.
+4. Apply schema/migrations to the staging database only. Record schema version and migration output.
+5. Create synthetic test fixtures only after schema setup. Include two SWAD offices, two MAIFIP facilities, and records in WAITING, RELEASED and CANCELLED states with different record versions.
+6. Confirm the staging database server reports the expected database name and utf8mb4 character set.
+
+DATABASE ENVIRONMENT VARIABLES
+Configure these in the Apache VirtualHost/service environment and in the CLI environment used for preflight. Do not put real passwords in source control or in a publicly served file:
+- APP_ENV=staging
+- LFAMS_DB_HOST=127.0.0.1 (or private DB hostname)
+- LFAMS_DB_NAME=lfams_staging_2026
+- LFAMS_DB_USER=<dedicated staging DB user>
+- LFAMS_DB_PASS=<secret from host secret manager>
+
+Example Apache VirtualHost fragment (replace placeholders; protect this file as server configuration, not web content):
+SetEnv APP_ENV staging
+SetEnv LFAMS_DB_HOST 127.0.0.1
+SetEnv LFAMS_DB_NAME lfams_staging_2026
+SetEnv LFAMS_DB_USER fams_stage_app
+SetEnv LFAMS_DB_PASS replace-with-secret
+
+For Windows/XAMPP, set the same variables for both Apache and the command prompt used to run PHP CLI. Restart Apache after changing VirtualHost/service environment. Verify Apache's PHP and CLI PHP versions/extensions match; the CLI preflight cannot prove the Apache SAPI configuration by itself.
+
+RUN PREFLIGHT (READ ONLY)
+From the extracted document root:
+  php maintenance/staging_preflight.php
+The script checks the explicit staging marker, PHP version, required extensions, selected PHP settings, core files, endpoint registry JSON, avatar directories, database-name safety, and (only when safe prerequisites exist) DB connectivity, database identity, server version, InnoDB count and database character set. It performs no writes and no schema changes. A PASS is not security sign-off. A FAIL blocks the next stage. Resolve WARN items or document why they are acceptable.
+
+WEB-SAPI VERIFICATION
+After CLI preflight passes, verify Apache's PHP version and extensions independently using the hosting control panel or a temporary diagnostic outside the public document root. Do not deploy phpinfo() publicly. Remove any temporary diagnostics after use. Verify HTTPS, cookie Secure/HttpOnly/SameSite attributes, session path/domain, upload limits, error logging, and that maintenance files cannot be fetched over HTTP.
+
+TEST IDENTITIES
+Create separate accounts only in staging:
+A1 AICS SWAD user / Office A; A2 AICS SWAD user / Office B; A3 AICS LPGMA Administrator;
+M1 MAIFIP facility user / Facility A; M2 MAIFIP facility user / Facility B; M3 MAIFIP LPGMA Administrator;
+L1 central LPGMA non-administrator with only explicitly granted capabilities.
+Use unique passwords and separate browser profiles/cookie jars. Do not copy production password hashes or sessions.
+
+DEPLOYMENT CHECKLIST
+[ ] Separate staging hostname/document root and database created
+[ ] No production DB credentials, data, API keys, notification destinations or cron jobs configured
+[ ] Synthetic fixtures prepared; no identifiable beneficiary data
+[ ] Required PHP extensions enabled for CLI and Apache
+[ ] PHP limits reviewed against upload/import requirements
+[ ] Database schema/migrations applied and version recorded
+[ ] Runtime DB user scoped to staging DB only
+[ ] Root and maintenance .htaccess protections retained; directory listing disabled
+[ ] HTTPS and staging access restriction enabled for remote staging
+[ ] CLI preflight result saved with timestamp and PHP version
+[ ] Apache/web-SAPI checks completed separately
+[ ] Backups and restore tested within staging only
+[ ] Staging tester and deployment owner identified
+
+ROLLBACK / CLEANUP
+- Snapshot the staging DB and files before each test deployment.
+- To roll back, restore the staging snapshot and redeploy the previously approved package. Never restore a staging snapshot to production.
+- Rotate/delete staging DB credentials and synthetic accounts when the environment is retired.
+- Remove diagnostic scripts and any temporary exports/backups from web-accessible directories.
+
+EXIT CRITERIA FOR STEP 4.1
+Step 4.1 is complete only when a real isolated staging host and database are provisioned, schema setup is documented, the preflight passes under CLI and Apache's PHP configuration is independently verified. This package supplies the checks and procedure; it cannot provision the user's hosting environment from this workspace. Step 4.2 authenticated route testing must not begin until these criteria are met.

@@ -1,0 +1,25 @@
+FAMS v0.0202 — Step 3.5 Validation
+
+Source-level checks:
+- PHP syntax lint: run against all PHP files in package.
+- Account/permission enforcement test: 11 checks.
+- Existing regression suites: authorization model, permission matrix, endpoint registry, record create/edit enforcement, status endpoint enforcement, ticket lifecycle enforcement, deletion/restoration enforcement, transaction runtime, repository contracts, payload fingerprint, dashboard reporting action, reporting period layout.
+- Endpoint registry JSON parse and route count verified.
+- ZIP integrity verified after packaging.
+
+Security coverage in this pass:
+- Workspace-targeted account/user-type authorization.
+- Reauthorization of submitted target workspace on POST.
+- Custom Administrator-base-role rejection.
+- Session invalidation on assigned role-key or user-type permission-policy change.
+- MAIFIP self-demotion protection.
+
+Not performed / requires MySQL staging:
+- Authenticated browser/HTTP requests for local AICS admin, MAIFIP admin, central LPGMA admin, and non-admin identities.
+- Cross-workspace GET and forged POST attempts against both user-type routes.
+- Concurrent account edits, type disable/delete races, and assignment races.
+- Full session revocation tests across multiple browser sessions.
+- Database-backed verification of audit events and transaction rollback.
+- Password-change-wide session revocation is not implemented in this pass.
+
+No production database was accessed or modified. Source-level checks do not establish runtime security in a configured deployment.

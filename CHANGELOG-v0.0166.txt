@@ -1,0 +1,11 @@
+FAMS Region II Unified — v0.0166
+
+Facility Card text wrapping fix
+- Long medical facility names now wrap naturally onto additional lines in the shared sidebar Facility Card.
+- Removed ellipsis clipping for the full facility name while retaining the compact facility short code.
+- Applied centrally in shared-shell.css so AICS and MAIFIP use the same behavior, including narrow screens.
+- The facility card copy can grow vertically to accommodate wrapped text without clipping.
+
+Validation scope
+- Static source checks and ZIP integrity check performed.
+- Live browser rendering and XAMPP/MySQL workflow tests were not performed in this environment.

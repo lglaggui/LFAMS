@@ -1,0 +1,16 @@
+FAMS Region II Unified v0.0110
+
+MAIFIP
+- Reduced vertical spacing in new/edit record popup forms.
+- Chat message panel now uses “No Conversations Yet” when a selected conversation has no messages.
+- Replaced per-render time-based avatar cache keys with a stable application-version key to avoid unnecessary cache misses and URL churn.
+
+AICS
+- Hid LPGMA / LPGMA Office rows from SWAD Office management lists and parent-office selectors, without deleting database rows.
+- Removed redundant SWAD Batanes / SWAD Batanes Office chat group where the province-level Batanes group already exists.
+
+Both systems
+- Standardized Help & Support icon sizing/alignment and restrained decorative effects.
+- Updated version labels to 0.0110.
+
+Validation scope: static syntax and structural checks only. No live browser, database, or hosted environment testing was performed.

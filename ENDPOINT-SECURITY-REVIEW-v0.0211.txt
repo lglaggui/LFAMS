@@ -1,0 +1,30 @@
+FAMS v0.0211 — Endpoint Security Review
+
+Scope
+- Compared maintenance/endpoint-registry.json with the PHP application tree.
+- Inspected registered entry points and source-level write paths for login requirements, workspace capability checks, CSRF validation, and ownership adapters.
+- This is a static source review. It is not a live authenticated HTTP penetration test.
+
+Inventory
+- Registered application routes: 81.
+- Duplicate route paths: 0.
+- Registered paths missing from the source tree: 0.
+- Routes with POST-handling logic: 42.
+- Registered routes containing recognizable SQL mutation statements: 36.
+- Registered SQL-mutating routes with a detectable CSRF verification path: 36/36.
+- Registered business mutation routes with an audit writer or dedicated message-trail path: all detected routes. The two address_api.php cache writers are intentionally excluded from business audit classification because they maintain derived PSGC reference data.
+- Registry marks only the AICS login, MAIFIP login and MAIFIP registration endpoints as public; all other routes are login-required. Portal selection independently validates the central LPGMA session and uses a portal-specific CSRF token.
+
+Important findings addressed
+- MAIFIP public registration previously inserted pending users without an atomic critical audit event. It now commits the account row and REGISTER_ACCOUNT audit entry together.
+- MAIFIP monthly_report_settings.php previously wrote the setting and audit entry as separate operations. It now uses one transaction, critical audit writing and bounded retry for recognized transient conflicts.
+- Monthly-report settings now reject malformed, negative, over-precision and out-of-range amounts before database mutation.
+
+Workspace boundaries preserved
+- AICS continues to use its Region II SWAD visibility/office rules.
+- MAIFIP continues to use facility-scoped record access.
+- No workspace authorization rules or data ownership rules were merged or broadened.
+
+Limitations
+- Static source heuristics cannot prove runtime behavior for every conditional branch or dynamically constructed query.
+- No authenticated browser tests, production traffic replay, database-backed role tests or live endpoint penetration tests were run.

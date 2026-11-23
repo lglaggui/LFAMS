@@ -1,0 +1,43 @@
+FAMS REGION II — CSS CASCADE / FLATTENING AUDIT v0.0180
+
+CANONICAL OWNERSHIP
+- core/shared-shell.css is the sole owner of full-page Pageview outer padding, outer margins, first/last child margin reset, measured header reservation, fixed-footer reservation, and common responsive card/heading/toolbar rhythm.
+- Pageview block and inline padding both use --fams-page-gutter; all four sides are equal at every breakpoint.
+- Pageview margins are zero on all four sides.
+- Popup and print contexts intentionally retain zero Pageview padding.
+
+RESPONSIVE PAGEVIEW GUTTER
+- >1100px: 28px
+- 768–1100px: 22px
+- 561–800px: 16px
+- <=560px: 12px
+
+COMMON PAGE RHYTHM
+- Heading gap: 12px; heading bottom spacing: 16px.
+- Toolbar/filter/action gap: 10px.
+- Card/panel inset: 18px desktop, 16px medium/tablet, 13px <=560px.
+- Footer horizontal inset uses the same page gutter.
+
+CLEANUP
+- Removed obsolete AICS and MAIFIP pageview frame rules and redundant declarations superseded by the shared shell.
+- Removed old MAIFIP static-footer flow rules.
+- Removed dead responsive card inset and heading-gap rules superseded by the shared shell.
+- Removed the old AICS dashboard width cap that competed with shared full-width layout.
+
+DIRECT PARSED CSS COUNTS (v0.0179 -> v0.0180)
+- AICS app.css: 3,623 rules / 4,999 !important -> 3,606 / 4,960.
+- MAIFIP app.css: 3,439 / 4,810 -> 3,428 / 4,768.
+- core/shared-shell.css: 243 / 768 -> 244 / 772.
+- core/uniform.css: 736 / 2,274 -> 736 / 2,274.
+- Other CSS files unchanged.
+- Total: 8,800 rules / 13,462 !important -> 8,773 / 13,385.
+- Net reduction: 27 rules and 77 !important declarations.
+
+PARSER / DUPLICATE CHECKS
+- 11 CSS files parsed.
+- 0 CSS parser errors.
+- 0 empty qualified rules.
+- 0 byte-identical duplicate rule blocks detected.
+
+LIMITATION
+- 13,385 !important declarations remain. The CSS is not fully flattened. Continue page-specific cleanup only with visual regression coverage; do not bulk-delete legacy !important declarations.

@@ -1,0 +1,897 @@
+FAMS REGION II — ENDPOINT REGISTRY RECONCILIATION v0.0197
+
+Routes inventoried: 80
+AICS: 35
+MAIFIP: 44
+Portal: 1
+
+IMPORTANT: This is a static source review and proposed policy inventory, not a runtime security certification. Source markers do not prove that a guard is correctly ordered, comprehensive, or effective. Exact HTTP method and CSRF behavior require manual control-flow review and authenticated staging tests.
+
+## aics/_chat_directory.php
+- Workspace: aics
+- Proposed capability: `chat.directory.view` — workspace chat directory
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: none detected by static scan
+- CSRF source markers: none detected by static scan
+- Explicit method checks detected: none detected by static scan
+- Scope source markers: office_id
+- Review status: static source review; authenticated runtime tests pending.
+
+## aics/account.php
+- Workspace: aics
+- Proposed capability: `account.manage_or_self_update` — account permissions and self-service ownership
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: current_user, require_login
+- CSRF source markers: csrf_token, verify_csrf
+- Explicit method checks detected: POST
+- Scope source markers: office_id
+- Review status: static source review; authenticated runtime tests pending.
+
+## aics/address_api.php
+- Workspace: aics
+- Proposed capability: `address.lookup` — address lookup access
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: require_login
+- CSRF source markers: csrf_token
+- Explicit method checks detected: none detected by static scan
+- Scope source markers: none detected by static scan
+- Review status: static source review; authenticated runtime tests pending.
+
+## aics/address_options.php
+- Workspace: aics
+- Proposed capability: `address.lookup` — address option lookup
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: require_login
+- CSRF source markers: none detected by static scan
+- Explicit method checks detected: none detected by static scan
+- Scope source markers: none detected by static scan
+- Review status: static source review; authenticated runtime tests pending.
+
+## aics/avatar.php
+- Workspace: aics
+- Proposed capability: `profile.avatar.manage` — self-avatar ownership
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: require_login
+- CSRF source markers: none detected by static scan
+- Explicit method checks detected: none detected by static scan
+- Scope source markers: none detected by static scan
+- Review status: static source review; authenticated runtime tests pending.
+
+## aics/chat.php
+- Workspace: aics
+- Proposed capability: `chat.view` — workspace chat membership
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: current_user, require_login
+- CSRF source markers: csrf_token
+- Explicit method checks detected: none detected by static scan
+- Scope source markers: office_id
+- Review status: static source review; authenticated runtime tests pending.
+
+## aics/chat_api.php
+- Workspace: aics
+- Proposed capability: `chat.message.manage` — chat membership and message ownership
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: current_user, is_logged_in, require_login
+- CSRF source markers: none detected by static scan
+- Explicit method checks detected: none detected by static scan
+- Scope source markers: office_id
+- Review status: static source review; authenticated runtime tests pending.
+
+## aics/dashboard.php
+- Workspace: aics
+- Proposed capability: `dashboard.view` — workspace dashboard scope
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: current_user, require_login
+- CSRF source markers: none detected by static scan
+- Explicit method checks detected: none detected by static scan
+- Scope source markers: office_id
+- Review status: static source review; authenticated runtime tests pending.
+
+## aics/delete_ticket_request.php
+- Workspace: aics
+- Proposed capability: `record.delete.request` — record scope and ticket state
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: current_user, require_login
+- CSRF source markers: csrf_token, verify_csrf
+- Explicit method checks detected: POST
+- Scope source markers: none detected by static scan
+- Review status: static source review; authenticated runtime tests pending.
+
+## aics/export_csv.php
+- Workspace: aics
+- Proposed capability: `records.export` — workspace record scope and export permission
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: current_user, require_login
+- CSRF source markers: none detected by static scan
+- Explicit method checks detected: none detected by static scan
+- Scope source markers: office_id
+- Review status: static source review; authenticated runtime tests pending.
+
+## aics/export_logs.php
+- Workspace: aics
+- Proposed capability: `audit.export` — audit-log permission and scope
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: require_login
+- CSRF source markers: none detected by static scan
+- Explicit method checks detected: none detected by static scan
+- Scope source markers: none detected by static scan
+- Review status: static source review; authenticated runtime tests pending.
+
+## aics/fund.php
+- Workspace: aics
+- Proposed capability: `fund.manage_or_view` — fund administration permission
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: current_user, require_login
+- CSRF source markers: csrf_token, verify_csrf
+- Explicit method checks detected: POST
+- Scope source markers: none detected by static scan
+- Review status: static source review; authenticated runtime tests pending.
+
+## aics/help.php
+- Workspace: aics
+- Proposed capability: `help.view` — authenticated workspace access
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: current_user, require_login
+- CSRF source markers: none detected by static scan
+- Explicit method checks detected: none detected by static scan
+- Scope source markers: none detected by static scan
+- Review status: static source review; authenticated runtime tests pending.
+
+## aics/import_sheet.php
+- Workspace: aics
+- Proposed capability: `records.import` — workspace import permission and duplicate protection
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: current_user, require_login
+- CSRF source markers: csrf_token, verify_csrf
+- Explicit method checks detected: POST
+- Scope source markers: office_id
+- Review status: static source review; authenticated runtime tests pending.
+
+## aics/index.php
+- Workspace: aics
+- Proposed capability: `workspace.enter` — workspace access
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: current_user, is_logged_in
+- CSRF source markers: none detected by static scan
+- Explicit method checks detected: none detected by static scan
+- Scope source markers: office_id
+- Review status: static source review; authenticated runtime tests pending.
+
+## aics/login.php
+- Workspace: aics
+- Proposed capability: `auth.login` — public authentication
+- Login expected: False
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: none detected by static scan
+- CSRF source markers: none detected by static scan
+- Explicit method checks detected: none detected by static scan
+- Scope source markers: none detected by static scan
+- Review status: static source review; authenticated runtime tests pending.
+
+## aics/logout.php
+- Workspace: aics
+- Proposed capability: `auth.logout` — authenticated session
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: is_logged_in
+- CSRF source markers: none detected by static scan
+- Explicit method checks detected: none detected by static scan
+- Scope source markers: none detected by static scan
+- Review status: static source review; authenticated runtime tests pending.
+
+## aics/logs.php
+- Workspace: aics
+- Proposed capability: `audit.view` — audit-log permission and scope
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: require_login
+- CSRF source markers: none detected by static scan
+- Explicit method checks detected: none detected by static scan
+- Scope source markers: none detected by static scan
+- Review status: static source review; authenticated runtime tests pending.
+
+## aics/masterlist_sheet.php
+- Workspace: aics
+- Proposed capability: `records.sheet.view` — record scope
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: current_user, require_login
+- CSRF source markers: csrf_token
+- Explicit method checks detected: none detected by static scan
+- Scope source markers: office_id
+- Review status: static source review; authenticated runtime tests pending.
+
+## aics/monthly_report.php
+- Workspace: aics
+- Proposed capability: `reports.view` — reporting scope
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: require_login
+- CSRF source markers: none detected by static scan
+- Explicit method checks detected: none detected by static scan
+- Scope source markers: none detected by static scan
+- Review status: static source review; authenticated runtime tests pending.
+
+## aics/notifications_api.php
+- Workspace: aics
+- Proposed capability: `notifications.view_or_manage` — notification ownership
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: current_user, is_logged_in, require_login
+- CSRF source markers: none detected by static scan
+- Explicit method checks detected: none detected by static scan
+- Scope source markers: none detected by static scan
+- Review status: static source review; authenticated runtime tests pending.
+
+## aics/office_reassignment_ticket.php
+- Workspace: aics
+- Proposed capability: `tickets.office_reassignment` — ticket ownership and destination office authority
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: current_user, require_login
+- CSRF source markers: csrf_token, verify_csrf
+- Explicit method checks detected: POST
+- Scope source markers: office_id
+- Review status: static source review; authenticated runtime tests pending.
+
+## aics/offices.php
+- Workspace: aics
+- Proposed capability: `offices.manage_or_view` — office administration permission
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: require_login
+- CSRF source markers: csrf_token, verify_csrf
+- Explicit method checks detected: POST
+- Scope source markers: office_id
+- Review status: static source review; authenticated runtime tests pending.
+
+## aics/print_record.php
+- Workspace: aics
+- Proposed capability: `records.print` — record scope
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: require_login
+- CSRF source markers: none detected by static scan
+- Explicit method checks detected: none detected by static scan
+- Scope source markers: office_id
+- Review status: static source review; authenticated runtime tests pending.
+
+## aics/record_form.php
+- Workspace: aics
+- Proposed capability: `records.create_or_edit` — record scope, ownership, workflow state
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: current_user, require_login
+- CSRF source markers: csrf_token, verify_csrf
+- Explicit method checks detected: POST
+- Scope source markers: office_id
+- Review status: static source review; authenticated runtime tests pending.
+
+## aics/records.php
+- Workspace: aics
+- Proposed capability: `records.view` — workspace record scope
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: current_user, require_login
+- CSRF source markers: csrf_token, verify_csrf
+- Explicit method checks detected: POST
+- Scope source markers: office_id
+- Review status: static source review; authenticated runtime tests pending.
+
+## aics/revision_ticket.php
+- Workspace: aics
+- Proposed capability: `tickets.revision.submit` — record scope and ticket state
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: current_user, require_login
+- CSRF source markers: csrf_token, verify_csrf
+- Explicit method checks detected: POST
+- Scope source markers: office_id
+- Review status: static source review; authenticated runtime tests pending.
+
+## aics/sheet_save.php
+- Workspace: aics
+- Proposed capability: `records.sheet.update` — record scope and optimistic version
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: current_user, require_login
+- CSRF source markers: csrf_token
+- Explicit method checks detected: none detected by static scan
+- Scope source markers: none detected by static scan
+- Review status: static source review; authenticated runtime tests pending.
+
+## aics/status_update.php
+- Workspace: aics
+- Proposed capability: `records.status.update` — record scope and permitted state transition
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: current_user, require_login
+- CSRF source markers: csrf_token, verify_csrf
+- Explicit method checks detected: POST
+- Scope source markers: office_id
+- Review status: static source review; authenticated runtime tests pending.
+
+## aics/switch.php
+- Workspace: aics
+- Proposed capability: `workspace.switch` — authorized workspace membership
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: none detected by static scan
+- CSRF source markers: none detected by static scan
+- Explicit method checks detected: none detected by static scan
+- Scope source markers: office_id
+- Review status: static source review; authenticated runtime tests pending.
+
+## aics/tickets.php
+- Workspace: aics
+- Proposed capability: `tickets.view_or_manage` — ticket scope and ownership
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: current_user, require_login
+- CSRF source markers: csrf_token, verify_csrf
+- Explicit method checks detected: POST
+- Scope source markers: office_id
+- Review status: static source review; authenticated runtime tests pending.
+
+## aics/trash.php
+- Workspace: aics
+- Proposed capability: `records.trash.manage` — delete/restore permission and record scope
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: current_user, require_login
+- CSRF source markers: csrf_token, verify_csrf
+- Explicit method checks detected: POST
+- Scope source markers: none detected by static scan
+- Review status: static source review; authenticated runtime tests pending.
+
+## aics/user.php
+- Workspace: aics
+- Proposed capability: `accounts.view_or_update` — account ownership and administrative scope
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: require_login
+- CSRF source markers: none detected by static scan
+- Explicit method checks detected: none detected by static scan
+- Scope source markers: none detected by static scan
+- Review status: static source review; authenticated runtime tests pending.
+
+## aics/users.php
+- Workspace: aics
+- Proposed capability: `accounts.manage` — account administration permission
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: current_user, require_login
+- CSRF source markers: csrf_token, verify_csrf
+- Explicit method checks detected: POST
+- Scope source markers: office_id
+- Review status: static source review; authenticated runtime tests pending.
+
+## aics/usertypes.php
+- Workspace: aics
+- Proposed capability: `roles.manage` — role administration permission
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: current_user, require_login
+- CSRF source markers: csrf_token, verify_csrf
+- Explicit method checks detected: POST
+- Scope source markers: none detected by static scan
+- Review status: static source review; authenticated runtime tests pending.
+
+## maifip/account.php
+- Workspace: maifip
+- Proposed capability: `account.manage_or_self_update` — account permissions and self-service ownership
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: current_user, require_login
+- CSRF source markers: csrf_token, verify_csrf
+- Explicit method checks detected: POST
+- Scope source markers: none detected by static scan
+- Review status: static source review; authenticated runtime tests pending.
+
+## maifip/address_api.php
+- Workspace: maifip
+- Proposed capability: `address.lookup` — address lookup access
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: require_login
+- CSRF source markers: csrf_token
+- Explicit method checks detected: none detected by static scan
+- Scope source markers: none detected by static scan
+- Review status: static source review; authenticated runtime tests pending.
+
+## maifip/avatar.php
+- Workspace: maifip
+- Proposed capability: `profile.avatar.manage` — self-avatar ownership
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: require_login
+- CSRF source markers: none detected by static scan
+- Explicit method checks detected: none detected by static scan
+- Scope source markers: none detected by static scan
+- Review status: static source review; authenticated runtime tests pending.
+
+## maifip/chat.php
+- Workspace: maifip
+- Proposed capability: `chat.view` — workspace chat membership
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: current_user, is_logged_in, require_login
+- CSRF source markers: csrf_token
+- Explicit method checks detected: none detected by static scan
+- Scope source markers: user_facility
+- Review status: static source review; authenticated runtime tests pending.
+
+## maifip/chat_api.php
+- Workspace: maifip
+- Proposed capability: `chat.message.manage` — chat membership and message ownership
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: current_user, is_logged_in, require_login
+- CSRF source markers: none detected by static scan
+- Explicit method checks detected: none detected by static scan
+- Scope source markers: user_facility
+- Review status: static source review; authenticated runtime tests pending.
+
+## maifip/dashboard.php
+- Workspace: maifip
+- Proposed capability: `dashboard.view` — workspace dashboard scope
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: current_user, require_login
+- CSRF source markers: none detected by static scan
+- Explicit method checks detected: none detected by static scan
+- Scope source markers: user_facility
+- Review status: static source review; authenticated runtime tests pending.
+
+## maifip/delete_record.php
+- Workspace: maifip
+- Proposed capability: `records.delete` — record scope and delete permission
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: current_user
+- CSRF source markers: verify_csrf
+- Explicit method checks detected: none detected by static scan
+- Scope source markers: none detected by static scan
+- Review status: static source review; authenticated runtime tests pending.
+
+## maifip/delete_request.php
+- Workspace: maifip
+- Proposed capability: `records.delete.request` — record scope and ticket state
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: current_user, require_login
+- CSRF source markers: csrf_token, verify_csrf
+- Explicit method checks detected: POST
+- Scope source markers: none detected by static scan
+- Review status: static source review; authenticated runtime tests pending.
+
+## maifip/doh_dashboard.php
+- Workspace: maifip
+- Proposed capability: `doh.dashboard.view` — DOH dashboard access and facility scope
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: current_user, require_login
+- CSRF source markers: csrf_token
+- Explicit method checks detected: POST
+- Scope source markers: user_facility
+- Review status: static source review; authenticated runtime tests pending.
+
+## maifip/export_csv.php
+- Workspace: maifip
+- Proposed capability: `records.export` — workspace record scope and export permission
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: require_login
+- CSRF source markers: none detected by static scan
+- Explicit method checks detected: none detected by static scan
+- Scope source markers: none detected by static scan
+- Review status: static source review; authenticated runtime tests pending.
+
+## maifip/export_logs.php
+- Workspace: maifip
+- Proposed capability: `audit.export` — audit-log permission and scope
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: require_login
+- CSRF source markers: none detected by static scan
+- Explicit method checks detected: none detected by static scan
+- Scope source markers: none detected by static scan
+- Review status: static source review; authenticated runtime tests pending.
+
+## maifip/fams_sheet_editor.php
+- Workspace: maifip
+- Proposed capability: `records.sheet.edit` — record scope and editor permission
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: current_user, require_login
+- CSRF source markers: none detected by static scan
+- Explicit method checks detected: none detected by static scan
+- Scope source markers: none detected by static scan
+- Review status: static source review; authenticated runtime tests pending.
+
+## maifip/fund.php
+- Workspace: maifip
+- Proposed capability: `fund.manage_or_view` — fund administration permission
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: current_user, require_login
+- CSRF source markers: csrf_token, verify_csrf
+- Explicit method checks detected: POST
+- Scope source markers: none detected by static scan
+- Review status: static source review; authenticated runtime tests pending.
+
+## maifip/help.php
+- Workspace: maifip
+- Proposed capability: `help.view` — authenticated workspace access
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: current_user, require_login
+- CSRF source markers: csrf_token
+- Explicit method checks detected: none detected by static scan
+- Scope source markers: none detected by static scan
+- Review status: static source review; authenticated runtime tests pending.
+
+## maifip/import_sheet.php
+- Workspace: maifip
+- Proposed capability: `records.import` — workspace import permission and duplicate protection
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: current_user, require_login
+- CSRF source markers: csrf_token, verify_csrf
+- Explicit method checks detected: POST
+- Scope source markers: none detected by static scan
+- Review status: static source review; authenticated runtime tests pending.
+
+## maifip/index.php
+- Workspace: maifip
+- Proposed capability: `workspace.enter` — workspace access
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: current_user, is_logged_in
+- CSRF source markers: none detected by static scan
+- Explicit method checks detected: none detected by static scan
+- Scope source markers: user_facility
+- Review status: static source review; authenticated runtime tests pending.
+
+## maifip/login.php
+- Workspace: maifip
+- Proposed capability: `auth.login` — public authentication
+- Login expected: False
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: none detected by static scan
+- CSRF source markers: none detected by static scan
+- Explicit method checks detected: none detected by static scan
+- Scope source markers: none detected by static scan
+- Review status: static source review; authenticated runtime tests pending.
+
+## maifip/logout.php
+- Workspace: maifip
+- Proposed capability: `auth.logout` — authenticated session
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: is_logged_in
+- CSRF source markers: none detected by static scan
+- Explicit method checks detected: none detected by static scan
+- Scope source markers: none detected by static scan
+- Review status: static source review; authenticated runtime tests pending.
+
+## maifip/logs.php
+- Workspace: maifip
+- Proposed capability: `audit.view` — audit-log permission and scope
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: require_login
+- CSRF source markers: none detected by static scan
+- Explicit method checks detected: none detected by static scan
+- Scope source markers: none detected by static scan
+- Review status: static source review; authenticated runtime tests pending.
+
+## maifip/media.php
+- Workspace: maifip
+- Proposed capability: `media.view` — media ownership and record scope
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: none detected by static scan
+- CSRF source markers: none detected by static scan
+- Explicit method checks detected: none detected by static scan
+- Scope source markers: none detected by static scan
+- Review status: static source review; authenticated runtime tests pending.
+
+## maifip/media_upgrade.php
+- Workspace: maifip
+- Proposed capability: `media.manage` — media administration permission
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: none detected by static scan
+- CSRF source markers: none detected by static scan
+- Explicit method checks detected: none detected by static scan
+- Scope source markers: none detected by static scan
+- Review status: static source review; authenticated runtime tests pending.
+
+## maifip/monthly_report.php
+- Workspace: maifip
+- Proposed capability: `reports.view` — reporting scope
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: current_user, require_login
+- CSRF source markers: csrf_token
+- Explicit method checks detected: none detected by static scan
+- Scope source markers: none detected by static scan
+- Review status: static source review; authenticated runtime tests pending.
+
+## maifip/monthly_report_export.php
+- Workspace: maifip
+- Proposed capability: `reports.export` — reporting scope and export permission
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: require_login
+- CSRF source markers: none detected by static scan
+- Explicit method checks detected: none detected by static scan
+- Scope source markers: none detected by static scan
+- Review status: static source review; authenticated runtime tests pending.
+
+## maifip/monthly_report_print.php
+- Workspace: maifip
+- Proposed capability: `reports.print` — reporting scope
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: require_login
+- CSRF source markers: none detected by static scan
+- Explicit method checks detected: none detected by static scan
+- Scope source markers: none detected by static scan
+- Review status: static source review; authenticated runtime tests pending.
+
+## maifip/monthly_report_settings.php
+- Workspace: maifip
+- Proposed capability: `reports.settings.manage` — report settings permission
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: none detected by static scan
+- CSRF source markers: csrf_token
+- Explicit method checks detected: none detected by static scan
+- Scope source markers: none detected by static scan
+- Review status: static source review; authenticated runtime tests pending.
+
+## maifip/notifications_api.php
+- Workspace: maifip
+- Proposed capability: `notifications.view_or_manage` — notification ownership
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: current_user, is_logged_in, require_login
+- CSRF source markers: none detected by static scan
+- Explicit method checks detected: none detected by static scan
+- Scope source markers: none detected by static scan
+- Review status: static source review; authenticated runtime tests pending.
+
+## maifip/offices.php
+- Workspace: maifip
+- Proposed capability: `offices.manage_or_view` — office administration permission
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: require_login
+- CSRF source markers: csrf_token, verify_csrf
+- Explicit method checks detected: POST
+- Scope source markers: none detected by static scan
+- Review status: static source review; authenticated runtime tests pending.
+
+## maifip/offline_changes.php
+- Workspace: maifip
+- Proposed capability: `offline.changes.view` — user/device and record scope
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: current_user, require_login
+- CSRF source markers: none detected by static scan
+- Explicit method checks detected: none detected by static scan
+- Scope source markers: none detected by static scan
+- Review status: static source review; authenticated runtime tests pending.
+
+## maifip/offline_resolve.php
+- Workspace: maifip
+- Proposed capability: `offline.conflict.resolve` — record scope and conflict state
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: current_user, require_login
+- CSRF source markers: none detected by static scan
+- Explicit method checks detected: none detected by static scan
+- Scope source markers: none detected by static scan
+- Review status: static source review; authenticated runtime tests pending.
+
+## maifip/offline_sync.php
+- Workspace: maifip
+- Proposed capability: `offline.sync` — record scope, device ownership and idempotency
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: current_user, require_login
+- CSRF source markers: none detected by static scan
+- Explicit method checks detected: none detected by static scan
+- Scope source markers: none detected by static scan
+- Review status: static source review; authenticated runtime tests pending.
+
+## maifip/record_form.php
+- Workspace: maifip
+- Proposed capability: `records.create_or_edit` — record scope, ownership, workflow state
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: current_user
+- CSRF source markers: csrf_token, verify_csrf
+- Explicit method checks detected: POST
+- Scope source markers: none detected by static scan
+- Review status: static source review; authenticated runtime tests pending.
+
+## maifip/records.php
+- Workspace: maifip
+- Proposed capability: `records.view` — workspace record scope
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: current_user, require_login
+- CSRF source markers: csrf_token
+- Explicit method checks detected: none detected by static scan
+- Scope source markers: user_facility
+- Review status: static source review; authenticated runtime tests pending.
+
+## maifip/records_search.php
+- Workspace: maifip
+- Proposed capability: `records.search` — workspace record scope
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: current_user, require_login
+- CSRF source markers: csrf_token
+- Explicit method checks detected: none detected by static scan
+- Scope source markers: none detected by static scan
+- Review status: static source review; authenticated runtime tests pending.
+
+## maifip/register.php
+- Workspace: maifip
+- Proposed capability: `auth.register` — registration policy
+- Login expected: False
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: is_logged_in
+- CSRF source markers: csrf_token, verify_csrf
+- Explicit method checks detected: POST
+- Scope source markers: none detected by static scan
+- Review status: static source review; authenticated runtime tests pending.
+
+## maifip/status_update.php
+- Workspace: maifip
+- Proposed capability: `records.status.update` — record scope and permitted state transition
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: current_user
+- CSRF source markers: verify_csrf
+- Explicit method checks detected: none detected by static scan
+- Scope source markers: none detected by static scan
+- Review status: static source review; authenticated runtime tests pending.
+
+## maifip/switch.php
+- Workspace: maifip
+- Proposed capability: `workspace.switch` — authorized workspace membership
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: none detected by static scan
+- CSRF source markers: none detected by static scan
+- Explicit method checks detected: none detected by static scan
+- Scope source markers: none detected by static scan
+- Review status: static source review; authenticated runtime tests pending.
+
+## maifip/ticket_create.php
+- Workspace: maifip
+- Proposed capability: `tickets.create` — record scope and ticket eligibility
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: current_user, require_login
+- CSRF source markers: csrf_token, verify_csrf
+- Explicit method checks detected: POST
+- Scope source markers: none detected by static scan
+- Review status: static source review; authenticated runtime tests pending.
+
+## maifip/ticket_edit.php
+- Workspace: maifip
+- Proposed capability: `tickets.edit` — ticket ownership and ticket state
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: current_user, require_login
+- CSRF source markers: csrf_token, verify_csrf
+- Explicit method checks detected: POST
+- Scope source markers: none detected by static scan
+- Review status: static source review; authenticated runtime tests pending.
+
+## maifip/ticket_review.php
+- Workspace: maifip
+- Proposed capability: `tickets.review` — review permission and ticket state
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: current_user, require_login
+- CSRF source markers: csrf_token, verify_csrf
+- Explicit method checks detected: POST
+- Scope source markers: none detected by static scan
+- Review status: static source review; authenticated runtime tests pending.
+
+## maifip/tickets.php
+- Workspace: maifip
+- Proposed capability: `tickets.view_or_manage` — ticket scope and ownership
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: current_user, require_login
+- CSRF source markers: csrf_token, verify_csrf
+- Explicit method checks detected: POST
+- Scope source markers: none detected by static scan
+- Review status: static source review; authenticated runtime tests pending.
+
+## maifip/trash.php
+- Workspace: maifip
+- Proposed capability: `records.trash.manage` — delete/restore permission and record scope
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: current_user, require_login
+- CSRF source markers: csrf_token, verify_csrf
+- Explicit method checks detected: POST
+- Scope source markers: none detected by static scan
+- Review status: static source review; authenticated runtime tests pending.
+
+## maifip/user.php
+- Workspace: maifip
+- Proposed capability: `accounts.view_or_update` — account ownership and administrative scope
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: current_user, require_login
+- CSRF source markers: none detected by static scan
+- Explicit method checks detected: none detected by static scan
+- Scope source markers: none detected by static scan
+- Review status: static source review; authenticated runtime tests pending.
+
+## maifip/users.php
+- Workspace: maifip
+- Proposed capability: `accounts.manage` — account administration permission
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: current_user, require_login
+- CSRF source markers: csrf_token, verify_csrf
+- Explicit method checks detected: POST
+- Scope source markers: user_facility
+- Review status: static source review; authenticated runtime tests pending.
+
+## maifip/usertypes.php
+- Workspace: maifip
+- Proposed capability: `roles.manage` — role administration permission
+- Login expected: True
+- Candidate methods: GET, POST (not confirmed)
+- Session/auth source markers: current_user, require_login
+- CSRF source markers: csrf_token, verify_csrf
+- Explicit method checks detected: POST
+- Scope source markers: none detected by static scan
+- Review status: static source review; authenticated runtime tests pending.
+
+## portal/index.php
+- Workspace: portal
+- Proposed capability: `portal.access` — authenticated portal entry and system membership
+- Login expected: True
+- Candidate methods: GET (not confirmed)
+- Session/auth source markers: none detected by static scan
+- CSRF source markers: none detected by static scan
+- Explicit method checks detected: none detected by static scan
+- Scope source markers: none detected by static scan
+- Review status: static source review; authenticated runtime tests pending.
+
+## Mandatory staging test matrix
+AICS: test every active role across each SWAD office, including cross-office record IDs, ticket operations, deletion/restoration, exports, CSRF, expired sessions, and invalid methods.
+MAIFIP: test every active role across each facility, including cross-facility record IDs, ticket operations, deletion/restoration, imports/offline conflicts, exports, CSRF, expired sessions, and invalid methods.
+Portal: test anonymous, inactive, and unauthorized workspace access.
+For each test capture expected/actual HTTP status, response shape, database effect, audit event, and rollback outcome.
+
+## Step 2 completion boundary
+The 80-route registry now has per-route proposed capability classifications, source-marker evidence, scope descriptions, and required test cases. Routes are not marked security-passed. Endpoint enforcement is deliberately not changed in this step.

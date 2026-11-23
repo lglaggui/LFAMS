@@ -1,0 +1,12 @@
+FAMS Region II Unified — v0.0189
+Dashboard navigation correction and header fund-summary restoration
+
+- Restored the MAIFIP Fund Summary to the shared header, matching the SWAD AICS placement and presentation.
+- Restored facility-scoped MAIFIP allotment and reconciled disbursement calculations before the shared shell renders.
+- Removed the “DOH MAIFIP R2 Fund Dashboard” link from the shared sidebar navigation.
+- Added a dedicated “DOH MAIFIP R2 Fund Dashboard” action to the MAIFIP Dashboard Hero Banner for LPGMA users only. The action continues to open maifip/doh_dashboard.php.
+- Removed the incorrect MAIFIP hero fund-summary block and its now-unused styles; simplified the MAIFIP hero to a single-column layout.
+- Retained the Reporting Period refinement introduced in v0.0188 in both dashboards.
+- Bumped shared application asset version to 0.0189 for cache invalidation.
+
+This release corrects the interpretation of the requested Fund Dashboard relocation. It does not claim completion of the broader backend/data-integrity roadmap.

@@ -1,0 +1,9 @@
+FAMS Region II branding assets — shared canonical asset registry
+
+Shared shell / portal:
+- lpgma-shared-logo.webp: canonical LPGMA Isabela District logo used by the login, portal, and both workspace identity areas.
+- doh-logo.webp: local PNG for the portal workspace selector.
+- doh-logo.jpg: canonical shared DOH seal used by MAIFIP shell and dashboard.
+- dswd-official-logo.png / dswd-official-logo.svg: shared local DSWD branding assets.
+
+Workspace-specific assets remain under aics/assets/ and maifip/assets/ where their appearance or runtime role differs.

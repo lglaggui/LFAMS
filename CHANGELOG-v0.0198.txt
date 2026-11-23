@@ -1,0 +1,20 @@
+FAMS Region II — v0.0198
+Step 3.1: Record Creation and Editing Enforcement
+
+Scope of this increment
+- Enforced server-side capability checks on AICS and MAIFIP record create/edit POST requests.
+- Added explicit GET/POST method allowlists to both record-form endpoints; unsupported methods return HTTP 405 with Allow: GET, POST.
+- AICS edits now lock and reload the current record inside the transaction, then re-check edit capability, office scope, locked status, and submitted record version before applying changes.
+- AICS SWAD office users cannot reassign edited records outside their assigned office; LPGMA users and administrators retain their existing authorized assignment behavior.
+- MAIFIP edits now lock and reload the record using both record ID and active facility, then re-check edit capability, facility scope, WAITING/admin workflow eligibility, and record version before updating.
+- MAIFIP update SQL independently constrains the update to WAITING records unless the current user is the administrator.
+- Preserved existing create idempotency, control-number allocation, audit logging, validation, and distinct AICS/MAIFIP data fields.
+- Updated the endpoint registry to distinguish source-enforced routes from runtime-verification-pending routes.
+- Added regression assertions for capability checks, locked-row revalidation, workspace scope, and method allowlists.
+
+Not included
+- Record status endpoints, ticket lifecycle, delete/restore, account administration, imports/exports, and offline synchronization remain for later Step 3 groups.
+
+Validation boundary
+- Static PHP syntax, JSON, and local regression tests are recorded in VALIDATION-v0.0198.txt.
+- No live MySQL staging database or authenticated test accounts were available; direct HTTP requests, CSRF expiry, cross-account replay, database effects, and concurrent mutation behavior have not been runtime-tested.

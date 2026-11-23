@@ -1,0 +1,8 @@
+FAMS Unified v0.0133 — AICS Ticket Decisions, Quotation Amount, Header Profile
+
+- AICS quotation is now treated and displayed as a currency amount, comparable to MAIFIP Bill Amount; record form validates non-negative numeric values and displays peso-formatted amounts.
+- Reimplemented AICS ticket management with explicit administrator APPROVED / REJECTED decisions and required rejection reason.
+- AICS users can edit their own pending tickets and delete their own tickets; admins can review decisions and delete tickets. Ticket actions enforce ownership and role checks server-side.
+- Added compatibility migration for AICS ticket status enum and resolution_notes.
+- Fixed shared header profile expansion ReferenceError by computing collapsed-copy width before it is used; this restores expand/collapse behavior in both systems.
+- Static checks only; live browser and database workflow testing remains required.

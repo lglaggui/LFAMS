@@ -1,0 +1,32 @@
+FAMS V5.8 DASHBOARD LAYOUT EDITOR
+
+ADMIN USE
+1. Open Dashboard.
+2. Click Customize Layout.
+3. Drag the handle on any division.
+4. Drop it anywhere inside another section/group or back into the main dashboard.
+5. Use 25%, 33%, 50%, 67%, 75%, or 100% to resize the selected division.
+6. Click Save Layout.
+7. Click Done when finished.
+8. Reset restores the original arrangement.
+
+EDITABLE DASHBOARD DIVISIONS
+The editor now supports both top-level dashboard panels and selected divisions inside sections, including statistics, summary cards, the monthly table/chart, reporting controls/status, fund sections, daily chart/note, municipality/ticket panels, and activity panels.
+
+PERSISTENCE
+Layout changes are saved in the browser localStorage on the current device/browser. They do not modify the FAMS database or financial calculations.
+
+REPORTING SHEET EDITOR
+The SIMC Monthly Disbursement panel now uses “Display Current Month Disbursement”. The Reporting Period panel uses “Display Selected Report”. Both open the same spreadsheet-style editable reporting sheet.
+
+On the editable sheet:
+- Click yellow cells to edit report values.
+- Add Row and Delete are available for report-only adjustments.
+- Totals update from edited guarantee amounts.
+- Reset Edits restores database-loaded values.
+- Print Edited Sheet prints the edited report.
+- Export Edited Sheet to PDF opens the browser print dialog; choose “Save as PDF”.
+- Edits are local to the browser and do NOT change FAMS database records.
+
+PRINT FORMAT
+The reporting sheet uses Folio 8.5 x 13 inches, landscape orientation, with 0.75 cm top and 0.3 cm left/right/bottom margins.

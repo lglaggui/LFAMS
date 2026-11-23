@@ -1,0 +1,17 @@
+FAMS Region II Unified — v0.0208
+Release: Database Integrity and Referential Consistency
+Package: Full htdocs source ZIP; archive contents are rooted at htdocs application root.
+Baseline: v0.0207.
+
+Key files:
+- core/audit_runtime.php — transaction-required audit and status-history contracts.
+- aics/helpers.php — AICS expiry uses shared status-history writer.
+- aics/status_update.php, aics/tickets.php — AICS status-history contract.
+- maifip/helpers.php — safe facility/control-number unique-index migration and transaction-aware audit adapter.
+- maifip/status_update.php, maifip/ticket_review.php, maifip/record_form.php, maifip/offline_sync.php, maifip/import_sheet.php — shared status-history contract.
+- maintenance/database_integrity_audit.php — CLI-only, read-only schema/data audit.
+- maintenance/tests/database_integrity_contract_test.php — integrity contract tests.
+- DATABASE-INTEGRITY-AUDIT-GUIDE-v0.0208.txt — usage and interpretation.
+
+Validation summary: see RELEASE-TEST-SUMMARY-v0.0208.txt.
+Database-connected checks were not performed; no production DB access or modifications occurred.

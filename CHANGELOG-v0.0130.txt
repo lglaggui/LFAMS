@@ -1,0 +1,13 @@
+FAMS Unified Release v0.0130
+Date: 2026-10-27
+
+Fixes and refinements
+- Fixed MAIFIP record-ticket popup mode initialization so $isPopup is defined before any POST validation, redirect, or form rendering path for encoder, social worker, and manager users.
+- MAIFIP ticket submissions made from a popup now notify the parent page on successful submission instead of loading the full ticket list inside the popup frame.
+- Removed the Priority column from the AICS system-wide ticket management table. The legacy database priority field is retained for compatibility with existing data and deployments.
+- Changed the AICS dashboard Add Financial Assistance Record action to open the record form directly in the shared popup, avoiding the intermediate records page when the popup shell is available; regular form navigation remains as fallback.
+- Bumped MAIFIP and AICS application version to 0.0130.
+
+Validation scope
+- PHP syntax lint, shared JavaScript syntax check, CSS brace balance, and ZIP integrity checks are run for this package.
+- No live browser, MySQL database, role-by-role session, or hosted deployment testing was performed in this environment.

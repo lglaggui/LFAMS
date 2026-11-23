@@ -1,0 +1,11 @@
+FAMS Region II v0.0065 — Shared Geometry and Header Alignment
+
+Changes:
+- Final shared shell rules establish matching desktop sidebar/header/footer/page-view dimensions for MAIFIP and AICS.
+- Desktop header fund summary occupies the flexible center column between the variable-width identity and profile groups.
+- At constrained widths, the fund summary moves to a centered second row.
+- Workspace label and switcher are more prominent while retaining the existing visual language.
+- Fund labels are mutually exclusive: expanded wording in expanded mode and short wording in collapsed/compact mode, including utilization.
+- Shared stylesheet cache token bumped to v0065.
+
+Validation performed: PHP syntax and archive integrity checks. Browser and live database behavior require runtime verification.

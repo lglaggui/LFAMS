@@ -1,0 +1,2 @@
+Source-level test files passed: 24
+MySQL concurrency test: refused by safety gate (no staging DSN and no pdo_mysql).

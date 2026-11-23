@@ -1,0 +1,4 @@
+FAMS Region II v0.0100
+- MAIFIP administrators use Edit for finalized records; Submit Ticket is hidden for administrators. Non-admin revision-ticket workflow remains.
+- MAIFIP masterlist width and columns are fixed to compact proportions, with collapsed borders, zero border spacing, and reduced cell padding.
+- Version updated in MAIFIP and AICS.

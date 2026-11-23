@@ -1,0 +1,28 @@
+FAMS REGION II v0.0195 — VALIDATION REPORT
+
+SOURCE VALIDATION
+- PHP lint: all PHP files passed (see PHP-LINT-v0.0195.txt).
+- Payload fingerprint tests: 4 passed, 0 failed.
+- Endpoint registry tests: 4 checks passed, 0 failed.
+- Repository contract tests: 6 passed, 0 failed.
+- Permission matrix: 47 passed, 0 failed.
+- Shared transaction runtime: 4 passed, 0 failed.
+- Reporting-period placement contract: 9 passed, 0 failed.
+
+BROWSER VISUAL SMOKE TEST
+- Chromium + Playwright; shared reporting CSS and representative dashboard DOM.
+- 1440x1000 desktop: PASS.
+- 1024x900 wide tablet: PASS.
+- 768x1024 tablet: PASS.
+- 390x844 mobile: PASS.
+- 360x800 small mobile: PASS.
+- All five: zero horizontal overflow; action stays within card and right-aligned.
+- Screenshots: maintenance/visual-baseline-reporting-*-v0.0195.png.
+
+NOT RUN
+- Authenticated AICS/MAIFIP dashboard flows and direct endpoint HTTP authorization tests: require staging MySQL and test accounts.
+- MySQL concurrency/idempotency runtime suite: requires MySQL/pdo_mysql and disposable fixtures.
+- Pixel-diff regression: no approved pre-existing baseline was supplied for these reporting-card views. Screenshots in this release are candidate baselines only.
+
+RESULT
+All executed checks passed. Runtime security and database-backed regression remain staging prerequisites.

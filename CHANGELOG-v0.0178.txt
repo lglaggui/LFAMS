@@ -1,0 +1,19 @@
+FAMS REGION II — CHANGELOG v0.0178
+AICS PAGEVIEW EDGE-SPACING STANDARDIZATION
+
+AICS Pageview
+- Standardized the Pageview's outer padding so top, bottom, left, and right edges use the same gutter at each responsive breakpoint.
+- Desktop: 28px on all four edges.
+- Medium screens (max-width 1100px): 22px on all four edges.
+- Tablet/small screens (max-width 800px): 16px on all four edges.
+- Narrow mobile (max-width 560px): 12px on all four edges.
+- Removed conflicting legacy top-only and mobile padding overrides that bypassed the Pageview spacing contract.
+- Preserved the zero-padding exception for popup pages.
+- Kept section/card internal padding and table-panel behavior unchanged.
+
+Release consistency
+- Updated AICS and MAIFIP APP_VERSION to 0.0178 for asset cache-busting and footer version consistency.
+
+Scope and limitations
+- This release changes AICS Pageview outer spacing only; it does not alter database schema, records, permissions, or assistance workflows.
+- Static validation does not replace authenticated browser testing against the production database.

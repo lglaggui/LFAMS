@@ -1,0 +1,13 @@
+FAMS Unified v0.0107
+
+MAIFIP
+- More compact, modern Add/Edit popup spacing and grouping.
+- Narrowed Address by 20%, Bill Amount by 10%, Guardian and Submission by 5%, and Action by 20%; width reductions allocated to Status and Remarks as requested.
+- Removed inner table padding and moved modest horizontal gutters to the masterlist section.
+
+AICS
+- Quotation column widened by 10%; Submission and Client narrowed by 5% each; Action narrowed by 20%; corresponding space allocated to Status.
+- Admins can open status editing for any status and edit any entry without submitting tickets; ticket workflow remains available to non-admins where applicable.
+- Existing Quotation required validation retained in Add/Edit form and server-side processing.
+
+Version labels updated to 0.0107.

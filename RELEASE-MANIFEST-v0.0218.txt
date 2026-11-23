@@ -1,0 +1,32 @@
+FAMS Region II Unified — Release Manifest v0.0218
+
+Release: 0.0218
+Package: FAMS-Region-II-Unified-htdocs-v0.0218-MONTHLY-RECONCILIATION.zip
+
+Included release records:
+- CHANGELOG-v0.0218.txt
+- VALIDATION-v0.0218.txt
+- PHP-LINT-v0.0218.txt
+- TEST-SUMMARY-v0.0218.txt
+- DATABASE-RECONCILIATION-AUDIT-v0.0218.txt
+
+Source updates:
+- maifip/helpers.php: global opening-anchor invariant, shared released-record query, and stored-summary discrepancy metadata.
+- maifip/monthly_report.php: normalized detail retrieval and visible historical-summary discrepancy notice, including Excel export.
+- maifip/monthly_report_print.php: normalized detail retrieval and accurate stored-summary comparison notice.
+- maifip/monthly_report_export.php: normalized detail retrieval and stored-summary comparison fields in CSV.
+- maintenance/tests/: added global reconciliation contract coverage and updated release-version assertions.
+- aics/config.php: APP_VERSION and FAMS_VERSION synchronized to 0.0218.
+- maifip/app_version.php: APP_VERSION synchronized to 0.0218.
+
+Compatibility:
+- No database schema migration is introduced.
+- Existing AICS and MAIFIP workspace separation is preserved.
+- Existing MAIFIP facility scope and permissions are preserved.
+
+Validation:
+- 155 PHP files linted successfully.
+- 21 JavaScript files passed syntax validation.
+- 26 PHP test scripts passed; 1 database integration script was skipped for lack of isolated staging credentials.
+- Five responsive viewport checks passed.
+- Offline SQL reconciliation audit completed; no production database connection or mutation occurred.

@@ -1,0 +1,44 @@
+FAMS Region II — v0.0201 Validation Report
+Step 3.4: Record deletion and restoration enforcement
+
+Source package
+- Baseline: v0.0200 full htdocs package
+- Release: v0.0201
+- Archive structure: complete htdocs contents at ZIP root
+
+Completed checks
+- PHP syntax: 135 PHP files passed php -l.
+- Deletion/restoration enforcement: 18/18 source-contract checks passed.
+- Authorization model: 16 passed.
+- Permission matrix: 52 passed.
+- Ticket lifecycle enforcement: 12 passed.
+- Status endpoint enforcement: 9 passed.
+- Endpoint registry: 4 passed.
+- Payload fingerprint: 4 passed.
+- Shared transaction runtime: 4 passed.
+- Repository contracts: 6 passed.
+- Dashboard reporting action: 12 passed.
+- Reporting period layout: 9 passed.
+- ZIP integrity: verified with unzip -t.
+
+Static review covered all active-record DELETE statements found in the AICS and MAIFIP PHP workspaces:
+- AICS direct deletion: aics/records.php
+- AICS ticket-approved deletion: aics/tickets.php
+- MAIFIP direct deletion: maifip/delete_record.php
+- MAIFIP ticket-approved deletion: maifip/ticket_review.php
+Each path writes the full record payload to fams_deleted_records and performs archive/delete/audit work within its shared transaction. AICS office scope and MAIFIP facility scope are independently checked. Ticket-approved deletion remains distinct from direct deletion and retains its base-record-version checks.
+
+Restoration review
+- AICS: admin + AICS edit_records capability, CSRF, shared control-sequence lock, archive row lock, payload-column allowlist, new control number/date, WAITING reset, atomic restored marker and audit.
+- MAIFIP: admin + MAIFIP edit_records capability, CSRF, facility-scoped sequence lock, facility-qualified archive row lock, payload-column allowlist, new facility control number/date, WAITING reset, atomic restored marker and audit.
+- Legacy AICS restore action on records.php is rejected; a single administrator restoration path remains.
+
+Not performed / requires staging
+- Authenticated HTTP tests with each AICS/MAIFIP role and custom user type.
+- Missing/expired CSRF token tests through a live web server.
+- Cross-office and cross-facility archive-ID replay tests against MySQL.
+- Concurrent duplicate restore attempts and simultaneous create-vs-restore sequence allocation tests against MySQL.
+- Unique-index behavior, transaction rollback after injected archive/delete/audit failures, and actual history/audit row assertions against a disposable staging database.
+- Browser-level confirmation and Trash UI regression.
+
+The local environment does not provide a configured MySQL/MariaDB staging database. Therefore no live database or production data was accessed, and database concurrency/atomicity are not claimed as runtime-tested. Static tests verify the required transaction, row-lock, scope, and sequence-lock code paths only.

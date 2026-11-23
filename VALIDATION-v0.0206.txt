@@ -1,0 +1,30 @@
+FAMS v0.0206 — STEP 4.2 SOURCE-LEVEL VALIDATION
+
+Scope
+- AICS and MAIFIP spreadsheet import preview-to-apply concurrency protection.
+- Source-level checks, PHP syntax lint, and existing automated regression suites.
+- No staging environment or database-connected test was used, per instruction.
+
+Changes verified
+- AICS preview captures the matched record ID and record_version.
+- AICS apply rejects a newly appearing, deleted, replaced, or version-changed match.
+- AICS update SQL includes record_version compare-and-swap and checks affected row count.
+- MAIFIP preview/recheck captures and refreshes matched record ID and record_version.
+- MAIFIP browser-side recheck updates the metadata included in the apply payload.
+- MAIFIP apply rejects changed/replaced facility record matches.
+- MAIFIP update SQL includes facility and record_version predicates and checks affected row count.
+
+Local environment
+- PHP CLI: 8.4.24
+- PHP files linted: 143
+- PHP syntax errors: 0
+- MAIFIP import inline JavaScript: Node.js syntax check passed
+- Automated test suites discovered: 17
+- Source-level assertions passed: 174
+- Failed assertions: 0
+- MySQL concurrency suite: intentionally not executed; it requires FAMS_ALLOW_DB_TESTS=1 and an explicit FAMS_TEST_DSN with a test/staging database name.
+
+Limitations
+- These checks do not prove behavior against a live MySQL server, Apache PHP SAPI, or browser session.
+- Database lock timing, isolation-level behavior, and concurrent requests still require database-connected verification when an isolated test database becomes available.
+- No production database was contacted or modified.

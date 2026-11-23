@@ -1,0 +1,17 @@
+FAMS Region II Unified — v0.0182
+Shared Component Foundation + CSS Duplication Reduction
+
+A. Shared component foundation
+- Promoted the byte-identical base visual contract previously duplicated in AICS and MAIFIP app.css into core/shared-components.css.
+- Consolidated common typography, spacing tokens, surfaces, form-control baseline, button baseline, focus states, badge baseline, and common card geometry into one maintained source.
+- Added common semantic aliases for buttons, form fields, cards, badges, action icons, modal headers, and pagination controls.
+- Existing workspace-specific CSS remains responsible for distinct workflow and page behavior.
+
+B. CSS duplication reduction
+- Removed the duplicated v0.0030 base contract from both workspace app.css files after verifying the extracted blocks were byte-identical.
+- Shared components stylesheet is already loaded after each workspace app.css in the unified shell, so the canonical shared contract is applied to both workspaces.
+- No database, schema, assistance record, permission, status, or financial calculation code was changed.
+
+Safety notes
+- This is a foundation and first safe extraction pass, not a claim that all legacy CSS duplicates have been eliminated.
+- No broad !important cleanup or blind stylesheet minification was performed.

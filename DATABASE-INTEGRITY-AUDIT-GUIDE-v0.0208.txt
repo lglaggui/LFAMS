@@ -1,0 +1,39 @@
+FAMS v0.0208 — Read-only database integrity audit
+
+The audit script is optional and is not run automatically by the application.
+It does not repair, delete, merge, or update any rows and does not alter schema.
+It prints aggregate counts only; it does not print beneficiary, patient, or account data.
+
+Requirements:
+- PHP CLI with pdo_mysql.
+- A dedicated MySQL account granted SELECT and metadata visibility only.
+- A disposable/local development database copy. Do not point this tool at production.
+
+PowerShell example (replace values with your local disposable database):
+  $env:FAMS_AUDIT_DSN = 'mysql:host=127.0.0.1;dbname=lfams_dev;charset=utf8mb4'
+  $env:FAMS_AUDIT_DB_USER = 'lfams_audit_readonly'
+  $env:FAMS_AUDIT_DB_PASS = 'your-read-only-password'
+  $env:FAMS_AUDIT_CONFIRM_DB = 'lfams_dev'
+  php maintenance/database_integrity_audit.php
+
+The database name in the DSN must exactly match FAMS_AUDIT_CONFIRM_DB. Names
+containing prod, production, or live are refused. The script starts a READ ONLY
+transaction and exits nonzero when duplicate/orphan groups require review.
+
+Checks include:
+- AICS control-number duplicates.
+- MAIFIP (facility, control_number) duplicates.
+- AICS and MAIFIP ticket-number duplicates.
+- Duplicate offline client change IDs.
+- Orphaned AICS/MAIFIP ticket, status-history, and offline-sync record references.
+- Existing foreign-key definitions and delete/update rules.
+
+Interpretation:
+- PASS: no duplicate/orphan group found for the available columns.
+- REVIEW: one or more groups need manual review; no automatic correction is made.
+- NOT_APPLICABLE: that workspace table/column is absent from this database schema.
+
+Archival records in fams_deleted_records intentionally retain a serialized record
+snapshot and original_id without a cascading FK to the live record. This preserves
+the archive after an approved deletion; the audit therefore does not classify
+those references as orphan defects.

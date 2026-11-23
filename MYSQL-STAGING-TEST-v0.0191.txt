@@ -1,0 +1,1 @@
+SKIP: pdo_mysql is not installed.

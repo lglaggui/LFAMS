@@ -1,0 +1,27 @@
+FAMS REGION II UNIFIED — PERMISSION / ENDPOINT AUDIT v0.0187
+
+Changes made in this pass
+- core/access_control.php: strictly system-scoped user-type resolution; no administrator bypass for unknown/disabled database roles; permission JSON and base-role baseline both required.
+- aics/helpers.php and maifip/helpers.php: session refresh failures invalidate stale sessions; missing or disabled user-type definitions invalidate the account session.
+- aics/tickets.php and maifip/tickets.php: approval/rejection and ticket administration require manage_tickets; own-ticket operations require submit_tickets.
+- AICS/MAIFIP fund, office/facility, users, and usertypes endpoints: explicit capability gates.
+- MAIFIP offline_sync.php: CREATE and UPDATE changes checked against create_records and edit_records separately.
+- MAIFIP offline_resolve.php: view access checked; applying offline payload requires edit_records.
+- MAIFIP delete_request.php: submit_tickets gate.
+- AICS/MAIFIP trash.php: restore requires edit_records plus administrator role.
+- MAIFIP can_edit_existing_record() and can_manage_users() no longer bypass capability evaluation for administrators.
+
+Ownership and scope controls inspected
+- AICS can_access_record_scope() remains office-bound for SWAD staff/social workers; can_edit_record() composes the scope check with edit_records.
+- MAIFIP record mutations inspected use active_data_facility() and facility-qualified record lookups/updates; offline conflict reads and writes are facility-qualified and user-bound in conflict-log lookup.
+- MAIFIP ticket deletion checks ticket facility and requester ownership for non-admins; ticket review decisions remain administrator-restricted and are now additionally capability-gated.
+- AICS status update checks update_status and can_access_record_scope() before mutation.
+
+Known remaining verification work
+- Execute MySQL-backed tests for custom type permission JSON, disabled user types, disabled accounts, and session revocation.
+- Build an authenticated HTTP endpoint matrix for every AICS/MAIFIP read/write/export/API route, including methods, CSRF, direct URL, and role combinations.
+- Exercise SWAD cross-office read visibility versus edit/status/delete restrictions with test fixtures for all offices.
+- Exercise MAIFIP cross-facility access attempts, including changing facility context and replaying record/ticket/offline identifiers.
+- Exercise AICS and MAIFIP ticket create/edit/approve/reject/delete and restoration workflows with transaction and audit-log assertions.
+
+This is a source-level hardening and static regression pass, not a security certification.

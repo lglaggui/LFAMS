@@ -1,0 +1,45 @@
+FAMS REGION II — VALIDATION REPORT v0.0177
+
+SOURCE / SYNTAX CHECKS
+- PHP files checked: 120
+- PHP syntax errors: 0
+- JavaScript files checked: 18
+- JavaScript syntax errors: 0
+- CSS files checked: 11
+- CSS parser errors: 0
+- Duplicate CSS selector blocks (adjacent or byte-identical in the parsed source): 0
+
+CHROMIUM UX FIXTURE (isolated browser fixture; no authenticated application/database)
+- Keyboard skip-to-main-content link appears: passed.
+- Shared success toast renders and dismisses: passed.
+- Toast layout at 1280px and 390px: passed.
+- No horizontal page overflow at tested desktop/mobile widths: passed.
+- Edited POST form triggers unsaved-change guard: passed.
+- Reset form clears dirty state: passed.
+- Ordinary in-app/AJAX navigation link prompts before discarding edits: passed.
+- Chat draft and GET/search forms are excluded from unsaved-change warnings: passed.
+- Explicit data-confirm destructive form prompts: passed.
+
+STATIC PERFORMANCE / CACHE ASSERTIONS
+- AICS and MAIFIP masterlists retain server-side pagination at 25 records per page.
+- Both masterlist search debounce intervals use the shared 260 ms value.
+- Both masterlists set aria-busy during requests and show a non-sensitive failure toast.
+- Shared shell CSS/JS and shared worksheet CSS use APP_VERSION cache tokens.
+- Service-worker cache generation is v0.0177.
+- Both application version constants are 0.0177; AICS FAMS_VERSION is 0.0177.
+- Optional composite-index migration is idempotent by table/index-name checks and is not auto-executed.
+- Maintenance directory is denied by Apache .htaccess; SQL migration must be imported from a local copy.
+
+DATABASE / PRODUCTION LIMITATIONS
+- No live MySQL connection was available; index migration execution, query EXPLAIN plans, and data reconciliation were not tested.
+- No live production backup or restore was performed.
+- No authenticated end-to-end test across LPGMA, SWAD, and MAIFIP facility accounts was performed.
+- The optional SQL migration should be reviewed and run once only after a fresh database backup.
+
+CSS FLATTENING LIMITATION
+- Safe adjacent/identical duplicate selector blocks were consolidated; see CSS-AUDIT-v0.0177.txt.
+- The legacy cascade still contains 13,506 !important declarations. They were not bulk-removed because doing so without page-by-page visual regression coverage could reintroduce layout defects.
+
+PACKAGE
+- Full htdocs/ directory included in ZIP.
+- ZIP integrity test: passed (unzip -t and archive-content assertions).

@@ -1,0 +1,11 @@
+FAMS Region II Unified — v0.0208
+Database Integrity and Referential Consistency
+
+- Hardened MAIFIP facility/control-number uniqueness migration. Duplicate facility/control-number pairs are detected before DDL; legacy uniqueness protection is retained until the replacement composite unique index is verified.
+- Migration completion is no longer cached after a failed or deferred operation; later requests may retry after the underlying issue is corrected.
+- Added a shared transactional status-history writer for both workspaces; it refuses writes outside an active transaction and retains separate AICS/MAIFIP history tables.
+- Updated workspace log_action adapters to write through the transaction-required audit contract whenever the caller already has an active transaction; standalone informational events retain their existing standalone behavior.
+- Added a CLI-only, read-only database integrity auditor for duplicate control numbers/ticket numbers/offline client IDs, orphaned ticket/history/sync references, and foreign-key inventory.
+- Archived-as-deleted references are excluded from unresolved orphan counts when fams_deleted_records is available, preserving the approved-deletion archive design.
+- Updated AICS and MAIFIP application version markers to 0.0208.
+- No AICS or MAIFIP business rules, workspace boundaries, or existing beneficiary/patient records were changed.

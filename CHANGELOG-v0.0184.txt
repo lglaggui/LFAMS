@@ -1,0 +1,16 @@
+FAMS Region II — Unified Source
+Version: 0.0184
+
+Primary change: dependency-aware MAIFIP offline synchronization module extraction.
+
+1. Extracted the MAIFIP offline record queue, synchronization, and conflict-resolution behavior from the large workspace app.js into maifip/assets/offline-sync.js.
+2. Registered the module through core/shared-page-assets.js for MAIFIP workspace routes, including after partial page replacement/navigation.
+3. Preserved the existing IndexedDB database name/version/store, queued record payload shape, record-version checks, API endpoints, conflict statuses, CSRF handling, user prompts, and public window functions (FAMSSyncOffline and FAMSResolveOffline).
+4. Changed the periodic 30-second synchronization loop so it starts only while local queued changes exist. It stops when the queue becomes empty and does not poll continuously on pages with no pending offline changes. Offline form submission starts the loop after saving a local change.
+5. Added duplicate-submit binding protection for dynamically replaced offline record forms and a synchronization-in-progress guard.
+6. Confirmed AICS assets/app.js is approximately 6.5 KB in this baseline, so it was not artificially split into smaller files. Its global shell/avatar behavior remains centralized.
+7. Updated AICS and MAIFIP application version constants to 0.0184.
+
+No database schema, beneficiary data, assistance calculations, office visibility rules, account roles, or authorization rules were intentionally changed.
+
+Scope note: this is the first safe feature extraction. Records, chat, ticket, and modal modules remain in the main MAIFIP controller pending dependency mapping and will be handled in subsequent isolated passes.

@@ -1,0 +1,12 @@
+FAMS Region II — v0.0199
+Step 3.2: Record Status Change Enforcement
+
+- Hardened AICS status updates with transactional capability and office-scope revalidation, row locking, mandatory positive record-version matching, and finalized-record protection.
+- Hardened MAIFIP status updates with in-transaction capability revalidation, facility-qualified row locking, stale-version protection, and finalized-record protection.
+- Explicitly reject unsupported HTTP methods on both status endpoints.
+- Kept status-history and audit writes atomic with each successful status update.
+- Hardened AICS automatic expiry cancellation: expired WAITING records are locked and version-guarded; status history and audit entries are written in the same transaction.
+- Updated endpoint registry status for the two status endpoints.
+- Added focused static regression tests.
+
+Not included in this phase: status changes performed as part of ticket resolution or spreadsheet imports. Those are handled in their respective Step 3.3 and Step 3.6 enforcement groups; authenticated staging verification remains required.

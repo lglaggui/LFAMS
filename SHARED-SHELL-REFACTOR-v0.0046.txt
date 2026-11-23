@@ -1,0 +1,24 @@
+LFAMS v0.0046 — SHARED SHELL REFACTOR (INCREMENTAL)
+
+This revision extracts the repeated MAIFIP/AICS top header into core/shared_topbar.php. The same header markup is now used by both workspaces; active-system labels, fund values, facility context, and accent color are supplied as workspace data. Both workspace headers continue to use core/uniform.css and core/header-fit.js with a fresh cache-busting version. Both footers already call core/unified_footer.php.
+
+Data compatibility:
+- Keeps the consolidated lfams_unified database and its existing MAIFIP and aics_ table names.
+- Does not rename/drop application tables or merge the separate user tables.
+- Does not intentionally change access-control checks, record workflows, or the system-specific page content.
+- Existing MAIFIP/AICS page navigation remains system-specific.
+
+Validation performed locally:
+- PHP syntax check: all 80 PHP files passed `php -l`.
+- Database export remains the existing consolidated `lfams_unified.sql` included in the package.
+- This environment has no MySQL/MariaDB server/client available, so the SQL has not been imported into a live server in this validation pass.
+- No authenticated browser tests against InfinityFree were possible here.
+
+Important scope note:
+This is the first implementation step, not the final completion of the full requested shared-shell refactor. The header and footer implementations are shared, but sidebar markup and the outer viewport/page wrappers still have some duplicated workspace markup. A subsequent step should extract the common sidebar frame/navigation renderer and unify the viewport wrapper while retaining system-specific navigation entries and permission checks. Do not describe v0.0046 as complete pixel/behavior parity until that is done and tested.
+
+Deployment:
+1. Back up the current website files and database.
+2. Upload the ZIP contents to the existing htdocs directory, preserving the folder structure.
+3. Keep the existing database configuration in core/database.php; do not re-import the SQL over a live database unless intentionally creating a fresh database.
+4. Test MAIFIP and AICS logins, switching, fund values, records, notifications, mobile navigation, and each role's permissions.

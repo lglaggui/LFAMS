@@ -1,0 +1,56 @@
+FAMS REGION II — ENDPOINT AUTHORIZATION / OWNERSHIP AUDIT v0.0191
+
+SOURCE-LEVEL REVIEW SUMMARY
+- Authenticated AICS and MAIFIP write endpoints were reviewed for login, CSRF, capability/role checks, and record/facility ownership checks.
+- Public entry points (login, registration, logout, version metadata) remain intentionally public.
+- MAIFIP media delivery remains public for login-page branding, but its accepted keys are now restricted to known public avatar/logo keys and generated facility-logo keys.
+- User profile/account pages are scoped to the signed-in account; administrative account endpoints require administrator capability/role.
+
+AICS RECORDS
+- Masterlist visibility remains district-wide for SWAD users as intentionally specified; visibility does not grant edit/delete authority.
+- Record form edits require edit_records and can_edit_record office-scope checks; released/cancelled records are ticket/admin controlled.
+- Status updates require update_status and can_access_record_scope; AICS record_version is checked before update.
+- Editable-sheet API now explicitly requires login and edit_records; each row is locked and checked through can_edit_record, with non-admin edits restricted to WAITING.
+- Sheet imports now recheck office ownership and WAITING-only status for non-admin updates; newly imported entries are assigned to the authenticated user's office.
+- Delete/archive operations re-read and lock the target row inside the transaction; restoration requires administrator + edit_records.
+- Ticket submissions require submit_tickets; decisions require manage_tickets and use locked/guarded ticket state transitions.
+
+MAIFIP RECORDS
+- Record reads and mutations are scoped to active_data_facility; updates/deletes lock and recheck the record inside the transaction.
+- Record form/status/ticket/import/offline changes advance record_version; stale offline changes are stored as conflicts.
+- Sheet imports are facility-qualified and call can_edit_existing_record before changing existing rows.
+- Offline sync checks create_records/edit_records separately, binds UPDATE to active facility and current version, and commits its log entry with the business write.
+- Offline conflict resolution is user-bound, active-facility-bound, row-locked, version-checked, and atomic.
+- Ticket creation requires submit_tickets; review decisions require manage_tickets; deletion checks facility and requester ownership; ticket state is rechecked under lock.
+- Facility administration requires the corresponding manage_offices capability and performs writes plus audit logging atomically.
+- Deleted-entry restoration requires administrator + edit_records and is scoped to the active facility.
+
+ACCOUNT / SHARED ENDPOINTS
+- AICS and MAIFIP personal account actions are limited to the authenticated user and now commit with audit logging.
+- AICS and MAIFIP account administration is administrator-only and uses row locks, duplicate username/email checks, and shared transactions.
+- MAIFIP email-change requests are user-bound; approvals/rejections lock the pending request and commit the account/email/notification/audit changes atomically.
+- Dashboard layout GET is authenticated; POST is administrator-only and CSRF-protected.
+- Notifications are authenticated and user-scoped by the shared notification controller.
+- Address-directory APIs are authenticated; they expose public PSGC directory data, not beneficiary records.
+
+STATIC REGRESSION CHECKS
+- Permission matrix / endpoint source tests: 41 passed, 0 failed.
+- These tests validate permission defaults and selected source invariants; they are not a substitute for authenticated HTTP testing.
+
+REMAINING VERIFICATION
+- Full role-by-role authenticated HTTP matrix is still required on staging.
+- Verify custom user-type permission JSON and inactive types against live MySQL.
+- Attempt cross-office AICS edit/status/delete/import identifier replay for every SWAD office.
+- Attempt cross-facility MAIFIP edit/status/delete/ticket/offline identifier replay for each facility.
+- Verify CSRF failures, expired sessions, direct endpoint URLs, and concurrent requests.
+- Validate database migrations and constraints on a copy of the production schema.
+
+This is a source-level hardening audit, not a penetration test or security certification.
+
+V0.0192 ADDENDUM — TICKET PROPOSAL VERSION SAFETY
+- AICS revision tickets now persist the source record_version; approval rejects proposals whose source version no longer matches the locked record.
+- AICS office-reassignment proposals also persist and check the source record_version.
+- AICS delete requests persist the source record_version; delete approval checks it before archiving/removal.
+- MAIFIP revision and deletion requests persist the source record_version. Ticket edit re-locks the ticket and source record, refreshes the base version, and writes the proposal with its audit event atomically.
+- MAIFIP ticket review locks the ticket and source record and rejects stale or legacy proposals without a base version.
+- These are source-level safeguards; authenticated HTTP testing remains required.

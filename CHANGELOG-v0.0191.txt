@@ -1,0 +1,53 @@
+FAMS REGION II — UNIFIED SOURCE
+Release: v0.0191
+Date: 04 November 2026
+
+SCOPE
+- Continued the shared backend transaction and idempotency hardening pass.
+- Removed the unrelated MG Tracking Android application folder from this FAMS package.
+- Preserved the separate AICS and MAIFIP workflows, their existing database tables, and shared authentication foundation.
+
+PACKAGE CLEANUP
+- Removed mgtrack/android-app/ from the FAMS source tree and release package.
+- No MG Tracking System source is included in this release.
+
+TRANSACTION CONSOLIDATION
+- Migrated remaining AICS and MAIFIP bulk sheet imports to the shared transaction wrapper while retaining their pre-import database backup and idempotency claim behavior.
+- Migrated address-directory cache seeding to the shared transaction service.
+- Migrated MAIFIP facility create/edit/enable/disable/remove operations to atomic transactions with audit logging.
+- Migrated AICS and MAIFIP own-account operations and administrative account workflows to shared transactions.
+- Migrated AICS ticket approval/rejection/edit/delete decisions and MAIFIP ticket approval/rejection/delete/bulk-delete workflows to shared transactions.
+- Migrated MAIFIP direct record deletion and both workspaces' deleted-entry restoration workflows to atomic archive/restore transactions.
+- Offline conflict resolution now updates the assistance record, conflict-log state, and audit log atomically.
+- Offline synchronization now commits the record mutation and its sync-log entry together.
+
+IDEMPOTENCY AND CONCURRENCY
+- Added facility-wide MySQL advisory locks around MAIFIP control-number allocation; normal creates, offline creates, imports, and restores use the same lock namespace.
+- Added a shared AICS control-number sequence lock for normal creates, imports, and restores.
+- Offline client-change IDs are now protected by a unique database index. Existing duplicate historical IDs are preserved by assigning deterministic legacy IDs to all but the earliest entry before enforcing uniqueness.
+- Duplicate offline requests return the previously recorded outcome rather than applying a second business mutation.
+- Ticket decisions lock the pending ticket row and use guarded status transitions so simultaneous reviewers cannot approve/reject the same ticket twice.
+- AICS now has a record_version column added automatically by its existing schema-compatibility routine. Record editing and status updates use compare-and-swap version checks and increment the version after successful updates.
+- MAIFIP record editing, status updates, ticket approvals, imports, and offline synchronization increment record_version; stale offline updates are retained as conflicts rather than overwriting newer data.
+- Imports now enforce record ownership and status restrictions before updating existing records: AICS office scope / WAITING restrictions for non-admins, and MAIFIP facility / editable-status restrictions.
+
+AUTHORIZATION AND OWNERSHIP
+- Added login and edit-capability checks to the AICS editable-sheet API.
+- Scoped the MAIFIP offline conflict list to the signed-in user and active facility, and required view_records permission.
+- Restricted the public MAIFIP media endpoint to known public branding/avatar keys and generated facility-logo keys.
+- Rechecked ownership, facility, status, and ticket state inside transactions for key mutation workflows.
+- Added static permission-regression checks for the new endpoint and ownership safeguards.
+
+TESTING / LIMITATIONS
+- PHP syntax lint: 123 PHP files, zero syntax errors.
+- JavaScript syntax checks: 19 files, zero errors.
+- CSS parser checks: 11 files, zero parse errors.
+- Shared transaction runtime tests: 4 passed, 0 failed.
+- Permission / endpoint source-regression tests: 41 passed, 0 failed.
+- A MySQL staging test harness is included at maintenance/tests/mysql_concurrency_test.php. It covers transaction rollback, duplicate idempotency claims, a stale record-version update, and a two-process unique-key race.
+- The MySQL staging harness could not be executed in this build environment because pdo_mysql is not installed. No live MySQL transaction, migration, or simultaneous-request result is claimed.
+- No browser-level visual/interaction regression test was performed in this environment.
+
+IMPORTANT
+- This is a source-level hardening increment, not a security certification and not a declaration that every endpoint has passed authenticated HTTP testing.
+- Run the included MySQL harness against a dedicated staging database before deploying to production.

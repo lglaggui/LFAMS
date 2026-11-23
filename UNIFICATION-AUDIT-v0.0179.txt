@@ -1,0 +1,19 @@
+FAMS REGION II — UNIFICATION AUDIT v0.0179
+
+SHARED RULES CONSOLIDATED
+- AICS and MAIFIP full-page Pageview outer gutters are now controlled by the shared shell.
+- Common page title/section title spacing, toolbar/filter/action gaps, common card padding, footer inset and responsive shell widths use shared tokens/rules.
+- AICS dashboard-specific hero/block styling remains workspace-specific, but its outer card padding follows the shared inset values.
+- Popup pages retain their standalone compact spacing exception.
+
+RESPONSIVE GEOMETRY VERIFIED IN FIXTURES
+- Desktop: 250px sidebar; page/footer gutter 28px.
+- Medium: 250px sidebar; page/footer gutter 22px.
+- Tablet (768–800px and through 1100px): 80px sidebar rail in both systems; gutter 16px at 800px and 22px above 800px.
+- Mobile (767px and below): full-width main/header/footer and mobile drawer; gutter 16px down to 561px, then 12px.
+- AICS + MAIFIP combined stylesheet fixture retains the same shell geometry.
+
+NOT VERIFIED IN THIS RELEASE
+- No live database connection or authenticated session was available for role-by-role application testing.
+- No production deployment, data migration, or workflow behavior was changed or tested.
+- Isolated browser fixtures validate CSS geometry and table scroll containment, not every actual page's content density or every interaction.

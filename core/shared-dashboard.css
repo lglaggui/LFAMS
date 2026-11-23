@@ -1,0 +1,177 @@
+/* FAMS v0.0197 — shared dashboard and reporting visual system.
+   Loaded after workspace CSS; applies only to dashboard/reporting components. */
+.fams-dashboard { display:grid; gap:16px; min-width:0; }
+.fams-dashboard .hero-banner { min-height:112px; align-items:center; }
+.fams-dashboard .dashboard-filter { min-width:0; }
+#dashboardLayout .dashboard-layout-item[data-dashboard-item="reporting-filter"] { grid-column:1/-1; width:100%; max-width:none; }
+#dashboardLayout .dashboard-layout-item[data-dashboard-item="reporting-filter"] .dashboard-filter { width:100%; max-width:none; padding:18px; }
+#dashboardLayout .reporting-editor-grid { gap:14px !important; align-items:stretch !important; }
+#dashboardLayout .reporting-editor-grid > .dashboard-editor-division { padding:14px !important; border:1px solid #e1e8ef !important; border-radius:11px !important; background:#f9fbfd !important; box-sizing:border-box !important; min-width:0 !important; }
+#dashboardLayout .reporting-editor-grid .dashboard-filter-form { height:100%; align-content:center; }
+#dashboardLayout .reporting-editor-grid .dashboard-period { text-align:left !important; display:flex; flex-direction:column; justify-content:center; height:100%; min-width:0; box-sizing:border-box; padding:14px 16px !important; }
+#dashboardLayout .reporting-editor-grid .dashboard-period strong { font-size:22px !important; margin-top:4px; }
+#dashboardLayout .reporting-editor-grid .dashboard-period small { max-width:none !important; font-size:9px !important; line-height:1.5 !important; color:#718398 !important; }
+#dashboardLayout .dashboard-layout-item[data-dashboard-item="reporting-filter"] .reporting-editor-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); width:100%; min-width:0; }
+#dashboardLayout .dashboard-layout-item[data-dashboard-item="reporting-filter"] .reporting-editor-grid > .dashboard-editor-division { min-width:0; grid-column:auto !important; }
+.fams-dashboard .reporting-editor-grid { align-items:stretch; }
+.fams-dashboard .dashboard-filter-form {
+  display:grid; grid-template-columns:minmax(150px,1fr) minmax(150px,1fr) auto;
+  align-items:end; gap:10px; width:100%; min-width:0;
+}
+.fams-dashboard .dashboard-filter-form > div { display:grid; gap:5px; min-width:0; }
+.fams-dashboard .dashboard-filter-form label {
+  color:#6d8294; font-size:9px; font-weight:850; letter-spacing:.07em; text-transform:uppercase;
+}
+.fams-dashboard .dashboard-filter-form select {
+  width:100%; min-width:0; min-height:40px; padding:8px 11px;
+  border:1px solid var(--fams-line); border-radius:9px; background:#fff;
+  color:var(--fams-ink); font-size:11px; font-weight:700;
+}
+.fams-dashboard .dashboard-filter-form .secondary-btn { min-height:40px; min-width:0; max-width:100%; box-sizing:border-box; display:inline-flex; align-items:center; justify-content:center; padding:9px 12px; text-align:center; line-height:1.35; white-space:normal; overflow-wrap:anywhere; }
+.fams-period-status { grid-column:1/-1; min-height:14px; color:var(--fams-muted); font-size:9px; }
+.fams-period-status[hidden] { display:none; }
+.fams-dashboard .dashboard-filter-form[aria-busy="true"] { opacity:.72; }
+.fams-dashboard .fams-kpi-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; align-items:stretch; }
+.fams-dashboard .fams-kpi-grid > .dashboard-editor-division { min-width:0; grid-column:auto !important; }
+.fams-dashboard .fams-kpi-card {
+  box-sizing:border-box; display:flex; flex-direction:column; justify-content:center;
+  min-width:0; min-height:var(--fams-kpi-min-height); height:100%; padding:16px 17px;
+  border:1px solid #dfe7ee; border-radius:var(--fams-kpi-radius);
+  background:linear-gradient(180deg,#fff 0%,#f9fbfd 100%);
+  box-shadow:0 5px 16px rgba(21,55,83,.045); overflow:hidden;
+}
+.fams-dashboard .fams-kpi-card > span { color:#718699; font-size:9px; font-weight:850; letter-spacing:.055em; text-transform:uppercase; }
+.fams-dashboard .fams-kpi-card > strong { display:block; margin:7px 0 4px; color:var(--fams-navy); font-size:clamp(19px,2vw,25px); font-weight:900; line-height:1.18; font-variant-numeric:tabular-nums; overflow-wrap:anywhere; }
+.fams-dashboard .fams-kpi-card > small { color:#7b8e9d; font-size:9px; line-height:1.45; }
+.fams-dashboard .fams-kpi-waiting { border-top:3px solid #d69b31; }
+.fams-dashboard .fams-kpi-released { border-top:3px solid #368568; }
+.fams-dashboard .fams-kpi-cancelled { border-top:3px solid #bd6262; }
+.fams-dashboard .today-disbursement-card { border-top:3px solid var(--fams-blue); }
+.fams-dashboard .line-chart { border:1px solid #dfe7ee; border-radius:13px; background:linear-gradient(180deg,#fff,#f8fbfd); }
+.fams-dashboard .line-chart .line-path { stroke:var(--fams-chart-primary) !important; stroke-width:3 !important; }
+.fams-dashboard .line-chart .line-point { stroke:var(--fams-chart-primary) !important; }
+.fams-dashboard .line-chart .line-grid { stroke:var(--fams-chart-grid) !important; }
+.fams-dashboard .line-chart .line-axis { stroke:var(--fams-chart-axis) !important; }
+.fams-dashboard .line-chart .line-label { fill:#657e91; }
+.fams-dashboard .line-chart .line-value { fill:#244f70; }
+.fams-dashboard .line-chart .line-area { opacity:.28; }
+.fams-chart-legend { position:absolute; top:5px; right:10px; display:flex; align-items:center; justify-content:flex-end; gap:7px; margin:0; color:#74899a; font-size:8px; font-weight:750; pointer-events:none; }
+.fams-chart-legend-mark { display:inline-block; width:18px; height:3px; border-radius:3px; background:var(--fams-chart-primary); position:relative; }
+.fams-chart-legend-mark::after { content:""; position:absolute; width:6px; height:6px; border:1.5px solid var(--fams-chart-primary); border-radius:50%; background:#fff; left:6px; top:-2px; }
+.fams-dashboard .panel-heading h3 { color:var(--fams-navy); }
+.fams-dashboard .report-total,
+.fams-dashboard .chart-total,
+.fams-dashboard .monthly-chart-total strong { font-variant-numeric:tabular-nums; }
+.fams-dashboard .table-wrap { max-width:100%; }
+.fams-dashboard .fams-data-list-table th,
+.fams-dashboard .fams-data-list-table td { font-variant-numeric:tabular-nums; }
+@media (max-width:1100px) {
+  .fams-dashboard .fams-kpi-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  #dashboardLayout .dashboard-layout-item[data-dashboard-item="reporting-filter"] .reporting-editor-grid { grid-template-columns:1fr; }
+  .fams-dashboard .dashboard-filter-form { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .fams-dashboard .dashboard-filter-form .secondary-btn { grid-column:1/-1; width:100%; }
+  #dashboardLayout .reporting-editor-grid .dashboard-period { padding:14px !important; }
+}
+@media (max-width:560px) {
+  .fams-dashboard { gap:12px; }
+  .fams-dashboard .fams-kpi-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }
+  .fams-dashboard .fams-kpi-card { min-height:108px; padding:12px; }
+  .fams-dashboard .fams-kpi-card > strong { font-size:19px; }
+  .fams-dashboard .dashboard-filter-form { grid-template-columns:1fr 1fr; }
+  .fams-dashboard .dashboard-filter-form .secondary-btn { grid-column:1/-1; }
+}
+@media (max-width:360px) {
+  .fams-dashboard .fams-kpi-grid { grid-template-columns:1fr; }
+}
+
+/* v0.0188 — canonical reporting-period and MAIFIP dashboard hero treatment. */
+.fams-dashboard .reporting-period-panel {
+  border:1px solid #dfe7ee;
+  border-radius:14px;
+  background:linear-gradient(180deg,#fff 0%,#f8fbfd 100%);
+  box-shadow:0 5px 18px rgba(21,55,83,.045);
+}
+.fams-dashboard .reporting-editor-grid > .dashboard-editor-division {
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  min-height:92px;
+}
+.fams-dashboard .dashboard-period-kicker {
+  color:#718699;
+  font-size:9px;
+  font-weight:850;
+  letter-spacing:.09em;
+  text-transform:uppercase;
+}
+.fams-dashboard .dashboard-period strong { color:var(--fams-navy); }
+.fams-dashboard .dashboard-filter-form select:focus-visible,
+.fams-dashboard .dashboard-filter-form a:focus-visible {
+  outline:3px solid rgba(54,116,174,.22);
+  outline-offset:2px;
+}
+.maifip-dashboard-hero {
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(220px,auto);
+  align-items:center;
+  gap:clamp(18px,2.5vw,30px);
+  padding:clamp(20px,2.4vw,30px);
+}
+.maifip-dashboard-hero .maifip-hero-copy {
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  justify-content:center;
+}
+.maifip-dashboard-hero .maifip-hero-copy .hero-action { margin-top:15px; }
+.maifip-dashboard-hero .maifip-hero-actions { display:flex; flex-direction:column; align-items:flex-end; justify-content:center; gap:10px; min-width:0; }
+.maifip-dashboard-hero .maifip-hero-actions .hero-action { margin:0; text-align:center; }
+.maifip-dashboard-hero .doh-fund-dashboard-action { margin-top:10px; background:rgba(255,255,255,.13); color:#fff; border:1px solid rgba(255,255,255,.34); }
+.maifip-dashboard-hero .doh-fund-dashboard-action:hover { background:rgba(255,255,255,.22); }
+.maifip-dashboard-hero .doh-fund-dashboard-action:focus-visible { outline:3px solid rgba(255,255,255,.45); outline-offset:3px; }
+
+@media(max-width:760px) {
+  .maifip-dashboard-hero { grid-template-columns:minmax(0,1fr); align-items:start; gap:16px; padding:18px; }
+  .maifip-dashboard-hero .maifip-hero-actions { width:100%; align-items:stretch; }
+  .maifip-dashboard-hero .maifip-hero-actions .hero-action { width:100%; box-sizing:border-box; }
+}
+
+
+/* v0.0195 — report action belongs to the selected-period status card. */
+.fams-dashboard .dashboard-filter-form { grid-template-columns:repeat(2,minmax(0,1fr)); }
+.fams-dashboard .dashboard-period { width:100%; min-width:0; }
+.fams-dashboard .dashboard-period-actions { display:flex; justify-content:flex-end; align-items:center; width:100%; margin-top:12px; }
+.fams-dashboard .dashboard-period-actions .secondary-btn { display:inline-flex; align-items:center; justify-content:center; max-width:100%; min-width:0; box-sizing:border-box; padding:9px 13px; text-align:center; line-height:1.35; white-space:normal; overflow-wrap:anywhere; }
+.fams-dashboard .dashboard-period-actions .dashboard-period-report-icon { display:inline-flex; align-items:center; justify-content:center; width:38px; height:38px; min-width:38px; box-sizing:border-box; border:1px solid var(--fams-line, #dce5ee); border-radius:10px; background:var(--fams-surface, #fff); color:var(--fams-blue, #245986); text-decoration:none; transition:background-color .16s ease, border-color .16s ease, color .16s ease, box-shadow .16s ease; }
+.fams-dashboard .dashboard-period-actions .dashboard-period-report-icon:hover { background:var(--fams-blue-soft, #eef5fc); border-color:var(--fams-blue, #245986); }
+.fams-dashboard .dashboard-period-actions .dashboard-period-report-icon:focus-visible { outline:3px solid var(--fams-focus, #8bb9e8); outline-offset:2px; }
+.fams-dashboard .dashboard-period-actions .dashboard-period-report-icon svg { display:block; width:19px; height:19px; fill:none; stroke:currentColor; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round; }
+@media (max-width:560px) {
+  .fams-dashboard .dashboard-period-actions { justify-content:flex-end; }
+  .fams-dashboard .dashboard-period-actions .secondary-btn { width:auto; max-width:100%; }
+}
+
+
+/* v0.0197 — compact selected-period card: heading, period and report action share one row. */
+.fams-dashboard .dashboard-period { display:flex; flex-direction:column; justify-content:center; gap:5px; padding:10px 14px !important; }
+.fams-dashboard .dashboard-period-heading { display:flex; align-items:center; gap:12px; width:100%; min-width:0; }
+.fams-dashboard .dashboard-period-title { display:flex; align-items:baseline; flex-wrap:wrap; gap:7px 12px; min-width:0; flex:1 1 auto; }
+.fams-dashboard .dashboard-period-title .dashboard-period-kicker { display:inline; margin:0; white-space:nowrap; }
+.fams-dashboard .dashboard-period-title strong { display:inline; margin:0 !important; font-size:18px !important; line-height:1.2; white-space:nowrap; }
+.fams-dashboard .dashboard-period small { display:block; max-width:none !important; margin:0 !important; font-size:9px; line-height:1.35 !important; }
+.fams-dashboard .dashboard-period-actions { flex:0 0 auto; width:auto; margin:0 !important; }
+.fams-dashboard .dashboard-period-actions .dashboard-period-report-icon { width:34px; height:34px; min-width:34px; }
+@media(max-width:560px) {
+ .fams-dashboard .dashboard-period { padding:9px 11px !important; }
+ .fams-dashboard .dashboard-period-heading { gap:8px; }
+ .fams-dashboard .dashboard-period-title { gap:4px 8px; }
+ .fams-dashboard .dashboard-period-title strong { font-size:16px !important; }
+ .fams-dashboard .dashboard-period-actions .dashboard-period-report-icon { width:32px; height:32px; min-width:32px; }
+}
+/* Keep the compact heading rules authoritative over the earlier dashboard ID-scoped rules. */
+#dashboardLayout .reporting-editor-grid .dashboard-period-title strong { display:inline !important; margin:0 !important; font-size:18px !important; line-height:1.2 !important; }
+#dashboardLayout .reporting-editor-grid .dashboard-period-title .dashboard-period-kicker { display:inline !important; margin:0 !important; white-space:nowrap; }
+#dashboardLayout .reporting-editor-grid .dashboard-period small { margin:0 !important; line-height:1.35 !important; }
+#dashboardLayout .reporting-editor-grid .dashboard-period-heading { display:flex; align-items:center; gap:12px; width:100%; min-width:0; }
+#dashboardLayout .reporting-editor-grid .dashboard-period-actions { width:auto !important; margin:0 !important; flex:0 0 auto; }

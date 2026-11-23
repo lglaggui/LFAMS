@@ -1,0 +1,11 @@
+FAMS Region II v0.0068 — Shell spacing and controls
+
+Changes:
+- Standardized sidebar navigation scroll container, nav block, section gaps, and link margins through the shared shell stylesheet.
+- Improved MAIFIP facility selector card hover/focus affordances and the chevron control while retaining its existing accessible select interaction.
+- Replaced literal (c) with the real copyright symbol via &copy; in the shared footer renderer.
+- Enforced a square 7px online presence indicator with fixed flex basis, aspect ratio, and border radius.
+- Increased right padding in the shared header profile card so the logout control has breathing room from the card edge, including mobile sizing.
+
+Validation performed: PHP syntax checks, JavaScript syntax checks, archive integrity.
+Runtime/browser and live database testing were not performed.

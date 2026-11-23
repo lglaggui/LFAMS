@@ -1,0 +1,16 @@
+FAMS UNIFIED — VERSION 0.0137
+Source baseline: v0.0136
+
+CHANGES
+- Consolidated CRUD popup behavior under one shared popup controller; removed the duplicate MAIFIP popup controller and retained shared popup title, focus return, backdrop close, and dashboard Add Record shortcut behavior.
+- Updated AICS Submit Ticket to use the shared popup link pathway only.
+- Added internal padding and responsive form spacing to the AICS ticket popup.
+- Expanded the shared header profile's calculated open width to provide additional room for the full Logout icon and label.
+- AICS deletion requests now link to their masterlist record. Admin approval archives the linked record in fams_deleted_records and removes it from the active AICS masterlist in the same transaction. The ticket remains for audit history.
+- MAIFIP approved deletion requests now archive the record before removing it from the active masterlist. The ticket is detached from the record and retained for audit history.
+- Removed automatic deletion of approved revision tickets; reviewed tickets remain visible for audit/history.
+- Bumped application/cache versions to 0.0137.
+
+VALIDATION
+- PHP syntax checks, JavaScript syntax checks, CSS structural checks, and ZIP integrity are run for this release.
+- Live database/browser workflows are not claimed as tested in this packaging environment.

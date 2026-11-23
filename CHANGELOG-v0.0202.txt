@@ -1,0 +1,19 @@
+FAMS Region II Unified — v0.0202
+Step 3.5: Account and Permission Administration Enforcement
+
+- Added a central workspace-admin authorization guard that requires an active Administrator identity and the requested permission in the target workspace.
+- Local workspace administrators are restricted to their authenticated workspace. Cross-workspace user-type administration requires the central LPGMA identity plus the target workspace's own administrator capability.
+- Re-authorized the selected workspace on both GET and POST in AICS and MAIFIP user-type administration routes, preventing forged POST workspace values from bypassing the page-level boundary.
+- Hardened user-type assignment and permission evaluation so Administrator privileges can only belong to the protected built-in Administrator type; custom user types cannot inherit the admin base role.
+- Added MAIFIP self-demotion protection consistent with AICS administrator account protection.
+- Added session invalidation when an account's assigned user type changes or that type's permission policy fingerprint changes. Deactivated accounts and disabled user types continue to fail closed.
+- Updated the endpoint registry with the account/permission administration source-review findings.
+- Added maintenance/tests/account_permission_enforcement_test.php.
+
+Scope deliberately preserved:
+- AICS local accounts remain in aics_users; bridged LPGMA accounts remain centrally managed.
+- MAIFIP LPGMA accounts remain in users.
+- AICS and MAIFIP user-type registries remain keyed by system_key and are never implicitly shared.
+- Existing office/facility assignment validation and account CRUD transaction paths are retained.
+
+Validation is source-level only. No production database was accessed. Authenticated staging tests, password-change-wide session revocation, race/concurrency checks, and full multi-account role-switch tests remain pending.

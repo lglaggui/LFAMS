@@ -1,0 +1,14 @@
+FAMS Region II Unified — v0.0153
+DOH MAIFIP Region II Dashboard + Workbook-Based Editable Table
+
+- Added the DOH MAIFIP Region II dashboard in the MAIFIP workspace, using the user's uploaded SUMMARY OF DOH MAIFIP FUNDS.xlsx (NEW worksheet) as the source template.
+- Recreated the eight-column worksheet with workbook-derived row heights, column widths, merged-cell layout, section headings, fund rows, totals, and remaining-fund rows.
+- Added + Add Row, Reset (with confirmation), and Export to Excel actions.
+- Added automatic database persistence for edits and added rows. Initial dashboard state is seeded from the supplied workbook template when the dashboard table is first opened.
+- Formula-like totals are recalculated in the browser for facility totals, remaining funds, and grand totals. Workbook formula definitions are retained in the saved state.
+- Restricted dashboard access to authorized LPGMA users with MAIFIP dashboard permission; editing/resetting requires MAIFIP manage_funds permission. All writes validate CSRF and the submitted sheet structure and are logged.
+- Added DOH MAIFIP R2 Fund Dashboard to the MAIFIP sidebar for LPGMA users.
+- Replaced DOH logo assets with the user-supplied logo and retained it on the portal system selector.
+- Bumped application version to 0.0153.
+
+Implementation note: browser rendering is a close HTML recreation of the workbook layout, not a literal Excel rendering engine. Export is an Excel-compatible HTML workbook (.xls), preserving merged cells and the displayed worksheet styling.

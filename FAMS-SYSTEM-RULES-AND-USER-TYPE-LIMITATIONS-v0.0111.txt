@@ -1,0 +1,46 @@
+FAMS REGION II — SYSTEM RULES AND USER-TYPE LIMITATIONS
+Version: 0.0111
+
+PURPOSE AND SCOPE
+This guide documents the intended role rules reflected in the unified MAIFIP/AICS source. Facility assignments and active/approved account state also affect access. Site Admin actions should be logged. Verify each rule against the deployed database and role configuration before treating this document as a formal policy.
+
+IDENTITY AND WORKSPACES
+- The central LPGMA identity registry is authoritative for LPGMA-linked users. AICS represents those users with a technical LPGMA_BRIDGED shadow row; changes to a bridged account should be made in central Account Management, not the local AICS account editor.
+- Local AICS accounts are managed separately and assigned to an office. Social Workers must be assigned to a SWAD subfacility. AICS admin/manager/staff assignments are currently restricted to the LPGMA facility by account validation.
+- In MAIFIP, the recognized roles include admin, manager, encoder (displayed as LPGMA Staff), and social_worker. The current role labels map admin to Site Admin, manager to LPGMA Manager, encoder/staff to LPGMA Staff, and social_worker to Social Worker.
+
+MAIFIP ROLE LIMITS (as implemented in helpers)
+- Admin: can edit any assistance record, update status, manage accounts, and access administrative workflows.
+- Encoder / LPGMA Staff: can create/encode records and edit records while status is WAITING; finalized records should go through a ticket workflow rather than direct editing.
+- Social Worker: can work with assigned-facility records while status is WAITING; finalized records should go through a ticket workflow. The shared header hides fund summary for Social Workers, and the MAIFIP masterlist hides the Action column for Social Workers.
+- Manager: may view/monitor and raise tickets; direct record editing is not granted by the MAIFIP can_edit_record helper. The Display Sheet control may be labelled View Sheet for managers.
+- Account management: central user management is admin-only; role changes and account assignment are validated server-side.
+
+AICS ROLE LIMITS (as implemented in helpers and pages)
+- Admin: full administrative access, including direct record editing, status management, deleted-entry management, account management, and administrative actions. Admin is the only role allowed to archive/restore deleted assistance entries.
+- Manager and Staff: limited to records in their permitted LPGMA office scope (current helper check requires office_id=1 for direct edit eligibility). Non-admin record edits are routed to a ticket rather than directly modifying the entry.
+- Social Worker: assigned-office record access; can edit eligible records in their own office, subject to the status/ticket rules. Social Workers are required to belong to a SWAD subfacility.
+- Bridged LPGMA users are centrally managed. Local AICS account editing/removal/password reset is blocked for LPGMA_BRIDGED accounts.
+- The FAMS Action panel (Add Financial Assistance Record, Display Sheet, Export CSV) is intended for LPGMA workspace users only; SWAD users should not see that panel. Server-side authorization for each underlying endpoint must remain enforced independently of panel visibility.
+
+STATUS RULES — BOTH SYSTEMS
+- WAITING: status changes should be initiated through the status dropdown/editor and must follow the status-update validation rules. Moving to RELEASED requires the required release details (including release date) and applicable remarks. Cancellation must follow the cancellation/remarks validation.
+- RELEASED and CANCELLED: locked/finalized for non-admin users. A non-admin request to change these statuses must create a ticket; it must not immediately mutate the record.
+- Admins can make authorized direct corrections, with action logging. A dropdown or hidden button is not a security boundary; server endpoints must validate the current user, role, office, current status, CSRF token, and required fields.
+- Expired WAITING records follow the configured validity/expiry workflow; current AICS default validity is 7 days, subject to the actual record/schema configuration.
+
+CHAT AND AVATARS
+- AICS chat recipients are active AICS users plus active/approved central LPGMA identities synchronized to AICS bridge rows. Disabled or unapproved central accounts should not be available as recipients.
+- LPGMA-linked avatar images should be served from the canonical central avatar endpoint; local SWAD accounts use their AICS avatar data/default.
+- Chat group visibility is based on configured SWAD offices and the Region II / province / office group definitions.
+
+PROFILE AND ACCOUNT NAVIGATION
+- Clicking the header profile card opens Account Management: MAIFIP opens users.php; AICS admins open users.php; other AICS users open account.php (My Account). The logout control remains a separate action.
+
+AUDIT AND SECURITY
+- Record create/edit/status/archive/restore and account changes should write action-log entries. Ticket submission and ticket decisions should also be logged.
+- UI hiding is only presentation. Every write endpoint must independently enforce authorization and log the action. Do not rely only on JavaScript or whether an Action panel is rendered.
+- Passwords must be stored as password hashes; uploads must validate MIME/content and size; CSRF verification is required for state-changing forms.
+
+KNOWN VERIFICATION LIMITATION
+This guide is based on source inspection and intended rules, not a live database/browser test. Office IDs and current data assignments can differ by deployment. Run end-to-end tests with one account per role before deployment.

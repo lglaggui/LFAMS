@@ -1,0 +1,10 @@
+FAMS REGION II v0.0072 — SHARED COMPONENTS REFACTOR
+
+Changes:
+- Added core/shared-components.css as the shared style source for the header profile and popup form surfaces.
+- Changed the shared header profile wrapper to a dedicated fams-header-profile class so it no longer depends on legacy generic .top-profile wrapper styling. Existing profile behavior continues to use the shared topProfile ID and child selectors.
+- Added a shared modal/dialog frame contract for standardized add/edit/update popup windows.
+- Standardized popup form typography, fields, focus states, action rows, buttons, spacing, and mobile behavior for popup documents that use the shared shell.
+- Bumped application version to 0.0072 and updated shared stylesheet/script cache keys.
+
+Validation note: this is a code-level refactor. It has not been browser-tested or connected to the production database. Existing page-specific styles remain for business-specific layouts and should be reviewed gradually rather than destructively removed.

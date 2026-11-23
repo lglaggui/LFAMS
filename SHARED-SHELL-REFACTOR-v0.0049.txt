@@ -1,0 +1,20 @@
+LFAMS v0.0049 — Unified Viewport Refactor
+
+Implemented:
+- One shared document/viewport renderer: core/shared_shell_start.php.
+- One shared viewport closer/footer/modal host: core/shared_shell_end.php.
+- Both MAIFIP and AICS/SWAD header partials now prepare system-specific values then delegate to the same shell renderer.
+- Both workspace footer partials now delegate to the same shell closer.
+- One shared core/shared-shell.js owns mobile sidebar controls, popup host behavior, Escape handling and form confirmation wiring.
+- Shared shell geometry is defined in core/shared-shell.css; system-specific content and business rules remain in the workspaces.
+- Existing unified database SQL and schema are preserved; no migration is run by this UI refactor.
+
+Important preserved distinctions:
+- MAIFIP and AICS retain their separate data tables, fund queries, role checks, system navigation and workflows.
+- System branding/facility values remain configuration-driven.
+
+Validation scope:
+- Run PHP syntax lint across all PHP files and ZIP integrity check.
+- Static checks verify both workspace header/footer partials delegate to the shared shell.
+- Live DB import, authenticated browser flows, permissions and responsive visual rendering still require testing on the deployment environment.
+- Do not import the SQL file over the live database for this code-only release.

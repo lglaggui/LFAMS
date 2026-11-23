@@ -1,0 +1,42 @@
+FAMS v0.0218 — Offline Database Reconciliation Audit
+
+Source
+- Supplied MariaDB SQL dump: lfams_unified 11132026 220pm.sql
+- Database dump generated November 13, 2026.
+- This was an offline, read-only parse of the supplied SQL text. The dump was not imported into a database engine.
+- Only aggregate ledger and monthly totals are recorded here. Beneficiary identities, contacts, credentials, and messages are intentionally excluded.
+
+Opening balances
+- Five MAIFIP facilities were present in the relevant fund/assistance data.
+- Each facility had exactly one 2026 BEGINNING BALANCE row dated 2026-01-01.
+- No duplicate 2026 opening anchors were found in the supplied fund_downloads rows.
+- Verified opening amounts in the supplied snapshot:
+  SIMC: PHP 1,397,386.17
+  CDH: PHP 1,233,001.00
+  CIMC: PHP 0.00
+  CVMC: PHP 0.00
+  TRC_R2: PHP 0.00
+- The CIMC PHP 200,000,000.00 entry dated 2026-01-01 is an ordinary fund addition (batch N/A), not an opening balance.
+
+Historical summary versus live releases
+- SIMC January-March 2026: no record-level RELEASED rows were present; saved monthly summaries are used as fallback.
+- SIMC April-August 2026: live release totals and client counts match the saved summaries.
+- SIMC September 2026: saved summary is PHP 77,000.00 / 20 clients; live RELEASED rows total PHP 150,000.00 / 38 clients. The live records are authoritative under the existing rule and are selected for reconciliation. v0.0218 surfaces this difference in worksheet, print, Excel, and CSV output.
+- SIMC October-December 2026: saved summary rows are zero placeholders. They remain fallback values only when no live releases exist.
+- Other facilities in the snapshot had live released records in months where disbursements were present; no stored monthly-summary discrepancy was found for them.
+
+Cross-path calculation comparison
+- Compared the month-by-month worksheet roll-forward with an independently aggregated ledger-position calculation through each 2026 month-end.
+- 65 facility/month or opening-anchor comparisons were performed across the five facilities.
+- Result: zero arithmetic differences between the two calculation paths for the supplied snapshot.
+- The independent comparison included opening balances, ordinary additions, saved-summary fallback, and live released records.
+
+Negative movements and adjustments
+- The supplied dump contained no negative fund_downloads rows.
+- The maifip_fund_adjustments table contained no rows.
+- Therefore negative movement and adjustment carry-forward remain source-contract validated; there is no supplied negative-row or adjustment-row dataset with which to replay them.
+
+Limitations
+- No MySQL/MariaDB server or PDO MySQL driver is available in the execution environment. SQL dump execution, transactional tests, and concurrency tests were not performed.
+- This audit does not prove production runtime behavior or replace isolated staging tests.
+- No production database was accessed or modified.

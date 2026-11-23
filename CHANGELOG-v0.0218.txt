@@ -1,0 +1,23 @@
+FAMS Region II Unified — v0.0218
+MAIFIP Monthly Reconciliation Consistency and Historical Summary Disclosure
+
+MAIFIP ledger integrity
+- Opening-balance uniqueness is now checked across the entire 2026+ facility ledger, not only through the selected reporting period. A later-dated duplicate can no longer remain hidden when an earlier month is viewed.
+- The invariant remains: at most one 2026+ BEGINNING BALANCE row per facility, and if one exists it must be dated January 1, 2026.
+
+Monthly detail consistency
+- Added one shared MAIFIP released-record retrieval helper for the worksheet, print report, and CSV export.
+- Facility and status comparisons are normalized consistently with the authoritative monthly summary helper.
+- Replaced YEAR()/MONTH() filtering in the detail views with a half-open release-date range, preserving facility scope and chronological ordering.
+
+Historical summary reconciliation
+- The monthly summary helper now retains stored-summary amount/client-count metadata when live RELEASED records exist.
+- A saved monthly summary that differs from live RELEASED records is explicitly flagged; live record-level releases remain authoritative for the monthly calculation.
+- The worksheet, print report, Excel export, and CSV export disclose stored-summary differences.
+- Print wording now distinguishes detail rows matching the selected report total from matching a stored historical summary.
+
+Preserved behavior
+- Signed fund downloads and signed adjustments continue to carry into later months.
+- Opening balance + signed net fund downloads + signed adjustments - released assistance remains the ending-balance formula.
+- AICS business logic and calculations were not changed.
+- No database migration was introduced and no production database operation was performed.

@@ -1,0 +1,10 @@
+FAMS Region II Unified v0.0155
+
+Fix: Rechecked shared application header scrolling behavior.
+- Enforced sticky top positioning for the shared header in MAIFIP and AICS/SWAD.
+- Overrode legacy page-level relative positioning that could make the header scroll away.
+- Ensured shared shell ancestors do not create an unintended overflow scroll container.
+- Kept document-level vertical scrolling enabled and added scroll-padding for header-aware anchor navigation.
+- Bumped shared application version to 0.0155.
+
+Validation scope: static source assertions, PHP syntax, JavaScript syntax, CSS brace checks, and ZIP integrity. Live browser scrolling and XAMPP/MySQL tests were not run.

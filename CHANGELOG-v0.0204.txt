@@ -1,0 +1,15 @@
+FAMS Region II — v0.0204
+Step 4: Full Endpoint Security Reconciliation (source-level pass)
+
+- Reconciled the endpoint manifest against the actual AICS, MAIFIP and portal PHP entry points.
+- Corrected the portal endpoint from the nonexistent portal/index.php to portal/select-system.php.
+- Removed maifip/media_upgrade.php from the route inventory because it is a configuration-loaded helper, not a public endpoint.
+- Added per-route source marker evidence for authentication, CSRF, method handling, permission checks, workspace/record scope, idempotency, transaction/locking and audit markers.
+- Updated the endpoint registry builder so future raw inventories use the real portal selector and exclude the media helper.
+- Added shared CSV and browser-generated Excel spreadsheet-formula neutralization and applied it to AICS/MAIFIP masterlist, record, action-log and monthly report CSV exports.
+- Added audit logging to the AICS editable-masterlist CSV export.
+- Added workspace-specific POST+CSRF+export-capability endpoints for browser-generated AICS/MAIFIP Excel and print/PDF sheet exports; client-side export actions now request an audit record before generating output.
+- Added endpoint security reconciliation tests and a route-by-route source marker report.
+- Updated application version markers to 0.0204.
+
+This release does NOT certify production readiness. Authenticated staging tests with separate AICS, MAIFIP and LPGMA accounts, a staging database, and concurrency verification remain required.

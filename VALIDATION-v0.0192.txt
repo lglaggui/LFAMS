@@ -1,0 +1,34 @@
+FAMS REGION II — VALIDATION REPORT v0.0192
+
+SOURCE BASELINE
+- v0.0191 transaction/concurrency hardening package.
+- MG Tracking Android application is not included; no mgtrack/android-app directory exists in this source tree.
+
+STATIC VALIDATION
+- PHP files: 124 checked; 0 syntax errors.
+- JavaScript files: 19 checked with node --check; 0 syntax errors.
+- CSS files: 11 parsed with tinycss2; 0 parser errors.
+- Shared transaction runtime tests: 4 passed, 0 failed.
+- Permission and endpoint source regression tests: 46 passed, 0 failed.
+- Release ZIP integrity: checked with unzip -t.
+- Archive scan: no mgtrack/android-app or android-app entries.
+
+V0.0192 FOCUSED REGRESSION COVERAGE
+- AICS revision ticket submission captures the base record version.
+- AICS office reassignment proposals capture the base record version.
+- AICS revision approval locks the record, checks the submitted base version, and uses a guarded update.
+- AICS delete-request submission captures the base record version; approval rejects changed records.
+- MAIFIP revision and delete ticket creation/edit paths capture or refresh the base record version.
+- MAIFIP ticket review locks the ticket and record, rejects stale/legacy proposals, and applies a guarded update.
+- MAIFIP ticket edits are transactional and commit with audit logging.
+
+NOT EXECUTED IN THIS ENVIRONMENT
+- Live MySQL / PDO database tests: PHP has PDO but no PDO database drivers are installed here.
+- Two-process duplicate-submission/concurrency harness against MySQL.
+- Staging HTTP authorization matrix, browser interaction tests, visual regression, and production-schema migration rehearsal.
+
+IMPORTANT COMPATIBILITY NOTE
+- Pending legacy ticket proposals without a stored _base_record_version are intentionally blocked from approval. Requesters should edit/re-submit where supported, or submit a new request after reviewing the current record. This prevents a stale proposal from silently overwriting or deleting newer data.
+
+ASSESSMENT
+Static syntax and source-level regression checks pass. This is not a live database, browser, penetration, or production-readiness certification. Run the included MySQL staging harness against a disposable copy of the current database before deployment.

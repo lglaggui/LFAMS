@@ -1,0 +1,13 @@
+FAMS Region II Unified — v0.0207
+Control-number allocation and transaction lock-order hardening
+
+- Standardized AICS record number allocation through a shared allocator used by record creation, sheet import, and restore-as-new.
+- AICS allocation now reconciles the stored source_no with the numeric control-number suffix, checks collisions, and retains the existing global AICS sequence advisory lock.
+- Added a guarded AICS unique control_number index creation attempt. Existing duplicate control numbers prevent automatic index creation and are logged for manual review; no existing records are rewritten or deleted.
+- Serialized all AICS ticket creation routes with one shared ticket-sequence advisory lock.
+- Replaced AICS ticket MAX(id)+1 assumptions with the table's AUTO_INCREMENT next value, avoiding sequence regression when the highest ticket row was deleted.
+- Kept MAIFIP control-number allocation facility-scoped. Existing facility advisory locks remain shared by record creation, imports, offline CREATE synchronization, and restore-as-new.
+- Added source-level audit tests and a lock-order/concurrency audit report.
+
+No AICS or MAIFIP business rules, workspace boundaries, or record visibility rules were intentionally changed.
+No production database was accessed. No staging environment was used.

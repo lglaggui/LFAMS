@@ -1,0 +1,12 @@
+FAMS REGION II — RELEASE MANIFEST
+Version: 0.0193
+Baseline: 0.0192
+Release focus: Platform Standardization and Data Integrity
+Package layout: application directories are at ZIP root (aics/, maifip/, core/, portal/, auth/, maintenance/).
+Files in source tree at manifest creation: 409
+Endpoint inventory: 80 routes (35 AICS, 44 MAIFIP, 1 portal).
+Database compatibility: payload_hash is added to fams_idempotency_keys when missing; no business data is rewritten.
+Validation: see VALIDATION-v0.0193.txt.
+Limitations: live MySQL and browser-level tests remain pending; endpoint registry is inventory-only; repository extraction remains incremental.
+Excluded unrelated project: MG Tracking Android application (no Android app folder or files included).
+Integrity: SHA256SUMS-v0.0193.txt lists source file hashes (excluding the checksum and this manifest themselves).

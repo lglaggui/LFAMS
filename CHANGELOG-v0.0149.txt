@@ -1,0 +1,16 @@
+FAMS Region II Unified — v0.0149
+User Types, Authorization Matrix, and Office-Scoped Guidance
+
+- Added a shared, system-scoped user-type registry for AICS/SWAD and MAIFIP.
+- Added a Site Administrator-only User Types & Authorization page in both workspaces.
+- Administrators can create custom user types, rename/edit types, check/uncheck permissions in a capability matrix, enable/disable eligible types, and remove custom types when no accounts are assigned.
+- Built-in Administrator access is protected; custom types cannot inherit Administrator privileges. A type cannot be disabled while active accounts use it or removed while any account is assigned to it.
+- Account forms now load user types from the registry and validate assignments against the selected type's underlying role template and office/facility rules.
+- Role columns are upgraded from fixed ENUM values to VARCHAR so administrator-defined type keys can be stored.
+- Applied permission-matrix checks to key record viewing, editing, creation, status-update, ticket submission, chat, reporting, export, and action-log routes/helpers. Existing role-template and office/facility boundaries remain in force; the matrix can restrict access but cannot elevate a custom type to Administrator.
+- Added clear SWAD office-scope reminders and actionable denial messages explaining beneficiary privacy, accountability, and how to request correction of an incorrect office assignment.
+- Added facility-scope reminders and clearer not-found messages in MAIFIP to guide users who attempt to access records outside their assigned facility without revealing cross-facility records.
+- Added UPGRADE-v0.0149-USER-TYPES-PERMISSIONS.sql for deployments where database DDL must be applied manually.
+- Updated both application asset versions to 0.0149.
+
+Important: The matrix is capability-based and constrained by each type's underlying role template and existing application authorization checks. Administrator-only management actions remain Administrator-only.

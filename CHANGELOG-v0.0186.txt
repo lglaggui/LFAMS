@@ -1,0 +1,21 @@
+FAMS REGION II UNIFIED — v0.0186
+Permission regression foundation
+
+BASELINE
+- FAMS Region II Unified htdocs v0.0184 (offline module release).
+
+CHANGES
+- Added a deterministic CLI regression suite at maintenance/tests/permission_matrix_test.php.
+- Covered the 15-capability permission catalog, AICS and MAIFIP built-in role baselines, manager read-only boundaries, Social Worker limits, AICS/MAIFIP role separation, and no-database fallback behavior.
+- Hardened fams_current_type_allows(): unknown workspace identifiers and permission keys now fail closed before the Administrator shortcut is evaluated.
+- This prevents a malformed/unknown permission key from being treated as authorized merely because the current account has the Administrator role.
+
+RUNNING THE TESTS
+From the htdocs directory:
+  php maintenance/tests/permission_matrix_test.php
+
+SCOPE / LIMITATIONS
+- This is the first permission-regression foundation, not completion of the full role/security audit.
+- Tests do not connect to MySQL and do not yet exercise database-backed custom user-type activation, permission JSON narrowing, office/facility assignment, record ownership, ticket decisions, or HTTP endpoint authorization.
+- No schema, seed data, business records, or SQL migration was changed.
+- Continue with database-backed role fixtures and endpoint-level integration tests before production sign-off.

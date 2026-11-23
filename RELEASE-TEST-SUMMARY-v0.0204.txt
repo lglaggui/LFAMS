@@ -1,0 +1,5 @@
+PHP files linted: 140
+Source-level assertions passed: 188
+Source-level assertion failures: 0
+MySQL concurrency test: safely refused; no explicit isolated staging DSN was configured.
+Inline JavaScript syntax checks: AICS and MAIFIP sheet export flows passed.

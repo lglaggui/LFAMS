@@ -1,0 +1,5 @@
+FAMS v0.0217 PHP syntax validation
+
+Command: find . -type f -name '*.php' -print0 | xargs -0 -n1 php -l
+Result: 154 PHP files passed; 0 syntax errors.
+Runtime: PHP 8.4.24 CLI.

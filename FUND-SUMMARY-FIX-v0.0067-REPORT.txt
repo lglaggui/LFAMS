@@ -1,0 +1,14 @@
+FAMS Region II v0.0067 — Shared Header Fund Summary Fix
+
+Changes:
+1. MAIFIP shared header now explicitly calculates the selected facility's total allotment from fund_downloads and released disbursement from assistance_records before invoking the shared topbar renderer. This fixes the shared renderer falling back to zero because its expected variables were never populated in the MAIFIP header partial.
+2. MAIFIP remaining fund and utilization rate are calculated from the same scoped allotment/disbursement values.
+3. Query errors are written to the PHP error log while allowing the page to render.
+4. The same shared header fund-summary component is retained for both MAIFIP and AICS; only their data sources differ.
+5. Both systems use a consistent maximum fund-summary width of 460px and identical three-column fund cards from the shared stylesheet.
+6. Updated version/cache labels to 0.0067.
+
+Validation:
+- PHP syntax checks run on all PHP files.
+- Archive integrity check run after packaging.
+- Live database and browser rendering were not available for runtime verification.

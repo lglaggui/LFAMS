@@ -1,0 +1,36 @@
+FAMS Region II Unified — v0.0211 Validation Report
+Baseline: v0.0210
+
+SOURCE VALIDATION
+- PHP CLI: 8.4.24
+- PHP files linted: 149; syntax failures: 0.
+- JavaScript files checked with Node.js v22.16.0: 19; syntax failures: 0.
+- CSS files parsed: 11; parse errors: 0.
+- Endpoint registry: 81 unique routes; every route maps to an existing PHP entry point.
+- New application_consistency_test.php: 11/11 assertions passed.
+
+AUTOMATED TEST SUITES
+- PHP test suites discovered: 22.
+- Passed: 21.
+- Refused by explicit safety guard: 1 (mysql_concurrency_test.php requires FAMS_ALLOW_DB_TESTS=1 and a FAMS_TEST_DSN whose database name contains test or staging).
+- Unexpected failures: 0.
+- Existing permission matrix, endpoint reconciliation, data lifecycle, import/export/offline sync, account, ticket, status, transaction and integrity-contract tests all passed.
+- Responsive reporting visual regression: 5/5 viewport checks passed.
+
+CHANGES VERIFIED BY SOURCE-LEVEL TESTS
+- MAIFIP registration and critical audit event are in one transaction.
+- Monthly report downloaded-balance validation matches DECIMAL(15,2) precision and scale.
+- Monthly report setting mutation and audit event are atomic and use bounded transient retry.
+- Registered SQL-mutating routes have detectable CSRF verification paths; business mutations have audit or dedicated message-trail coverage, excluding derived PSGC address-cache refreshes.
+- AICS and MAIFIP version markers both read 0.0211.
+
+ENVIRONMENT AND TEST LIMITATIONS
+- PDO is available, but pdo_mysql, mysqli, Apache, a live MySQL/MariaDB service and an isolated FAMS test/staging DSN are not available in this execution environment.
+- No live database connection, authenticated browser session, actual account registration, monthly-report update, concurrency test or runtime migration was executed.
+- No staging environment was used, consistent with the user's instruction to continue source hardening without staging.
+- No production database was accessed or modified. No beneficiary, patient, account, ticket, fund or audit records were changed.
+- CSS review was syntax + targeted responsive regression only; it was not a full authenticated-page visual audit.
+
+RELEASE STATUS
+- Source-level and automated checks: PASS, subject to the explicitly refused database concurrency suite and environment limitations above.
+- ZIP integrity check passed (`unzip -t`); all application files and folders are at the archive root with no wrapper directory.

@@ -1,0 +1,14 @@
+FAMS v0.0218 Test Summary
+
+- PHP test scripts passed: 26
+- PHP test scripts failed: 0
+- MySQL concurrency integration test skipped: 1 (no isolated staging DSN / explicit opt-in)
+- PHP syntax files passed: 155
+- JavaScript syntax files passed: 21
+- Reporting-period viewport checks passed: 5
+- Monthly reconciliation global contract checks: 13/13
+- Monthly reconciliation contract checks: 17/17
+- Fund opening classification checks: 15/15
+- Fund ledger anchor checks: 16/16
+
+Database-backed tests were not run. See VALIDATION-v0.0218.txt and DATABASE-RECONCILIATION-AUDIT-v0.0218.txt.

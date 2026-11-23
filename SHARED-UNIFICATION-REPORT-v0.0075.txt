@@ -1,0 +1,15 @@
+FAMS Region II Unified — v0.0075
+
+Changes
+- Consolidated profile expansion/collapse remains in core/shared-shell.js and now supports click/touch-style toggling and keyboard activation in addition to hover/focus behavior.
+- Cross-workspace view state retains the user-scoped active navigation descriptor, browser scroll position, page-view scroll position, and sidebar navigation scroll position. Cross-system restoration can match the saved navigation by its label or route basename when the destination system has a corresponding item.
+- Added shared contrast tokens and shared selectors in core/shared-components.css for labels, muted text, primary buttons, focus rings, chat labels, message text, timestamps, and form placeholders. This stylesheet is included by the common shell for both MAIFIP and AICS.
+- Updated application version/cache-busting tokens to 0.0075.
+
+Chat parity status
+- Chat presentation contrast is now standardized through the shared stylesheet.
+- Full chat behavior parity is NOT complete in this build. AICS still uses its own server-rendered chat flow; it has not yet been migrated to the complete MAIFIP chat API/client logic (AJAX polling, unread/read cursors, edit/delete trails, and administrator clear-chat workflow). This requires an AICS-specific API adapter that preserves AICS user IDs, office/province/region group membership, role permissions, and separate message tables. Do not point AICS at the MAIFIP API or merge the two message tables.
+
+Validation
+- Source syntax checks and ZIP integrity are performed at packaging time.
+- No live browser, production database, or hosted-site test is claimed.

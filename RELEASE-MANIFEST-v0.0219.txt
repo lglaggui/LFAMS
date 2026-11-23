@@ -1,0 +1,24 @@
+FAMS REGION II UNIFIED — RELEASE MANIFEST
+Version: 0.0219
+Release: CONTEXTUAL ICONS AND SHARED UI STANDARDIZATION
+Archive layout: complete htdocs contents at ZIP root
+Baseline: v0.0218 MONTHLY-RECONCILIATION
+
+Key modified files:
+- core/shared-shell.js
+- core/shared-components.css
+- aics/config.php
+- maifip/app_version.php
+- maintenance/tests/contextual_icons_standardization_test.php
+- maintenance/tests/fund_ledger_anchor_test.php
+- maintenance/tests/data_lifecycle_audit_test.php
+- maintenance/tests/monthly_sheet_standardization_test.php
+- maintenance/tests/fund_opening_2026_test.php
+
+Release documentation:
+- CHANGELOG-v0.0219.txt
+- VALIDATION-v0.0219.txt
+- TEST-SUMMARY-v0.0219.txt
+- RELEASE-MANIFEST-v0.0219.txt
+
+Integrity values are supplied separately after archive generation.

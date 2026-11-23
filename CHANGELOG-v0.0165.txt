@@ -1,0 +1,17 @@
+FAMS REGION II UNIFIED - v0.0165
+
+Page-view/header overlap repair
+- Rebuilt shared viewport geometry around a fixed header with a runtime-measured reserved height.
+- The main content column now reserves exactly the rendered header height, including wrapped/responsive headers.
+- Page-view begins immediately after that reserved header area and has equal top/left/right content gutters.
+- Removed the late legacy flow-contract block that reset main-content top padding to zero and conflicted with fixed-header geometry.
+- Consolidated the authoritative layout, page-view, header, and footer geometry in one final shared-shell contract for AICS and MAIFIP.
+- Added ResizeObserver, resize, font-ready, and image-load measurement refreshes to prevent stale offsets.
+
+Scrolling
+- Retained the shared edge-arrow and edge-wheel implementation, including the DOH worksheet viewport.
+- DOH worksheet uses the shared selector and keyboard-focusable horizontal viewport.
+
+Validation
+- Pending automated static validation in the release build.
+- Live browser/visual and MySQL workflow testing require the user's XAMPP or hosted environment.

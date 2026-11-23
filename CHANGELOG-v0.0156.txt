@@ -1,0 +1,11 @@
+FAMS Region II Unified v0.0156
+
+Records page layout standardization
+- MAIFIP records page: replaced the legacy title card with the AICS-style masterlist hero, including the record count and facility-aware kicker.
+- MAIFIP records page: aligned the hero and Record Actions card side-by-side on desktop, stacking responsively on narrower screens.
+- MAIFIP actions: added administrator-only Deleted Entries and permission-gated Export CSV buttons.
+- AICS records page: aligned Centralized Monitoring and Record Actions side-by-side for LPGMA workspace users.
+- AICS non-LPGMA users: integrated the office-based access reminder into the Centralized Monitoring hero card.
+- Updated application version references to 0.0156.
+
+Validation: PHP/JS/CSS static checks and ZIP integrity are run for this package. Live browser and database testing are not performed in this environment.

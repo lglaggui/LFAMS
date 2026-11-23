@@ -1,0 +1,9 @@
+FAMS Region II v0.0092
+
+- Fixed undefined $roleLabel on AICS My Account.
+- Avatar saves now retain and validate the actual image MIME type rather than always labeling image bytes as WebP.
+- Added cache-busting to MAIFIP avatar URLs so newly saved profile photos refresh reliably.
+- Refined shared header profile collapse sequencing so the card width animates before expanded contents are hidden, with a transition fallback.
+- Version and Help & Support cache tokens updated to 0.0092.
+
+Validation performed: PHP syntax lint, JavaScript syntax check, CSS brace check, ZIP integrity. No live browser/database test performed.

@@ -1,0 +1,22 @@
+FAMS REGION II — UNIFICATION AUDIT / IMPLEMENTATION NOTES v0.0174
+
+SHARED IMPLEMENTATIONS CONFIRMED OR IMPROVED
+- Authentication: auth/login.php and auth/logout.php remain the single login/logout endpoints; core/unified.php owns identity/session handling.
+- Session policy: centralized idle/absolute expiry in core/unified.php; a shared activity heartbeat refreshes only on user interaction, not background polling.
+- User types/permissions: core/access_control.php is already the shared registry and permission evaluator used by both configurations.
+- Header/sidebar/topbar/footer: both workspaces delegate to core/shared_shell_start.php, core/shared_sidebar.php, core/shared_topbar.php, and core/shared_shell_end.php.
+- Notifications: one frontend module and one API controller; system-specific notification tables and counters are preserved behind the controller.
+- Chat: one shared frontend, API response/CSRF contract, schema manager, and read-cursor operations; workspace-specific message storage and group rules remain adapters.
+- Action logging: one audit writer with AICS and MAIFIP storage adapters.
+- Search/pagination: common normalization/window helpers used by both masterlists and logs.
+- Modals: one shared shell iframe form-dialog controller; same-origin message validation, Escape close, and delegated confirmations.
+- Uploads/account: common image validation (2 MB profile-image limit), account field/password policies, and own-account avatar/password service with workspace-specific table adapters.
+
+REMAINING DOMAIN-SPECIFIC ADAPTERS (INTENTIONAL)
+- AICS users are local SWAD accounts in aics_users; MAIFIP/LPGMA accounts are in users. A single destructive CRUD query/UI would risk changing ownership, office/facility assignment, bridged identities, or approval rules. The shared account runtime consolidates common operations, while administrator CRUD forms remain workspace-aware.
+- AICS and MAIFIP chat groups have different membership semantics and separate message tables. The shared frontend/protocol is consolidated; the group authorization and storage adapters remain separate.
+- Notification rows and audit rows remain in their existing per-workspace tables to avoid data migration and preserve history. Common controllers/writers provide a shared implementation layer.
+- Specialized crop editors and worksheet editors remain page-specific because they have distinct interaction requirements; the global form-popup framework is shared.
+
+NO DATABASE DATA MIGRATION
+This release does not merge, rename, truncate, or delete existing business tables or records. The notification API retains the pre-existing system-specific notification stores.

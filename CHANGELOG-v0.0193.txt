@@ -1,0 +1,28 @@
+FAMS REGION II — UNIFIED RELEASE v0.0193
+Platform Standardization and Data Integrity
+Baseline: v0.0192
+
+IMPLEMENTED
+- Removed the unrelated MG Tracking Android application from the FAMS distribution.
+- Extended shared idempotency storage with a SHA-256 canonical payload fingerprint.
+- Same user/scope/key + same payload is recognized as a retry; same key + different payload raises an explicit conflict.
+- Added safe on-demand schema compatibility for existing fams_idempotency_keys installations (payload_hash column).
+- Bound AICS and MAIFIP spreadsheet import claims to the submitted payload.
+- Added shared HTTP request method, request-data, and JSON success/error response primitives.
+- Made the on-demand payload_hash compatibility ALTER tolerant of simultaneous first-request schema preparation.
+- Added a machine-readable endpoint inventory (maintenance/endpoint-registry.json) and reproducible generator.
+- Added AICS office-scoped and MAIFIP facility-scoped record repositories with version compare-and-swap updates.
+- Migrated both workspace status-update writes to repository adapters while retaining their workspace-specific access rules and history/audit transaction boundaries.
+- Added payload fingerprint, endpoint registry, and repository contract tests; extended the MySQL staging harness for payload mismatch rejection.
+- Performed a CSS duplicate-selector audit and removed one confirmed redundant DOH worksheet cell rule.
+- Updated application version markers to 0.0193.
+
+VALIDATION
+- See VALIDATION-v0.0193.txt for exact source-level test results and limitations.
+- Live MySQL integration/concurrency tests and browser-level visual tests were not run in this environment.
+
+KNOWN REMAINING WORK
+- Endpoint registry is an inventory and review contract, not yet a universal runtime router/authorization middleware. Endpoint-specific capability and method metadata still requires authenticated HTTP verification before enforcement.
+- Repository adapters are introduced and used for status updates; remaining raw SQL in record/ticket/account/reporting paths should be migrated incrementally.
+- CSS duplication remains extensive in legacy workspace stylesheets. Only confirmed redundant rules should be removed after viewport-level visual regression checks.
+- No production database migration or destructive data change was performed.

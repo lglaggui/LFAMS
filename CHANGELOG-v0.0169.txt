@@ -1,0 +1,15 @@
+FAMS Region II Unified — v0.0169
+
+TRCR2 edge-scroll correction:
+- Resolve the nearest actual horizontal scrollport using computed overflow and real scroll dimensions, not a brittle allowlist of wrapper class names. This prevents the controller from attaching to an outer wrapper when an inner element is the true scrollport.
+- Normalize horizontal scroll positions to a logical left-to-right coordinate and detect browser RTL scrollLeft models (default, negative, reverse).
+- Use the same normalized coordinate for arrow visibility, edge-wheel movement, and arrow-button scrolling.
+- Recalculate after scroll, viewport/content resize, and content mutations.
+- Keep one shared controller and one canonical arrow presentation rule.
+
+AICS masterlist cascade cleanup:
+- Removed multiple competing .masterlist-table-wrap container geometry declarations from legacy blocks.
+- Consolidated display, width, overflow-x, overflow-y, touch scrolling, and overscroll behavior into one canonical rule.
+- Preserved the table's column and responsive styling rules.
+
+Version: 0.0169

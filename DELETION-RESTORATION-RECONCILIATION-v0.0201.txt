@@ -1,0 +1,27 @@
+Deletion and Restoration Reconciliation — v0.0201
+
+AICS direct deletion
+- POST-only action branch in records.php; CSRF; AICS edit_records capability.
+- Record SELECT ... FOR UPDATE followed by can_access_record_scope recheck.
+- Non-admin direct delete restricted to LPGMA workspace WAITING entries; finalized/locked records require administrator ticket approval.
+- Full row JSON archive with JSON_THROW_ON_ERROR, active row delete, and audit log in fams_shared_transaction.
+- Legacy restore action on records.php returns 405; restore mutations are not duplicated there.
+
+AICS ticket-approved deletion
+- tickets.php locks pending ticket and linked record, validates _base_record_version, archives full row, updates ticket, deletes record, and audits in the same transaction.
+- This remains a distinct authorization path from direct deletion.
+
+MAIFIP direct deletion
+- delete_record.php requires POST, CSRF, MAIFIP edit_records capability, role gate, active facility, facility-qualified row lock, and can_edit_existing_record.
+- Admins follow the existing administrator policy; non-admin direct deletion remains limited to authorized editable WAITING records.
+- Full row archive, facility-qualified delete, and audit log are transactional.
+
+MAIFIP ticket-approved deletion
+- ticket_review.php requires ticket review permissions, locks the OPEN ticket and facility-qualified record, validates base record version, archives full payload, retains resolved ticket audit data, deletes the record, and logs the action transactionally.
+
+Restoration
+- AICS trash.php and MAIFIP trash.php are administrator-only and require the relevant workspace edit_records capability plus CSRF.
+- Each uses a sequence lock shared with its corresponding create/import path, locks the un-restored archive row, checks payload keys against INFORMATION_SCHEMA destination columns, creates a new record with a new control number and current submission date, resets status to WAITING, marks the archive restored exactly once, and writes an audit event in the transaction.
+- Original archive rows remain in Trash history. Restore creates a new record; it does not resurrect the old primary key or erase archive history.
+
+Static review is complete for this phase. Authenticated MySQL staging tests remain pending and are listed in VALIDATION-v0.0201.txt.

@@ -1,0 +1,9 @@
+{
+  "name":"FAMS - Financial Assistance Monitoring System",
+  "short_name":"FAMS",
+  "start_url":"index.php",
+  "display":"standalone",
+  "background_color":"#f4f7fa",
+  "theme_color":"#153f67",
+  "icons":[]
+}

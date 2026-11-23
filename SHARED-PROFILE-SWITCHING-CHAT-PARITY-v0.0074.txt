@@ -1,0 +1,14 @@
+FAMS Region II Unified — v0.0074 implementation report
+
+Implemented in this revision
+- Header profile expand/collapse measurement and event handling is now owned by core/shared-shell.js, not duplicated in the MAIFIP and AICS app.js files. Both systems use the same shared handler for hover/focus open and collapse, width measurement, animation sizing, resize/font/avatar refresh, and page-fragment rebind.
+- The system/facility view-state preservation introduced in v0.0073 remains in place: active navigation identity, browser/page-view scroll, and sidebar navigation scroll are saved per signed-in identity and restored only on workspace/facility switches.
+- Shared shell cache-busting version updated to v0.0074.
+
+Not completed in this revision
+- AICS chat still uses its existing standalone server-rendered chat implementation. It has not yet been migrated to MAIFIP's complete dynamic chat behavior (AJAX polling, read cursors, unread counters, edit/delete trails, and administrator clear-chat behavior). The two systems currently use separate account and message tables, so the parity work must retain AICS/SWAD office/group semantics and data isolation rather than pointing AICS at MAIFIP's API. This is explicitly outstanding; do not treat chat parity as complete.
+
+Validation scope
+- Static PHP/JavaScript syntax and ZIP integrity checks are run for the package.
+- No production database changes or live-host changes are performed.
+- Browser visual/runtime testing against a live database has not been performed in this environment.

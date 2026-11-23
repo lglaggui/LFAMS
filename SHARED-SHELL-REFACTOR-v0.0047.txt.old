@@ -1,0 +1,15 @@
+LFAMS v0.0048 — SHARED SHELL CONSOLIDATION (INCREMENTAL)
+
+Changes:
+- Added core/shared_sidebar.php as the shared sidebar mount/dispatcher. MAIFIP and AICS workspace-specific sidebar contents are now isolated in their own partial files, rather than embedded in the main header/page wrapper.
+- Both workspaces now use the same core/shared-shell.css for viewport sizing, shared sidebar/main-content geometry, topbar width, page-view sizing, footer positioning, and responsive width rules.
+- Both workspaces continue to use the common core/shared_topbar.php and core/unified_footer.php renderers.
+- Cache-busting references and displayed app version bumped to 0.0048.
+- Kept database table names, data, user tables, permissions, workflows, and system-specific navigation entries unchanged.
+
+Validation:
+- Run php -l over all PHP files and ZIP integrity check before distribution.
+- Runtime database/browser/role testing remains required; no live-host test is claimed.
+
+Scope:
+This consolidates shell mounting and common viewport geometry. The sidebar's workspace-specific navigation and branding markup is deliberately kept in separate partials to avoid changing permission checks and links in this pass. Further consolidation can move shared nav item definitions into configuration after automated role/navigation tests are available.

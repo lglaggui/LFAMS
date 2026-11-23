@@ -1,0 +1,7 @@
+FAMS Region II Unified v0.0111
+
+- AICS chat refreshes active/approved central LPGMA users into bridge rows so they appear as recipients when available.
+- AICS avatar endpoint forwards bridged LPGMA avatars to the canonical central avatar endpoint.
+- AICS FAMS Action panel is displayed only for LPGMA workspace users; SWAD users retain the masterlist without those action controls.
+- Header profile card opens the correct account-management route for the current workspace/role; logout remains independent.
+- Added FAMS-SYSTEM-RULES-AND-USER-TYPE-LIMITATIONS-v0.0111.txt.

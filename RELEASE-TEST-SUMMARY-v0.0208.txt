@@ -1,0 +1,16 @@
+FAMS v0.0208 — Release Test Summary
+
+PHP syntax: 146 files passed.
+PHP automated tests: 18 suites executed; 209 PASS checks; 0 FAIL checks.
+New database-integrity contract tests: 13/13 passed.
+JavaScript syntax: 19 files passed.
+Reporting visual regression checks: desktop, tablet-wide, tablet, mobile, and small-mobile passed.
+Integrity auditor guard: refused execution without explicit database target (expected exit 2); no database connection attempted.
+ZIP integrity: verified after packaging.
+
+Not run:
+- MySQL concurrency test, because no explicit disposable database DSN is configured.
+- Actual duplicate/orphan/FK inventory, because no database connection or schema dump was provided.
+- Live authenticated browser tests.
+
+No production database was accessed or modified. No records were automatically repaired, merged, or deleted.

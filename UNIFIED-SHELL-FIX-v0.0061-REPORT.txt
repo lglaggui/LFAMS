@@ -1,0 +1,12 @@
+FAMS Region II Unified Build v0.0061
+
+Corrective work:
+- MAIFIP workspace selector now delegates workspace activation to the shared AICS switch endpoint, which restores and validates the authoritative LPGMA account before opening MAIFIP. This fixes the prior route that landed on the MAIFIP dashboard without changing the session out of portal mode.
+- The shared sidebar logo routes through the root dispatcher. For LPGMA and bridged LPGMA identities, the dispatcher restores the central LPGMA identity and opens the workspace selector; other accounts return to their own active workspace home/dashboard.
+- The sidebar profile geometry is standardized in the shared shell stylesheet for MAIFIP and AICS: circular, contained avatar artwork; stable profile grid; and a full-width logout row with the label forced to remain on one line.
+- MAIFIP and AICS continue to render the same shared header, sidebar, and footer partials. Workspace-specific labels, navigation, facility/office context, and operational data remain distinct.
+- Version labels updated to 0.0061.
+
+Validation:
+- PHP syntax lint completed for all PHP files in the project.
+- This is static validation only. No live database or browser-based visual test was performed, so confirm switching and profile layout in a staging copy before replacing the hosted build.

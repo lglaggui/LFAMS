@@ -1,0 +1,83 @@
+FAMS Region II — Isolated Staging Verification Plan
+Release: v0.0204
+
+PURPOSE
+Execute the endpoint security checks that cannot be proven by source inspection. Use synthetic data only. Do not connect this plan to the production database.
+
+REQUIRED ENVIRONMENT
+- Separate MySQL/MariaDB database named with `staging` or `test`.
+- PHP CLI and web SAPI with pdo_mysql enabled.
+- Same schema/migrations as the intended deployment.
+- Separate browser profiles or isolated cookie jars for each account.
+- At least two AICS SWAD offices (e.g. Cauayan and Ilagan) and two MAIFIP facilities (e.g. SIMC and CIMC).
+- Synthetic records in WAITING, RELEASED and CANCELLED states, with distinct identifiers and record_version values.
+
+TEST ACCOUNTS
+A1 — AICS local SWAD Social Worker, assigned to SWAD Office A.
+A2 — AICS local SWAD Social Worker, assigned to SWAD Office B.
+A3 — AICS LPGMA Administrator.
+M1 — MAIFIP facility user, assigned to Facility A.
+M2 — MAIFIP facility user, assigned to Facility B.
+M3 — MAIFIP LPGMA Administrator.
+L1 — Central LPGMA non-administrator with only explicitly granted workspace capabilities.
+
+AUTHENTICATION / SESSION / ROUTE CONTRACT
+- For all 81 registered endpoints, verify anonymous access is denied where login is required.
+- Verify unsupported methods return 405 and an Allow header where the endpoint defines a method allowlist.
+- For every state-changing POST, test missing, invalid, expired and valid CSRF tokens.
+- Change a user's role and custom user-type permissions while a second session is active; verify stale sessions are invalidated in both workspaces.
+- Verify a local AICS administrator cannot administer MAIFIP user types and vice versa unless the central LPGMA identity and target-workspace permission permit it.
+
+AICS / SWAD SCOPE
+- A1 can view the centralized Region II records as intended, including Office B rows.
+- A1 cannot edit, change status, delete, restore, or submit an unauthorized ticket for Office B records by replaying record IDs/control numbers.
+- A2 receives the same centralized read behavior but can mutate only Office B records.
+- A3 can perform only operations allowed by the AICS Administrator policy.
+- Attempt import updates using Office B Control Numbers while authenticated as A1; expect a rejection and no database mutation.
+- Confirm imports by non-admin accounts create/update only WAITING records; finalized statuses cannot be imported as a shortcut.
+
+MAIFIP FACILITY SCOPE
+- M1 can view, export and mutate only Facility A records as allowed by its user type.
+- M2 cannot read, export, update, delete, ticket, restore or resolve conflicts for Facility A records by replaying IDs/control numbers.
+- M3 can perform only explicitly authorized MAIFIP administrative operations.
+- Attempt cross-facility import updates and export query manipulation; expect no data leakage or mutation.
+
+IMPORTS
+- Test invalid extension, mismatched MIME/signature, empty file, oversized file, malformed CSV/XLSX, missing required columns and malformed rows.
+- Test duplicate Control Numbers, duplicate legacy numbers, duplicate identities in the same upload, and records already present in the target workspace.
+- Re-submit the same idempotency key and same payload; expect one business write only.
+- Reuse the same key with a changed payload; expect conflict/rejection.
+- Inject a failure after a row write but before audit/idempotency completion; verify transaction rollback leaves no partial import.
+- Verify import initiator, workspace, outcome, counts and error state are auditable.
+
+EXPORTS
+- Deny export when export_records capability is false even if the user can view records.
+- Verify AICS export intentionally includes Region II SWAD records while MAIFIP export includes only the active facility.
+- Test CSV values beginning with =, +, -, @, tab, and whitespace followed by a formula prefix in Excel and LibreOffice.
+- Verify CSV, Excel, print and PDF sheet actions create an audit event only after POST, CSRF and workspace export capability checks pass.
+- Verify export logs and monthly exports are workspace/facility scoped and bounded where applicable.
+
+OFFLINE SYNCHRONIZATION
+- CREATE must require create_records; UPDATE must require edit_records.
+- Reject invalid client_change_id values and payloads, over-100-change batches, missing required fields and unsupported operations.
+- Re-submit a processed client_change_id; expect the original outcome and no duplicate record/update.
+- Attempt to reuse another user's client_change_id and another facility's record ID.
+- Test exact base_version, stale base_version, and a race where the record changes after conflict preview.
+- Resolve conflicts using KEEP_SERVER and USE_OFFLINE; test replay, wrong user, wrong facility, locked record and second server-version change.
+- Confirm offline_sync_log rows, audit rows and business changes commit or roll back atomically.
+
+BACKGROUND / BATCH / AUDIT
+- Trigger AICS expiry concurrently from separate sessions; each eligible WAITING record must transition once, increment version once, write one history event and one system audit event.
+- Confirm no scheduled jobs, cron entries, queue workers, deployment hooks or external scripts are omitted from the host-level deployment inventory.
+- For every import/export/sync operation, compare user identity, workspace, scope, result, affected-row count and audit event with the database before/after snapshot.
+
+CONCURRENCY / RELEASE GATE
+- Run maintenance/tests/mysql_concurrency_test.php only with FAMS_ALLOW_DB_TESTS=1 and a DSN targeting the isolated staging/test database.
+- Verify unique idempotency claims, payload conflict detection, optimistic version compare-and-swap, and two-process contention.
+- Capture HTTP status, response body, database state, audit rows and session state for each test.
+- Any failed or unexecuted critical test blocks production-readiness sign-off.
+
+SIGN-OFF
+Staging tester: ____________________  Date: ____________________
+Security reviewer: __________________  Date: ____________________
+Deployment owner: ___________________  Date: ____________________

@@ -1,0 +1,1373 @@
+/* Shared viewport geometry is defined once at the end of this file. */
+
+/* Same sidebar frame, typography, cards, nav rhythm and profile area in both systems. */
+
+body.app-body.aics-app .sidebar-brand,
+body.app-body .sidebar-brand.formal-brand {
+  display:block!important; width:100%!important; max-width:100%!important; gap:0!important;
+  padding:2px 4px 14px!important; box-sizing:border-box!important;
+  border-bottom:1px solid rgba(255,255,255,.10)!important;
+}
+body.app-body .sidebar-logo-large,
+body.app-body.aics-app .sidebar-logo-large,
+body.app-body .sidebar-brand .sidebar-home-link,
+body.app-body.aics-app .sidebar-brand .sidebar-home-link {
+  display:flex!important; align-items:center!important; justify-content:center!important;
+  width:100%!important; height:82px!important; min-height:82px!important; margin:0 auto 7px!important;
+  padding:4px 8px!important; flex:0 0 82px!important; box-sizing:border-box!important;
+  background:transparent!important; border:0!important; box-shadow:none!important;
+}
+body.app-body .sidebar-lpgma-logo img,
+body.app-body.aics-app .sidebar-lpgma-logo img {
+  width:min(235px,100%)!important; height:76px!important; max-width:100%!important;
+  object-fit:contain!important; object-position:center!important; filter:drop-shadow(0 5px 10px rgba(0,0,0,.18))!important;
+}
+body.app-body .sidebar-system-switch,
+body.app-body.aics-app .sidebar-system-switch {
+  display:flex!important; align-items:center!important; justify-content:center!important; gap:6px!important;
+  margin:2px 0 8px!important; min-height:29px!important;
+}
+body.app-body .sidebar-system-current,
+body.app-body.aics-app .sidebar-system-current {
+  display:inline-flex!important; align-items:center!important; justify-content:center!important;
+  min-width:67px!important; height:28px!important; padding:0 10px!important; border-radius:7px!important;
+  font-size:9px!important; font-weight:900!important; letter-spacing:.08em!important;
+}
+body.app-body .sidebar-fams-title,
+body.app-body.aics-app .sidebar-fams-title {
+  display:flex!important; flex-direction:column!important; align-items:center!important; justify-content:center!important;
+  gap:2px!important; margin:0 0 9px!important; padding:0 4px!important;
+  font-family:inherit!important; font-size:12px!important; font-weight:800!important;
+  letter-spacing:1.15px!important; line-height:1.05!important; text-align:center!important; color:#fff!important;
+}
+body.app-body .sidebar-fams-title span,
+body.app-body.aics-app .sidebar-fams-title span,
+body.app-body .sidebar-fams-title span:last-child,
+body.app-body.aics-app .sidebar-fams-title span:last-child {
+  display:block!important; font-family:inherit!important; font-size:11px!important; font-weight:800!important;
+  letter-spacing:1.05px!important; line-height:1.1!important; color:#fff!important; text-transform:uppercase!important; opacity:1!important;
+}
+body.app-body .sidebar-user-panel,
+body.app-body.aics-app .sidebar-user-panel {
+  margin:8px 0 0!important; padding:10px 4px 2px!important; border-top:1px solid rgba(255,255,255,.12)!important;
+  display:grid!important; grid-template-columns:38px minmax(0,1fr) 30px!important; align-items:center!important;
+  gap:9px!important; flex:0 0 auto!important;
+}
+body.app-body .sidebar-profile-avatar,
+body.app-body.aics-app .sidebar-profile-avatar { position:relative!important; width:38px!important; height:38px!important; }
+body.app-body .sidebar-profile-avatar .avatar-frame,
+body.app-body.aics-app .sidebar-profile-avatar .avatar-frame { width:38px!important; height:38px!important; border-radius:50%!important; }
+body.app-body .sidebar-user-copy,
+body.app-body.aics-app .sidebar-user-copy { min-width:0!important; display:flex!important; flex-direction:column!important; line-height:1.2!important; gap:2px!important; grid-column:auto!important; padding:0!important; }
+body.app-body .sidebar-user-copy strong,
+body.app-body.aics-app .sidebar-user-copy strong { font-size:10px!important; color:#fff!important; white-space:nowrap!important; overflow:hidden!important; text-overflow:ellipsis!important; }
+body.app-body .sidebar-user-copy span,
+body.app-body.aics-app .sidebar-user-copy span { font-size:8px!important; color:#d7e6f2!important; white-space:nowrap!important; overflow:hidden!important; text-overflow:ellipsis!important; }
+body.app-body .sidebar-user-copy small,
+body.app-body.aics-app .sidebar-user-copy small { font-size:7px!important; color:#91b0c8!important; white-space:nowrap!important; overflow:hidden!important; text-overflow:ellipsis!important; }
+body.app-body .sidebar-logout,
+body.app-body.aics-app .sidebar-logout { width:30px!important; min-width:30px!important; height:30px!important; display:grid!important; place-items:center!important; border:1px solid rgba(255,255,255,.16)!important; background:rgba(255,255,255,.08)!important; color:#fff!important; border-radius:9px!important; text-decoration:none!important; }
+@media (max-width:767px) {
+  :root { --fams-shell-sidebar:0px; --sidebar-width:0px; }
+  body.app-body .app-layout.fams-shared-layout > .sidebar,
+  body.app-body.aics-app .app-layout.fams-shared-layout > .sidebar { width:min(310px,86vw)!important; max-width:min(310px,86vw)!important; transform:translateX(-105%); transition:transform .22s ease; }
+  body.app-body .app-layout.fams-shared-layout > .sidebar.open,
+  body.app-body.aics-app .app-layout.fams-shared-layout > .sidebar.open { transform:translateX(0); }
+  body.app-body .app-layout.fams-shared-layout > #lfamsMainContent,
+  body.app-body.aics-app .app-layout.fams-shared-layout > #lfamsMainContent,
+  body.app-body.aics-app .main-content { margin-left:0!important; width:100%!important; padding-bottom:34px!important; }
+  body.app-body .app-layout.fams-shared-layout > #lfamsMainContent > .topbar,
+  body.app-body.aics-app .app-layout.fams-shared-layout > #lfamsMainContent > .topbar,
+  body.app-body.aics-app .topbar.fams-branded-topbar { left:0!important; right:0!important; width:100%!important; }
+  body.app-body .app-layout.fams-shared-layout > #lfamsMainContent > .fams-unified-footer,
+  body.app-body.aics-app .app-layout.fams-shared-layout > #lfamsMainContent > .fams-unified-footer,
+  body.app-body.aics-app .fams-unified-footer { left:0!important; right:0!important; width:100%!important; }
+  body.app-body.aics-app .topbar.fams-branded-topbar .header-full-label { display:none!important; }
+  body.app-body.aics-app .topbar.fams-branded-topbar .header-short-label { display:inline!important; }
+}
+@media(prefers-reduced-motion:reduce){ body.app-body .sidebar, body.app-body.aics-app .sidebar{transition:none!important;} }
+
+
+/* LFAMS v0.0052 — sidebar collision prevention and compact shared fund summary. */
+body.app-body .sidebar-brand.formal-brand,
+body.app-body.aics-app .sidebar-brand.formal-brand {
+  width:100%!important; min-width:0!important; overflow:visible!important;
+}
+body.app-body .sidebar-logo-large.sidebar-lpgma-logo,
+body.app-body.aics-app .sidebar-logo-large.sidebar-lpgma-logo {
+  display:flex!important; align-items:center!important; justify-content:center!important;
+  width:100%!important; min-width:0!important; height:76px!important; min-height:76px!important;
+  padding:3px 8px!important; margin:0 auto 8px!important; box-sizing:border-box!important;
+}
+body.app-body .sidebar-logo-large.sidebar-lpgma-logo img,
+body.app-body.aics-app .sidebar-logo-large.sidebar-lpgma-logo img {
+  display:block!important; width:100%!important; max-width:220px!important; height:70px!important;
+  object-fit:contain!important; object-position:center!important;
+}
+body.app-body .sidebar-user-panel,
+body.app-body.aics-app .sidebar-user-panel {
+  width:100%!important; min-width:0!important; box-sizing:border-box!important;
+  grid-template-columns:38px minmax(0,1fr) 30px!important; gap:8px!important; overflow:hidden!important;
+}
+body.app-body .sidebar-profile-avatar,
+body.app-body.aics-app .sidebar-profile-avatar {
+  grid-column:1!important; grid-row:1!important; position:relative!important; z-index:1!important;
+  width:38px!important; min-width:38px!important; height:38px!important; overflow:hidden!important;
+}
+body.app-body .sidebar-user-copy,
+body.app-body.aics-app .sidebar-user-copy {
+  grid-column:2!important; grid-row:1!important; width:100%!important; min-width:0!important;
+  overflow:hidden!important; padding:0!important; margin:0!important; position:relative!important; z-index:1!important;
+}
+body.app-body .sidebar-logout,
+body.app-body.aics-app .sidebar-logout { grid-column:3!important; grid-row:1!important; }
+
+/* The fund summary is deliberately compact: three short KPIs and one slim utilization row. */
+
+
+
+
+
+
+
+
+
+
+
+
+/* Dashboard cards use a consistent section heading, border, spacing and content rhythm. */
+body.aics-app .aics-dashboard-block {
+  border:1px solid #dfe7ee!important; border-radius:13px!important;
+  box-shadow:0 4px 16px rgba(24,50,74,.045)!important; padding:16px!important;
+}
+body.aics-app .aics-dashboard-block > .aics-section-head,
+body.aics-app .aics-dashboard-block .aics-section-head {
+  display:flex!important; align-items:center!important; justify-content:space-between!important;
+  gap:12px!important; min-width:0!important; margin:0 0 13px!important;
+}
+body.aics-app .aics-dashboard-block .aics-section-head h2 { margin:3px 0 0!important; line-height:1.2!important; }
+body.aics-app .aics-dashboard-block .aics-section-head p { margin:4px 0 0!important; }
+body.aics-app .aics-dashboard-block [data-dashboard-item],
+body.aics-app .aics-dashboard-block > div,
+body.aics-app .aics-dashboard-block section { min-width:0; }
+body.aics-app .aics-line-card,
+body.aics-app .aics-month-table,
+body.aics-app .aics-recent-table { min-width:0!important; }
+
+@media(max-width:560px) {
+  
+  
+  body.aics-app .aics-dashboard-block { padding:12px!important; }
+}
+
+
+/* LFAMS v0.0052 — one clear, consistent workspace switch control. */
+body.app-body .sidebar-system-switch,
+body.app-body.aics-app .sidebar-system-switch {
+  display:flex!important; align-items:center!important; justify-content:center!important;
+  gap:7px!important; width:100%!important; min-width:0!important; margin:3px 0 9px!important;
+}
+body.app-body .sidebar-system-current,
+body.app-body.aics-app .sidebar-system-current {
+  min-width:74px!important; padding:0 12px!important; border:1px solid rgba(255,255,255,.18)!important;
+  background:rgba(255,255,255,.10)!important; color:#fff!important;
+}
+body.app-body .sidebar-system-switch-btn,
+body.app-body.aics-app .sidebar-system-switch-btn {
+  display:inline-flex!important; align-items:center!important; justify-content:center!important;
+  width:32px!important; min-width:32px!important; height:28px!important; padding:0!important;
+  border:1px solid rgba(255,255,255,.30)!important; border-radius:8px!important;
+  background:rgba(255,255,255,.12)!important; color:#fff!important; text-decoration:none!important;
+  font-size:18px!important; font-weight:900!important; line-height:1!important;
+  transition:background .15s ease,transform .15s ease,border-color .15s ease!important;
+}
+body.app-body .sidebar-system-switch-btn:hover,
+body.app-body.aics-app .sidebar-system-switch-btn:hover {
+  background:rgba(255,255,255,.23)!important; border-color:rgba(255,255,255,.55)!important; transform:translateY(-1px);
+}
+body.app-body .sidebar-system-switch-btn:focus-visible,
+body.app-body.aics-app .sidebar-system-switch-btn:focus-visible {
+  outline:2px solid #fff!important; outline-offset:3px!important;
+}
+@media(prefers-reduced-motion:reduce) {
+  body.app-body .sidebar-system-switch-btn, body.app-body.aics-app .sidebar-system-switch-btn {transition:none!important;}
+}
+
+
+/* v0.0061 — canonical sidebar profile geometry shared by MAIFIP and AICS.
+   Keep avatar artwork fully visible in a true circle and keep the logout label on one line. */
+body.app-body .sidebar-user-panel.sidebar-profile-strict,
+body.app-body.aics-app .sidebar-user-panel.sidebar-profile-strict {
+  display:grid!important; grid-template-columns:52px minmax(0,1fr)!important;
+  grid-template-rows:auto auto!important; align-items:center!important;
+  gap:8px!important; width:100%!important; min-width:0!important;
+  box-sizing:border-box!important; padding:10px 4px 8px!important;
+}
+body.app-body .sidebar-profile-strict .sidebar-profile-avatar,
+body.app-body.aics-app .sidebar-profile-strict .sidebar-profile-avatar {
+  grid-column:1!important; grid-row:1!important; display:flex!important;
+  align-items:center!important; justify-content:center!important;
+  width:52px!important; height:52px!important; min-width:52px!important;
+  overflow:visible!important;
+}
+body.app-body .sidebar-profile-strict .sidebar-profile-avatar .user-avatar,
+body.app-body .sidebar-profile-strict .sidebar-profile-avatar .avatar-frame,
+body.app-body.aics-app .sidebar-profile-strict .sidebar-profile-avatar .user-avatar,
+body.app-body.aics-app .sidebar-profile-strict .sidebar-profile-avatar .avatar-frame {
+  display:flex!important; align-items:center!important; justify-content:center!important;
+  width:52px!important; height:52px!important; min-width:52px!important;
+  max-width:52px!important; border-radius:50%!important; overflow:hidden!important;
+  box-sizing:border-box!important; flex:0 0 52px!important;
+}
+body.app-body .sidebar-profile-strict .sidebar-profile-avatar img,
+body.app-body.aics-app .sidebar-profile-strict .sidebar-profile-avatar img {
+  display:block!important; width:100%!important; height:100%!important;
+  max-width:100%!important; max-height:100%!important; object-fit:contain!important;
+  object-position:center!important; border-radius:50%!important;
+}
+body.app-body .sidebar-profile-strict .sidebar-user-copy,
+body.app-body.aics-app .sidebar-profile-strict .sidebar-user-copy {
+  grid-column:2!important; grid-row:1!important; display:flex!important;
+  flex-direction:column!important; justify-content:center!important; align-items:flex-start!important;
+  width:100%!important; min-width:0!important; height:auto!important;
+  overflow:hidden!important; padding:0!important; margin:0!important; text-align:left!important;
+}
+body.app-body .sidebar-profile-strict .sidebar-user-copy strong,
+body.app-body .sidebar-profile-strict .sidebar-user-copy span,
+body.app-body .sidebar-profile-strict .sidebar-user-copy small,
+body.app-body.aics-app .sidebar-profile-strict .sidebar-user-copy strong,
+body.app-body.aics-app .sidebar-profile-strict .sidebar-user-copy span,
+body.app-body.aics-app .sidebar-profile-strict .sidebar-user-copy small {
+  display:block!important; width:100%!important; min-width:0!important;
+  white-space:nowrap!important; overflow:hidden!important; text-overflow:ellipsis!important;
+  line-height:1.3!important; margin:0!important;
+}
+body.app-body .sidebar-profile-strict .sidebar-logout,
+body.app-body.aics-app .sidebar-profile-strict .sidebar-logout {
+  grid-column:1/-1!important; grid-row:2!important; justify-self:stretch!important;
+  display:flex!important; flex-direction:row!important; flex-wrap:nowrap!important;
+  align-items:center!important; justify-content:center!important; gap:8px!important;
+  width:100%!important; min-width:0!important; max-width:100%!important;
+  height:34px!important; min-height:34px!important; box-sizing:border-box!important;
+  margin:0!important; padding:0 12px!important; overflow:hidden!important;
+  white-space:nowrap!important; line-height:1!important;
+}
+body.app-body .sidebar-profile-strict .sidebar-logout svg,
+body.app-body.aics-app .sidebar-profile-strict .sidebar-logout svg {
+  display:block!important; flex:0 0 16px!important; width:16px!important; height:16px!important;
+}
+body.app-body .sidebar-profile-strict .sidebar-logout span,
+body.app-body.aics-app .sidebar-profile-strict .sidebar-logout span {
+  display:inline-block!important; flex:0 0 auto!important; width:auto!important;
+  min-width:max-content!important; max-width:none!important; white-space:nowrap!important;
+}
+
+/* Canonical shared design primitives: loaded by both workspaces. */
+html, body, button, input, select, textarea {
+  font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+}
+html { scrollbar-width: thin; scrollbar-color: #9aafc1 #edf2f6; }
+* { scrollbar-width: thin; scrollbar-color: #9aafc1 #edf2f6; }
+*::-webkit-scrollbar { width: 9px; height: 9px; }
+*::-webkit-scrollbar-track { background: #edf2f6; }
+*::-webkit-scrollbar-thumb { background: #9aafc1; border: 2px solid #edf2f6; border-radius: 10px; }
+*::-webkit-scrollbar-thumb:hover { background: #6f8ba2; }
+
+
+
+.sidebar-user-panel.sidebar-profile-strict {
+  display: grid !important;
+  grid-template-columns: 48px minmax(0,1fr) !important;
+  grid-template-rows: 56px 32px !important;
+  align-items: center !important;
+  gap: 7px 9px !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  padding: 10px 0 0 !important;
+  box-sizing: border-box !important;
+  overflow: visible !important;
+}
+.sidebar-profile-strict .sidebar-profile-avatar {
+  grid-column: 1 !important; grid-row: 1 !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  width: 48px !important; height: 48px !important; min-width: 48px !important;
+  overflow: visible !important;
+}
+.sidebar-profile-strict .sidebar-profile-avatar .avatar-frame,
+.sidebar-profile-strict .sidebar-profile-avatar .user-avatar,
+.sidebar-profile-strict .sidebar-profile-avatar .avatar-img {
+  display: flex !important; flex: 0 0 44px !important;
+  width: 44px !important; height: 44px !important; min-width: 44px !important; max-width: 44px !important;
+  border-radius: 50% !important; overflow: hidden !important; object-fit: cover !important; box-sizing: border-box !important;
+}
+.sidebar-profile-strict .sidebar-profile-avatar img { width: 100% !important; height: 100% !important; object-fit: cover !important; border-radius: 50% !important; }
+.sidebar-profile-strict .sidebar-user-copy {
+  grid-column: 2 !important; grid-row: 1 !important; display: flex !important;
+  flex-direction: column !important; justify-content: center !important; align-items: flex-start !important;
+  width: 100% !important; max-width: 100% !important; min-width: 0 !important; height: 56px !important;
+  margin: 0 !important; padding: 0 !important; overflow: hidden !important;
+}
+.sidebar-profile-strict .sidebar-user-copy strong,
+.sidebar-profile-strict .sidebar-user-copy span,
+.sidebar-profile-strict .sidebar-user-copy small {
+  display: block !important; width: 100% !important; max-width: 100% !important;
+  overflow: hidden !important; text-overflow: ellipsis !important; white-space: nowrap !important;
+}
+.sidebar-profile-strict .sidebar-logout {
+  grid-column: 1 / -1 !important; grid-row: 2 !important; position: static !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  flex-flow: row nowrap !important; gap: 7px !important; width: 100% !important; min-width: 0 !important;
+  height: 32px !important; min-height: 32px !important; margin: 0 !important; padding: 0 8px !important;
+  white-space: nowrap !important; box-sizing: border-box !important;
+}
+.sidebar-profile-strict .sidebar-logout span { display: inline !important; white-space: nowrap !important; line-height: 1 !important; }
+.sidebar-profile-strict .sidebar-logout svg { display: block !important; flex: 0 0 15px !important; width: 15px !important; height: 15px !important; }
+@media (max-width: 767px) {
+  .sidebar-user-panel.sidebar-profile-strict { grid-template-columns: 48px minmax(0,1fr) !important; grid-template-rows: 52px 32px !important; }
+}
+
+/* v0.0063 canonical shared header geometry and fund-summary presentation. */
+body.app-body .topbar.fams-branded-topbar,
+body.app-body.aics-app .topbar.fams-branded-topbar {
+  display:grid!important; grid-template-columns:minmax(150px,1fr) minmax(390px,520px) minmax(170px,auto)!important;
+  align-items:center!important; column-gap:16px!important; min-height:94px!important;
+  height:auto!important; padding:10px 20px!important; box-sizing:border-box!important;
+}
+body.app-body .topbar.fams-branded-topbar .topbar-left,
+body.app-body.aics-app .topbar.fams-branded-topbar .topbar-left { min-width:0!important; }
+body.app-body .topbar.fams-branded-topbar .topbar-right,
+body.app-body.aics-app .topbar.fams-branded-topbar .topbar-right {
+  min-width:0!important; justify-self:end!important; display:flex!important; align-items:center!important; gap:10px!important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+body.app-body .topbar.fams-branded-topbar.header-summary-collapsed,
+body.app-body.aics-app .topbar.fams-branded-topbar.header-summary-collapsed {
+  grid-template-columns:minmax(120px,1fr) minmax(300px,460px) minmax(130px,auto)!important; column-gap:10px!important; min-height:80px!important; padding:7px 14px!important;
+}
+
+
+
+
+
+
+
+
+@media(max-width:1100px) {
+ body.app-body .topbar.fams-branded-topbar,body.app-body.aics-app .topbar.fams-branded-topbar { grid-template-columns:minmax(0,1fr) minmax(0,auto)!important; row-gap:8px!important; }
+ 
+ body.app-body .topbar.fams-branded-topbar .topbar-right,body.app-body.aics-app .topbar.fams-branded-topbar .topbar-right { grid-column:2!important; grid-row:1!important; }
+}
+@media(max-width:767px) {
+ body.app-body .topbar.fams-branded-topbar,body.app-body.aics-app .topbar.fams-branded-topbar { grid-template-columns:minmax(0,1fr) auto!important; padding:8px 10px!important; min-height:0!important; }
+ 
+ 
+ 
+ 
+}
+/* Footer copyright is identical in both workspaces. */
+body.app-body .fams-unified-footer,body.app-body.aics-app .fams-unified-footer { font-family:Inter,"Segoe UI",Roboto,Arial,sans-serif!important; font-size:9px!important; line-height:1!important; }
+
+/* Canonical dimensions for equivalent header/sidebar controls in both workspaces. */
+body.app-body .topbar.fams-branded-topbar .notification-bell,
+body.app-body.aics-app .topbar.fams-branded-topbar .notification-bell {
+  position:relative!important; display:inline-flex!important; align-items:center!important; justify-content:center!important;
+  width:38px!important; height:38px!important; min-width:38px!important; flex:0 0 38px!important; margin:0!important;
+  padding:0!important; border:1px solid #dfe7ef!important; border-radius:10px!important;
+  background:#fff!important; color:#214f80!important; box-shadow:none!important; box-sizing:border-box!important;
+}
+body.app-body .topbar.fams-branded-topbar .notification-bell:hover,
+body.app-body.aics-app .topbar.fams-branded-topbar .notification-bell:hover {
+  border-color:#c6d6e5!important; background:#f9fbfd!important; color:#214f80!important; box-shadow:0 6px 16px rgba(15,53,104,.08)!important;
+}
+body.app-body .topbar.fams-branded-topbar .notification-bell:active,
+body.app-body.aics-app .topbar.fams-branded-topbar .notification-bell:active { transform:scale(.96)!important; }
+body.app-body .topbar.fams-branded-topbar .notification-bell svg,
+body.app-body.aics-app .topbar.fams-branded-topbar .notification-bell svg { width:19px!important; height:19px!important; }
+body.app-body .topbar.fams-branded-topbar .top-logout,
+body.app-body.aics-app .topbar.fams-branded-topbar .top-logout {
+  display:inline-flex!important; flex:0 0 auto!important; align-items:center!important; justify-content:center!important;
+  flex-direction:row!important; flex-wrap:nowrap!important; gap:5px!important; width:auto!important; min-width:max-content!important;
+  height:30px!important; min-height:30px!important; padding:0 8px!important; white-space:nowrap!important; line-height:1!important;
+}
+body.app-body .topbar.fams-branded-topbar .top-logout svg,
+body.app-body.aics-app .topbar.fams-branded-topbar .top-logout svg { width:14px!important; height:14px!important; flex:0 0 14px!important; }
+
+
+
+
+body.app-body,body.app-body.aics-app { scrollbar-color:#91a8ba #eaf0f5; scrollbar-width:thin; }
+body.app-body *::-webkit-scrollbar,body.app-body.aics-app *::-webkit-scrollbar { width:8px; height:8px; }
+body.app-body *::-webkit-scrollbar-track,body.app-body.aics-app *::-webkit-scrollbar-track { background:#eaf0f5; }
+body.app-body *::-webkit-scrollbar-thumb,body.app-body.aics-app *::-webkit-scrollbar-thumb { background:#91a8ba; border:2px solid #eaf0f5; border-radius:99px; }
+
+
+/* v0.0064 — final canonical logo, profile-card and avatar defaults. These rules
+   intentionally apply equally to MAIFIP and AICS after legacy stylesheets. */
+body.app-body .sidebar .sidebar-logo-large.sidebar-lpgma-logo,
+body.app-body.aics-app .sidebar .sidebar-logo-large.sidebar-lpgma-logo {
+  width:100%!important; height:82px!important; min-height:82px!important; max-height:82px!important;
+  display:flex!important; align-items:center!important; justify-content:center!important;
+  padding:4px 8px!important; box-sizing:border-box!important; overflow:visible!important;
+}
+body.app-body .sidebar .sidebar-logo-large.sidebar-lpgma-logo img,
+body.app-body.aics-app .sidebar .sidebar-logo-large.sidebar-lpgma-logo img {
+  display:block!important; width: min(210px,100%)!important; height:72px!important; max-width:100%!important; max-height:72px!important;
+  object-fit:contain!important; object-position:center!important; flex:0 0 auto!important;
+}
+body.app-body .sidebar .sidebar-user-panel.sidebar-profile-strict,
+body.app-body.aics-app .sidebar .sidebar-user-panel.sidebar-profile-strict {
+  display:grid!important; grid-template-columns:52px minmax(0,1fr)!important; grid-template-rows:auto auto!important;
+  align-items:center!important; gap:8px!important; width:100%!important; min-height:104px!important;
+  padding:10px 4px 8px!important; box-sizing:border-box!important;
+}
+body.app-body .sidebar .sidebar-profile-strict .sidebar-profile-avatar,
+body.app-body.aics-app .sidebar .sidebar-profile-strict .sidebar-profile-avatar {
+  grid-column:1!important; grid-row:1!important; width:52px!important; height:52px!important; min-width:52px!important;
+}
+body.app-body .sidebar .sidebar-profile-strict .sidebar-profile-avatar .avatar-frame,
+body.app-body .sidebar .sidebar-profile-strict .sidebar-profile-avatar .user-avatar,
+body.app-body.aics-app .sidebar .sidebar-profile-strict .sidebar-profile-avatar .avatar-frame,
+body.app-body.aics-app .sidebar .sidebar-profile-strict .sidebar-profile-avatar .user-avatar {
+  width:52px!important; height:52px!important; min-width:52px!important; max-width:52px!important;
+  border-radius:50%!important; overflow:hidden!important; flex:0 0 52px!important;
+}
+body.app-body .sidebar .sidebar-profile-strict .sidebar-profile-avatar img,
+body.app-body.aics-app .sidebar .sidebar-profile-strict .sidebar-profile-avatar img {
+  width:100%!important; height:100%!important; max-width:100%!important; max-height:100%!important;
+  object-fit:contain!important; object-position:center!important; border-radius:50%!important;
+}
+
+
+/* v0.0065 — final shared geometry contract for MAIFIP and AICS.
+   The header's center column flexes to the actual width left between the identity
+   labels and the profile controls; the fund card stays centered in that space. */
+:root {
+  --lfams-sidebar-width: 250px;
+  --fams-shell-sidebar: 250px;
+  --sidebar-width: 250px;
+  --lfams-header-height: 76px;
+  --fams-shell-footer: 34px;
+}
+body.app-body .topbar.fams-branded-topbar,
+body.app-body.aics-app .topbar.fams-branded-topbar {
+  display:grid!important;
+  grid-template-columns:max-content minmax(0,1fr) max-content!important;
+  grid-template-rows:minmax(76px,auto)!important;
+  align-items:center!important;
+  column-gap:clamp(12px,1.4vw,24px)!important;
+  row-gap:8px!important;
+  min-height:76px!important;
+  height:auto!important;
+  padding:9px clamp(18px,2vw,30px)!important;
+  box-sizing:border-box!important;
+}
+body.app-body .topbar.fams-branded-topbar .topbar-left,
+body.app-body.aics-app .topbar.fams-branded-topbar .topbar-left {
+  grid-column:1!important;grid-row:1!important;justify-self:start!important;
+  display:flex!important;align-items:center!important;min-width:0!important;max-width:100%!important;
+}
+
+body.app-body .topbar.fams-branded-topbar .topbar-right,
+body.app-body.aics-app .topbar.fams-branded-topbar .topbar-right {
+  grid-column:3!important;grid-row:1!important;justify-self:end!important;
+  display:flex!important;align-items:center!important;min-width:0!important;max-width:100%!important;
+}
+/* The fund labels are mutually exclusive: full wording in expanded mode and
+   short wording in compact mode, including the utilization row. */
+
+
+
+
+/* Make the workspace selector more prominent without introducing a new style. */
+body.app-body .sidebar .sidebar-system-switch,
+body.app-body.aics-app .sidebar .sidebar-system-switch {
+  min-height:36px!important;margin:3px 0 10px!important;gap:8px!important;
+}
+body.app-body .sidebar .sidebar-system-current,
+body.app-body.aics-app .sidebar .sidebar-system-current {
+  min-width:86px!important;height:34px!important;padding:0 13px!important;
+  font-size:12px!important;line-height:1!important;letter-spacing:.075em!important;
+  border-radius:8px!important;
+}
+body.app-body .sidebar .sidebar-system-switch-btn,
+body.app-body.aics-app .sidebar .sidebar-system-switch-btn {
+  display:inline-flex!important;align-items:center!important;justify-content:center!important;
+  width:34px!important;height:34px!important;min-width:34px!important;flex:0 0 34px!important;
+  border-radius:9px!important;font-size:19px!important;line-height:1!important;
+}
+/* v0.0066 — canonical, single-source branding and sidebar profile components.
+   These components intentionally use dedicated class names so legacy workspace
+   selectors cannot resize or reposition them. */
+.fams-shared-brand {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 2px 4px 12px;
+  box-sizing: border-box;
+  border-bottom: 1px solid rgba(255,255,255,.12);
+  font-family: inherit;
+}
+.fams-brand-logo-link {
+  display: flex;
+  flex: 0 0 82px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 82px;
+  min-width: 0;
+  margin: 0 0 7px;
+  padding: 3px 8px;
+  box-sizing: border-box;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+.fams-brand-logo-image {
+  display: block;
+  flex: 0 0 auto;
+  width: 220px;
+  max-width: 100%;
+  height: 76px;
+  margin: 0;
+  padding: 0;
+  object-fit: contain;
+  object-position: center;
+}
+.fams-brand-system-switch {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 36px;
+  margin: 3px 0 10px;
+}
+.fams-brand-system-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 86px;
+  height: 34px;
+  padding: 0 13px;
+  box-sizing: border-box;
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 8px;
+  background: rgba(255,255,255,.1);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: .075em;
+}
+.fams-brand-system-label.is-aics { background: rgba(255,255,255,.1); }
+.fams-brand-system-label.is-maifip { background: rgba(255,255,255,.1); }
+.fams-brand-switch-button {
+  display: inline-flex;
+  flex: 0 0 34px;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  box-sizing: border-box;
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 9px;
+  background: rgba(255,255,255,.08);
+  color: #fff;
+  font-size: 19px;
+  line-height: 1;
+  text-decoration: none;
+}
+.fams-brand-switch-button:hover { background: rgba(255,255,255,.16); }
+.fams-brand-title {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  margin: 0 0 9px;
+  padding: 0 4px;
+  color: #fff;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: 1.05px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+
+
+
+
+
+
+
+
+.fams-shared-profile-card {
+  display: grid;
+  flex: 0 0 auto;
+  grid-template-columns: 46px minmax(0,1fr);
+  grid-template-rows: 54px 32px;
+  align-items: center;
+  gap: 7px 9px;
+  width: 100%;
+  min-width: 0;
+  margin: auto 0 0;
+  padding: 10px 0 0;
+  box-sizing: border-box;
+  border-top: 1px solid rgba(255,255,255,.12);
+  font-family: inherit;
+}
+.fams-profile-avatar {
+  display: flex;
+  grid-column: 1;
+  grid-row: 1;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  min-width: 46px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+.fams-shared-avatar.fams-profile-image {
+  display: block;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  max-width: 44px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+.fams-shared-avatar.fams-profile-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+}
+.fams-profile-copy {
+  display: flex;
+  grid-column: 2;
+  grid-row: 1;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3px;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+.fams-profile-copy strong,
+.fams-profile-copy span,
+.fams-profile-copy small {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.fams-profile-copy strong { color: #fff; font-size: 10px; font-weight: 850; line-height: 1.2; }
+.fams-profile-copy span { color: #d7e6f2; font-size: 8px; font-weight: 700; line-height: 1.2; }
+.fams-profile-copy small { color: rgba(255,255,255,.62); font-size: 8px; font-weight: 650; line-height: 1.2; }
+.fams-profile-logout {
+  display: flex;
+  grid-column: 1 / -1;
+  grid-row: 2;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  width: 100%;
+  height: 32px;
+  min-width: 0;
+  margin: 0;
+  padding: 0 8px;
+  box-sizing: border-box;
+  border: 1px solid rgba(255,255,255,.16);
+  border-radius: 8px;
+  background: rgba(255,255,255,.08);
+  color: #fff;
+  font-size: 9px;
+  font-weight: 800;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.fams-profile-logout svg { display: block; flex: 0 0 15px; width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.fams-profile-logout span { display: inline; line-height: 1; white-space: nowrap; }
+@media (max-width: 767px) {
+  .fams-shared-profile-card { grid-template-columns: 46px minmax(0,1fr); grid-template-rows: 54px 32px; }
+}
+
+@media (max-width: 767px) {
+}
+
+
+/* v0.0069 — canonical sidebar navigation rhythm, facility selector and header profile fit.
+   Shared by MAIFIP and AICS; the only differences are their facility/data labels. */
+
+
+
+
+
+
+/* MAIFIP facility selector: round facility mark and integrated navy/ice-blue control. */
+body.app-body:not(.aics-app) .app-layout.fams-shared-layout .sidebar .sidebar-facility-selector {
+  position: relative !important;
+  border: 1px solid rgba(169, 207, 238, .24) !important;
+  border-radius: 13px !important;
+  background: linear-gradient(135deg, rgba(20, 66, 101, .96), rgba(12, 46, 75, .98)) !important;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, .16), inset 0 1px 0 rgba(255,255,255,.06) !important;
+  transition: border-color .16s ease, background .16s ease, box-shadow .16s ease !important;
+}
+body.app-body:not(.aics-app) .app-layout.fams-shared-layout .sidebar .sidebar-facility-selector:hover,
+body.app-body:not(.aics-app) .app-layout.fams-shared-layout .sidebar .sidebar-facility-selector:focus-within {
+  border-color: rgba(173, 218, 250, .72) !important;
+  background: linear-gradient(135deg, rgba(25, 78, 118, .99), rgba(15, 55, 88, .99)) !important;
+  box-shadow: 0 7px 18px rgba(0,0,0,.20), 0 0 0 2px rgba(124,190,236,.10) !important;
+}
+body.app-body:not(.aics-app) .app-layout.fams-shared-layout .sidebar .sidebar-facility-selector .sidebar-selected-facility-logo {
+  width: 42px !important;
+  min-width: 42px !important;
+  height: 42px !important;
+  border-radius: 50% !important;
+  overflow: hidden !important;
+  background: #fff !important;
+  border: 2px solid rgba(221, 239, 252, .95) !important;
+  box-shadow: 0 3px 9px rgba(0,0,0,.16) !important;
+}
+body.app-body:not(.aics-app) .app-layout.fams-shared-layout .sidebar .sidebar-facility-selector .sidebar-selected-facility-logo img,
+body.app-body:not(.aics-app) .app-layout.fams-shared-layout .sidebar .sidebar-facility-selector .sidebar-selected-facility-logo svg {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 50% !important;
+  object-fit: contain !important;
+  object-position: center !important;
+}
+body.app-body:not(.aics-app) .app-layout.fams-shared-layout .sidebar .sidebar-facility-select-cue {
+  top: 50% !important;
+  right: 9px !important;
+  transform: translateY(-50%) !important;
+  width: 28px !important;
+  min-width: 28px !important;
+  height: 28px !important;
+  min-height: 28px !important;
+  padding: 0 !important;
+  border: 1px solid rgba(190, 222, 246, .28) !important;
+  border-radius: 9px !important;
+  background: rgba(222, 240, 253, .10) !important;
+  color: #e7f5ff !important;
+  box-shadow: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  pointer-events: none !important;
+}
+body.app-body:not(.aics-app) .app-layout.fams-shared-layout .sidebar .sidebar-facility-select-cue .facility-switch-chevron {
+  display: block !important;
+  width: 17px !important;
+  height: 17px !important;
+  fill: none !important;
+  stroke: currentColor !important;
+  stroke-width: 2 !important;
+  stroke-linecap: round !important;
+  stroke-linejoin: round !important;
+}
+body.app-body:not(.aics-app) .app-layout.fams-shared-layout .sidebar .sidebar-facility-selector > select {
+  cursor: pointer !important;
+}
+@media (max-width: 767px) {
+}
+
+
+/* FAMS v0.0070 — canonical shared shell components.
+   Each shared component is defined once here for both MAIFIP and AICS. */
+
+/* Navigation rhythm: identical top/bottom spacing and link geometry. */
+.app-layout.fams-shared-layout .sidebar .sidebar-nav-scroll {
+  display: block;
+  flex: 1 1 auto;
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  padding: 12px 0 10px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  box-sizing: border-box;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(185,212,235,.45) transparent;
+}
+.app-layout.fams-shared-layout .sidebar .sidebar-nav-scroll::-webkit-scrollbar { width: 7px; }
+.app-layout.fams-shared-layout .sidebar .sidebar-nav-scroll::-webkit-scrollbar-track { background: transparent; }
+.app-layout.fams-shared-layout .sidebar .sidebar-nav-scroll::-webkit-scrollbar-thumb { border-radius: 20px; background: rgba(185,212,235,.45); }
+.app-layout.fams-shared-layout .sidebar .sidebar-nav-categorized {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 0 10px 10px;
+  box-sizing: border-box;
+}
+.app-layout.fams-shared-layout .sidebar .sidebar-nav-categorized > .nav-section {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.app-layout.fams-shared-layout .sidebar .sidebar-nav-categorized .nav-section-label {
+  display: block;
+  margin: 0;
+  padding: 8px 10px 5px;
+  color: #91b0c8;
+  font-size: 8px;
+  font-weight: 900;
+  line-height: 1.2;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  box-sizing: border-box;
+}
+.app-layout.fams-shared-layout .sidebar .sidebar-nav-categorized a {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  min-width: 0;
+  min-height: 40px;
+  margin: 0;
+  padding: 7px 9px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  color: rgba(255,255,255,.82);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-transform: uppercase;
+  text-decoration: none;
+  box-sizing: border-box;
+  transition: background-color .16s ease, border-color .16s ease, color .16s ease;
+}
+.app-layout.fams-shared-layout .sidebar .sidebar-nav-categorized a:hover {
+  border-color: rgba(255,255,255,.10);
+  background: rgba(255,255,255,.08);
+  color: #fff;
+}
+.app-layout.fams-shared-layout .sidebar .sidebar-nav-categorized a.active {
+  border-color: rgba(255,255,255,.16);
+  background: rgba(255,255,255,.13);
+  box-shadow: inset 3px 0 0 #d9eaf9;
+  color: #fff;
+}
+.app-layout.fams-shared-layout .sidebar .sidebar-nav-categorized .nav-icon {
+  display: inline-flex;
+  flex: 0 0 28px;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  margin: 0;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 8px;
+  background: rgba(255,255,255,.045);
+  box-sizing: border-box;
+}
+.app-layout.fams-shared-layout .sidebar .sidebar-nav-categorized .nav-icon svg {
+  display: block;
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.app-layout.fams-shared-layout .sidebar .sidebar-nav-categorized .nav-label-stack { display: flex; min-width: 0; flex-direction: column; gap: 2px; }
+.app-layout.fams-shared-layout .sidebar .sidebar-nav-categorized .nav-label-stack strong { font-size: inherit; line-height: 1.05; }
+.app-layout.fams-shared-layout .sidebar .sidebar-nav-categorized .nav-label-stack small { font-size: 9px; line-height: 1.05; opacity: .78; }
+
+/* MAIFIP facility selector: single modern navy/blue treatment and circular logo. */
+.app-layout.fams-shared-layout .sidebar .fams-brand-facility {
+  position: relative;
+  display: grid;
+  grid-template-columns: 42px minmax(0,1fr) 28px;
+  align-items: center;
+  gap: 9px;
+  min-height: 62px;
+  margin: 0;
+  padding: 8px 9px;
+  border: 1px solid rgba(177,214,246,.28);
+  border-radius: 12px;
+  background: linear-gradient(135deg, #183f60, #102f4a);
+  box-shadow: 0 4px 12px rgba(0,0,0,.12);
+  color: #fff;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: border-color .16s ease, background-color .16s ease, box-shadow .16s ease;
+}
+.app-layout.fams-shared-layout .sidebar .fams-brand-facility:not(.has-switcher) { grid-template-columns: 42px minmax(0,1fr); }
+.app-layout.fams-shared-layout .sidebar .fams-brand-facility:hover,
+.app-layout.fams-shared-layout .sidebar .fams-brand-facility:focus-within {
+  border-color: #8bc3eb;
+  background: linear-gradient(135deg, #204f75, #153b5a);
+  box-shadow: 0 0 0 2px rgba(139,195,235,.12), 0 6px 16px rgba(0,0,0,.16);
+}
+.app-layout.fams-shared-layout .sidebar .fams-brand-facility-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  overflow: hidden;
+  border: 2px solid #e6f3fc;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 2px 7px rgba(0,0,0,.14);
+  box-sizing: border-box;
+}
+.app-layout.fams-shared-layout .sidebar .fams-brand-facility-logo img,
+.app-layout.fams-shared-layout .sidebar .fams-brand-facility-logo svg { display: block; width: 100%; height: 100%; border-radius: 50%; object-fit: contain; object-position: center; }
+.app-layout.fams-shared-layout .sidebar .fams-brand-facility-copy {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 3px;
+  overflow: visible;
+  color: #fff;
+}
+.app-layout.fams-shared-layout .sidebar .fams-brand-facility-copy strong {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 11px;
+  font-weight: 850;
+  line-height: 1.2;
+}
+.app-layout.fams-shared-layout .sidebar .fams-brand-facility-copy span {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  overflow: visible;
+  text-overflow: clip;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: normal;
+  color: #c7dcec;
+  font-size: 8px;
+  font-weight: 650;
+  line-height: 1.35;
+}
+/* One wrapping contract covers the active shared card and legacy sidebar partials. */
+body.app-body .app-layout.fams-shared-layout .sidebar .fams-brand-facility-copy,
+body.app-body .app-layout.fams-shared-layout .sidebar .sidebar-selected-facility-copy {
+  min-width: 0 !important;
+  overflow: visible !important;
+}
+body.app-body .app-layout.fams-shared-layout .sidebar .fams-brand-facility-copy span,
+body.app-body .app-layout.fams-shared-layout .sidebar .sidebar-selected-facility-copy .sidebar-facility-full-name {
+  display: block !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  white-space: normal !important;
+  overflow-wrap: anywhere !important;
+  word-break: normal !important;
+  line-height: 1.35 !important;
+}
+.app-layout.fams-shared-layout .sidebar .fams-brand-facility-cue {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid rgba(196,225,247,.28);
+  border-radius: 8px;
+  background: rgba(222,240,253,.10);
+  color: #e7f5ff;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+.app-layout.fams-shared-layout .sidebar .fams-brand-facility-cue svg { display: block; width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; }
+.app-layout.fams-shared-layout .sidebar .fams-brand-facility-form { position: absolute; inset: 0; margin: 0; border-radius: inherit; }
+.app-layout.fams-shared-layout .sidebar .fams-brand-facility-form select { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
+.app-layout.fams-shared-layout .sidebar .fams-brand-facility-form select:focus-visible { outline: 2px solid #9bc9f2; outline-offset: 2px; border-radius: inherit; }
+.app-layout.fams-shared-layout .sidebar .fams-brand-facility-form select option { background-color: #173f63; color: #e7f5ff; font-family: inherit; font-size: 12px; font-weight: 650; }
+.app-layout.fams-shared-layout .sidebar .fams-brand-facility-form select option:checked { background-color: #dcebf7; color: #173f63; }
+
+/* Header fund summary: one shared card with a 460px maximum in both systems. */
+.topbar.fams-branded-topbar .header-fund-summary {
+  display: flex;
+  flex: 0 1 460px;
+  flex-direction: column;
+  align-items: stretch;
+  width: min(460px, 100%);
+  min-width: 0;
+  max-width: 460px;
+  margin: 0 auto;
+  padding: 7px 8px;
+  gap: 5px;
+  border: 1px solid #dce6ee;
+  border-radius: 11px;
+  background: #f9fbfd;
+  box-shadow: inset 0 1px #fff;
+  color: #173f63;
+  box-sizing: border-box;
+}
+.topbar.fams-branded-topbar .header-fund-summary-heading { display: block; width: 100%; margin: 0; padding: 0 1px 2px; color: #647c90; font-size: 8px; font-weight: 950; line-height: 1.1; letter-spacing: .11em; text-align: center; text-transform: uppercase; box-sizing: border-box; }
+.topbar.fams-branded-topbar .header-fund-cards { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 5px; width: 100%; min-width: 0; box-sizing: border-box; }
+.topbar.fams-branded-topbar .header-fund-card { display: flex; min-width: 0; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 6px 7px; border: 1px solid #e0e8ef; border-radius: 7px; background: #fff; text-align: center; box-sizing: border-box; }
+.topbar.fams-branded-topbar .header-fund-card > span { display: block; width: 100%; min-width: 0; overflow: hidden; color: #647c90; font-size: 7px; font-weight: 850; line-height: 1.2; text-align: center; text-overflow: ellipsis; text-transform: uppercase; white-space: nowrap; }
+.topbar.fams-branded-topbar .header-fund-card strong { display: block; width: 100%; min-width: 0; overflow: hidden; color: #173f63; font-size: 10px; font-weight: 900; line-height: 1.2; text-align: center; text-overflow: ellipsis; text-transform: uppercase; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.topbar.fams-branded-topbar .header-fund-utilization { display: grid; grid-template-columns: max-content minmax(24px,1fr) max-content; align-items: center; gap: 7px; width: 100%; min-width: 0; box-sizing: border-box; }
+.topbar.fams-branded-topbar .header-fund-utilization-label { color: #647c90; font-size: 7px; font-weight: 850; line-height: 1.1; text-align: center; text-transform: uppercase; white-space: nowrap; }
+.topbar.fams-branded-topbar .header-fund-utilization-track { display: block; width: 100%; min-width: 0; height: 5px; overflow: hidden; border-radius: 999px; background: #e3ebf2; }
+.topbar.fams-branded-topbar .header-fund-utilization-track > span { display: block; height: 100%; border-radius: inherit; background: #299b70; }
+.topbar.fams-branded-topbar .header-fund-utilization-percent { color: #173f63; font-size: 8px; font-weight: 900; line-height: 1; text-align: center; text-transform: uppercase; white-space: nowrap; }
+.topbar.fams-branded-topbar.header-summary-collapsed .header-fund-summary { max-width: 460px; padding: 6px 8px; gap: 4px; }
+.topbar.fams-branded-topbar.header-summary-collapsed .header-fund-summary-heading { padding-bottom: 1px; }
+.topbar.fams-branded-topbar.header-fund-compact .header-fund-card { padding: 5px 5px; }
+.topbar.fams-branded-topbar.header-fit-ultra .header-fund-card strong { font-size: 9px; }
+@media (max-width: 820px) {
+  .topbar.fams-branded-topbar .header-fund-summary { flex-basis: 100%; width: min(100%,460px); max-width: 460px; }
+  .topbar.fams-branded-topbar .header-fund-cards { grid-template-columns: repeat(3,minmax(0,1fr)); }
+}
+@media (max-width: 520px) {
+  .topbar.fams-branded-topbar .header-fund-summary { padding: 6px; gap: 4px; }
+  .topbar.fams-branded-topbar .header-fund-card { padding: 5px 4px; }
+  .topbar.fams-branded-topbar .header-fund-card > span { font-size: 6px; }
+  .topbar.fams-branded-topbar .header-fund-card strong { font-size: 9px; }
+  .topbar.fams-branded-topbar .header-fund-utilization { gap: 5px; }
+}
+
+/* v0.0097: normalized hover interaction layer; preserve existing component colors while standardizing motion and focus behavior. */
+.app-layout.fams-shared-layout .sidebar a, .app-layout.fams-shared-layout .sidebar button, .fams-header-lpgma-label, .fams-brand-switch-button, .app-layout.fams-shared-layout .sidebar-nav-categorized a { transition: background-color .16s ease, color .16s ease, border-color .16s ease, transform .16s ease, box-shadow .16s ease; }
+.app-layout.fams-shared-layout .sidebar a:focus-visible, .app-layout.fams-shared-layout .sidebar button:focus-visible, .fams-header-lpgma-label:focus-visible, .fams-brand-switch-button:focus-visible { outline: 2px solid var(--fams-blue); outline-offset: 2px; }
+
+
+/* v0.0127 responsive header placement: centered fund summary stays out of profile column. */
+body.app-body .topbar.fams-branded-topbar, body.app-body.aics-app .topbar.fams-branded-topbar { isolation:isolate!important; }
+body.app-body .topbar.fams-branded-topbar > .topbar-left, body.app-body.aics-app .topbar.fams-branded-topbar > .topbar-left { grid-column:1!important; grid-row:1!important; position:relative!important; z-index:2!important; }
+body.app-body .topbar.fams-branded-topbar > .header-fund-summary, body.app-body.aics-app .topbar.fams-branded-topbar > .header-fund-summary { grid-column:2!important; grid-row:1!important; justify-self:center!important; align-self:center!important; width:100%!important; min-width:0!important; position:relative!important; z-index:1!important; }
+body.app-body .topbar.fams-branded-topbar > .topbar-right, body.app-body.aics-app .topbar.fams-branded-topbar > .topbar-right { grid-column:3!important; grid-row:1!important; position:relative!important; z-index:20!important; min-width:0!important; }
+body.app-body #topProfile.fams-header-profile-compactable, body.app-body.aics-app #topProfile.fams-header-profile-compactable { position:relative!important; z-index:30!important; pointer-events:auto!important; isolation:isolate!important; }
+@media(max-width:1100px) { body.app-body .topbar.fams-branded-topbar > .header-fund-summary, body.app-body.aics-app .topbar.fams-branded-topbar > .header-fund-summary { grid-column:1 / -1!important; grid-row:2!important; justify-self:center!important; width:min(100%,460px)!important; } body.app-body .topbar.fams-branded-topbar > .topbar-right, body.app-body.aics-app .topbar.fams-branded-topbar > .topbar-right { grid-column:2!important; grid-row:1!important; } }
+@media(max-width:767px) { body.app-body .topbar.fams-branded-topbar > .header-fund-summary, body.app-body.aics-app .topbar.fams-branded-topbar > .header-fund-summary { grid-column:1 / -1!important; grid-row:2!important; } }
+
+
+/* v0.0129 — reliable bottom reachability on short/landscape viewports.
+   Keep document-level scrolling available; use a modest responsive tail rather
+   than a fixed-height blank panel that wastes space on tall screens. */
+html, body.app-body {
+  min-height:100%!important;
+  height:auto!important;
+  overflow-y:auto!important;
+  overscroll-behavior-y:auto;
+}
+body.app-body .app-layout.fams-shared-layout,
+body.app-body .app-layout.fams-shared-layout > #lfamsMainContent {
+  min-height:100vh!important;
+  min-height:100dvh!important;
+  height:auto!important;
+  overflow:visible!important;
+}
+body.app-body .app-layout.fams-shared-layout > #lfamsMainContent {
+  display:flex!important;
+  flex-direction:column!important;
+  min-width:0!important;
+  padding-bottom:clamp(28px, 4vh, 52px)!important;
+}
+body.app-body .app-layout.fams-shared-layout > #lfamsMainContent > #pageView.page-view,
+body.app-body .app-layout.fams-shared-layout > #lfamsMainContent > .page-view,
+body.app-body .app-layout.fams-shared-layout > #lfamsMainContent > [data-page-view] {
+  flex:0 0 auto!important;
+  min-height:0!important;
+  height:auto!important;
+  max-height:none!important;
+  overflow:visible!important;
+  padding-bottom:clamp(32px, 5vh, 64px)!important;
+  scroll-margin-bottom:16px!important;
+}
+@media (max-height:560px) and (orientation:landscape) {
+  body.app-body .app-layout.fams-shared-layout > #lfamsMainContent {padding-bottom:40px!important;}
+  body.app-body .app-layout.fams-shared-layout > #lfamsMainContent > #pageView.page-view,
+  body.app-body .app-layout.fams-shared-layout > #lfamsMainContent > .page-view,
+  body.app-body .app-layout.fams-shared-layout > #lfamsMainContent > [data-page-view] {padding-bottom:72px!important;}
+}
+
+/* v0.0155 — keep the shared application header pinned while the document scrolls.
+   Legacy page styles previously reset some headers to position:relative. */
+html:has(body.app-body) { scroll-padding-top: 96px; }
+body.app-body { overflow-x: hidden !important; overflow-y: auto !important; }
+body.app-body .app-layout.fams-shared-layout,
+body.app-body .app-layout.fams-shared-layout > #lfamsMainContent,
+body.app-body #lfamsMainContent,
+body.app-body .main.main-content,
+body.app-body .main-content { overflow: visible !important; }
+body.app-body #lfamsMainContent > .topbar.fams-branded-topbar,
+body.app-body .main.main-content > .topbar.fams-branded-topbar,
+body.app-body .main-content > .topbar.fams-branded-topbar,
+body.app-body .app-layout.fams-shared-layout > #lfamsMainContent > .topbar {
+  position: sticky !important;
+  top: 0 !important;
+  inset-block-start: 0 !important;
+  align-self: stretch !important;
+  z-index: 1500 !important;
+  flex-shrink: 0 !important;
+}
+
+
+/* v0.0159 — universal fixed-header content offset for every full page view. */
+body.app-body #lfamsMainContent,
+body.app-body .app-layout > .main-content,
+body.app-body .main.main-content{padding-top:var(--fams-shell-header-height,76px)!important;scroll-padding-top:calc(var(--fams-shell-header-height,76px) + 12px)!important}
+@media(max-width:760px){body.app-body #lfamsMainContent,body.app-body .app-layout > .main-content,body.app-body .main.main-content{padding-top:68px!important}}
+/* v0.0157 — fixed shared shell header across AICS/SWAD and MAIFIP. */
+:root{--fams-shell-header-height:76px}
+body.app-body .app-layout.fams-shared-layout > #lfamsMainContent > .topbar,
+body.app-body.aics-app .app-layout.fams-shared-layout > #lfamsMainContent > .topbar,
+body.app-body.aics-app .topbar.fams-branded-topbar{
+ position:fixed!important;top:0!important;left:250px!important;right:0!important;width:calc(100% - 250px)!important;
+ min-height:var(--fams-shell-header-height)!important;z-index:5000!important;
+}
+body.app-body .app-layout.fams-shared-layout > #lfamsMainContent,
+body.app-body.aics-app .app-layout.fams-shared-layout > #lfamsMainContent,
+body.app-body.aics-app .main.main-content,body.app-body.aics-app .main-content{padding-top:var(--fams-shell-header-height)!important}
+body.app-body .app-layout.fams-shared-layout > #lfamsMainContent > .topbar + [data-page-view],
+body.app-body.aics-app .app-layout.fams-shared-layout > #lfamsMainContent > .topbar + [data-page-view],
+body.app-body.aics-app #pageView,body.app-body.aics-app .content,body.app-body.aics-app .page-view{scroll-margin-top:calc(var(--fams-shell-header-height) + 12px)!important}
+@media(max-width:760px){body.app-body .app-layout.fams-shared-layout > #lfamsMainContent > .topbar,body.app-body.aics-app .app-layout.fams-shared-layout > #lfamsMainContent > .topbar,body.app-body.aics-app .topbar.fams-branded-topbar{left:0!important;width:100%!important;min-height:68px!important}body.app-body .app-layout.fams-shared-layout > #lfamsMainContent,body.app-body.aics-app .app-layout.fams-shared-layout > #lfamsMainContent,body.app-body.aics-app .main.main-content,body.app-body.aics-app .main-content{padding-top:68px!important}}
+
+/* v0.0164 legacy viewport declarations removed: v0.0165 shared shell below is authoritative. */
+
+/* v0.0180 — SINGLE SOURCE OF TRUTH: shared viewport and Pageview geometry.
+   The header is measured at runtime for both workspaces. The main column reserves
+   exactly that measured height; Pageview uses equal block and inline gutters,
+   zero outer margins, and zero first/last child margin. */
+:root {
+  --fams-shell-sidebar: 250px;
+  --fams-shell-footer: 34px;
+  --fams-header-reserved-height: 76px;
+  --fams-page-gutter: 28px;
+  --fams-page-section-gap: 16px;
+  --fams-page-heading-gap: 12px;
+  --fams-page-toolbar-gap: 10px;
+  --fams-card-padding: 18px;
+  --fams-card-padding-compact: 16px;
+  --fams-card-padding-mobile: 13px;
+  --fams-control-gap: 8px;
+  --fams-form-row-gap: 14px;
+}
+body.app-body .app-layout.fams-shared-layout {
+  display: block !important;
+  position: relative !important;
+  width: 100% !important;
+  min-height: 100vh !important;
+  min-height: 100dvh !important;
+  margin: 0 !important;
+}
+body.app-body .app-layout.fams-shared-layout > #lfamsMainContent,
+body.app-body.aics-app .app-layout.fams-shared-layout > #lfamsMainContent {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  position: relative !important;
+  width: calc(100% - var(--fams-shell-sidebar)) !important;
+  min-width: 0 !important;
+  min-height: 100vh !important;
+  min-height: 100dvh !important;
+  margin: 0 0 0 var(--fams-shell-sidebar) !important;
+  padding: var(--fams-header-reserved-height) 0 var(--fams-shell-footer) !important;
+  gap: 0 !important;
+  box-sizing: border-box !important;
+}
+body.app-body .app-layout.fams-shared-layout > #lfamsMainContent > .topbar.fams-branded-topbar {
+  position: fixed !important;
+  top: 0 !important;
+  right: 0 !important;
+  left: var(--fams-shell-sidebar) !important;
+  width: auto !important;
+  max-width: none !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  z-index: 1100 !important;
+  box-sizing: border-box !important;
+}
+body.app-body .app-layout.fams-shared-layout > #lfamsMainContent > #pageView.page-view[data-page-view] {
+  display: block !important;
+  position: relative !important;
+  inset: auto !important;
+  top: auto !important;
+  transform: none !important;
+  flex: 1 0 auto !important;
+  align-self: stretch !important;
+  width: 100% !important;
+  max-width: none !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  margin-block: 0 !important;
+  margin-inline: 0 !important;
+  padding-block: var(--fams-page-gutter) !important;
+  padding-inline: var(--fams-page-gutter) !important;
+  clear: none !important;
+  box-sizing: border-box !important;
+  scroll-margin-top: 12px !important;
+}
+/* Popup documents are standalone compact surfaces, not full shared-shell pages. */
+body.app-body.fams-popup-page .app-layout.fams-shared-layout > #lfamsMainContent {
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  min-height: 100vh !important;
+}
+body.app-body.fams-popup-page .app-layout.fams-shared-layout > #lfamsMainContent > #pageView.page-view[data-page-view] {
+  padding: 0 !important;
+  flex: none !important;
+}
+/* Shared page rhythm: one heading, toolbar and work-surface spacing contract. */
+body.app-body .app-layout.fams-shared-layout > #lfamsMainContent > #pageView.page-view[data-page-view] > * {
+  min-width: 0;
+  max-width: 100%;
+}
+body.app-body .app-layout.fams-shared-layout > #lfamsMainContent > #pageView.page-view[data-page-view] :where(.page-header,.fams-page-header,.page-heading,.section-head,.panel-heading,.aics-section-head) {
+  box-sizing: border-box;
+  gap: var(--fams-page-heading-gap) !important;
+  margin-bottom: var(--fams-page-section-gap) !important;
+}
+body.app-body .app-layout.fams-shared-layout > #lfamsMainContent > #pageView.page-view[data-page-view] :where(.toolbar,.filter-row,.filters-row,.filter-bar,.masterlist-filterbar,.masterlist-toolbar-top,.fams-toolbar-search-line,.fams-toolbar-actions-line,.search-form,.dashboard-filter-form,.table-actions,.form-actions) {
+  box-sizing: border-box;
+  gap: var(--fams-page-toolbar-gap) !important;
+  row-gap: var(--fams-page-toolbar-gap) !important;
+}
+body.app-body .app-layout.fams-shared-layout > #lfamsMainContent > #pageView.page-view[data-page-view] :where(.form-grid,.filter-grid,.dashboard-grid,.stats-grid,.cards-grid) {
+  min-width: 0;
+  row-gap: var(--fams-form-row-gap);
+  column-gap: var(--fams-page-section-gap);
+}
+body.app-body .app-layout.fams-shared-layout > #lfamsMainContent > #pageView.page-view[data-page-view] :where(.form-actions) {
+  gap: var(--fams-control-gap);
+}
+body.app-body .app-layout.fams-shared-layout > #lfamsMainContent > #pageView.page-view[data-page-view] :where(.form-actions,.toolbar,.filter-row,.filters-row,.filter-bar) > * {
+  min-width: 0;
+}
+body.app-body .app-layout.fams-shared-layout > #lfamsMainContent > #pageView.page-view[data-page-view] :where(.card,.panel,.content-card,.form-panel,.aics-dashboard-block,.aics-hero,.table-panel,.table-wrap,.table-responsive) {
+  min-width: 0;
+  box-sizing: border-box;
+}
+body.app-body .app-layout.fams-shared-layout > #lfamsMainContent > #pageView.page-view[data-page-view] :where(.card,.panel,.content-card,.form-panel,.aics-dashboard-block,.aics-hero):not(.table-panel) {
+  padding: var(--fams-card-padding) !important;
+}
+body.app-body .app-layout.fams-shared-layout > #lfamsMainContent > #pageView.page-view[data-page-view] :where(.table-wrap,.table-responsive) {
+  max-width: 100%;
+}
+body.app-body .app-layout.fams-shared-layout > #lfamsMainContent > #pageView.page-view[data-page-view] > :first-child {
+  margin-block-start: 0 !important;
+}
+body.app-body .app-layout.fams-shared-layout > #lfamsMainContent > #pageView.page-view[data-page-view] > :last-child {
+  margin-block-end: 0 !important;
+}
+body.app-body .app-layout.fams-shared-layout > #lfamsMainContent > .fams-unified-footer {
+  position: fixed !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  left: var(--fams-shell-sidebar) !important;
+  width: auto !important;
+  height: var(--fams-shell-footer) !important;
+  min-height: var(--fams-shell-footer) !important;
+  margin: 0 !important;
+  padding-inline: var(--fams-page-gutter) !important;
+  z-index: 1300 !important;
+  box-sizing: border-box !important;
+}
+@media (max-width: 1100px) and (min-width: 768px) {
+  :root { --fams-shell-sidebar: 80px; --fams-page-gutter: 22px; }
+  body.app-body .app-layout.fams-shared-layout > .sidebar,
+  body.app-body.aics-app .app-layout.fams-shared-layout > .sidebar {
+    left: 0 !important; width: 80px !important; max-width: 80px !important; transform: none !important;
+  }
+  body.app-body .app-layout.fams-shared-layout > #lfamsMainContent,
+  body.app-body.aics-app .app-layout.fams-shared-layout > #lfamsMainContent {
+    width: calc(100% - 80px) !important; margin-left: 80px !important;
+  }
+  body.app-body .app-layout.fams-shared-layout > #lfamsMainContent > .topbar.fams-branded-topbar,
+  body.app-body.aics-app .app-layout.fams-shared-layout > #lfamsMainContent > .topbar.fams-branded-topbar,
+  body.app-body .app-layout.fams-shared-layout > #lfamsMainContent > .fams-unified-footer,
+  body.app-body.aics-app .app-layout.fams-shared-layout > #lfamsMainContent > .fams-unified-footer {
+    left: 80px !important; right: 0 !important; width: auto !important;
+  }
+}
+@media (max-width: 800px) {
+  :root { --fams-page-gutter: 16px; }
+}
+@media (max-width: 560px) {
+  :root { --fams-page-gutter: 12px; }
+}
+@media (max-width: 767px) {
+  :root { --fams-shell-sidebar: 0px; }
+  body.app-body .app-layout.fams-shared-layout > .sidebar,
+  body.app-body.aics-app .app-layout.fams-shared-layout > .sidebar {
+    left: 0 !important; width: min(300px,86vw) !important; max-width: min(300px,86vw) !important;
+  }
+  body.app-body .app-layout.fams-shared-layout > #lfamsMainContent,
+  body.app-body.aics-app .app-layout.fams-shared-layout > #lfamsMainContent {
+    width: 100% !important; margin-left: 0 !important;
+  }
+  body.app-body .app-layout.fams-shared-layout > #lfamsMainContent > .topbar.fams-branded-topbar,
+  body.app-body.aics-app .app-layout.fams-shared-layout > #lfamsMainContent > .topbar.fams-branded-topbar,
+  body.app-body .app-layout.fams-shared-layout > #lfamsMainContent > .fams-unified-footer,
+  body.app-body.aics-app .app-layout.fams-shared-layout > #lfamsMainContent > .fams-unified-footer {
+    left: 0 !important; right: 0 !important; width: 100% !important;
+  }
+}
+@media (max-width: 1100px) {
+  body.app-body .app-layout.fams-shared-layout > #lfamsMainContent > #pageView.page-view[data-page-view] :where(.card,.panel,.content-card,.form-panel,.aics-dashboard-block,.aics-hero):not(.table-panel) {
+    padding: var(--fams-card-padding-compact) !important;
+  }
+}
+@media (max-width: 560px) {
+  body.app-body .app-layout.fams-shared-layout > #lfamsMainContent > #pageView.page-view[data-page-view] :where(.card,.panel,.content-card,.form-panel):not(.table-panel) {
+    padding: var(--fams-card-padding-mobile) !important;
+  }
+}
+@media print {
+  body.app-body .app-layout.fams-shared-layout > #lfamsMainContent { width:100% !important; margin:0 !important; padding:0 !important; }
+  body.app-body .app-layout.fams-shared-layout > #lfamsMainContent > .topbar.fams-branded-topbar,
+  body.app-body .app-layout.fams-shared-layout > .sidebar,
+  body.app-body .app-layout.fams-shared-layout > #lfamsMainContent > .fams-unified-footer { display:none !important; }
+  body.app-body .app-layout.fams-shared-layout > #lfamsMainContent > #pageView.page-view[data-page-view] { padding:0 !important; }
+}

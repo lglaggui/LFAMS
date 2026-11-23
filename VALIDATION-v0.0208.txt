@@ -1,0 +1,25 @@
+FAMS v0.0208 — Validation Report
+
+Completed source changes:
+1. MAIFIP facility/control-number migration checks duplicate (facility, control_number) pairs before adding the composite unique index.
+2. Existing single-column unique protection is not dropped until the replacement composite index is verified.
+3. Failed/deferred migration attempts remain retryable; exceptions are logged rather than silently marking the migration complete.
+4. Shared status-history writer enforces an active transaction and maps only to the workspace-specific history table.
+5. Workspace log_action adapters use the transaction-required audit writer when invoked inside an existing transaction.
+6. Added a CLI-only read-only integrity auditor for duplicate identifiers, unresolved orphan references, and foreign-key inventory. Archived-as-deleted references are excluded from orphan counts when the archive table is present.
+
+Automated verification:
+- PHP syntax: 146 files, no errors.
+- PHP test suites: 18 executed, 209 PASS checks, 0 FAIL checks.
+- JavaScript syntax: 19 files, no errors.
+- Reporting visual regression: five viewport sizes passed.
+- New integrity contract test: 13/13 passed.
+- ZIP integrity verified.
+
+Database verification is intentionally pending. No DB connection was made. The integrity auditor was tested only for its safe refusal path without an explicit target; it was not run against actual schema/data.
+
+No database DDL was executed in this build environment. No production database was accessed. No existing records were modified.
+
+Constraint strategy:
+- Add no speculative foreign keys. Ticket, history, offline-sync and archive relationships differ by workspace and deletion lifecycle. The read-only auditor inventories the actual foreign keys and flags unresolved orphan references for review.
+- The AICS and MAIFIP business rules and visibility scopes remain distinct.

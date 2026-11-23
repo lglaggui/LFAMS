@@ -1,0 +1,37 @@
+FAMS REGION II — CSS CASCADE / FLATTENING AUDIT v0.0179
+
+SCOPE
+- Compared the v0.0178 ZIP source with the v0.0179 working source.
+- Parsed all 11 CSS files, including nested at-rules, with tinycss2.
+- Performed targeted cleanup of duplicate shared Pageview geometry and superseded workspace-level Pageview padding declarations.
+- Did not reorder stylesheets or bulk-delete !important declarations.
+
+CANONICAL LAYOUT CONTRACT
+- core/shared-shell.css owns the final Pageview outer gutter, shared title/section heading rhythm, toolbar/filter/action gaps, common card insets, footer inset and responsive sidebar alignment.
+- Pageview padding is equal on all four edges: 28px desktop, 22px medium, 16px tablet, 12px narrow mobile.
+- Common card inset: 18px desktop, 16px medium/tablet, 13px narrow mobile.
+- Heading gap/bottom spacing: 12px / 16px.
+- Toolbar/filter/action gap: 10px.
+- Sidebar: 250px desktop, 80px tablet (768–1100px), mobile drawer at 767px and below.
+- Popup and print exceptions remain separate.
+
+SAFE CLEANUP
+- Removed the obsolete v0.0164 shared viewport declaration block.
+- Removed the old AICS 761–800px drawer override that conflicted with the shared 80px tablet rail.
+- Removed 10 AICS, 7 MAIFIP and 19 core/uniform Pageview outer-padding declarations superseded by the shared shell. Popup/print-specific rules were preserved.
+- Removed obsolete generic AICS and MAIFIP Pageview frame declarations and repeated generic card/heading/toolbar declarations where the shared shell now owns those values.
+- Removed empty rules left by the targeted cleanup.
+- No empty qualified rules or duplicate identical top-level CSS rule blocks remain in the audit.
+
+DIRECT PARSED COUNTS (v0.0178 → v0.0179)
+- AICS app.css: 3,642 rules / 5,016 !important → 3,623 / 4,999 (−19 rules, −17 !important).
+- MAIFIP app.css: 3,449 / 4,824 → 3,439 / 4,810 (−10 rules, −14 !important).
+- core/uniform.css: 750 / 2,301 → 736 / 2,274 (−14 rules, −27 !important).
+- core/shared-shell.css: 232 / 750 → 243 / 768 (+11 rules, +18 !important) for the shared final layout contract and responsive overrides.
+- Other CSS files were unchanged.
+- Total across all CSS: 8,832 rules / 13,502 !important → 8,800 / 13,462 (−32 rules, −40 !important).
+
+LIMITATIONS
+- 13,462 !important declarations remain across the full CSS set. The legacy cascade is still complex.
+- Further removal should be done in page-specific batches with authenticated visual regression for dashboards, masterlists, reporting, tickets, logs, forms, chat and management pages.
+- No claim is made that all CSS conflicts have been eliminated or that every live page has been visually tested.

@@ -1,0 +1,8 @@
+FAMS Region II Unified — v0.0145
+
+Issue-check pass and account usertype dropdown fix
+
+- Fixed MAIFIP Edit Account User Type dropdown: role options now include the facility-scope data attributes required by the facility-aware dropdown controller. Previously, the controller treated every option as disallowed, hiding/disabling the options and preventing administrators from changing usertypes.
+- Synchronized AICS and MAIFIP APP_VERSION to 0.0145 to avoid stale browser cache behavior and inconsistent version indicators.
+- Performed a static issue-check pass covering PHP syntax, JavaScript syntax, CSS structure, archive integrity, role-option/controller attribute consistency, and release-version consistency.
+- No database schema changes.

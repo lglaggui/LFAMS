@@ -1,0 +1,23 @@
+FAMS v0.0205 — STEP 4.1 VALIDATION
+
+Scope: static/package checks and safe preflight behavior in this build container only.
+
+Environment detected:
+- PHP CLI: 8.4.24
+- PDO: loaded
+- pdo_mysql: NOT loaded
+- fileinfo: loaded
+- mbstring: NOT loaded
+- zip: NOT loaded
+- No MySQL/MariaDB staging server or credentials were provided.
+
+Expected result in this environment:
+- Staging preflight is expected to BLOCK because APP_ENV=staging and a dedicated staging database are not configured, and required pdo_mysql/mbstring extensions are absent.
+- Database connection is skipped; no DB writes or schema changes occur.
+
+Required validation on the user's staging host:
+- Run `php maintenance/staging_preflight.php` with APP_ENV=staging and a dedicated LFAMS_DB_NAME containing staging/test.
+- Verify Apache PHP SAPI separately; CLI and Apache extension/ini configurations may differ.
+- Confirm actual DB name and least-privilege DB user before proceeding.
+
+This package is staging-deployment preparation, not proof of an operational staging environment and not production-readiness certification.

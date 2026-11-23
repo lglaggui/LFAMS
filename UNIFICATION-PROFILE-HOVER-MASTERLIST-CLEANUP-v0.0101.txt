@@ -1,0 +1,5 @@
+FAMS Region II v0.0101
+- Profile hover/focus region uses stable transitions and preserves pointer interaction across profile contents.
+- Compact fixed-width MAIFIP masterlist table with collapsed borders and reduced horizontal padding.
+- Edit action uses a pencil glyph; delete/archive action uses an X glyph.
+- Version updated in MAIFIP and AICS.

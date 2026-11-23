@@ -1,0 +1,23 @@
+FAMS Region II Unified — v0.0168
+Facility-card wrapping, TRCR2 edge-scroll rebuild, and focused cascade cleanup
+
+Facility card
+- Corrected the actual shared facility-card selector (.fams-brand-facility-copy span); the previous v0.0166 patch targeted retired markup and therefore did not reliably affect the active card.
+- Facility full names now wrap naturally to additional lines, including long unbroken names, without ellipsis truncation.
+- Added the same single wrapping contract for the legacy sidebar partials so older entry points remain consistent.
+- Removed stale legacy facility-name truncation rules from the shared stylesheet layer and uniform stylesheet.
+
+TRCR2 / horizontal table navigation
+- Replaced the separate edge-arrow and edge-wheel handlers with one shared horizontal table navigation controller.
+- The controller resolves the actual horizontally scrollable ancestor instead of assuming the first matching wrapper is the scroll viewport.
+- Left/right arrows are evaluated independently against the current scroll position and disappear at the corresponding boundary.
+- Added ResizeObserver and scroll-state refresh handling so arrow visibility follows table resizing and synchronized scrolling.
+- Preserved the four-sided MAIFIP records scrollbar synchronization and existing horizontal table scrolling behavior.
+
+Focused conflict audit
+- Confirmed the active shared shell uses core/shared_sidebar_brand.php and the active facility card class is .fams-brand-facility; prior rules aimed at .sidebar-selected-facility were legacy compatibility rules, not the active card.
+- Removed retired shared-shell/uniform selectors that were no longer connected to the current shared sidebar markup.
+- Identified substantial legacy cascade duplication in workspace app stylesheets (AICS and MAIFIP) and repeated !important usage. Those broad historical page-specific rules were not mechanically stripped because many pages still depend on them and a safe full flattening requires live visual regression coverage.
+- Centralized the two reported behaviors in the shared shell rather than adding another late override patch.
+
+Version: 0.0168

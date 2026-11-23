@@ -1,0 +1,8 @@
+FAMS Region II v0.0096
+
+- Added browser-side 2 MB photo upload checks and crop payload checks to stop oversized images before POST submission. MAIFIP also rejects oversized request bodies before CSRF validation with a clear message.
+- Tightened MAIFIP and AICS masterlist column spacing and fixed layout to reduce excessive column width.
+- Changed MAIFIP My Account panel to open in a modal from the My Account button; removed the redundant standalone New Account card so New Account remains a popup action.
+- Updated AICS Registration & Access heading and description to match MAIFIP language while continuing to read central LPGMA identities from the shared central users database. Local SWAD accounts remain in aics_users by design.
+
+Validation should include PHP lint, JavaScript syntax, CSS brace balance and ZIP integrity. Live browser/database/hosting behavior has not been tested here.

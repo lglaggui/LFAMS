@@ -1,0 +1,22 @@
+FAMS REGION II — VALIDATION REPORT v0.0178
+
+Change validated
+- AICS Pageview outer gutter now uses one responsive gutter value on all four edges.
+- Desktop: 28px; <=1100px: 22px; <=800px: 16px; <=560px: 12px.
+- Removed conflicting Pageview top-only overrides and the mobile shorthand override that previously made vertical spacing differ from horizontal spacing.
+- Popup Pageview zero-padding exception retained.
+- AICS and MAIFIP release versions both set to 0.0178.
+
+Static validation
+- PHP files linted: 120; syntax errors: 0.
+- JavaScript syntax check: AICS app.js passed.
+- CSS files parsed: 11; parser errors: 0.
+- AICS Pageview obsolete --aics-page-gutter-y variable: absent.
+- AICS Pageview later top-only padding overrides: absent.
+- AICS/MAIFIP APP_VERSION consistency: 0.0178 / 0.0178.
+- No database or schema changes.
+
+Not performed
+- No live MySQL integration or migration testing.
+- No authenticated end-to-end test against the deployed website.
+- No full visual regression across every AICS page and device. The package should be checked in the user's XAMPP/staging environment, especially page bottoms, popup pages, and narrow mobile layouts.

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">Default user silhouette</title>
+  <desc id="desc">A clean professional head and shoulders silhouette.</desc>
+  <circle cx="128" cy="88" r="47" fill="#5b7086"/>
+  <path d="M40 232c6-52 39-86 88-86s82 34 88 86H40Z" fill="#5b7086"/>
+  <path d="M92 146c9 10 22 16 36 16s27-6 36-16" fill="none" stroke="#72869a" stroke-width="8" stroke-linecap="round" opacity=".48"/>
+</svg>

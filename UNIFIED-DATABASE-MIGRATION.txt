@@ -1,0 +1,12 @@
+FAMS Region II — Unified Database Import Guide
+
+The database source files are distributed separately from the deployable htdocs package in FAMS-Database-Backups-Consolidated-v0.0183.zip.
+
+For a brand-new installation only:
+1. Create a new, empty MySQL/MariaDB database.
+2. Import lfams_unified.sql from the separate database archive.
+3. Configure core/database.php with the exact database credentials.
+4. Deploy the htdocs package.
+5. Test both workspaces and role-specific access.
+
+For an existing installation: do NOT import the baseline dump. Inspect the current schema and migration history first. Historical scripts are preserved in the archive, but they are not a single executable migration chain. The v0.0177 index script is optional and idempotent by index name; back up first and review database-host support for stored procedures.

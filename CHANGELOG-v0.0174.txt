@@ -1,0 +1,62 @@
+FAMS REGION II — v0.0174
+UNIFIED CROSS-WORKSPACE SERVICES
+
+Baseline: v0.0173
+Package: Full htdocs source
+
+IMPLEMENTED
+1. Authentication and sessions
+   - Retained the single central login/logout and unified identity bridge.
+   - Added one shared session lifetime policy in core/unified.php: 60-minute idle timeout and 12-hour absolute lifetime.
+   - Preserves the original authentication start time when an LPGMA user switches workspaces.
+   - Background polling does not extend idle sessions; a shared user-interaction heartbeat refreshes activity.
+   - Expired sessions are invalidated and the login page displays an expiry message.
+
+2. Shared runtime primitives
+   - Added core/shared_runtime.php for escaping, redirects, session identity access, CSRF, flash messages, JSON responses, search normalization, pagination windows, account field/password policy, and image validation.
+   - AICS and MAIFIP helper functions now delegate their matching common primitives to this implementation.
+
+3. Account management and uploads
+   - Added core/account_runtime.php for shared own-account avatar save/revert and password-change operations.
+   - Both workspaces use the same account field/password policy and image-data validation, with a standardized 2 MB profile-image limit.
+   - MAIFIP uploaded-avatar file validation also delegates to the shared image validator.
+   - Workspace-specific account tables, facility/office assignment rules, approval flows, and administrator account operations remain adapters to preserve existing business rules.
+
+4. Notifications
+   - Moved the duplicated notification-center JavaScript from both app.js files into core/shared-notifications.js, loaded by the shared shell.
+   - Added core/notifications_controller.php for common notification list/read/delete operations.
+   - AICS and MAIFIP API endpoints now use the shared controller while retaining their existing notification stores and system-specific pending counts.
+
+5. Chat
+   - Both chat APIs now use core/chat_runtime.php for the same JSON response identity contract, CSRF verification, schema manager, and read-cursor operations.
+   - Existing shared chat UI remains the single frontend.
+   - Message storage, conversation groups, and office/facility membership remain workspace-specific adapters.
+
+6. Action logs
+   - Added core/audit_runtime.php as the shared audit-event writer.
+   - AICS and MAIFIP log_action() functions now use the common writer with their existing storage schemas and metadata.
+
+7. Search and pagination
+   - Added shared search normalization and page-window calculations.
+   - Applied them to both masterlists and both action-log pages.
+
+8. Modal/dialog behavior
+   - Retained the shared-shell popup/form dialog as the common form-popup implementation.
+   - Hardened popup postMessage handling to accept messages only from the same-origin shared iframe.
+   - Added Escape-key close and delegated data-confirm handling so dynamically replaced forms follow the same confirmation behavior.
+
+9. Shared shell and cache versions
+   - Existing shared header, sidebar, topbar, profile/fund summary, navigation and footer remain the single implementation for both workspaces.
+   - Updated app/cache versions to 0.0174.
+
+PRESERVED
+- AICS and MAIFIP assistance record schemas and workflows.
+- AICS local SWAD account storage versus the central MAIFIP/LPGMA users registry.
+- Office/facility visibility, assignment, ticket and approval rules.
+- Existing chat message tables and group membership semantics.
+- Existing notification and action-log tables; no destructive database migration was added.
+
+VALIDATION LIMITS
+- PHP, JavaScript and CSS static checks passed.
+- Shared runtime helper and idle-session-expiry checks passed in PHP CLI.
+- Database-backed integration testing, authenticated role-by-role browser testing, and production-host testing were not performed in this build environment.

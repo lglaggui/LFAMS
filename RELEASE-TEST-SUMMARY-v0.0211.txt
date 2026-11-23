@@ -1,0 +1,12 @@
+FAMS v0.0211 — Release Test Summary
+
+PHP lint: 149/149 passed.
+JavaScript syntax: 19/19 passed.
+CSS parser: 11/11 passed, 0 parse errors.
+PHP automated test suites: 21 passed, 1 refused by explicit database-test safety guard, 0 unexpected failures.
+New consistency assertions: 11/11 passed.
+Responsive reporting visual checks: 5/5 passed.
+Endpoint registry: 81 unique routes, all existing.
+ZIP integrity: passed; application contents verified at archive root.
+
+The refused suite is the MySQL concurrency integration test. It requires FAMS_ALLOW_DB_TESTS=1 and a dedicated FAMS_TEST_DSN containing test or staging in its database name. It was not bypassed. No live or production database was used.

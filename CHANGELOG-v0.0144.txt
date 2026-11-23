@@ -1,0 +1,6 @@
+FAMS Region II Unified — v0.0144
+
+- Added contextual left/right floating arrow controls when the pointer is near the edge of a horizontally scrollable table. Clicking an arrow scrolls the table by approximately 72% of its visible width.
+- Standardized account-management popup/form spacing, headings, labels, input controls, action rows, focus states, and mobile layout across AICS and MAIFIP.
+- Replaced the unclear password-replacement glyph with a consistent key icon in both systems.
+- Updated application asset versions to 0.0144.

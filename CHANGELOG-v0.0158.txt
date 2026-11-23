@@ -1,0 +1,14 @@
+FAMS Region II Unified — v0.0158
+
+Records page top-section standardization
+- Standardized compact, modern top cards for LPGMA and non-LPGMA users in both AICS/SWAD and MAIFIP.
+- LPGMA workspace users see the monitoring/masterlist card beside a compact Actions card.
+- Non-LPGMA users see the monitoring/masterlist card beside a separate office/facility access reminder card.
+- Converted Records page Actions controls to standardized icon-only actions with descriptive native help text (title), accessible aria-labels, consistent dimensions, hover states, and visible keyboard focus.
+- Kept the existing role and usertype permission checks around every action.
+- Removed the LPGMA office from the AICS Search & Filter office dropdown and ignore a manually supplied LPGMA office filter value so the records filter remains SWAD-office focused.
+- Updated AICS and MAIFIP version constants to 0.0158.
+
+Validation scope
+- PHP syntax checks, JavaScript syntax checks, CSS brace-balance checks, targeted source assertions, and ZIP integrity checks.
+- No live browser or database integration testing performed.

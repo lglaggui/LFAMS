@@ -1,0 +1,11 @@
+FAMS Region II Unified — v0.0103
+
+Changes
+- Shared header profile: after hover starts expansion, leaving the card no longer interrupts the expansion animation. If the pointer is still away when the card reaches its expanded width, it smoothly collapses; re-entering cancels the pending collapse.
+- AICS masterlist: changed the Edit button label to a pencil glyph with accessible Edit record label/title. The administrator delete action uses an X glyph (not a trash icon).
+- MAIFIP masterlist: narrowed Patient from 17% to 14% and Status from 6% to 5%, widened Action from 14% to 16%, preserving the 100% total column allocation. Patient and Status contents wrap.
+- Updated MAIFIP and AICS version labels to 0.0103.
+
+Validation
+- PHP syntax lint and JavaScript syntax checks are recorded in the accompanying validation report.
+- ZIP integrity checked. No live hosting/browser/database test was performed.

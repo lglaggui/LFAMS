@@ -1,0 +1,31 @@
+FAMS Region II Unified — v0.0212 Validation
+Baseline: v0.0211
+
+SOURCE CHECKS
+- PHP files: 150 checked; 0 syntax errors.
+- JavaScript files: 20 checked; 0 syntax errors.
+- AICS monthly-report inline JavaScript: passed Node.js syntax check after replacing PHP interpolation with safe literals for static parsing.
+- MAIFIP monthly-report inline JavaScript: passed Node.js syntax check after replacing PHP interpolation with safe literals for static parsing.
+- CSS files: 11 parsed; 0 parser errors.
+- Shared worksheet controller: 5 runtime-style mock-DOM assertions passed.
+- Monthly worksheet source-contract test: 11 assertions passed.
+- Existing PHP maintenance tests: 22 passed, 0 assertion failures.
+- MySQL concurrency test: safely refused (exit 2) because the required explicit FAMS_ALLOW_DB_TESTS=1 and a test/staging DSN were not provided.
+
+CHANGES VERIFIED
+- Both monthly_report.php pages load core/shared-sheet.js.
+- AICS dimensions use an AICS + year + month storage namespace.
+- MAIFIP dimensions use a MAIFIP + facility + year + month storage namespace.
+- Column widths restore for table headers, cells, and explicit colgroup elements.
+- Row heights restore by worksheet row position.
+- Pointer and mouse resize completion both persist dimensions.
+- MAIFIP manager read-only worksheets do not write dimension preferences.
+- MAIFIP inline Excel export JavaScript syntax error corrected.
+- AICS and MAIFIP version constants are synchronized to 0.0212.
+
+LIMITATIONS
+- No live MySQL/MariaDB integration or production database access.
+- No authenticated browser session or facility-role end-to-end test.
+- No live PDF/Excel application interoperability test; export generation was source/syntax checked.
+- Worksheet data remains browser-local except MAIFIP downloaded-balance settings, which retain their existing audited server-side save endpoint.
+- AICS and MAIFIP worksheet field structures and export builders remain intentionally separate in this incremental release.

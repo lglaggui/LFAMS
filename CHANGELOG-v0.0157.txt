@@ -1,0 +1,9 @@
+FAMS Region II Unified v0.0157
+
+- Standardized LPGMA record-action controls with recognizable inline SVG icons while retaining text labels, permissions, and destinations.
+- Separated the AICS Centralized Monitoring and SWAD office access reminder into distinct side-by-side cards for non-LPGMA users.
+- Separated the MAIFIP Masterlist heading and facility access reminder into distinct side-by-side cards for non-LPGMA users.
+- Reconstructed shared application topbars as fixed shell headers across AICS/SWAD and MAIFIP, reserving vertical space for page content and adapting to mobile widths.
+- Updated application version references to 0.0157.
+
+Validation: PHP syntax, JavaScript syntax, CSS brace balance, targeted source assertions, and ZIP integrity checked. Live browser/database testing not performed.

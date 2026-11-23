@@ -1,0 +1,17 @@
+FAMS REGION II UNIFIED BUILD v0.0064
+Avatar defaults, floor-based fund truncation, and shared sizing
+
+CHANGES
+1. Shared avatar rendering now selects the administrator default avatar for role=admin and the regular-user default avatar for other roles.
+2. The central avatar endpoint returns the role-appropriate default image when a central LPGMA account has no uploaded avatar.
+3. Added shared default avatar image assets under core/branding for stable fallback behavior.
+4. Header compact-money formatting uses floor/truncation at the displayed precision instead of rounding. Examples: 1,999,999 -> ₱1.9M; 10,999,999 -> ₱10M; 1,999 -> ₱1.9K.
+5. Appended final shared-shell sizing rules so the LPGMA logo and profile cards use identical dimensions in MAIFIP and AICS, overriding older conflicting stylesheet rules.
+6. Cache keys and version labels updated to 0.0064.
+7. Footer copyright remains exactly: (c) 2026 LPGMA Isabela District.
+
+VALIDATION
+- PHP syntax checks run across all PHP files.
+- JavaScript syntax check run for core/header-fit.js.
+- ZIP integrity check run on the packaged project.
+- Live database/browser verification has not been performed by this package step.

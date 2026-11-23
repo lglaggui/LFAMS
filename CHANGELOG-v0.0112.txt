@@ -1,0 +1,16 @@
+FAMS Region II Unified — v0.0112
+
+MAIFIP
+- Added a dedicated delete-entry request popup for LPGMA encoder/staff/manager roles. Requests create an approval ticket and do not alter the record until approved by an administrator.
+- Rebalanced Submission (-10%), Guardian (-10%), Remarks (-10%), and Status (-20%) widths; redistributed freed space to Patient and Bill Amount.
+- Added role-aware user.php/account.php routing.
+
+AICS
+- Central LPGMA-linked chat identities now display LPGMA Office rather than Unassigned when no local SWAD office is assigned.
+- Added role-aware user.php/account.php routing; non-admin access to users.php is redirected to the self-service account page.
+
+Both systems
+- Version labels advanced to 0.0112.
+- Added focused checks for source syntax, CSS braces, and archive integrity.
+
+Note: live browser/database/hosting tests were not performed.

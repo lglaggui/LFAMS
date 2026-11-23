@@ -1,0 +1,18 @@
+FAMS v0.0182 — VALIDATION
+
+Static checks are performed by the release script after this report is generated.
+- PHP syntax lint: see release validation output.
+- CSS parser validation: see release validation output.
+- JavaScript syntax checks: see release validation output.
+- ZIP integrity and required htdocs structure: see release validation output.
+
+Not performed: authenticated end-to-end browser tests against a live PHP/MySQL installation; production deployment; live financial-data or permission workflow tests.
+
+Actual static validation results
+- PHP files linted: 120; syntax errors: 0.
+- JavaScript files checked with node --check: 17; command completed without errors.
+- CSS files parsed with tinycss2: 11; parser errors: 0; qualified rules: 6622.
+- Workspace CSS sizes: AICS 421,742 bytes; MAIFIP 399,493 bytes.
+- Shared components CSS size: 73,308 bytes.
+
+Version constants: AICS and MAIFIP both resolve APP_VERSION 0.0182.

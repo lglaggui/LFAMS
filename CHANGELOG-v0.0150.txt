@@ -1,0 +1,13 @@
+FAMS Region II Unified — v0.0150
+Centralized SWAD Visibility and Office Reassignment Tickets
+
+- SWAD social workers and office staff can view centralized AICS records from all offices; own-office records are sorted first on every page and visually highlighted.
+- Added assigned-office column and own-office label to the AICS masterlist; added an office filter for SWAD users.
+- Updated office-access guidance to distinguish visibility from editing/status permissions.
+- Updated editable-sheet view to show all offices, prioritize the user's office, and visually highlight own-office rows. Existing edit permissions remain restricted.
+- Added a dedicated office-reassignment-only ticket form for cross-office entries. It records only the proposed office_id and reason, not beneficiary/financial field edits.
+- Ticket destinations are validated against active SWAD suboffices, excluding LPGMA. The existing admin approval flow applies the office_id proposal only after approval.
+- Cross-office records do not expose direct edit/status/delete actions; ticket action requests reassignment only. Existing own-office revision/deletion ticket behavior remains scope-checked.
+- Version bumped to 0.0150.
+
+Validation note: PHP/JS syntax and package integrity are checked; live browser and database workflow tests are not performed in this build environment.

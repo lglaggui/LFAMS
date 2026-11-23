@@ -1,0 +1,10 @@
+FAMS Region II Unified — v0.0126
+
+- MAIFIP and AICS dashboard reporting-period selectors now submit automatically when the month or year changes; the Apply Period button was removed.
+- MAIFIP monthly report Back action is now Close and calls window.close() rather than navigating back.
+- AICS monthly report Close control now calls window.close().
+- AICS monthly report toolbar and report presentation aligned more closely with MAIFIP, including a balance summary, editable signatory names/designations, and a pin/save control for browser-local signatory defaults.
+- Reworked shared header profile interaction logic for interruption-safe expansion/collapse and centralized motion rules at the end of shared-components.css.
+- Version labels updated to 0.0126.
+
+Validation scope: PHP/JavaScript syntax, CSS structure, and ZIP integrity. Live browser/database/hosting testing is not performed by these static checks.

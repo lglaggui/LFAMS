@@ -1,0 +1,5 @@
+FAMS v0.0206 JavaScript syntax validation
+- File: maifip/import_sheet.php inline import-table script
+- Tool: Node.js v22.16.0
+- Result: node --check passed with no syntax errors.
+- Scope: syntax only; no browser interaction or authenticated session was exercised.

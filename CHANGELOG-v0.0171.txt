@@ -1,0 +1,8 @@
+FAMS Region II Unified — v0.0171
+AICS-matched MAIFIP masterlist edge scrolling
+
+- MAIFIP masterlist now uses the same canonical table wrapper class combination as AICS (table-wrap + masterlist-table-wrap), while retaining its dedicated fixed-width table viewport.
+- Kept one native horizontal scrollport; no mirrored scrollbars or secondary scroll containers were reintroduced.
+- Hardened shared edge-arrow boundary handling with a slightly safer end tolerance, immediate re-evaluation while hovering an arrow, and a scrollend refresh. This prevents the MAIFIP right arrow from remaining visible after the native table scroll reaches its rightmost position.
+- AICS table markup and its working horizontal-scroll behavior were left unchanged.
+- Shared shell script cache version and both system version constants updated to 0.0171.

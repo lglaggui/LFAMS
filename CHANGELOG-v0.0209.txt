@@ -1,0 +1,20 @@
+FAMS Region II Unified — v0.0209
+Data Lifecycle and Audit Trail Hardening
+
+AICS + MAIFIP
+- Added a shared transactional archive adapter that snapshots the complete record payload and workspace-specific status history before a record is deleted.
+- Added history_payload to the shared deleted-record archive. Existing archive rows remain valid with a NULL history snapshot.
+- Before deletion, linked tickets are detached from the live record ID while retaining the record control number; MAIFIP tickets also retain the facility reference.
+- AICS approved delete tickets now retain record_control_number and detach record_id after approval. Existing archived delete-ticket references are backfilled and detached safely.
+- User removal now locks the target account and writes its local account ID, username, full name and (for MAIFIP) role/facility into the audit description within the same transaction.
+- AICS identity-bridge, record-version/validity, avatar, ticket and archive schema upgrades no longer silently mark incomplete work as complete.
+- MAIFIP audit, facility, facility-scoped data, monthly-report, offline-sync, control-number and ticket-reference migrations now verify required schema state and surface critical failures.
+- MAIFIP facility-aware unique indexes are created and verified before legacy indexes are removed; unexpected definitions and duplicate conditions do not trigger destructive index replacement.
+- MAIFIP chat unread schema migration now verifies columns after concurrent ALTER attempts.
+- Optional MAIFIP media seeding remains non-blocking but logs failures and retries on later requests.
+
+Preserved behavior
+- AICS and MAIFIP retain separate record/history tables, permissions, office/facility scopes and workflow rules.
+- Restoration continues to create a new record with a new control number; original archived record and status history remain as audit evidence.
+- No existing beneficiary/patient rows, legacy duplicate identifiers, or historical ticket decisions were automatically deleted or rewritten beyond safe ticket-reference snapshot/backfill operations.
+- No production database access or writes; no staging environment used.

@@ -1,0 +1,26 @@
+LFAMS v0.0045 — MIGRATION VALIDATION REPORT
+
+SOURCE FILES
+- lpgma_fams (14).sql — uploaded in lfams db.zip
+- swad_fams (4).sql — uploaded in lfams db.zip
+
+SCHEMA MAPPING
+- 21 MAIFIP source tables retained with original names.
+- 17 AICS/SWAD source tables renamed with the aics_ prefix.
+- 38 total CREATE TABLE statements in lfams_unified.sql.
+- Source INSERT statements are carried into the corresponding output tables, with AICS/SWAD table names prefixed. Empty source tables remain defined.
+
+APPLICATION FIXES IN THIS BUILD
+- Both workspaces obtain their PDO connection from core/database.php.
+- Hosting database credentials are configured in one file.
+- LPGMA-to-AICS bridge now reads/writes aics_users and aics_offices where appropriate.
+- Cross-system switch reads the authoritative LPGMA user from users, not from aics_users.
+- Portal version and deployment instructions updated to 0.0045.
+
+CHECKS RUN
+- PHP syntax lint for all PHP files.
+- ZIP archive integrity check.
+- SQL table mapping check against both source dumps.
+
+NOT CLAIMED
+- No live database server or hosting credentials were available, so SQL import execution, password login, record-level foreign-key consistency, and end-to-end browser testing have not been performed. Test these on a fresh database before replacing a live deployment.

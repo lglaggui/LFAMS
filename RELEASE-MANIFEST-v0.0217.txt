@@ -1,0 +1,34 @@
+FAMS Region II Unified — Release Manifest v0.0217
+Release: MAIFIP Signed Fund Movements and Negative Download Reconciliation
+
+Package contents
+- Complete unified htdocs source tree at archive root.
+- CHANGELOG-v0.0217.txt
+- VALIDATION-v0.0217.txt
+- PHP-LINT-v0.0217.txt
+- TEST-SUMMARY-v0.0217.txt
+- maintenance/tests/monthly_reconciliation_contract_test.php
+- Prior release history and migrations retained.
+
+Primary code changes
+- maifip/helpers.php: signed net downloaded-fund total; removed zero-floor clipping.
+- maifip/fund.php: accepts negative fund movement values, updates form guidance, and labels ledger values as signed movements.
+- maifip/monthly_report.php and maifip/monthly_report_print.php: label the figure NET FUND DOWNLOADS.
+- maintenance/tests/: added signed-balance and negative-entry contract checks; synchronized release assertions to 0.0217.
+- aics/config.php and maifip/app_version.php: synchronized application version markers to 0.0217.
+
+Calculation
+Ending Balance = Opening Balance + Net Fund Downloads + Fund Adjustments - Released Assistance.
+Negative fund-download entries reduce net fund downloads and therefore reduce the available/ending balance. They are not opening balances.
+
+Database and migration notes
+- fund_downloads.downloaded_amount is already a signed DECIMAL(14,2) in the supplied schema.
+- No schema migration is introduced by v0.0217.
+- No production DB operation was performed.
+
+Verification
+- 154 PHP files passed syntax checks.
+- 21 JavaScript files passed syntax checks.
+- 25 PHP test scripts passed; MySQL concurrency integration and its standalone worker were excluded for lack of an explicitly authorized staging DSN.
+- 5 responsive visual checks passed.
+- Database-backed tests remain pending isolated MySQL/MariaDB staging.

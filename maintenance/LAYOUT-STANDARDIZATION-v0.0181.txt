@@ -1,0 +1,12 @@
+v0.0181 shared layout standardization
+
+The shared shell remains the single source of truth for Pageview geometry and spacing. Existing gutter values remain: 28px desktop, 22px medium/tablet, 16px compact, and 12px narrow mobile.
+
+Added shared tokens:
+- --fams-card-padding / --fams-card-padding-compact / --fams-card-padding-mobile
+- --fams-card-radius
+- --fams-control-gap
+- --fams-form-row-gap
+- --fams-content-max
+
+The shared Pageview applies common grid rhythm to common form, filter, dashboard, statistics, and card grids. System-specific form structures, table layouts, popup surfaces, and print layouts remain intentionally separate.

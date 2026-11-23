@@ -1,0 +1,21 @@
+FAMS Region II Unified — v0.0183
+
+C. Route-aware JavaScript loading
+- Dashboard reporting-period behavior is loaded only on dashboard.php.
+- Shared table enhancement is loaded only on routes that render common data tables.
+- Input-assist enhancement is loaded only on form-oriented routes.
+- Header-fit is omitted from popup documents.
+- Shared shell, notifications, page-skeleton, session activity and accessibility/UX remain on normal authenticated shell pages where they are needed.
+- Workspace app.js is now deferred to avoid blocking HTML parsing while preserving script order.
+
+D. Image optimization
+- Six oversized shared/facility branding PNGs were replaced by lossless WebP equivalents after pixel-for-pixel RGBA verification.
+- All runtime references were updated and the original PNGs removed only after the reference audit. No logo was downscaled or visually altered.
+- Verified savings: approximately 2.25 MiB uncompressed. See maintenance/IMAGE-OPTIMIZATION-v0.0183.txt for per-file savings.
+
+E. Deployment / database backup separation
+- Removed SQL dumps and historical migration scripts from htdocs.
+- Preserved all three SQL source files in a separate consolidated database-backup ZIP outside the web root.
+- Updated deployment and import documentation. The archive is not an executable migration chain; each file has its own purpose and safety notes.
+
+No application database records, schemas, permissions, assistance workflows or financial calculations were modified.

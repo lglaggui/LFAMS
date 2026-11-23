@@ -1,0 +1,28 @@
+FAMS REGION II v0.0194 — VALIDATION REPORT
+Date: 2026-11-05
+Baseline: v0.0193
+
+SOURCE VALIDATION
+- PHP syntax: 129 PHP files linted; 0 syntax errors.
+- Static layout assertions: 6 passed.
+- Unified login PHP response: HTTP 200; rendered version marker is 0.0194.
+- Unified login stylesheet cache keys use APP_VERSION (0.0194), not the stale 0.0175 key.
+
+CHROMIUM LAYOUT CHECKS
+Rendered using Chromium at 1440x1000, 768x1024, and 390x844.
+- Tablet 768px: unified login grid resolves to one 768px track; hidden brand panel does not leave a phantom second column; horizontal scroll width remains 768px.
+- Desktop 1440px: two-column layout remains active; no horizontal overflow.
+- Mobile 390px: one-column layout; no horizontal overflow.
+- Browser page errors: 0 across the three login viewport checks.
+
+REPORTING-PERIOD COMPONENT CHECKS
+Rendered shared AICS/MAIFIP reporting component at 1440px, 1024px, 768px, and 390px.
+- Status card computed padding: 14px 16px (14px at narrow widths), so text is inset from the card edges.
+- Selected-period report action uses normal wrapping, bounded width, and overflow-wrap; it stays within the form/card at every tested viewport.
+- Document horizontal scroll width equals viewport width at all four sizes.
+
+LIMITATIONS
+- No baseline screenshots were approved before this pass; these are post-fix validation captures, not pixel-difference comparisons.
+- Reporting component was rendered with production CSS and representative DOM, not authenticated dashboard data.
+- Authenticated AICS/MAIFIP dashboards, database workflows, and production integrations were not tested because this environment has no MySQL server or PHP pdo_mysql driver and no staging credentials.
+- No production database was accessed or modified.

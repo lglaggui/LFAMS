@@ -1,0 +1,36 @@
+FAMS v0.0218 — Validation Report
+
+Scope
+- MAIFIP monthly reconciliation review across reporting months and facilities.
+- Based on v0.0217 source, the supplied MariaDB SQL dump, and the v0.0218 source changes.
+
+Code changes
+- Global 2026+ opening-anchor uniqueness validation.
+- Canonical normalized facility/status retrieval for monthly released detail rows.
+- Stored historical-summary comparison metadata and explicit discrepancy reporting across worksheet, print, Excel, and CSV.
+- Signed fund movements and signed adjustments remain supported and carried forward.
+- AICS business rules and calculations were not changed.
+
+Source validation
+- PHP syntax: 155 files passed php -l.
+- JavaScript syntax: 21 files passed node --check.
+- PHP test scripts: 26 passed, 0 failed.
+- MySQL concurrency integration test: skipped because no isolated MySQL staging DSN and explicit opt-in were supplied.
+- Reporting-period visual test: 5 viewport checks passed (desktop, tablet-wide, tablet, mobile, small mobile).
+- Monthly reconciliation global contract: 13 checks, 0 failures.
+- Existing monthly reconciliation contract: 17 checks, 0 failures.
+- Fund opening classification: 15 checks, 0 failures.
+- Fund ledger anchor: 16 checks, 0 failures.
+- ZIP integrity: checked on the generated release archive.
+
+Offline database review
+- See DATABASE-RECONCILIATION-AUDIT-v0.0218.txt.
+- 65 facility/month or opening-anchor comparisons; zero arithmetic differences.
+- One SIMC September 2026 stored-summary/live-record discrepancy was identified and is now explicitly surfaced by report outputs.
+- No negative fund-download rows or adjustment rows were present in the supplied dump.
+
+Limitations
+- The runtime has PDO but no pdo_mysql/pdo_sqlite driver and no MySQL/MariaDB server or CLI. The SQL dump could not be imported or executed.
+- No database-backed monthly reconciliation, transaction, authorization, or concurrency test was performed.
+- No production database was accessed or modified.
+- No SQL migration is introduced by v0.0218.

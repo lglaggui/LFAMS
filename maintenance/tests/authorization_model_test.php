@@ -1,0 +1,24 @@
+<?php
+declare(strict_types=1);
+require_once __DIR__ . '/../../core/access_control.php';
+$passed=0;$failed=0;
+$check=static function(bool $ok,string $label)use(&$passed,&$failed):void{echo ($ok?'PASS: ':'FAIL: ').$label.PHP_EOL;if($ok)$passed++;else $failed++;};
+$m=fams_authorization_model();
+$check(($m['model_version']??0)===1,'authorization model has a supported version');
+$check(($m['deny_by_default']??false)===true,'authorization model denies by default');
+$check(($m['ui_visibility_is_authorization']??true)===false,'UI visibility is explicitly not authorization');
+$check(($m['decision_order']??[])===['authenticated_session','workspace_role','capability','workspace_scope','record_ownership','workflow_state'],'authorization decisions follow the required evaluation order');
+$check(($m['workspaces']['AICS']['scope_dimension']??'')==='office_id','AICS scope is office-based');
+$check(($m['workspaces']['MAIFIP']['scope_dimension']??'')==='facility','MAIFIP scope is facility-based');
+$check(($m['workspaces']['AICS']['read_scope']??'')==='workspace_records','AICS preserves cross-office SWAD read visibility');
+$check(($m['workspaces']['MAIFIP']['read_scope']??'')==='active_facility','MAIFIP reads remain within active facility context');
+$check(($m['workspaces']['AICS']['roles']['staff']['mutate']??'')==='lpgma_or_assigned_office','AICS staff mutation scope remains office-qualified');
+$check(($m['workspaces']['AICS']['roles']['social_worker']['mutate']??'')==='assigned_swad_office','AICS social worker mutation scope remains assigned-office-only');
+$check(($m['workspaces']['MAIFIP']['roles']['social_worker']['mutate']??'')==='assigned_facility','MAIFIP social worker mutation scope remains facility-qualified');
+$check(fams_authorization_role_policy('AICS','staff')!==null,'known AICS role policy resolves');
+$check(fams_authorization_role_policy('MAIFIP','encoder')!==null,'MAIFIP encoder remains workspace-specific');
+$check(fams_authorization_role_policy('AICS','encoder')===null,'MAIFIP-only encoder role cannot leak into AICS');
+$check(fams_authorization_role_policy('UNKNOWN','admin')===null,'unknown workspace fails closed in policy lookup');
+$check(count($m['shared_requirements'])===7,'shared enforcement requirements are explicitly catalogued');
+printf("\nAuthorization model tests: %d passed, %d failed.\n",$passed,$failed);
+exit($failed===0?0:1);

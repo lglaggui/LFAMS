@@ -1,0 +1,7 @@
+Release: FAMS Region II Unified v0.0209
+Baseline: v0.0208
+Package layout: full htdocs source at ZIP archive root
+Main changes: transactional record+history archive snapshots; ticket reference detachment/snapshots; account removal attribution; critical runtime migration verification and safe unique-index replacement.
+Validation: see VALIDATION-v0.0209.txt and TEST-RESULTS-v0.0209.txt.
+Database-connected tests: not run; no staging DB configured.
+Production database: not accessed or modified.

@@ -1,0 +1,7 @@
+FAMS Region II Unified — v0.0120
+
+- AICS Configured Offices: force edit/enable-disable/remove icon actions into a single horizontal row; prevent global form styles from stacking the action forms vertically. The row can scroll with its table wrapper on narrow screens.
+- Shared profile card: lengthen expansion/collapse to 560ms with a smooth ease-out curve; adjust collapse cleanup fallback to avoid truncating the transition. Applied through the shared shell used by MAIFIP and AICS.
+- Version labels updated to 0.0120.
+
+Validation scope: PHP syntax, CSS brace balance, archive integrity, and static source checks. No live browser, database, or hosting tests were performed.

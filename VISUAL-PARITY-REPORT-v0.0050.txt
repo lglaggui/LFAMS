@@ -1,0 +1,24 @@
+LFAMS v0.0050 — VISUAL PARITY REFACTOR
+
+Purpose
+Make MAIFIP and AICS/SWAD use the same visual application shell while preserving system-specific branding, data, permissions, workflows, and database tables.
+
+Implemented
+- Added a final shared-shell CSS layer to neutralize conflicting legacy AICS shell geometry overrides.
+- Standardized desktop sidebar width, content-column placement, header position, page-view width, footer placement, navigation rhythm, facility card sizing, and user panel sizing.
+- Standardized mobile sidebar overlay behavior and main content/footer full-width behavior.
+- Kept the same shell renderers for header, sidebar frame, viewport wrapper, and footer.
+- Updated AICS sidebar logo to DSWD Region II branding while preserving MAIFIP LPGMA branding.
+- Footer organization label now comes from active system configuration.
+- Updated application version to 0.0050 and cache-busting tags.
+- No SQL schema or data migration is required for this code-only update.
+
+Validation
+- All PHP files passed php -l.
+- ZIP archive integrity check passed.
+- Asset path for DSWD Region II sidebar logo was verified to exist.
+
+Not yet verified
+- Pixel-by-pixel browser comparison at multiple desktop/mobile widths.
+- Live hosting behavior, real database queries, login and system switching, notifications, chat, and role permissions.
+- These need browser/runtime testing against the deployed environment; this report does not claim those tests were completed.

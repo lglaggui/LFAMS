@@ -1,0 +1,8 @@
+FAMS Unified v0.0134
+
+- Restyled the AICS ticket submission/edit popup to follow the MAIFIP ticket form hierarchy, section headings, form grid, and action placement while retaining the AICS support-ticket workflow and permissions.
+- Kept ticket submission and editing inside the shared modal popup; cancel and successful submission communicate with the parent modal controller.
+- Added explicit runtime width calculation for the expanding logout control so the profile card allocates room for its full label instead of relying on a fixed 30px width.
+- Bumped MAIFIP and AICS asset versions to 0.0134.
+
+Validation scope: static syntax and archive checks only. No live database, browser, or hosting test was performed.

@@ -1,0 +1,28 @@
+FAMS REGION II — v0.0191 VALIDATION REPORT
+Date: 04 November 2026
+
+PACKAGE
+- Full htdocs source contents are packaged at the ZIP root.
+- mgtrack/android-app/ is absent from the package by request.
+- AICS and MAIFIP source directories, core shared services, portal, and maintenance tests are retained.
+
+STATIC VALIDATION
+- PHP: 123 files linted; 0 syntax errors.
+- JavaScript: 19 files checked with node --check; 0 syntax errors.
+- CSS: 11 files parsed with tinycss2; 0 parser errors.
+- Shared transaction runtime tests: 4 passed; 0 failed.
+- Permission / endpoint source-regression tests: 41 passed; 0 failed.
+
+MYSQL / DATABASE VALIDATION
+- PDO is present, but no PDO database driver (including pdo_mysql) is installed in this environment.
+- maintenance/tests/mysql_concurrency_test.php was invoked and correctly reported: SKIP: pdo_mysql is not installed.
+- The included harness is guarded: it requires FAMS_ALLOW_DB_TESTS=1 and a FAMS_TEST_DSN database name containing "test" or "staging".
+- Live MySQL schema migration, record creation/update, rollback, unique-key contention, and simultaneous HTTP endpoint tests remain to be run against a dedicated staging database.
+- No production database was accessed or modified.
+
+BROWSER VALIDATION
+- No browser session or deployed staging URL was available for visual and interaction regression testing in this build pass.
+
+RESULT
+- Static checks passed.
+- Database-backed and browser-backed validation remain pending; do not treat this package as production-verified until those tests pass.

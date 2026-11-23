@@ -1,0 +1,23 @@
+FAMS Region II — v0.0206
+Step 4.2: Source-level concurrency hardening for spreadsheet imports
+
+AICS
+- Import preview now records the matched AICS record ID and record_version for every existing Control No.
+- Import apply re-locks the matched record and rejects a new, missing, replaced, or version-changed match since preview.
+- Existing-record updates use record-version compare-and-swap and require exactly one affected row.
+- Existing AICS office-scope and non-administrator WAITING-only restrictions remain in place.
+
+MAIFIP
+- Import preview and recheck now retain the matched record ID and record_version.
+- The editable import table refreshes match/version metadata after recheck and carries it into the apply payload.
+- Import apply rejects a changed or replaced facility record match since the last preview/recheck.
+- Existing-record updates use facility- and version-scoped compare-and-swap and require exactly one affected row.
+- Existing facility-scope, record-status and status-history behavior remain in place.
+
+Validation
+- Added import_preview_concurrency_test.php with seven source-level assertions.
+- 143 PHP files passed syntax lint.
+- MAIFIP import inline JavaScript passed Node.js syntax validation.
+- 174 source-level assertions passed across the available automated test suites.
+- The MySQL concurrency suite was not run because no explicitly authorized staging/test DSN is available; it refuses to run without the safety opt-in.
+- No database connection, schema migration, production data access, or database write was performed.

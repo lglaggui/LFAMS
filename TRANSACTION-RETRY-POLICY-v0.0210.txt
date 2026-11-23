@@ -1,0 +1,13 @@
+FAMS v0.0210 — Transaction Retry Policy
+
+The shared fams_shared_transaction_retry() helper retries only top-level transactions and only for recognized transient InnoDB failures:
+- SQLSTATE 40001 / vendor error 1213: deadlock.
+- Vendor error 1205: lock wait timeout.
+
+Maximum attempts: 5 (default 3). Backoff is exponential with bounded random jitter.
+
+The callback can execute more than once. It must contain database-only work and must not send email, write files, make HTTP requests, or perform other external side effects. Business validation, permission errors, unique-constraint violations, and stale record-version errors are not retried.
+
+Nested transactions use the existing savepoint behavior and do not retry independently. The AICS and MAIFIP status-update closures are safe for retry because they re-lock the row, re-check record version and permissions, and keep mutation, history, and critical audit writes in the same transaction.
+
+No database concurrency simulation was performed in this environment. The retry behavior was tested with a PDO test double.

@@ -1,0 +1,24 @@
+<?php
+declare(strict_types=1);
+$root=dirname(__DIR__,2);
+$checks=0;$failed=0;
+$assert=static function(bool $ok,string $message)use(&$checks,&$failed):void{$checks++;echo ($ok?'PASS: ':'FAIL: ').$message."\n";if(!$ok)$failed++;};
+$aics=file_get_contents($root.'/aics/import_sheet.php');
+$maifip=file_get_contents($root.'/maifip/import_sheet.php');
+$sync=file_get_contents($root.'/maifip/offline_sync.php');
+$resolve=file_get_contents($root.'/maifip/offline_resolve.php');
+$aicsExport=file_get_contents($root.'/aics/export_csv.php');
+$maifipExport=file_get_contents($root.'/maifip/export_csv.php');
+$assert(str_contains($aics,'is_uploaded_file($_FILES[\'sheet\'][\'tmp_name\'])') && str_contains($aics,'in_array($ext,[\'csv\',\'xlsx\'],true)'),'AICS import requires an actual uploaded file and an allowed extension');
+$assert(str_contains($maifip,'is_uploaded_file($_FILES[\'sheet\'][\'tmp_name\'])') && str_contains($maifip,'20*1024*1024'),'MAIFIP import validates upload provenance and size');
+$assert(str_contains($aics,'non-administrator imports may only create or retain WAITING records'),'AICS imports cannot bypass status-transition workflow');
+$assert(str_contains($maifip,'non-administrator imports may only create or retain WAITING records'),'MAIFIP imports cannot bypass status-transition workflow');
+$assert(str_contains($aics,'aics.import.apply') && str_contains($aics,'can_edit_record($existing)'),'AICS import retains idempotency and office edit checks');
+$assert(str_contains($maifip,'maifip.import.apply') && str_contains($maifip,'can_edit_existing_record($existing)'),'MAIFIP import retains idempotency and facility edit checks');
+$assert(str_contains($sync,"fams_current_type_allows('MAIFIP','create_records')") && str_contains($sync,"fams_current_type_allows('MAIFIP','edit_records')"),'Offline synchronization separates create and edit capabilities');
+$assert(str_contains($sync,'count($changes)>100'),'Offline synchronization caps batch size');
+$assert(str_contains($sync,'client_change_id') && str_contains($sync,'record_version') && str_contains($sync,'$activeFacility'),'Offline sync retains replay, version and facility controls');
+$assert(str_contains($resolve,'WHERE id=? AND facility=? FOR UPDATE') && str_contains($resolve,'record_version=?'),'Conflict resolution locks facility record and validates current version');
+$assert(str_contains($aicsExport,"fams_current_type_allows('AICS','export_records')"),'AICS bulk export requires export capability');
+$assert(str_contains($maifipExport,"fams_current_type_allows('MAIFIP','export_records')") && str_contains($maifipExport,'WHERE facility=?'),'MAIFIP bulk export requires capability and facility scope');
+echo "Checks: {$checks}; Failed: {$failed}\n";exit($failed?1:0);

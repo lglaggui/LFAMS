@@ -1,0 +1,20 @@
+FAMS Region II Unified — v0.0154
+DOH MAIFIP dashboard live-data and worksheet editor refinement
+Date: 2026-10-29
+
+Changes
+- Rebuilt the DOH MAIFIP Region II worksheet template from the active MAIFIP facility registry rather than hard-coded facility names in the uploaded workbook.
+- Removed the old workbook-only DOH R2, TRC R02, and Tumauini Community Hospital sections from the generated template unless those are configured as active facilities in FAMS.
+- Populated downloaded-fund rows from each active facility's fund_downloads records, including amount, date, source, and batch number.
+- Populated utilized fund values from released assistance records, using record-level released amounts in preference to imported monthly summaries for months that have actual released records.
+- Calculated facility and region totals from system values; reset regenerates the current system-based template.
+- Added draggable column-width and row-height controls.
+- Added selected-cell formatting tools for font family, font size, bold, italic, underline, text color, and cell background color.
+- Enabled editing of worksheet text and cells for authorized users.
+- Persisted cell styles and geometry with server-side validation and bounded size/range checks.
+- Upgraded prior v0.0153 worksheet data once to the system-derived layout.
+- Bumped application version to 0.0154 across MAIFIP and AICS version constants.
+
+Notes
+- The uploaded workbook remains included as the layout/reference source. Its historical facility and financial values are not used as live FAMS data.
+- The table layout is a workbook-style HTML recreation; it is not an embedded Excel engine.

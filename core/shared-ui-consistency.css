@@ -1,0 +1,154 @@
+/* FAMS v0.0220 — cross-workspace UI consistency layer.
+   Loaded after workspace and shared styles. Scoped to the shared application shell;
+   intentionally does not alter workflow, permission, or data behavior. */
+:root {
+  --fams-ui-page-gap: clamp(12px, 1.5vw, 18px);
+  --fams-ui-card-radius: 13px;
+  --fams-ui-control-radius: 9px;
+  --fams-ui-card-border: #dfe7ee;
+  --fams-ui-card-shadow: 0 5px 18px rgba(21,55,83,.045);
+  --fams-ui-control-height: 40px;
+  --fams-ui-mobile-gutter: 12px;
+}
+body.app-body .page-view {
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+body.app-body .page-view :where(.panel,.card,.form-card,.form-panel,.masterlist-table-card,.reporting-period-panel) {
+  min-width: 0;
+  border-radius: var(--fams-ui-card-radius);
+}
+body.app-body .page-view :where(.panel,.card,.form-card,.form-panel,.masterlist-table-card) {
+  border-color: var(--fams-ui-card-border);
+  box-shadow: var(--fams-ui-card-shadow);
+}
+body.app-body .page-view :where(.panel-heading,.section-head,.modal-head,.modal-header,.fams-modal-header) {
+  min-width: 0;
+  gap: 10px;
+}
+body.app-body .page-view :where(.panel-heading h1,.panel-heading h2,.panel-heading h3,.section-head h1,.section-head h2,.section-head h3) {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  line-height: 1.3;
+}
+
+/* Common data-entry controls: consistent height, readable text and visible states. */
+body.app-body .page-view :where(input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=hidden]),select,textarea,.input),
+body.fams-popup-page :where(input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=hidden]),select,textarea,.input) {
+  box-sizing: border-box;
+  max-width: 100%;
+  min-width: 0;
+  border-radius: var(--fams-ui-control-radius);
+}
+body.app-body .page-view :where(input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=hidden]),select,.input),
+body.fams-popup-page :where(input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=hidden]),select,.input) {
+  min-height: var(--fams-ui-control-height);
+}
+body.app-body .page-view :where(textarea),body.fams-popup-page :where(textarea) {
+  min-height: 96px;
+  line-height: 1.5;
+  resize: vertical;
+}
+body.app-body .page-view :where(label,.form-label) {
+  line-height: 1.4;
+}
+body.app-body .page-view :where(.form-help,.form-text,.help-text,small.muted) {
+  color: #667f93;
+  line-height: 1.5;
+}
+body.app-body .page-view :where(input,select,textarea):disabled {
+  cursor: not-allowed;
+  background-color: #f1f4f7;
+  color: #75879a;
+}
+body.app-body .page-view :where(input[aria-invalid=true],select[aria-invalid=true],textarea[aria-invalid=true]) {
+  border-color: #bd4b52;
+  box-shadow: 0 0 0 3px rgba(189,75,82,.10);
+}
+
+/* Filters align consistently and collapse without horizontal overflow. */
+body.app-body .page-view :where(.filter-bar,.filter-grid,.filter-row,.filters-row,.logs-filter-bar,.masterlist-filterbar,.account-filter-bar,.fams-audit-filters) {
+  min-width: 0;
+  align-items: end;
+  row-gap: 10px;
+}
+body.app-body .page-view :where(.filter-bar,.filter-grid,.filter-row,.filters-row) > * { min-width: 0; }
+body.app-body .page-view :where(.filter-bar,.filter-grid,.filter-row,.filters-row) :where(input,select,button) { max-width: 100%; }
+
+/* Tables share a calm header, consistent density and predictable wrapping. */
+body.app-body .page-view :where(table.fams-standard-table,table.fams-data-list-table,table.records-table,table.management-table,table.masterlist-table,table.monthly-report-table) {
+  border-collapse: separate;
+  border-spacing: 0;
+  font-variant-numeric: tabular-nums;
+}
+body.app-body .page-view :where(table.fams-standard-table,table.fams-data-list-table,table.records-table,table.management-table,table.masterlist-table,table.monthly-report-table) thead th {
+  vertical-align: middle;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+body.app-body .page-view :where(table.fams-standard-table,table.fams-data-list-table,table.records-table,table.management-table,table.masterlist-table,table.monthly-report-table) tbody td {
+  vertical-align: middle;
+  line-height: 1.45;
+}
+body.app-body .page-view :where(.table-wrap,.table-responsive,.masterlist-table-wrap,.fams-data-list-table-wrap) { min-width: 0; }
+
+/* Empty states: center the message, preserve useful action links and avoid oversized gaps. */
+body.app-body .page-view :where(.empty,.aics-empty,.chat-empty,.notification-empty,.fams-table-empty,.empty-office-card,.empty-cell) {
+  min-width: 0;
+  color: #718397;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+body.app-body .page-view :where(.empty,.aics-empty,.chat-empty,.notification-empty,.fams-table-empty) :where(strong,h3,h4) {
+  color: #38566f;
+  line-height: 1.35;
+}
+body.app-body .page-view :where(.empty,.aics-empty,.chat-empty,.notification-empty) :where(p,small) { max-width: 58ch; }
+
+/* Dialog and popup content use one spacing rhythm; nested content may still scroll. */
+body.fams-popup-page { box-sizing: border-box; min-width: 0; }
+body.fams-popup-page > :where(.panel,.card,.form-card,.form-panel,.account-popup-modern) {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+body.fams-popup-page :where(.form-grid,.form-grid-2,.admin-user-editor-grid) { min-width: 0; }
+body.fams-popup-page :where(.form-grid,.form-grid-2) > * { min-width: 0; }
+body.fams-popup-page :where(.form-actions,.modal-actions,.form-footer) {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+body.fams-popup-page :where(.form-actions,.modal-actions,.form-footer) > * { max-width: 100%; }
+
+/* Dashboard cards and KPI values maintain consistent hierarchy. */
+body.app-body .page-view :where(.stat,.stat-card,.dashboard-card,.kpi-card,.fams-kpi-card,.summary-card) {
+  box-sizing: border-box;
+  min-width: 0;
+  border-radius: var(--fams-ui-card-radius);
+}
+body.app-body .page-view :where(.stat,.stat-card,.dashboard-card,.kpi-card,.fams-kpi-card,.summary-card) :where(strong,.value,.stat-value) {
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 760px) {
+  body.app-body .page-view { padding-left: var(--fams-ui-mobile-gutter); padding-right: var(--fams-ui-mobile-gutter); }
+  body.app-body .page-view :where(.panel,.card,.form-card,.form-panel,.masterlist-table-card) { border-radius: 11px; }
+  body.app-body .page-view :where(.filter-bar,.filter-grid,.filter-row,.filters-row,.logs-filter-bar,.masterlist-filterbar,.account-filter-bar) { width: 100%; }
+  body.fams-popup-page { padding: 10px !important; }
+  body.fams-popup-page :where(.form-actions,.modal-actions,.form-footer) { justify-content: stretch; }
+  body.fams-popup-page :where(.form-actions,.modal-actions,.form-footer) > :where(button,a,input[type=submit]) { flex: 1 1 130px; }
+}
+@media (max-width: 420px) {
+  body.app-body .page-view :where(.panel-heading,.section-head) { align-items: flex-start; }
+  body.app-body .page-view :where(.panel-heading,.section-head) :where(button,a) { max-width: 100%; }
+  body.fams-popup-page :where(.form-actions,.modal-actions,.form-footer) > :where(button,a,input[type=submit]) { flex-basis: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  body.app-body .page-view *, body.fams-popup-page * { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}

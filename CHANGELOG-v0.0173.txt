@@ -1,0 +1,8 @@
+FAMS Region II Unified — v0.0173
+Wide-table-only edge navigation
+
+- Restricted floating horizontal edge arrows to explicit table wrappers containing a real table.
+- Removed generic ancestor-scrollport fallback. Cards, sections, page panels, and arbitrary overflow containers can no longer activate table arrows.
+- Requires the table itself to be wider than its wrapper and the wrapper to have actual horizontal overflow.
+- Retains the same wrapper scroll ownership and edge boundary calculations introduced in v0.0172.
+- Bumped shared-shell script cache key and AICS/MAIFIP app versions to 0.0173.

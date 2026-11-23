@@ -1,0 +1,15 @@
+FAMS REGION II UNIFIED v0.0084 — MASTERLIST, PROFILE, AND AICS REPORT SHEET
+
+Changes
+- Header profile logout button is absolutely pinned to the right edge of the profile card; its label expansion is measured by the shared controller and the profile grows to the left.
+- AICS masterlist action controls and search/filter controls are now separate, clearly labeled sections. Display Sheet opens the editable masterlist; Export CSV now produces a filtered CSV download instead of opening the sheet again.
+- MAIFIP masterlist action and search sections retain their existing separation and now have explicit accessible section labels.
+- AICS Display Selected Period Report now opens an editable worksheet with a shared toolbar style, local edit persistence, add/remove rows, column and row resizing, Excel-compatible export, and browser Print/Save as PDF. Edits to this reporting worksheet are local and do not change the assistance database.
+- Shared editable-sheet CSS now styles toolbar links as well as buttons; MAIFIP and AICS sheets use the updated cache token. AICS report rows and columns both support pointer-based resizing.
+- Version bumped to 0.0084.
+
+Validation
+- PHP syntax checked across all PHP files.
+- JavaScript syntax checked for the new AICS report worksheet and shared application scripts.
+- CSS brace-balance and ZIP integrity checked.
+- No live database/browser deployment was performed.

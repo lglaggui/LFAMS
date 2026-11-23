@@ -1,0 +1,22 @@
+<?php
+declare(strict_types=1);
+$root=dirname(__DIR__,2);
+$checks=0;$failed=0;
+$check=static function(bool $ok,string $label)use(&$checks,&$failed):void{$checks++;echo ($ok?'PASS: ':'FAIL: ').$label.PHP_EOL;if(!$ok)$failed++;};
+$aics=(string)file_get_contents($root.'/aics/monthly_report.php');
+$maifip=(string)file_get_contents($root.'/maifip/monthly_report.php');
+$shared=(string)file_get_contents($root.'/core/shared-sheet.js');
+$css=(string)file_get_contents($root.'/core/shared-sheet.css');
+$check(str_contains($aics,'../core/shared-sheet.js?v=<?=e(APP_VERSION)?>'),'AICS loads the shared worksheet controller');
+$check(str_contains($maifip,'../core/shared-sheet.js?v=<?=e(APP_VERSION)?>'),'MAIFIP loads the shared worksheet controller');
+$check(str_contains($aics,'data-sheet-key="<?=e(\'aics:\'.$year.\':\'.$month)?>"'),'AICS dimensions are isolated by reporting period');
+$check(str_contains($maifip,'data-sheet-key="<?=e(\'maifip:\'.$activeFacility.\':\'.$year.\':\'.$month)?>"'),'MAIFIP dimensions are isolated by facility and reporting period');
+$check(str_contains($maifip,'data-sheet-readonly="<?= $readOnly ? \'1\' : \'0\' ?>"'),'MAIFIP read-only mode is passed to the shared controller');
+$check(str_contains($shared,"fams.sheet.dimensions.v1:") && str_contains($shared,'localStorage.setItem(storageKey'),'shared controller persists worksheet dimensions');
+$check(str_contains($shared,"document.addEventListener('pointerup'") && str_contains($shared,"document.addEventListener('mouseup'"),'shared controller supports both pointer and mouse resize handlers');
+$check(str_contains($shared,'colgroup.children[index]'),'shared controller restores explicit column-group widths');
+$check(str_contains($css,'common worksheet geometry'),'both worksheets use the shared visual standard');
+$check(str_contains((string)file_get_contents($root.'/aics/config.php'),"const APP_VERSION = '0.0220';"),'AICS version is synchronized');
+$check(str_contains((string)file_get_contents($root.'/maifip/app_version.php'),"const APP_VERSION = '0.0220';"),'MAIFIP version is synchronized');
+echo "Assertions: {$checks}; failures: {$failed}".PHP_EOL;
+exit($failed?1:0);

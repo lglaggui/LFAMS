@@ -1,0 +1,33 @@
+FAMS v0.0190 — Validation Report
+
+STATIC VALIDATION
+- PHP files checked: 122
+- PHP syntax errors: 0
+- JavaScript files checked: 19
+- JavaScript syntax errors: 0
+- CSS files parsed: 11
+- CSS parse errors: 0
+- Transaction runtime tests: 4 passed, 0 failed
+- Permission matrix tests: 32 passed, 0 failed
+- ZIP integrity: pending final archive check
+
+SOURCE CHECKS
+- MAIFIP Fund Summary is emitted by the shared topbar for eligible roles; it is not placed in the dashboard Hero Banner.
+- MAIFIP dashboard actions are in a right-side action wrapper at desktop widths and stack on narrow screens.
+- DOH MAIFIP R2 Fund Dashboard action targets doh_dashboard.php.
+- DOH MAIFIP dashboard includes a top-right Back to Dashboard link.
+- No DOH MAIFIP dashboard navigation link was found in MAIFIP sidebar_navigation.php or sidebar.php.
+- Idempotency claims are applied to AICS/MAIFIP record creation, spreadsheet-import application, and the implemented ticket-submission endpoints.
+
+DATABASE / BROWSER LIMITATIONS
+- Live MySQL integration tests were not run in this environment because no PDO database driver is available.
+- Browser-level visual and interaction regression tests were not run.
+- Production behavior must be confirmed on a staging XAMPP/MySQL installation, especially the first-use creation of fams_idempotency_keys and repeat-submission behavior.
+
+RESULT
+- Static checks and the existing database-independent test suite passed. This is not a substitute for staging database and browser validation.
+
+ADDITIONAL TICKET ROUTE CHECK
+- AICS generic support ticket, record revision, delete request, and office reassignment inserts use shared idempotent transaction handling.
+- MAIFIP record revision and delete-request inserts use shared idempotent transaction handling.
+- The AICS and MAIFIP record creation and spreadsheet import apply paths use idempotency claims.

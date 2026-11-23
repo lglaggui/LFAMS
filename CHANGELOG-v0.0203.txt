@@ -1,0 +1,12 @@
+FAMS Region II Unified — v0.0203
+Step 3.6 — Imports, exports, and offline synchronization
+
+- Reconciled AICS and MAIFIP spreadsheet import endpoints against the existing permission model, idempotency claims, record scope checks, and final apply-time validation.
+- Added uploaded-file provenance checks, 1-byte–20-MB size bounds, strict CSV/XLSX extension allowlists, XLSX ZIP-signature checks, and rejection of binary data presented as CSV.
+- Prevented non-administrator sheet imports from creating or changing records into RELEASED/CANCELLED states. Dedicated status and ticket workflows remain authoritative.
+- Capped each MAIFIP offline synchronization request at 100 changes while preserving per-operation create/edit authorization, per-user client-change idempotency, active-facility record binding, record-version conflict detection, and transactional writes.
+- Reconciled workspace export boundaries: AICS centralized SWAD masterlist export remains intentionally all-office for authorized SWAD visibility; MAIFIP record and monthly exports remain active-facility scoped. Action-log exports retain workspace-specific permission checks.
+- Updated endpoint registry with Step 3.6 static review notes and explicit runtime-test limitations.
+- Added import/export/offline-sync static regression checks.
+
+No database schema change or production database operation was performed.

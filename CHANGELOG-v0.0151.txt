@@ -1,0 +1,16 @@
+FAMS Region II Unified — v0.0151
+
+Fixes and refinements
+- Fixed the MAIFIP User Types & Authorization fatal error by using the available MAIFIP account-management authorization helper, with a safe compatibility check across both workspaces.
+- Updated the portal/select-system.php footer to show the current APP_VERSION instead of the stale 0.0066 value; portal stylesheet cache keys now follow the same release version.
+- Aligned the login page version and stylesheet cache keys with v0.0151.
+- Standardized high-frequency table and management actions into consistent, accessible SVG icon buttons with stronger size, contrast, hover/focus treatment, and descriptive title/aria-label text. Updated record edit, ticket, deletion, office edit/enable/disable/remove, user-type edit/enable/disable/remove, and user approval/rejection/removal actions.
+- Preserved existing action URLs, POST action values, CSRF tokens, confirmation prompts, and authorization checks while changing presentation.
+
+Validation
+- PHP syntax checked for all PHP files.
+- JavaScript syntax checked where Node.js is available.
+- CSS brace balance checked for CSS files.
+- Targeted assertions checked the usertypes guard, portal version source, and key action-icon replacements.
+- ZIP archive integrity checked.
+- Live browser and MySQL/XAMPP workflow tests were not performed.

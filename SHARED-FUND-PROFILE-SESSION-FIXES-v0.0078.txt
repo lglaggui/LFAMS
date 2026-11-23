@@ -1,0 +1,16 @@
+FAMS REGION II UNIFIED — v0.0078
+
+Changes
+1. Renamed both MAIFIP and AICS/SWAD fund management page files from fund_settings.php to fund.php.
+2. Updated shared navigation, popup/edit links, redirects, loading-skeleton page matching, and other source references to fund.php. Checked source files for remaining fund_settings references; none remain.
+3. Corrected the shared profile collapse sizing contract: the expanded copy has zero flex-basis, width, min/max width, margins, and padding while collapsed. The shared handler now applies collapsed sizing immediately before final width recalculation, reducing leftover reserved space in AICS as well as MAIFIP.
+4. Standardized header logout contrast with a dark blue background and white icon/text, including hover and AICS/MAIFIP scoped rules. Defined shared button/focus variables at root so they are not limited to popup dialog scope.
+5. Improved workspace mismatch recovery. If a cross-workspace navigation request arrives with a valid central/bridged LPGMA identity but a stale fams_system session value, the guard routes through the workspace switch handler and requests the current PHP page as return_page. Local AICS accounts still return to the portal rather than being promoted into MAIFIP.
+6. Bumped version/cache identifiers to 0.0078 / 20261026-v0078.
+
+Validation
+- PHP syntax checks: 95 files passed.
+- JavaScript syntax checks: shared-shell.js, header-fit.js, MAIFIP/AICS app.js and address-cascade.js passed.
+- CSS brace counts balanced for shared CSS and both workspace stylesheets.
+- Source scan: no remaining fund_settings.php/fund_settings references in source files.
+- Browser/database/live-host testing was not performed for this build.

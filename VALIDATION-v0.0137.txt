@@ -1,0 +1,25 @@
+FAMS REGION II UNIFIED — v0.0137 VALIDATION REPORT
+Source package: FAMS-Region-II-Unified-htdocs-v0.0136-ICON-TICKETS-POPUPS.zip
+Release package: FAMS-Region-II-Unified-htdocs-v0.0137-UNIFIED-TICKETS-PROFILE.zip
+
+IMPLEMENTED
+- Removed the duplicate MAIFIP CRUD popup controller; CRUD popup links now use the shared-shell controller.
+- Shared popup controller now supports popup titles, close/backdrop handling, focus return, and the dashboard Add Record shortcut.
+- AICS Submit Ticket now opens through the shared popup link mechanism only.
+- Added padding and responsive spacing to the AICS ticket form popup.
+- Increased the shared header profile's expanded width calculation to allow more space for the full Logout label and icon.
+- AICS deletion request tickets now store their associated record ID. Admin approval archives the record in fams_deleted_records and deletes it from the active masterlist within one transaction.
+- MAIFIP approved deletion requests archive the record and remove it from the active masterlist while retaining the resolved ticket for audit history. Ticket record links become nullable and preserve control number/facility snapshots.
+- Removed automatic deletion of approved revision tickets; reviewed tickets remain available in ticket history.
+- Updated SQL dump and application/cache versions to v0.0137.
+
+VALIDATION RESULTS
+- PHP syntax: 108 of 108 PHP files passed `php -l`.
+- JavaScript syntax: `node --check` passed for core/shared-shell.js, maifip/assets/app.js, and aics/assets/app.js.
+- CSS structure: brace-balance checks passed for core/shared-shell.css, core/shared-components.css, aics/assets/app.css, and maifip/assets/app.css.
+- Source assertions passed for linked AICS deletion tickets, archive-and-delete approval flow, ticket retention, one MAIFIP popup controller, and version labels.
+- ZIP integrity checked after packaging.
+
+LIMITATIONS
+- No live database was connected for exercising schema migration or transaction workflows.
+- No browser-driven visual/end-to-end testing was performed in this environment. Please test in a backed-up XAMPP/staging copy before production deployment.

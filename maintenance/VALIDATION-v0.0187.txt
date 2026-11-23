@@ -1,0 +1,28 @@
+FAMS REGION II UNIFIED — v0.0187 VALIDATION
+
+Source package: v0.0186-PERMISSION-TESTS
+PHP syntax: 121 files checked; 0 failures.
+JavaScript syntax: 19 files checked with node --check; 0 failures.
+CSS parsing: 11 files checked with tinycss2; 0 parser errors.
+Permission regression suite: 32 passed; 0 failed.
+Deployment SQL files: 0.
+Android app folder: retained (contains the existing README placeholder only).
+ZIP integrity: checked after packaging with unzip -t.
+
+Scope of permission tests:
+- Built-in AICS/MAIFIP policy baselines and no-PDO fallback behavior.
+- Unknown permission/workspace/custom role denial.
+- Workspace-specific database lookup source invariant.
+- Disabled/missing type and stale-session fail-closed source invariants.
+- Ticket decision gates, offline create/edit/conflict gates, deletion-ticket gate, and restore gates.
+
+Not tested in this environment:
+- Database-backed user-type permissions against MySQL (no PDO drivers available in this PHP CLI).
+- Live disabled account / disabled custom type sign-in and active-session revocation.
+- Every protected endpoint through authenticated HTTP requests.
+- Real SWAD office and MAIFIP facility cross-scope access attempts against populated data.
+- Ticket approve/reject/delete/restore end-to-end transactions and audit log effects.
+- Browser/visual regression, production hosting, concurrency, or live offline synchronization.
+
+Deployment note: Back up the database and files before replacing an existing installation. No SQL migration is required for this release. Run the CLI regression test from htdocs:
+php maintenance/tests/permission_matrix_test.php

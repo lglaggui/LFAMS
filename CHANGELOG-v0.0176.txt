@@ -1,0 +1,18 @@
+FAMS Region II — v0.0176
+Dashboard, reporting, and design-system standardization
+
+- Added one shared dashboard stylesheet for AICS and MAIFIP, loaded after workspace styles.
+- Standardized dashboard KPI cards, dimensions, typography, responsive layout, reporting-period controls, chart colors, and number presentation.
+- Expanded both dashboards to clearly distinguish all-time total records and waiting records from selected-year released and cancelled counts and amounts, while retaining today's, selected-month, and selected-year disbursement indicators.
+- Rebuilt reporting-period refresh as a delegated document-level controller. It continues to work after dashboard fragments replace the reporting form, including repeated period changes. Added busy/status feedback and navigation fallback on fragment errors.
+- Removed obsolete per-dashboard change listeners that became detached after fragment replacement.
+- Standardized dashboard wrapper semantics and report-link target security attributes.
+- Updated MAIFIP CSV monthly report export to use the same live-record-first / historical-summary-fallback totals as the dashboard and editable report worksheet; adds a reconciled summary row.
+- Added shared chart, KPI, and z-index design tokens.
+- Preserved workspace-specific business rules, databases, and editable worksheet behavior.
+- Did not indiscriminately remove legacy !important declarations; retained them where workspace-specific overrides may be intentional.
+- Corrected AICS and MAIFIP all-time released-amount indicators so they sum RELEASED records only, rather than all assistance statuses.
+- MAIFIP editable monthly worksheet now also loads the same shared worksheet design layer used by AICS, using matching sheet-page, toolbar, and sheet-card hooks without replacing its facility-specific report structure.
+- Moved duplicated reporting-period card/control styling out of both workspace stylesheets into the shared dashboard stylesheet.
+- Removed four byte-identical duplicate CSS rule blocks (one AICS table-width rule and three shared action-icon rules); no broad !important purge was attempted.
+- MAIFIP editable worksheet Excel export now preserves the historical-summary fallback total/client count when no record-level rows exist, while deliberate deletion of all rows still exports zero.

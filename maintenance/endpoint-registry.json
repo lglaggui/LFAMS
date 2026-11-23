@@ -1,0 +1,4250 @@
+{
+  "manifest_version": 3,
+  "generated_at_utc": "2026-11-05",
+  "policy": "Endpoint reconciliation manifest v3. The route list contains application entry points only; shared config/helper files are excluded. Candidate methods are reconciled against source-level guards where present, but no route is runtime-verified by this manifest. Each route still requires authenticated staging tests for anonymous access, wrong methods, CSRF, capabilities, workspace/record scope, workflow state, idempotency, transaction effects, and audit outcomes. A source marker is evidence for review, not proof of enforcement. This manifest is not runtime authorization enforcement and does not constitute a production-readiness certification.",
+  "routes": [
+    {
+      "path": "aics/_chat_directory.php",
+      "workspace": "aics",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "chat.directory.view",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "aics_office_adapter",
+      "idempotency": "not_applicable_or_read_only",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "workspace chat directory",
+      "static_evidence": {
+        "session_or_auth_markers": [],
+        "csrf_markers": [],
+        "method_markers": [],
+        "scope_markers": [
+          "office_id"
+        ]
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": false,
+        "csrf_markers_present": false,
+        "request_method_or_superglobal_present": false,
+        "explicit_method_guard_detected": false,
+        "permission_or_role_markers_present": false,
+        "workspace_or_record_scope_markers_present": true,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": false,
+        "audit_markers_present": false,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "aics/account.php",
+      "workspace": "aics",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "account.manage_or_self_update",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "aics_office_adapter",
+      "idempotency": "required_for_retryable_create_or_batch_write",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "account permissions and self-service ownership",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "current_user",
+          "require_login"
+        ],
+        "csrf_markers": [
+          "csrf_token",
+          "verify_csrf"
+        ],
+        "method_markers": [
+          "POST"
+        ],
+        "scope_markers": [
+          "office_id"
+        ]
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": true,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": true,
+        "permission_or_role_markers_present": false,
+        "workspace_or_record_scope_markers_present": true,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": true,
+        "audit_markers_present": true,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "aics/address_api.php",
+      "workspace": "aics",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "address.lookup",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "aics_office_adapter",
+      "idempotency": "not_applicable_or_read_only",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "address lookup access",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "require_login"
+        ],
+        "csrf_markers": [
+          "csrf_token"
+        ],
+        "method_markers": [],
+        "scope_markers": []
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": true,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": true,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": false,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": true,
+        "audit_markers_present": false,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "aics/address_options.php",
+      "workspace": "aics",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "address.lookup",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "aics_office_adapter",
+      "idempotency": "not_applicable_or_read_only",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "address option lookup",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "require_login"
+        ],
+        "csrf_markers": [],
+        "method_markers": [],
+        "scope_markers": []
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": false,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": false,
+        "permission_or_role_markers_present": false,
+        "workspace_or_record_scope_markers_present": false,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": false,
+        "audit_markers_present": false,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "aics/avatar.php",
+      "workspace": "aics",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "profile.avatar.manage",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "aics_office_adapter",
+      "idempotency": "not_applicable_or_read_only",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "self-avatar ownership",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "require_login"
+        ],
+        "csrf_markers": [],
+        "method_markers": [],
+        "scope_markers": []
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": false,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": false,
+        "permission_or_role_markers_present": false,
+        "workspace_or_record_scope_markers_present": false,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": false,
+        "audit_markers_present": false,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "aics/chat.php",
+      "workspace": "aics",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "chat.view",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "aics_office_adapter",
+      "idempotency": "not_applicable_or_read_only",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "workspace chat membership",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "current_user",
+          "require_login"
+        ],
+        "csrf_markers": [
+          "csrf_token"
+        ],
+        "method_markers": [],
+        "scope_markers": [
+          "office_id"
+        ]
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": true,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": false,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": true,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": false,
+        "audit_markers_present": false,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "aics/chat_api.php",
+      "workspace": "aics",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "chat.message.manage",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "aics_office_adapter",
+      "idempotency": "not_applicable_or_read_only",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "chat membership and message ownership",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "current_user",
+          "is_logged_in",
+          "require_login"
+        ],
+        "csrf_markers": [],
+        "method_markers": [],
+        "scope_markers": [
+          "office_id"
+        ]
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": true,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": false,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": true,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": false,
+        "audit_markers_present": true,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "aics/dashboard.php",
+      "workspace": "aics",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "dashboard.view",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "aics_office_adapter",
+      "idempotency": "not_applicable_or_read_only",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "workspace dashboard scope",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "current_user",
+          "require_login"
+        ],
+        "csrf_markers": [],
+        "method_markers": [],
+        "scope_markers": [
+          "office_id"
+        ]
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": false,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": false,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": true,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": false,
+        "audit_markers_present": true,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "aics/delete_ticket_request.php",
+      "workspace": "aics",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "record.delete.request",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "aics_office_adapter",
+      "idempotency": "required_for_retryable_create_or_batch_write",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "record scope and ticket state",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "current_user",
+          "require_login"
+        ],
+        "csrf_markers": [
+          "csrf_token",
+          "verify_csrf"
+        ],
+        "method_markers": [
+          "POST"
+        ],
+        "scope_markers": []
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "ticket_lifecycle_enforcement": "v0.0200_static_source_reviewed_runtime_test_pending",
+      "enforcement_notes": "AICS delete-ticket creation rechecks office scope and the captured record version while holding the record row lock; idempotent insert and audit event remain transactional.",
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": true,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": true,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": false,
+        "idempotency_markers_present": true,
+        "transaction_or_lock_markers_present": true,
+        "audit_markers_present": true,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "aics/export_csv.php",
+      "workspace": "aics",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "records.export",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "aics_office_adapter",
+      "idempotency": "not_applicable_or_read_only",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "workspace record scope and export permission",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "current_user",
+          "require_login"
+        ],
+        "csrf_markers": [],
+        "method_markers": [],
+        "scope_markers": [
+          "office_id"
+        ]
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "step_036_review": "AICS export capability; centralized SWAD all-office read visibility by design. Bulk-export audit and output handling reviewed statically; runtime pending.",
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": false,
+        "request_method_or_superglobal_present": false,
+        "explicit_method_guard_detected": false,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": true,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": false,
+        "audit_markers_present": true,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "aics/export_event.php",
+      "workspace": "aics",
+      "methods_to_verify": [
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "export_records",
+      "csrf": "required",
+      "ownership_scope": "aics_office_adapter",
+      "idempotency": "not_applicable_audit_event_only",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "Audits and authorizes client-generated sheet export/print requests before browser file generation.",
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": true,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": true,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": false,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": false,
+        "audit_markers_present": true,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "aics/export_logs.php",
+      "workspace": "aics",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "audit.export",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "aics_office_adapter",
+      "idempotency": "not_applicable_or_read_only",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "audit-log permission and scope",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "require_login"
+        ],
+        "csrf_markers": [],
+        "method_markers": [],
+        "scope_markers": []
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "step_036_review": "AICS view_action_logs capability; workspace-specific audit export. Runtime pending.",
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": false,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": false,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": false,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": false,
+        "audit_markers_present": true,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "aics/fund.php",
+      "workspace": "aics",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "fund.manage_or_view",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "aics_office_adapter",
+      "idempotency": "required_for_retryable_create_or_batch_write",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "fund administration permission",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "current_user",
+          "require_login"
+        ],
+        "csrf_markers": [
+          "csrf_token",
+          "verify_csrf"
+        ],
+        "method_markers": [
+          "POST"
+        ],
+        "scope_markers": []
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": true,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": true,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": false,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": false,
+        "audit_markers_present": true,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "aics/help.php",
+      "workspace": "aics",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "help.view",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "aics_office_adapter",
+      "idempotency": "not_applicable_or_read_only",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "authenticated workspace access",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "current_user",
+          "require_login"
+        ],
+        "csrf_markers": [],
+        "method_markers": [],
+        "scope_markers": []
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": false,
+        "request_method_or_superglobal_present": false,
+        "explicit_method_guard_detected": false,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": false,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": false,
+        "audit_markers_present": false,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "aics/import_sheet.php",
+      "workspace": "aics",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "records.import",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "aics_office_adapter",
+      "idempotency": "required_for_retryable_create_or_batch_write",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "workspace import permission and duplicate protection",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "current_user",
+          "require_login"
+        ],
+        "csrf_markers": [
+          "csrf_token",
+          "verify_csrf"
+        ],
+        "method_markers": [
+          "POST"
+        ],
+        "scope_markers": [
+          "office_id"
+        ]
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "step_036_review": "Upload provenance/size/extension/signature checks; AICS edit capability; import apply idempotency and office-scoped update check; non-admin WAITING-only rule. Runtime pending.",
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": true,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": true,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": true,
+        "idempotency_markers_present": true,
+        "transaction_or_lock_markers_present": true,
+        "audit_markers_present": true,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "aics/index.php",
+      "workspace": "aics",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "workspace.enter",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "aics_office_adapter",
+      "idempotency": "not_applicable_or_read_only",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "workspace access",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "current_user",
+          "is_logged_in"
+        ],
+        "csrf_markers": [],
+        "method_markers": [],
+        "scope_markers": [
+          "office_id"
+        ]
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": false,
+        "request_method_or_superglobal_present": false,
+        "explicit_method_guard_detected": false,
+        "permission_or_role_markers_present": false,
+        "workspace_or_record_scope_markers_present": true,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": false,
+        "audit_markers_present": false,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "aics/login.php",
+      "workspace": "aics",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": false,
+      "capability": "auth.login",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "aics_office_adapter",
+      "idempotency": "not_applicable_or_read_only",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "public authentication",
+      "static_evidence": {
+        "session_or_auth_markers": [],
+        "csrf_markers": [],
+        "method_markers": [],
+        "scope_markers": []
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": false,
+        "csrf_markers_present": false,
+        "request_method_or_superglobal_present": false,
+        "explicit_method_guard_detected": false,
+        "permission_or_role_markers_present": false,
+        "workspace_or_record_scope_markers_present": false,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": false,
+        "audit_markers_present": false,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "aics/logout.php",
+      "workspace": "aics",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "auth.logout",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "aics_office_adapter",
+      "idempotency": "not_applicable_or_read_only",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "authenticated session",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "is_logged_in"
+        ],
+        "csrf_markers": [],
+        "method_markers": [],
+        "scope_markers": []
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": false,
+        "request_method_or_superglobal_present": false,
+        "explicit_method_guard_detected": false,
+        "permission_or_role_markers_present": false,
+        "workspace_or_record_scope_markers_present": false,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": false,
+        "audit_markers_present": true,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "aics/logs.php",
+      "workspace": "aics",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "audit.view",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "aics_office_adapter",
+      "idempotency": "not_applicable_or_read_only",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "audit-log permission and scope",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "require_login"
+        ],
+        "csrf_markers": [],
+        "method_markers": [],
+        "scope_markers": []
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": false,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": false,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": false,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": false,
+        "audit_markers_present": true,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "aics/masterlist_sheet.php",
+      "workspace": "aics",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "records.sheet.view",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "aics_office_adapter",
+      "idempotency": "not_applicable_or_read_only",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "record scope",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "current_user",
+          "require_login"
+        ],
+        "csrf_markers": [
+          "csrf_token"
+        ],
+        "method_markers": [],
+        "scope_markers": [
+          "office_id"
+        ]
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": true,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": false,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": true,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": false,
+        "audit_markers_present": true,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "aics/monthly_report.php",
+      "workspace": "aics",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "reports.view",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "aics_office_adapter",
+      "idempotency": "not_applicable_or_read_only",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "reporting scope",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "require_login"
+        ],
+        "csrf_markers": [],
+        "method_markers": [],
+        "scope_markers": []
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": false,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": false,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": false,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": false,
+        "audit_markers_present": false,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "aics/notifications_api.php",
+      "workspace": "aics",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "notifications.view_or_manage",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "aics_office_adapter",
+      "idempotency": "not_applicable_or_read_only",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "notification ownership",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "current_user",
+          "is_logged_in",
+          "require_login"
+        ],
+        "csrf_markers": [],
+        "method_markers": [],
+        "scope_markers": []
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": false,
+        "request_method_or_superglobal_present": false,
+        "explicit_method_guard_detected": false,
+        "permission_or_role_markers_present": false,
+        "workspace_or_record_scope_markers_present": false,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": false,
+        "audit_markers_present": false,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "aics/office_reassignment_ticket.php",
+      "workspace": "aics",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "tickets.office_reassignment",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "aics_office_adapter",
+      "idempotency": "required_for_retryable_create_or_batch_write",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "ticket ownership and destination office authority",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "current_user",
+          "require_login"
+        ],
+        "csrf_markers": [
+          "csrf_token",
+          "verify_csrf"
+        ],
+        "method_markers": [
+          "POST"
+        ],
+        "scope_markers": [
+          "office_id"
+        ]
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "ticket_lifecycle_enforcement": "v0.0200_static_source_reviewed_runtime_test_pending",
+      "enforcement_notes": "AICS office-reassignment ticket creation rechecks requester scope, current office, destination validity, and captured record version under row lock.",
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": true,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": true,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": true,
+        "idempotency_markers_present": true,
+        "transaction_or_lock_markers_present": true,
+        "audit_markers_present": true,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "aics/offices.php",
+      "workspace": "aics",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "offices.manage_or_view",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "aics_office_adapter",
+      "idempotency": "required_for_retryable_create_or_batch_write",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "office administration permission",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "require_login"
+        ],
+        "csrf_markers": [
+          "csrf_token",
+          "verify_csrf"
+        ],
+        "method_markers": [
+          "POST"
+        ],
+        "scope_markers": [
+          "office_id"
+        ]
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": true,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": true,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": true,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": false,
+        "audit_markers_present": true,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "aics/print_record.php",
+      "workspace": "aics",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "records.print",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "aics_office_adapter",
+      "idempotency": "not_applicable_or_read_only",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "record scope",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "require_login"
+        ],
+        "csrf_markers": [],
+        "method_markers": [],
+        "scope_markers": [
+          "office_id"
+        ]
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": false,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": false,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": true,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": false,
+        "audit_markers_present": false,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "aics/record_form.php",
+      "workspace": "aics",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "records.create_or_edit",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "aics_office_adapter",
+      "idempotency": "required_for_retryable_create_or_batch_write",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "record scope, ownership, workflow state",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "current_user",
+          "require_login"
+        ],
+        "csrf_markers": [
+          "csrf_token",
+          "verify_csrf"
+        ],
+        "method_markers": [
+          "GET",
+          "POST",
+          "Allow: GET, POST"
+        ],
+        "scope_markers": [
+          "office_id",
+          "can_edit_record",
+          "FOR UPDATE"
+        ]
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "implementation_status": "source_enforced_runtime_verification_pending",
+      "enforcement_notes": "POST capability is rechecked; edit scope and workflow state are revalidated under SELECT FOR UPDATE before updating.",
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": true,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": true,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": true,
+        "idempotency_markers_present": true,
+        "transaction_or_lock_markers_present": true,
+        "audit_markers_present": true,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "aics/records.php",
+      "workspace": "aics",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "records.view",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "aics_office_adapter",
+      "idempotency": "not_applicable_or_read_only",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "record delete archive",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "current_user",
+          "require_login"
+        ],
+        "csrf_markers": [
+          "csrf_token",
+          "verify_csrf"
+        ],
+        "method_markers": [
+          "POST"
+        ],
+        "scope_markers": [
+          "office_id"
+        ]
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect",
+        "non_admin_restore_denied",
+        "cross_system_archive_id_replay",
+        "cross_facility_archive_replay",
+        "duplicate_restore_race",
+        "archive_payload_integrity",
+        "delete_archive_audit_atomicity",
+        "ticket_delete_base_version_mismatch"
+      ],
+      "deletion_restoration_enforcement": "v0.0201_static_source_reviewed_runtime_test_pending",
+      "enforcement_notes": "AICS direct deletion is POST+CSRF, requires edit_records, locks the record, rechecks office scope and LPGMA WAITING/admin policy, writes the complete payload to shared trash, deletes and audits in one transaction. Legacy restore action is rejected; restore is only through administrator trash workflow.",
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": true,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": true,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": true,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": true,
+        "audit_markers_present": true,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "aics/revision_ticket.php",
+      "workspace": "aics",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "tickets.revision.submit",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "aics_office_adapter",
+      "idempotency": "required_for_retryable_create_or_batch_write",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "record scope and ticket state",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "current_user",
+          "require_login"
+        ],
+        "csrf_markers": [
+          "csrf_token",
+          "verify_csrf"
+        ],
+        "method_markers": [
+          "POST"
+        ],
+        "scope_markers": [
+          "office_id"
+        ]
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "ticket_lifecycle_enforcement": "v0.0200_static_source_reviewed_runtime_test_pending",
+      "enforcement_notes": "AICS revision-ticket creation rechecks office scope and captured record version under row lock; proposals remain pending until administrator decision.",
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": true,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": true,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": true,
+        "idempotency_markers_present": true,
+        "transaction_or_lock_markers_present": true,
+        "audit_markers_present": true,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "aics/sheet_save.php",
+      "workspace": "aics",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "records.sheet.update",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "aics_office_adapter",
+      "idempotency": "required_for_retryable_create_or_batch_write",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "record scope and optimistic version",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "current_user",
+          "require_login"
+        ],
+        "csrf_markers": [
+          "csrf_token"
+        ],
+        "method_markers": [],
+        "scope_markers": []
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": true,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": true,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": false,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": true,
+        "audit_markers_present": true,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "aics/status_update.php",
+      "workspace": "aics",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "records.status.update",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "aics_office_adapter",
+      "idempotency": "required_for_retryable_create_or_batch_write",
+      "review_status": "static_enforcement_implemented_runtime_tests_pending",
+      "capability_description": "record scope and permitted state transition",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "require_login",
+          "current_user",
+          "can_update_status",
+          "fams_current_type_allows"
+        ],
+        "csrf_markers": [
+          "verify_csrf",
+          "fams_shared_verify_csrf"
+        ],
+        "method_markers": [
+          "REQUEST_METHOD",
+          "POST"
+        ],
+        "scope_markers": [
+          "FOR UPDATE",
+          "record_version",
+          "office_id"
+        ],
+        "transactional_writes": [
+          "record_status",
+          "status_history",
+          "audit_log"
+        ]
+      },
+      "method_verification": "STATIC_SOURCE_CONFIRMED_POST_FOR_MUTATIONS",
+      "csrf_verification": "STATIC_SOURCE_CONFIRMED_SHARED_CSRF_ON_POST",
+      "scope_verification": "STATIC_SOURCE_CONFIRMED_TRANSACTIONAL_ROW_LOCK_AND_WORKSPACE_SCOPE_RECHECK",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "finalized_record_transition",
+        "stale_record_version",
+        "atomic_status_history_and_audit",
+        "concurrent_status_update"
+      ],
+      "enforcement_notes": "Static source enforcement updated in v0.0199. Runtime authenticated MySQL staging tests remain pending.",
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": true,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": true,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": true,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": true,
+        "audit_markers_present": true,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "aics/switch.php",
+      "workspace": "aics",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "workspace.switch",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "aics_office_adapter",
+      "idempotency": "not_applicable_or_read_only",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "authorized workspace membership",
+      "static_evidence": {
+        "session_or_auth_markers": [],
+        "csrf_markers": [],
+        "method_markers": [],
+        "scope_markers": [
+          "office_id"
+        ]
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": false,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": false,
+        "permission_or_role_markers_present": false,
+        "workspace_or_record_scope_markers_present": true,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": false,
+        "audit_markers_present": false,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "aics/tickets.php",
+      "workspace": "aics",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "tickets.view_or_manage",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "aics_office_adapter",
+      "idempotency": "required_for_retryable_create_or_batch_write",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "ticket-approved deletion archive",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "current_user",
+          "require_login"
+        ],
+        "csrf_markers": [
+          "csrf_token",
+          "verify_csrf"
+        ],
+        "method_markers": [
+          "POST"
+        ],
+        "scope_markers": [
+          "office_id"
+        ]
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect",
+        "non_admin_restore_denied",
+        "cross_system_archive_id_replay",
+        "cross_facility_archive_replay",
+        "duplicate_restore_race",
+        "archive_payload_integrity",
+        "delete_archive_audit_atomicity",
+        "ticket_delete_base_version_mismatch"
+      ],
+      "ticket_lifecycle_enforcement": "v0.0200_static_source_reviewed_runtime_test_pending",
+      "enforcement_notes": "AICS approved delete tickets lock the pending ticket and linked record, require matching base record version, archive the complete payload, then delete within the same transaction; ticket decision and audit remain linked.",
+      "deletion_restoration_enforcement": "v0.0201_static_source_reviewed_runtime_test_pending",
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": true,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": true,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": true,
+        "idempotency_markers_present": true,
+        "transaction_or_lock_markers_present": true,
+        "audit_markers_present": true,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "aics/trash.php",
+      "workspace": "aics",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "records.trash.manage",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "aics_office_adapter",
+      "idempotency": "required_for_retryable_create_or_batch_write",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "administrator restore",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "current_user",
+          "require_login"
+        ],
+        "csrf_markers": [
+          "csrf_token",
+          "verify_csrf"
+        ],
+        "method_markers": [
+          "POST"
+        ],
+        "scope_markers": []
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect",
+        "non_admin_restore_denied",
+        "cross_system_archive_id_replay",
+        "cross_facility_archive_replay",
+        "duplicate_restore_race",
+        "archive_payload_integrity",
+        "delete_archive_audit_atomicity",
+        "ticket_delete_base_version_mismatch"
+      ],
+      "deletion_restoration_enforcement": "v0.0201_static_source_reviewed_runtime_test_pending",
+      "enforcement_notes": "AICS restoration is admin+edit_records only, POST+CSRF, uses a named sequence lock and transaction, locks the archive row, assigns a new control number/date/status, atomically marks restored and audits. Runtime database tests remain pending.",
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": true,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": true,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": true,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": true,
+        "audit_markers_present": true,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "aics/user.php",
+      "workspace": "aics",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "accounts.view_or_update",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "aics_office_adapter",
+      "idempotency": "required_for_retryable_create_or_batch_write",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "account ownership and administrative scope",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "require_login"
+        ],
+        "csrf_markers": [],
+        "method_markers": [],
+        "scope_markers": []
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": false,
+        "request_method_or_superglobal_present": false,
+        "explicit_method_guard_detected": false,
+        "permission_or_role_markers_present": false,
+        "workspace_or_record_scope_markers_present": false,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": false,
+        "audit_markers_present": false,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "aics/users.php",
+      "workspace": "aics",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "accounts.manage",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "aics_office_adapter",
+      "idempotency": "required_for_retryable_create_or_batch_write",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "AICS-local account administration; LPGMA-bridged identities are centrally managed and excluded from local mutations.",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "current_user",
+          "fams_current_type_allows",
+          "fams_workspace_admin_allowed",
+          "require_login"
+        ],
+        "csrf_markers": [
+          "csrf_token",
+          "verify_csrf"
+        ],
+        "method_markers": [
+          "POST"
+        ],
+        "scope_markers": [
+          "office_id"
+        ]
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "WORKSPACE_BOUNDARY_STATIC_REVIEWED_AUTHENTICATED_TEST_PENDING",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": true,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": true,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": true,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": true,
+        "audit_markers_present": true,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "aics/usertypes.php",
+      "workspace": "aics",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "roles.manage",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "aics_office_adapter",
+      "idempotency": "required_for_retryable_create_or_batch_write",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "Selected-workspace authorization is rechecked on GET and POST; local AICS administrators cannot administer MAIFIP types without central LPGMA identity.",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "current_user",
+          "fams_current_type_allows",
+          "fams_workspace_admin_allowed",
+          "require_login"
+        ],
+        "csrf_markers": [
+          "csrf_token",
+          "verify_csrf"
+        ],
+        "method_markers": [
+          "POST"
+        ],
+        "scope_markers": []
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "WORKSPACE_BOUNDARY_STATIC_REVIEWED_AUTHENTICATED_TEST_PENDING",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": true,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": true,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": false,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": false,
+        "audit_markers_present": true,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "maifip/account.php",
+      "workspace": "maifip",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "account.manage_or_self_update",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "maifip_facility_adapter",
+      "idempotency": "required_for_retryable_create_or_batch_write",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "account permissions and self-service ownership",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "current_user",
+          "require_login"
+        ],
+        "csrf_markers": [
+          "csrf_token",
+          "verify_csrf"
+        ],
+        "method_markers": [
+          "POST"
+        ],
+        "scope_markers": []
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": true,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": true,
+        "permission_or_role_markers_present": false,
+        "workspace_or_record_scope_markers_present": false,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": true,
+        "audit_markers_present": true,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "maifip/address_api.php",
+      "workspace": "maifip",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "address.lookup",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "maifip_facility_adapter",
+      "idempotency": "not_applicable_or_read_only",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "address lookup access",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "require_login"
+        ],
+        "csrf_markers": [
+          "csrf_token"
+        ],
+        "method_markers": [],
+        "scope_markers": []
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": true,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": true,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": false,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": true,
+        "audit_markers_present": false,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "maifip/avatar.php",
+      "workspace": "maifip",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "profile.avatar.manage",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "maifip_facility_adapter",
+      "idempotency": "not_applicable_or_read_only",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "self-avatar ownership",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "require_login"
+        ],
+        "csrf_markers": [],
+        "method_markers": [],
+        "scope_markers": []
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": false,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": false,
+        "permission_or_role_markers_present": false,
+        "workspace_or_record_scope_markers_present": false,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": false,
+        "audit_markers_present": false,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "maifip/chat.php",
+      "workspace": "maifip",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "chat.view",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "maifip_facility_adapter",
+      "idempotency": "not_applicable_or_read_only",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "workspace chat membership",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "current_user",
+          "is_logged_in",
+          "require_login"
+        ],
+        "csrf_markers": [
+          "csrf_token"
+        ],
+        "method_markers": [],
+        "scope_markers": [
+          "user_facility"
+        ]
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": true,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": false,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": true,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": false,
+        "audit_markers_present": false,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "maifip/chat_api.php",
+      "workspace": "maifip",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "chat.message.manage",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "maifip_facility_adapter",
+      "idempotency": "not_applicable_or_read_only",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "chat membership and message ownership",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "current_user",
+          "is_logged_in",
+          "require_login"
+        ],
+        "csrf_markers": [],
+        "method_markers": [],
+        "scope_markers": [
+          "user_facility"
+        ]
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": true,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": false,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": true,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": false,
+        "audit_markers_present": true,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "maifip/dashboard.php",
+      "workspace": "maifip",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "dashboard.view",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "maifip_facility_adapter",
+      "idempotency": "not_applicable_or_read_only",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "workspace dashboard scope",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "current_user",
+          "require_login"
+        ],
+        "csrf_markers": [],
+        "method_markers": [],
+        "scope_markers": [
+          "user_facility"
+        ]
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": false,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": false,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": true,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": false,
+        "audit_markers_present": true,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "maifip/delete_record.php",
+      "workspace": "maifip",
+      "methods_to_verify": [
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "records.delete",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "maifip_facility_adapter",
+      "idempotency": "required_for_retryable_create_or_batch_write",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "record delete archive",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "current_user"
+        ],
+        "csrf_markers": [
+          "verify_csrf"
+        ],
+        "method_markers": [],
+        "scope_markers": []
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect",
+        "non_admin_restore_denied",
+        "cross_system_archive_id_replay",
+        "cross_facility_archive_replay",
+        "duplicate_restore_race",
+        "archive_payload_integrity",
+        "delete_archive_audit_atomicity",
+        "ticket_delete_base_version_mismatch"
+      ],
+      "deletion_restoration_enforcement": "v0.0201_static_source_reviewed_runtime_test_pending",
+      "enforcement_notes": "MAIFIP direct deletion is POST-only+CSRF, requires edit_records, facility-qualifies the locked record, applies can_edit_existing_record (admin or permitted WAITING editor), archives complete payload and audits atomically.",
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": true,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": true,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": true,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": true,
+        "audit_markers_present": true,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "maifip/delete_request.php",
+      "workspace": "maifip",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "records.delete.request",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "maifip_facility_adapter",
+      "idempotency": "required_for_retryable_create_or_batch_write",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "record scope and ticket state",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "current_user",
+          "require_login"
+        ],
+        "csrf_markers": [
+          "csrf_token",
+          "verify_csrf"
+        ],
+        "method_markers": [
+          "POST"
+        ],
+        "scope_markers": []
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": true,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": true,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": true,
+        "idempotency_markers_present": true,
+        "transaction_or_lock_markers_present": false,
+        "audit_markers_present": true,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "maifip/doh_dashboard.php",
+      "workspace": "maifip",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "doh.dashboard.view",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "maifip_facility_adapter",
+      "idempotency": "not_applicable_or_read_only",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "DOH dashboard access and facility scope",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "current_user",
+          "require_login"
+        ],
+        "csrf_markers": [
+          "csrf_token"
+        ],
+        "method_markers": [
+          "POST"
+        ],
+        "scope_markers": [
+          "user_facility"
+        ]
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": true,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": true,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": true,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": false,
+        "audit_markers_present": true,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "maifip/export_csv.php",
+      "workspace": "maifip",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "records.export",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "maifip_facility_adapter",
+      "idempotency": "not_applicable_or_read_only",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "workspace record scope and export permission",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "require_login"
+        ],
+        "csrf_markers": [],
+        "method_markers": [],
+        "scope_markers": []
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "step_036_review": "MAIFIP export capability and active-facility query scope. Bulk-export audit and output handling reviewed statically; runtime pending.",
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": false,
+        "request_method_or_superglobal_present": false,
+        "explicit_method_guard_detected": false,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": true,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": false,
+        "audit_markers_present": true,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "maifip/export_event.php",
+      "workspace": "maifip",
+      "methods_to_verify": [
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "export_records",
+      "csrf": "required",
+      "ownership_scope": "maifip_facility_adapter",
+      "idempotency": "not_applicable_audit_event_only",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "Audits and authorizes client-generated sheet export/print requests before browser file generation.",
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": true,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": true,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": true,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": false,
+        "audit_markers_present": true,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "maifip/export_logs.php",
+      "workspace": "maifip",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "audit.export",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "maifip_facility_adapter",
+      "idempotency": "not_applicable_or_read_only",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "audit-log permission and scope",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "require_login"
+        ],
+        "csrf_markers": [],
+        "method_markers": [],
+        "scope_markers": []
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "step_036_review": "MAIFIP view_action_logs capability; workspace-specific audit export. Runtime pending.",
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": false,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": false,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": false,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": false,
+        "audit_markers_present": true,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "maifip/fams_sheet_editor.php",
+      "workspace": "maifip",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "records.sheet.edit",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "maifip_facility_adapter",
+      "idempotency": "not_applicable_or_read_only",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "record scope and editor permission",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "current_user",
+          "require_login"
+        ],
+        "csrf_markers": [],
+        "method_markers": [],
+        "scope_markers": []
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": true,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": false,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": true,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": false,
+        "audit_markers_present": true,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "maifip/fund.php",
+      "workspace": "maifip",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "fund.manage_or_view",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "maifip_facility_adapter",
+      "idempotency": "required_for_retryable_create_or_batch_write",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "fund administration permission",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "current_user",
+          "require_login"
+        ],
+        "csrf_markers": [
+          "csrf_token",
+          "verify_csrf"
+        ],
+        "method_markers": [
+          "POST"
+        ],
+        "scope_markers": []
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": true,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": true,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": true,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": false,
+        "audit_markers_present": true,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "maifip/help.php",
+      "workspace": "maifip",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "help.view",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "maifip_facility_adapter",
+      "idempotency": "not_applicable_or_read_only",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "authenticated workspace access",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "current_user",
+          "require_login"
+        ],
+        "csrf_markers": [
+          "csrf_token"
+        ],
+        "method_markers": [],
+        "scope_markers": []
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": true,
+        "request_method_or_superglobal_present": false,
+        "explicit_method_guard_detected": false,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": false,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": false,
+        "audit_markers_present": true,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "maifip/import_sheet.php",
+      "workspace": "maifip",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "records.import",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "maifip_facility_adapter",
+      "idempotency": "required_for_retryable_create_or_batch_write",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "workspace import permission and duplicate protection",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "current_user",
+          "require_login"
+        ],
+        "csrf_markers": [
+          "csrf_token",
+          "verify_csrf"
+        ],
+        "method_markers": [
+          "POST"
+        ],
+        "scope_markers": []
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "step_036_review": "Upload provenance/size/extension/signature checks; MAIFIP edit capability and active-facility matching; import apply idempotency; non-admin WAITING-only rule. Runtime pending.",
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": true,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": true,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": true,
+        "idempotency_markers_present": true,
+        "transaction_or_lock_markers_present": true,
+        "audit_markers_present": true,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "maifip/index.php",
+      "workspace": "maifip",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "workspace.enter",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "maifip_facility_adapter",
+      "idempotency": "not_applicable_or_read_only",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "workspace access",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "current_user",
+          "is_logged_in"
+        ],
+        "csrf_markers": [],
+        "method_markers": [],
+        "scope_markers": [
+          "user_facility"
+        ]
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": false,
+        "request_method_or_superglobal_present": false,
+        "explicit_method_guard_detected": false,
+        "permission_or_role_markers_present": false,
+        "workspace_or_record_scope_markers_present": false,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": false,
+        "audit_markers_present": false,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "maifip/login.php",
+      "workspace": "maifip",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": false,
+      "capability": "auth.login",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "maifip_facility_adapter",
+      "idempotency": "not_applicable_or_read_only",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "public authentication",
+      "static_evidence": {
+        "session_or_auth_markers": [],
+        "csrf_markers": [],
+        "method_markers": [],
+        "scope_markers": []
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": false,
+        "csrf_markers_present": false,
+        "request_method_or_superglobal_present": false,
+        "explicit_method_guard_detected": false,
+        "permission_or_role_markers_present": false,
+        "workspace_or_record_scope_markers_present": false,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": false,
+        "audit_markers_present": false,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "maifip/logout.php",
+      "workspace": "maifip",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "auth.logout",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "maifip_facility_adapter",
+      "idempotency": "not_applicable_or_read_only",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "authenticated session",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "is_logged_in"
+        ],
+        "csrf_markers": [],
+        "method_markers": [],
+        "scope_markers": []
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": false,
+        "request_method_or_superglobal_present": false,
+        "explicit_method_guard_detected": false,
+        "permission_or_role_markers_present": false,
+        "workspace_or_record_scope_markers_present": false,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": false,
+        "audit_markers_present": true,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "maifip/logs.php",
+      "workspace": "maifip",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "audit.view",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "maifip_facility_adapter",
+      "idempotency": "not_applicable_or_read_only",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "audit-log permission and scope",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "require_login"
+        ],
+        "csrf_markers": [],
+        "method_markers": [],
+        "scope_markers": []
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": false,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": false,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": false,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": false,
+        "audit_markers_present": true,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "maifip/media.php",
+      "workspace": "maifip",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "media.view",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "maifip_facility_adapter",
+      "idempotency": "not_applicable_or_read_only",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "media ownership and record scope",
+      "static_evidence": {
+        "session_or_auth_markers": [],
+        "csrf_markers": [],
+        "method_markers": [],
+        "scope_markers": []
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": false,
+        "csrf_markers_present": false,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": false,
+        "permission_or_role_markers_present": false,
+        "workspace_or_record_scope_markers_present": false,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": false,
+        "audit_markers_present": false,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "maifip/monthly_report.php",
+      "workspace": "maifip",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "reports.view",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "maifip_facility_adapter",
+      "idempotency": "not_applicable_or_read_only",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "reporting scope",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "current_user",
+          "require_login"
+        ],
+        "csrf_markers": [
+          "csrf_token"
+        ],
+        "method_markers": [],
+        "scope_markers": []
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": true,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": false,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": true,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": false,
+        "audit_markers_present": true,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "maifip/monthly_report_export.php",
+      "workspace": "maifip",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "reports.export",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "maifip_facility_adapter",
+      "idempotency": "not_applicable_or_read_only",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "reporting scope and export permission",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "require_login"
+        ],
+        "csrf_markers": [],
+        "method_markers": [],
+        "scope_markers": []
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "step_036_review": "MAIFIP view_reports capability and active-facility query scope; export action audit. Runtime pending.",
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": false,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": false,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": true,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": false,
+        "audit_markers_present": true,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "maifip/monthly_report_print.php",
+      "workspace": "maifip",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "reports.print",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "maifip_facility_adapter",
+      "idempotency": "not_applicable_or_read_only",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "reporting scope",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "require_login"
+        ],
+        "csrf_markers": [],
+        "method_markers": [],
+        "scope_markers": []
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": false,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": false,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": true,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": false,
+        "audit_markers_present": true,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "maifip/monthly_report_settings.php",
+      "workspace": "maifip",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "reports.settings.manage",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "maifip_facility_adapter",
+      "idempotency": "required_for_retryable_create_or_batch_write",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "report settings permission",
+      "static_evidence": {
+        "session_or_auth_markers": [],
+        "csrf_markers": [
+          "csrf_token"
+        ],
+        "method_markers": [],
+        "scope_markers": []
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": true,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": true,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": false,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": false,
+        "audit_markers_present": true,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "maifip/notifications_api.php",
+      "workspace": "maifip",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "notifications.view_or_manage",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "maifip_facility_adapter",
+      "idempotency": "not_applicable_or_read_only",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "notification ownership",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "current_user",
+          "is_logged_in",
+          "require_login"
+        ],
+        "csrf_markers": [],
+        "method_markers": [],
+        "scope_markers": []
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": false,
+        "request_method_or_superglobal_present": false,
+        "explicit_method_guard_detected": false,
+        "permission_or_role_markers_present": false,
+        "workspace_or_record_scope_markers_present": false,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": false,
+        "audit_markers_present": false,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "maifip/offices.php",
+      "workspace": "maifip",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "offices.manage_or_view",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "maifip_facility_adapter",
+      "idempotency": "required_for_retryable_create_or_batch_write",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "office administration permission",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "require_login"
+        ],
+        "csrf_markers": [
+          "csrf_token",
+          "verify_csrf"
+        ],
+        "method_markers": [
+          "POST"
+        ],
+        "scope_markers": []
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": true,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": true,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": true,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": true,
+        "audit_markers_present": true,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "maifip/offline_changes.php",
+      "workspace": "maifip",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "offline.changes.view",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "maifip_facility_adapter",
+      "idempotency": "not_applicable_or_read_only",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "user/device and record scope",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "current_user",
+          "require_login"
+        ],
+        "csrf_markers": [],
+        "method_markers": [],
+        "scope_markers": []
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "step_036_review": "MAIFIP view_records capability; current-facility and current-user conflict list scope. Runtime pending.",
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": false,
+        "request_method_or_superglobal_present": false,
+        "explicit_method_guard_detected": false,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": true,
+        "idempotency_markers_present": true,
+        "transaction_or_lock_markers_present": false,
+        "audit_markers_present": true,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "maifip/offline_resolve.php",
+      "workspace": "maifip",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "offline.conflict.resolve",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "maifip_facility_adapter",
+      "idempotency": "required_for_retryable_create_or_batch_write",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "record scope and conflict state",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "current_user",
+          "require_login"
+        ],
+        "csrf_markers": [],
+        "method_markers": [],
+        "scope_markers": []
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "step_036_review": "MAIFIP view_records and edit_records gates; current-user conflict ownership; active-facility record lock and server-version recheck. Runtime pending.",
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": true,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": true,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": true,
+        "idempotency_markers_present": true,
+        "transaction_or_lock_markers_present": true,
+        "audit_markers_present": true,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "maifip/offline_sync.php",
+      "workspace": "maifip",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "offline.sync",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "maifip_facility_adapter",
+      "idempotency": "required_for_retryable_create_or_batch_write",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "record scope, device ownership and idempotency",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "current_user",
+          "require_login"
+        ],
+        "csrf_markers": [],
+        "method_markers": [],
+        "scope_markers": []
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "step_036_review": "MAIFIP create/edit capabilities checked per operation; active-facility record binding; client-change idempotency; record-version conflicts; batch capped at 100. Runtime pending.",
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": true,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": true,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": true,
+        "idempotency_markers_present": true,
+        "transaction_or_lock_markers_present": true,
+        "audit_markers_present": true,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "maifip/record_form.php",
+      "workspace": "maifip",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "records.create_or_edit",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "maifip_facility_adapter",
+      "idempotency": "required_for_retryable_create_or_batch_write",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "record scope, ownership, workflow state",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "current_user",
+          "require_role"
+        ],
+        "csrf_markers": [
+          "csrf_token",
+          "verify_csrf"
+        ],
+        "method_markers": [
+          "GET",
+          "POST",
+          "Allow: GET, POST"
+        ],
+        "scope_markers": [
+          "facility",
+          "can_edit_existing_record",
+          "FOR UPDATE"
+        ]
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "implementation_status": "source_enforced_runtime_verification_pending",
+      "enforcement_notes": "POST capability is rechecked; facility scope and workflow state are revalidated under SELECT FOR UPDATE before updating.",
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": true,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": true,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": true,
+        "idempotency_markers_present": true,
+        "transaction_or_lock_markers_present": true,
+        "audit_markers_present": true,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "maifip/records.php",
+      "workspace": "maifip",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "records.view",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "maifip_facility_adapter",
+      "idempotency": "not_applicable_or_read_only",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "workspace record scope",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "current_user",
+          "require_login"
+        ],
+        "csrf_markers": [
+          "csrf_token"
+        ],
+        "method_markers": [],
+        "scope_markers": [
+          "user_facility"
+        ]
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": true,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": false,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": true,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": false,
+        "audit_markers_present": true,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "maifip/records_search.php",
+      "workspace": "maifip",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "records.search",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "maifip_facility_adapter",
+      "idempotency": "not_applicable_or_read_only",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "workspace record scope",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "current_user",
+          "require_login"
+        ],
+        "csrf_markers": [
+          "csrf_token"
+        ],
+        "method_markers": [],
+        "scope_markers": []
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": true,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": false,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": true,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": false,
+        "audit_markers_present": false,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "maifip/register.php",
+      "workspace": "maifip",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": false,
+      "capability": "auth.register",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "maifip_facility_adapter",
+      "idempotency": "not_applicable_or_read_only",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "registration policy",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "is_logged_in"
+        ],
+        "csrf_markers": [
+          "csrf_token",
+          "verify_csrf"
+        ],
+        "method_markers": [
+          "POST"
+        ],
+        "scope_markers": []
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": true,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": true,
+        "permission_or_role_markers_present": false,
+        "workspace_or_record_scope_markers_present": true,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": false,
+        "audit_markers_present": false,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "maifip/status_update.php",
+      "workspace": "maifip",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "records.status.update",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "maifip_facility_adapter",
+      "idempotency": "required_for_retryable_create_or_batch_write",
+      "review_status": "static_enforcement_implemented_runtime_tests_pending",
+      "capability_description": "record scope and permitted state transition",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "require_login",
+          "current_user",
+          "can_update_status",
+          "fams_current_type_allows"
+        ],
+        "csrf_markers": [
+          "verify_csrf",
+          "fams_shared_verify_csrf"
+        ],
+        "method_markers": [
+          "REQUEST_METHOD",
+          "POST"
+        ],
+        "scope_markers": [
+          "FOR UPDATE",
+          "record_version",
+          "facility"
+        ],
+        "transactional_writes": [
+          "record_status",
+          "status_history",
+          "audit_log"
+        ]
+      },
+      "method_verification": "STATIC_SOURCE_CONFIRMED_POST_FOR_MUTATIONS",
+      "csrf_verification": "STATIC_SOURCE_CONFIRMED_SHARED_CSRF_ON_POST",
+      "scope_verification": "STATIC_SOURCE_CONFIRMED_TRANSACTIONAL_ROW_LOCK_AND_WORKSPACE_SCOPE_RECHECK",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "finalized_record_transition",
+        "stale_record_version",
+        "atomic_status_history_and_audit",
+        "concurrent_status_update"
+      ],
+      "enforcement_notes": "Static source enforcement updated in v0.0199. Runtime authenticated MySQL staging tests remain pending.",
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": true,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": true,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": true,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": true,
+        "audit_markers_present": true,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "maifip/switch.php",
+      "workspace": "maifip",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "workspace.switch",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "maifip_facility_adapter",
+      "idempotency": "not_applicable_or_read_only",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "authorized workspace membership",
+      "static_evidence": {
+        "session_or_auth_markers": [],
+        "csrf_markers": [],
+        "method_markers": [],
+        "scope_markers": []
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": false,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": false,
+        "permission_or_role_markers_present": false,
+        "workspace_or_record_scope_markers_present": false,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": false,
+        "audit_markers_present": false,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "maifip/ticket_create.php",
+      "workspace": "maifip",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "tickets.create",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "maifip_facility_adapter",
+      "idempotency": "required_for_retryable_create_or_batch_write",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "record scope and ticket eligibility",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "current_user",
+          "require_login"
+        ],
+        "csrf_markers": [
+          "csrf_token",
+          "verify_csrf"
+        ],
+        "method_markers": [
+          "POST"
+        ],
+        "scope_markers": []
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "ticket_lifecycle_enforcement": "v0.0200_static_source_reviewed_runtime_test_pending",
+      "enforcement_notes": "MAIFIP ticket creation locks the facility-qualified record and rejects stale submissions whose captured base version no longer matches.",
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": true,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": true,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": true,
+        "idempotency_markers_present": true,
+        "transaction_or_lock_markers_present": true,
+        "audit_markers_present": true,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "maifip/ticket_edit.php",
+      "workspace": "maifip",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "tickets.edit",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "maifip_facility_adapter",
+      "idempotency": "required_for_retryable_create_or_batch_write",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "ticket ownership and ticket state",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "current_user",
+          "require_login"
+        ],
+        "csrf_markers": [
+          "csrf_token",
+          "verify_csrf"
+        ],
+        "method_markers": [
+          "POST"
+        ],
+        "scope_markers": []
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "ticket_lifecycle_enforcement": "v0.0200_static_source_reviewed_runtime_test_pending",
+      "enforcement_notes": "MAIFIP ticket edits are requester- and facility-scoped, require OPEN state, and reject stale base versions instead of silently rebasing proposals.",
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": true,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": true,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": true,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": true,
+        "audit_markers_present": true,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "maifip/ticket_review.php",
+      "workspace": "maifip",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "tickets.review",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "maifip_facility_adapter",
+      "idempotency": "required_for_retryable_create_or_batch_write",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "ticket-approved deletion archive",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "current_user",
+          "require_login"
+        ],
+        "csrf_markers": [
+          "csrf_token",
+          "verify_csrf"
+        ],
+        "method_markers": [
+          "POST"
+        ],
+        "scope_markers": []
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect",
+        "non_admin_restore_denied",
+        "cross_system_archive_id_replay",
+        "cross_facility_archive_replay",
+        "duplicate_restore_race",
+        "archive_payload_integrity",
+        "delete_archive_audit_atomicity",
+        "ticket_delete_base_version_mismatch"
+      ],
+      "ticket_lifecycle_enforcement": "v0.0200_static_source_reviewed_runtime_test_pending",
+      "enforcement_notes": "MAIFIP approved delete tickets lock OPEN ticket and facility-qualified record, require matching base record version, archive complete payload, retain ticket audit fields and delete in one transaction.",
+      "deletion_restoration_enforcement": "v0.0201_static_source_reviewed_runtime_test_pending",
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": true,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": true,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": true,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": true,
+        "audit_markers_present": true,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "maifip/tickets.php",
+      "workspace": "maifip",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "tickets.view_or_manage",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "maifip_facility_adapter",
+      "idempotency": "required_for_retryable_create_or_batch_write",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "ticket scope and ownership",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "current_user",
+          "require_login"
+        ],
+        "csrf_markers": [
+          "csrf_token",
+          "verify_csrf"
+        ],
+        "method_markers": [
+          "POST"
+        ],
+        "scope_markers": []
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": true,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": true,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": true,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": true,
+        "audit_markers_present": true,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "maifip/trash.php",
+      "workspace": "maifip",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "records.trash.manage",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "maifip_facility_adapter",
+      "idempotency": "required_for_retryable_create_or_batch_write",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "administrator restore",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "current_user",
+          "require_login"
+        ],
+        "csrf_markers": [
+          "csrf_token",
+          "verify_csrf"
+        ],
+        "method_markers": [
+          "POST"
+        ],
+        "scope_markers": []
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect",
+        "non_admin_restore_denied",
+        "cross_system_archive_id_replay",
+        "cross_facility_archive_replay",
+        "duplicate_restore_race",
+        "archive_payload_integrity",
+        "delete_archive_audit_atomicity",
+        "ticket_delete_base_version_mismatch"
+      ],
+      "deletion_restoration_enforcement": "v0.0201_static_source_reviewed_runtime_test_pending",
+      "enforcement_notes": "MAIFIP restoration is admin+edit_records only, POST+CSRF, facility-qualifies and locks the archive row, uses a facility-scoped sequence lock, assigns a new control number/date/status, atomically marks restored and audits.",
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": true,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": true,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": true,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": true,
+        "audit_markers_present": true,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "maifip/user.php",
+      "workspace": "maifip",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "accounts.view_or_update",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "maifip_facility_adapter",
+      "idempotency": "required_for_retryable_create_or_batch_write",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "account ownership and administrative scope",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "current_user",
+          "require_login"
+        ],
+        "csrf_markers": [],
+        "method_markers": [],
+        "scope_markers": []
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "REQUIRES_MANUAL_ENDPOINT_REVIEW_AND_AUTHENTICATED_TEST",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": false,
+        "request_method_or_superglobal_present": false,
+        "explicit_method_guard_detected": false,
+        "permission_or_role_markers_present": false,
+        "workspace_or_record_scope_markers_present": false,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": false,
+        "audit_markers_present": false,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "maifip/users.php",
+      "workspace": "maifip",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "accounts.manage",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "maifip_facility_adapter",
+      "idempotency": "required_for_retryable_create_or_batch_write",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "MAIFIP central LPGMA account administration; local SWAD accounts are not mutated through this route.",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "current_user",
+          "fams_current_type_allows",
+          "fams_workspace_admin_allowed",
+          "require_login"
+        ],
+        "csrf_markers": [
+          "csrf_token",
+          "verify_csrf"
+        ],
+        "method_markers": [
+          "POST"
+        ],
+        "scope_markers": [
+          "user_facility"
+        ]
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "WORKSPACE_BOUNDARY_STATIC_REVIEWED_AUTHENTICATED_TEST_PENDING",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": true,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": true,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": true,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": true,
+        "audit_markers_present": true,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "maifip/usertypes.php",
+      "workspace": "maifip",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "roles.manage",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "maifip_facility_adapter",
+      "idempotency": "required_for_retryable_create_or_batch_write",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "Selected-workspace authorization is rechecked on GET and POST; cross-workspace management requires central LPGMA identity and target-workspace administrator capability.",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "current_user",
+          "fams_current_type_allows",
+          "fams_workspace_admin_allowed",
+          "require_login"
+        ],
+        "csrf_markers": [
+          "csrf_token",
+          "verify_csrf"
+        ],
+        "method_markers": [
+          "POST"
+        ],
+        "scope_markers": []
+      },
+      "method_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "csrf_verification": "NOT_CONFIRMED_STATIC_SCAN_ONLY",
+      "scope_verification": "WORKSPACE_BOUNDARY_STATIC_REVIEWED_AUTHENTICATED_TEST_PENDING",
+      "required_tests": [
+        "anonymous_access",
+        "wrong_http_method",
+        "csrf_missing_and_expired_for_writes",
+        "unauthorized_capability",
+        "cross_scope_identifier_replay",
+        "workflow_state_violation",
+        "audit_and_database_effect"
+      ],
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": true,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": true,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": false,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": false,
+        "audit_markers_present": true,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    },
+    {
+      "path": "portal/select-system.php",
+      "workspace": "portal",
+      "methods_to_verify": [
+        "GET",
+        "POST"
+      ],
+      "login_required": true,
+      "capability": "portal.access",
+      "csrf": "required_for_state_changing_requests",
+      "ownership_scope": "central_lpgma_identity",
+      "idempotency": "not_applicable",
+      "review_status": "static_source_reviewed_runtime_test_pending",
+      "capability_description": "LPGMA portal workspace selection; POST must retain portal identity and validate portal CSRF token",
+      "static_evidence": {
+        "session_or_auth_markers": [
+          "fams_system",
+          "fams_is_lpgma_role"
+        ],
+        "csrf_markers": [
+          "portal_csrf",
+          "hash_equals"
+        ],
+        "method_markers": [
+          "REQUEST_METHOD"
+        ],
+        "scope_markers": [
+          "fams_system",
+          "fams_is_lpgma_role"
+        ]
+      },
+      "method_verification": "STATIC_SOURCE_REVIEWED_RUNTIME_TEST_PENDING",
+      "csrf_verification": "STATIC_SOURCE_REVIEWED_RUNTIME_TEST_PENDING",
+      "scope_verification": "STATIC_SOURCE_REVIEWED_RUNTIME_TEST_PENDING",
+      "required_tests": [
+        "anonymous_access",
+        "inactive_account",
+        "unauthorized_workspace_membership",
+        "direct_workspace_url_access"
+      ],
+      "source_reconciliation": {
+        "file_exists": true,
+        "auth_markers_present": true,
+        "csrf_markers_present": true,
+        "request_method_or_superglobal_present": true,
+        "explicit_method_guard_detected": true,
+        "permission_or_role_markers_present": true,
+        "workspace_or_record_scope_markers_present": false,
+        "idempotency_markers_present": false,
+        "transaction_or_lock_markers_present": false,
+        "audit_markers_present": false,
+        "runtime_status": "NOT_TESTED_STAGING_REQUIRED"
+      }
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+FAMS Region II Unified — v0.0161
+
+SWAD cross-office visibility correction
+- All authorized SWAD users can view the centralized AICS/SWAD masterlist across all SWAD offices.
+- CSV masterlist export now includes all offices for authorized users, including Social Workers.
+- Read-only individual record printing is available across offices to users with AICS view permission.
+- Office-based edit, status update, and deletion restrictions remain unchanged; this update does not grant cross-office modification rights.
+- Updated AICS and MAIFIP version constants to 0.0161.
+
+Validation: PHP syntax checks and ZIP integrity checks are performed for this package. Live browser/database testing remains a deployment-stage check.

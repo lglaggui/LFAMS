@@ -1,0 +1,12 @@
+FAMS Region II Unified — Release Manifest v0.0214
+Release: FUND OPENING-BALANCE SAFEGUARDS + MAIFIP AUDITED ADJUSTMENTS
+Baseline: v0.0213 FUND LEDGER CORRECTIONS
+Archive layout: complete htdocs contents at ZIP root
+
+Release artifacts:
+- CHANGELOG-v0.0214.txt
+- VALIDATION-v0.0214.txt
+- PHP-LINT-v0.0214.txt
+- MIGRATION-v0.0214-MAIFIP-FUND-ADJUSTMENTS.sql
+
+No production database was accessed or modified. Apply the included additive SQL migration manually after backup and review.

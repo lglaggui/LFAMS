@@ -1,0 +1,12 @@
+FAMS REGION II UNIFIED — v0.0138 VALIDATION REPORT
+
+Changes included
+- Profile hover sizing is idempotent: removed duplicate pointerenter trigger, ignores repeated expansion while already open, animates from the canonical collapsed width, and resets to the collapsed width after close cleanup.
+- AICS Action Logs pagination now uses the same markup and behavior as MAIFIP Action Logs, including compact numbered pages, first/previous/next/last controls, ellipses, summary, and direct page jump. Existing active filter query parameters are preserved.
+- Updated application and shared asset cache versions to 0.0138.
+
+Automated checks
+- PHP syntax: passed for 108 PHP files.
+- JavaScript syntax: node --check passed for core/shared-shell.js, aics/assets/app.js, and maifip/assets/app.js.
+- CSS structure: brace-balance checks passed for core/shared-shell.css, core/shared-components.css, aics/assets/app.css, and maifip/assets/app.css.
+- Browser interaction and live-database tests were not available in this automated package build.

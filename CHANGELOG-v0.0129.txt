@@ -1,0 +1,8 @@
+FAMS Unified v0.0129 — Pageview Scroll, AICS Masterlist Width, Ticket UI
+
+- Corrected short landscape viewport layout so document/pageview can scroll past the final content. Uses dynamic viewport sizing and responsive bottom padding; no fixed oversized blank block is added to all screens.
+- AICS masterlist table now uses the full available width when sufficient while retaining a minimum width and horizontal scrolling on narrower pageviews. Column widths are coordinated between the header and body.
+- Aligned AICS ticket table and popup ticket form visual treatment with MAIFIP: panel/header hierarchy, table colors/borders/spacing, responsive horizontal scroll, form controls and action buttons. AICS ticket fields, tables, access rules and processing remain AICS-specific.
+- Updated application version labels to 0.0129.
+
+Validation in this package is static only unless separately reported. Browser, live database, and hosting behavior require deployment testing.

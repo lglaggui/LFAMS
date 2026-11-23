@@ -1,0 +1,38 @@
+FAMS Region II Unified — v0.0210
+Security, Auditability and Operational Resilience
+
+Baseline: v0.0209
+
+1. Session invalidation and account-removal effects
+- Added auth_version to the central MAIFIP/LPGMA users table and local AICS users table through a verified, idempotent runtime migration.
+- MAIFIP and AICS session refresh now compare the session's account version with the authoritative database value and invalidate stale sessions.
+- Account disablement, approval/rejection state changes, password changes, and role/profile administration advance the version within the account mutation transaction.
+- Own profile/password changes refresh the current session version to avoid logging out the user who performed the change.
+- AICS LPGMA bridge sessions verify the central LPGMA account on every AICS request; bridge synchronization carries the authoritative central version.
+- The LPGMA portal selector validates active state, approval state, role, and account version on every request.
+- Server-side invalidation clears workspace identity and CSRF state and regenerates the session ID. Normal logout continues to destroy the session and expire its cookie.
+
+2. Audit completeness
+- Added explicit critical-audit action classification and a critical writer that refuses to write outside the business transaction.
+- AICS and MAIFIP status mutations now use the critical audit writer alongside their status-history writes.
+- Existing account, deletion, restoration, ticket, import, and offline-sync paths retain their transaction-bound log_action behavior where already implemented.
+
+3. Transaction retry and conflict behavior
+- Added bounded retry for top-level database-only transactions on recognized InnoDB deadlock (1213 / SQLSTATE 40001) and lock-wait timeout (1205) failures.
+- Retries are limited to five attempts, use bounded exponential backoff with jitter, and do not retry validation, permission, or constraint failures.
+- Nested transactions do not retry independently or commit their caller's transaction.
+- AICS and MAIFIP status updates use the retry wrapper and retain row locks, record-version checks, history, and audit writes.
+
+4. Error handling
+- Added a shared safe database-error mapper that avoids exposing SQL, schema names, or credentials to end users.
+- Status update and My Account failure messages use actionable, sanitized text while detailed technical exceptions remain in the PHP error log.
+
+5. Runtime migration review
+- Chat message compatibility DDL no longer swallows all ALTER failures; it tolerates only duplicate-column races and verifies the column afterward.
+- User-type registry initialization no longer silently continues after required schema initialization fails.
+- Read-only optional UI fallbacks remain non-blocking and are not treated as required schema migrations.
+
+Compatibility and scope
+- AICS and MAIFIP data models and business rules remain separate.
+- No beneficiary/patient records, ticket records, or production database contents were modified during this release work.
+- No staging environment or live database was used.

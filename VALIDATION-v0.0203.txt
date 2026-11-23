@@ -1,0 +1,48 @@
+FAMS Region II Unified — v0.0203 Validation
+Step 3.6 — Imports, exports, and offline synchronization
+
+Scope reviewed:
+- aics/import_sheet.php; maifip/import_sheet.php
+- aics/export_csv.php; maifip/export_csv.php
+- aics/export_logs.php; maifip/export_logs.php
+- maifip/offline_sync.php; maifip/offline_changes.php; maifip/offline_resolve.php
+- maifip/monthly_report_export.php
+- maintenance/endpoint-registry.json
+
+Changes:
+- Import upload provenance, file size, extension, and signature/content checks.
+- Non-admin import status restricted to WAITING to prevent bypass of status workflows.
+- MAIFIP offline sync request cap of 100 changes; existing create/edit authorization, facility binding, idempotency, conflict/version checks retained.
+- Static endpoint registry notes updated; AICS/MAIFIP export data boundaries recorded.
+
+Tests intended for local execution:
+- PHP syntax lint across all PHP files.
+- Import/export/sync enforcement static checks.
+- Existing permission matrix, account permission, authorization, endpoint registry, record/status, ticket, deletion/restoration, idempotency, and transaction regression tests.
+
+Limitations:
+- No MySQL/MariaDB server or PDO MySQL driver is available in this build environment; no database-backed or authenticated staging tests were run.
+- No production database was connected to or modified.
+- Offline sync currently has a per-request batch cap but does not add a separate registered-device credential model; authentication remains the existing logged-in session plus CSRF/session protections.
+- Background/scheduled job execution was not modified: no import/export/offline-sync scheduler or queue worker was identified as part of the reviewed endpoint set. Any deployment-specific cron or external worker must be separately inventoried and tested.
+- Export output is still subject to authenticated staging review for formula-injection handling and large-export resource limits; this release does not claim those behaviors fully verified.
+- Audit actions are present for the reviewed import/export/sync paths, but durable outcome logging for failed/partially rejected batch rows requires staging verification.
+
+This is a static source-hardening release, not production-readiness certification.
+
+Executed results (this build environment):
+- PHP lint: 137 PHP files, all passed.
+- Import/export/sync enforcement: 12/12 passed.
+- Permission matrix: 52 passed, 0 failed.
+- Account permission enforcement: 11 checks, 0 failures.
+- Authorization model: 16 passed, 0 failed.
+- Deletion/restoration enforcement: 18/18 passed.
+- Endpoint registry: passed; 80 routes; JSON valid.
+- Payload fingerprint: 4 passed, 0 failed.
+- Status endpoint enforcement: 9 checks, 0 failures.
+- Ticket lifecycle: 12/12 passed.
+- Transaction runtime: 4 passed, 0 failed.
+- Repository contracts: passed.
+- Dashboard reporting action: 12 passed, 0 failed.
+- Reporting period layout: passed.
+- ZIP archive integrity is verified after packaging.

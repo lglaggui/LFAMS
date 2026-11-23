@@ -1,0 +1,17 @@
+FAMS v0.0216 — Test Summary
+
+PHP lint: 154/154 passed.
+JavaScript syntax: 21/21 passed.
+PHP test scripts attempted: 26.
+Passed: 25.
+Refused by safety gate: 1 (mysql_concurrency_test.php; no FAMS_ALLOW_DB_TESTS=1 and no staging/test FAMS_TEST_DSN).
+Failed tests: 0.
+
+Targeted checks:
+- monthly_reconciliation_contract_test.php: 13 checks, 0 failures.
+- fund_ledger_anchor_test.php: 16 checks, 0 failures.
+- fund_opening_2026_test.php: 15 checks, 0 failures.
+- monthly_sheet_standardization_test.php: 11 checks, 0 failures.
+- data_lifecycle_audit_test.php: 26 checks, 0 failures.
+
+No database-backed tests were performed.

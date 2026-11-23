@@ -1,0 +1,10 @@
+FAMS Region II Unified v0.0117
+
+Visual standardization pass for MAIFIP and AICS.
+
+- Added shared styling rules loaded after both system stylesheets to standardize page surface behavior, action links, table typography, header/cell padding, borders, hover states, and status-badge shadow treatment.
+- Flattened MAIFIP and AICS masterlist table styling: removed table shadows and heavy header fills, unified neutral header/cell colors, simplified borders, and normalized row hover/zebra treatment.
+- Kept existing system-specific table columns, data, permissions, and workflow logic intact.
+- Updated both system version labels to 0.0117.
+
+Validation scope: static PHP syntax, JavaScript syntax where available, CSS brace balance, and ZIP integrity. Browser-based visual and live workflow testing are not included.

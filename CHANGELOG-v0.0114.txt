@@ -1,0 +1,12 @@
+FAMS Region II Unified v0.0114
+
+MAIFIP
+- Replaced the administrator My Account modal entry in Users.php with direct navigation to account.php.
+- Implemented a dedicated My Account page using the AICS account-page layout pattern, with profile editing, avatar crop/save/revert, password change, and account-management navigation.
+- Further reduced Masterlist widths by 10% cumulatively for Status, Bill Amount, Patient, Address, and Submission.
+
+BOTH SYSTEMS
+- Chat office/group dropdowns now initialize collapsed by default. A user's previously saved expanded state is respected; otherwise groups start collapsed.
+- Updated version labels to 0.0114.
+
+Validation note: static syntax and archive checks only; no live browser/database/hosting end-to-end test performed.

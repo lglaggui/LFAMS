@@ -1,0 +1,35 @@
+FAMS Region II Unified — Release Manifest v0.0216
+Release: Fund Breakdown Wrapping and Unified MAIFIP Monthly Reconciliation
+
+Package contents
+- Complete unified htdocs source tree at archive root.
+- CHANGELOG-v0.0216.txt
+- VALIDATION-v0.0216.txt
+- PHP-LINT-v0.0216.txt
+- TEST-SUMMARY-v0.0216.txt
+- maintenance/tests/monthly_reconciliation_contract_test.php
+- Existing v0.0215 opening-classification migration and earlier release history retained.
+
+Primary code changes
+- aics/assets/app.css and maifip/assets/app.css: wrap Fund Source contents within the fourth Fund Breakdown column.
+- maifip/helpers.php: authoritative maifip_monthly_fund_reconciliation() calculation contract.
+- maifip/monthly_report.php: worksheet consumes shared reconciliation; adjustments displayed; Excel balance block includes all fund components.
+- maifip/monthly_report_print.php: print view consumes shared reconciliation and uses authoritative monthly-summary fallback for ending balance.
+- maifip/monthly_report_export.php: CSV exports full fund balance breakdown and detail reconciliation indicators.
+- maintenance/tests/: added 13-check static monthly reconciliation, presentation, and authorization contract test; updated release version assertions to 0.0216.
+
+Migration notes
+- No new database migration is introduced by v0.0216.
+- The v0.0215 opening-classification migration remains a separate manual migration and must be reviewed/applied according to its own instructions.
+- The v0.0214 MAIFIP adjustment-table migration is still required if that table has not yet been created.
+
+Verification
+- 154 PHP files passed php -l.
+- 21 JavaScript files passed node --check.
+- 26 PHP test scripts were attempted: 25 passed; the MySQL concurrency test was safely refused because no explicit staging/test DSN and opt-in flag were supplied.
+- New monthly reconciliation contract test: 13 checks, 0 failures.
+- Existing fund ledger anchor test: 16 checks, 0 failures.
+- Existing 2026 opening classification test: 15 checks, 0 failures.
+- Monthly sheet standardization test: 11 checks, 0 failures.
+- Data lifecycle audit test: 26 checks, 0 failures.
+- Database-backed reconciliation and account-based authorization tests were not run.

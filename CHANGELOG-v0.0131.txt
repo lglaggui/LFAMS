@@ -1,0 +1,9 @@
+FAMS v0.0131 — AICS quotation schema and MAIFIP ticket-edit fixes
+
+- Added a backward-compatible runtime migration for aics_assistance_records.quotation, matching the AICS record form and masterlist field.
+- Added quotation to the fresh-install unified SQL schema.
+- Initialized popup mode in MAIFIP ticket_edit.php before validation and rendering use it.
+- Preserved popup behavior after successful own-ticket edits and on ticket navigation.
+- Updated MAIFIP and AICS app version labels to 0.0131.
+
+Validation performed: PHP syntax checks, JavaScript syntax checks where available, CSS structure checks, and ZIP integrity. Live database/browser workflow testing was not performed.

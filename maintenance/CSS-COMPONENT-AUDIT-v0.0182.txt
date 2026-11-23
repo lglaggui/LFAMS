@@ -1,0 +1,21 @@
+FAMS v0.0182 — CSS / COMPONENT AUDIT
+
+Shared base contract migration
+- Source: identical v0.0030 base visual-system block in AICS and MAIFIP app.css.
+- Verified exact equality before migration.
+- Canonical destination: core/shared-components.css.
+- Removed from both workspace app.css files.
+
+Component coverage in the shared foundation
+- Buttons: .btn, .button, .primary-btn, .secondary-btn, .ghost-btn aliases.
+- Fields: native text inputs, selects, textareas and .input.
+- Cards: .card, .panel, .form-panel, .table-panel, .content-card, .dashboard-card.
+- Badges: .badge, .status-badge, .pill.
+- Action controls: .action-icon, .table-action, .icon-action, .fams-action-icon.
+- Modal headings: .modal-header, .modal-head, .fams-modal-header, .avatar-crop-head.
+- Pagination: .pagination, .pagination-controls, .fams-pagination-controls; existing .fams-masterlist-pagination remains canonical for the masterlist pager.
+
+Scope / limitations
+- Existing markup continues to use its current class names; this pass does not rewrite every page template into new component markup.
+- Workspace-specific variants and page-level rules remain in each app.css intentionally.
+- No broad deletion of repeated selectors was attempted because selector overlap and cascade order require visual regression before removal.

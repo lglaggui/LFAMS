@@ -1,0 +1,42 @@
+FAMS Region II Unified — Release Manifest v0.0212
+Release: Monthly Editable Worksheet Standardization
+Baseline: v0.0211
+Package type: Full htdocs source tree; archive entries are at ZIP root.
+
+SOURCE INVENTORY
+- PHP source files: 150
+- JavaScript files: 20
+- CSS files: 11
+- Existing maintenance/test assets retained.
+- Both AICS and MAIFIP workspace source trees retained.
+
+IMPLEMENTATION
+- Added core/shared-sheet.js for shared row-height and column-width persistence.
+- Both monthly_report.php pages load the shared controller and shared stylesheet.
+- AICS dimensions are stored per selected year/month.
+- MAIFIP dimensions are stored per facility and selected year/month.
+- MAIFIP manager read-only mode is enforced by the shared dimension controller.
+- Added regression tests for shared worksheet persistence and source contracts.
+- Corrected a missing closing quote in the MAIFIP Excel-export HTML string that caused its inline JavaScript to fail syntax validation.
+- Workspace-specific fields, report calculations, data sources, permissions, and downloaded-balance server persistence remain distinct.
+
+VALIDATION
+- PHP syntax lint: 150 files, 0 syntax errors.
+- JavaScript syntax: 20 external JavaScript files plus both extracted monthly-report inline scripts passed Node.js syntax checks.
+- CSS parser: 11 files, 0 parser errors.
+- PHP maintenance tests: 22 passed; the MySQL concurrency test was safely refused because no explicit staging/test DSN and opt-in were supplied.
+- Shared worksheet dimension JavaScript tests: 5 passed.
+- Monthly worksheet static contract tests: 11 passed.
+- Existing data-lifecycle test updated to assert v0.0212 markers and passed all 26 checks.
+
+DATABASE / DEPLOYMENT
+- No database schema changes or migrations.
+- No production database connection, reads, or writes.
+- No deployment performed.
+- Authenticated live-browser testing and database-backed role testing were not available in this environment.
+- Worksheet layout dimensions are stored in browser localStorage; MAIFIP downloaded-balance setting continues to use its existing audited server-side endpoint.
+
+RECOMMENDED DEPLOYMENT
+- Extract the ZIP into a staging copy of htdocs.
+- Verify AICS editing and MAIFIP editing/read-only behavior across at least two facilities and multiple reporting periods.
+- Verify exports, print/PDF, downloaded-balance persistence, and browser-local dimension restoration before production deployment.

@@ -1,0 +1,17 @@
+FAMS Region II — v0.0200
+Step 3.3: Ticket Lifecycle Enforcement
+
+Scope implemented
+- MAIFIP ticket creation now locks the linked facility-qualified record and verifies that the record version captured when the form was loaded is still current before inserting either a revision or delete ticket.
+- MAIFIP ticket editing now rejects stale proposals. It verifies the proposal's original base record version against the current facility-qualified record both before rendering and again under transaction locks. Editing no longer silently rebases a stale proposal to a newer record version.
+- AICS revision, deletion, and office-reassignment ticket submissions now re-lock the linked record and recheck office scope and the captured record version before ticket insertion.
+- AICS approved revision tickets now write aics_status_history when the proposed status changes, in the same transaction as the record update and ticket decision.
+- AICS ticket deletion is restricted to pending, non-record-linked support tickets. Reviewed tickets and record-linked workflow tickets are retained for audit and recovery.
+- AICS approval/rejection remains administrator-only, locks the pending ticket, and rejects replayed decisions after the ticket leaves its pending state.
+- Updated the endpoint registry with the ticket lifecycle source-review notes. Runtime verification remains explicitly pending.
+- Version markers updated to 0.0200.
+
+Not included
+- Ticket-driven status enforcement has not been declared complete for all legacy paths.
+- Spreadsheet import and offline synchronization enforcement remain separate future phases.
+- No database schema migration or production data change was performed in this package.

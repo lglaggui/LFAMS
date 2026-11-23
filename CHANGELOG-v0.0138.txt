@@ -1,0 +1,6 @@
+FAMS UNIFIED — VERSION 0.0138
+
+Changes
+- Fixed header profile expansion so repeated hover/unhover cycles cannot use an in-flight width as a new baseline. Removed duplicate mouseenter/pointerenter expansion triggers and made expansion idempotent.
+- Restored the canonical collapsed width after the expansion transition cleanup.
+- Rebuilt AICS Action Logs pagination to match MAIFIP: total-action summary, current/total page, first/previous/next/last controls, compact numbered pages with ellipses, and direct page jump. Existing filters are preserved when changing pages.

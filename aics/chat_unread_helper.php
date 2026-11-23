@@ -1,0 +1,12 @@
+<?php
+function fams_chat_unread_state(PDO $pdo, int $me, string $role): array {
+    $pdo->exec("CREATE TABLE IF NOT EXISTS aics_chat_read_state (user_id INT UNSIGNED NOT NULL,conversation_key VARCHAR(80) NOT NULL,last_read_message_id BIGINT UNSIGNED NOT NULL DEFAULT 0,updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,PRIMARY KEY(user_id,conversation_key)) ENGINE=InnoDB");
+    $users=$pdo->query("SELECT id FROM aics_users WHERE is_active=1")->fetchAll(PDO::FETCH_COLUMN);
+    $offices=$pdo->query("SELECT id FROM aics_offices WHERE is_active=1 AND id<>1")->fetchAll(PDO::FETCH_COLUMN);
+    $groups=['ALL','SWAD-REGION-II']; foreach($offices as $id)$groups[]='SWAD-'.(int)$id;
+    foreach(['ISABELA','CAGAYAN','NUEVA-VIZCAYA','QUIRINO','BATANES'] as $province)$groups[]='SWAD-PROV-'.$province;
+    $counts=[];$total=0;$state=$pdo->prepare('SELECT last_read_message_id FROM aics_chat_read_state WHERE user_id=? AND conversation_key=?');
+    foreach($users as $uid){$uid=(int)$uid;if($uid===$me)continue;$key='u:'.$uid;$st=$pdo->prepare('SELECT COALESCE(MAX(id),0) FROM aics_user_messages WHERE ((sender_id=? AND recipient_id=?) OR (sender_id=? AND recipient_id=?)) AND group_key IS NULL');$st->execute([$me,$uid,$uid,$me]);$max=(int)$st->fetchColumn();$state->execute([$me,$key]);$cursor=$state->fetchColumn();if($cursor===false){$pdo->prepare('INSERT IGNORE INTO aics_chat_read_state(user_id,conversation_key,last_read_message_id) VALUES(?,?,?)')->execute([$me,$key,$max]);$cursor=$max;} $q=$pdo->prepare('SELECT COUNT(*) FROM aics_user_messages WHERE recipient_id=? AND sender_id=? AND group_key IS NULL AND deleted_at IS NULL AND id>?');$q->execute([$me,$uid,(int)$cursor]);$n=(int)$q->fetchColumn();if($n){$counts[$key]=$n;$total+=$n;}}
+    foreach($groups as $g){$db='g:'.$g;$key='g:'.$g;$mx=$pdo->prepare('SELECT COALESCE(MAX(id),0) FROM aics_user_messages WHERE group_key=?');$mx->execute([$db]);$max=(int)$mx->fetchColumn();$state->execute([$me,$key]);$cursor=$state->fetchColumn();if($cursor===false){$pdo->prepare('INSERT IGNORE INTO aics_chat_read_state(user_id,conversation_key,last_read_message_id) VALUES(?,?,?)')->execute([$me,$key,$max]);$cursor=$max;} $q=$pdo->prepare('SELECT COUNT(*) FROM aics_user_messages WHERE group_key=? AND sender_id<>? AND deleted_at IS NULL AND id>?');$q->execute([$db,$me,(int)$cursor]);$n=(int)$q->fetchColumn();if($n){$counts[$key]=$n;$total+=$n;}}
+    return ['counts'=>$counts,'unread_messages'=>$total,'unread_conversations'=>count($counts)];
+}

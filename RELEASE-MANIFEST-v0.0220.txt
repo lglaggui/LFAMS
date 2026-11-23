@@ -1,0 +1,12 @@
+Release: FAMS Region II Unified v0.0220
+Release name: Shared UI Consistency
+Baseline: v0.0219 CONTEXTUAL-ICONS
+Archive layout: complete htdocs contents at ZIP root
+Primary shared UI addition: core/shared-ui-consistency.css
+Workspace integration: aics/assets/app.css, maifip/assets/app.css
+Version markers: aics/config.php, maifip/app_version.php
+Contract test: maintenance/tests/ui_consistency_contract_test.php
+Validation: VALIDATION-v0.0220.txt
+Changelog: CHANGELOG-v0.0220.txt
+Test output: TEST-RESULTS-v0.0220.txt
+PHP lint output: PHP-LINT-v0.0220.txt

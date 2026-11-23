@@ -1,0 +1,21 @@
+FAMS REGION II UNIFIED - v0.0164
+
+Shared page-view spacing
+- Preserved the page-view frame's flush position immediately below the reserved fixed header.
+- Applied one shared responsive page-content gutter to both AICS and MAIFIP: 22px desktop, 18px tablet, and 14px mobile on the top/left/right edges.
+- Kept popup workspaces exempt from full-page gutters.
+
+DOH MAIFIP dashboard scrolling
+- Added the DOH worksheet viewport to the same shared horizontal edge-arrow and edge-wheel navigation used by the other wide tables.
+- Made the worksheet viewport keyboard-focusable and accessible by name.
+- Standardized horizontal overscroll containment, smooth scrolling, and stable scrollbar gutter behavior.
+
+Cross-system unification
+- Centralized responsive page-view geometry in the shared shell rather than allowing AICS and MAIFIP to use different page gutters.
+- Removed duplicated edge-arrow presentation rules from the two workspace stylesheets; the shared component stylesheet is now the single visual owner.
+- Aligned edge-arrow and edge-wheel viewport detection to one shared selector list.
+- Updated shared-shell asset cache keys and both system version constants to 0.0164.
+
+Validation
+- Source-level checks: pending final package validation.
+- Live browser, PHP runtime, and MySQL workflow tests require the user's configured environment and were not performed in this packaging pass.

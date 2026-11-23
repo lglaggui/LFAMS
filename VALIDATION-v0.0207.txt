@@ -1,0 +1,16 @@
+FAMS v0.0207 — Validation Report
+
+Scope: source-level control-number allocation and lock-order hardening on v0.0206.
+
+Checks planned/performed:
+- PHP syntax lint across all PHP files.
+- Existing automated test suites.
+- New control-number/lock audit source assertions.
+- JavaScript syntax validation where supported by local tooling.
+- ZIP integrity and archive-root structure.
+
+Database-backed concurrency tests were not run. The local CLI environment lacks pdo_mysql and there is no staging database configured. No production DB access or modification occurred.
+
+AICS unique index behavior is guarded: if legacy duplicates exist, automatic index creation is skipped and an error-log warning is emitted. This does not repair duplicates.
+
+See LOCK-ORDER-AUDIT-v0.0207.txt for detailed findings and residual risks.

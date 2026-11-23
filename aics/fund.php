@@ -1,0 +1,35 @@
+<?php
+require_once __DIR__.'/config.php'; require_login(); if(!fams_current_type_allows('AICS','manage_funds')){http_response_code(403);exit('Fund management is not permitted.');} require_role(['admin','manager']);
+$popup=isset($_GET['popup'])||isset($_POST['popup']);
+$editId=(int)($_GET['edit']??$_POST['edit']??0);
+$userRole=(string)current_user()['role'];
+$editFund=null;
+if($editId){$st=$pdo->prepare('SELECT * FROM aics_fund_downloads WHERE id=?');$st->execute([$editId]);$editFund=$st->fetch();if(!$editFund){http_response_code(404);exit('Fund entry not found.');}}
+if($_SERVER['REQUEST_METHOD']==='POST'){
+ verify_csrf();
+ if(!user_is_admin()){http_response_code(403);exit('Only the LPGMA System Administrator can modify the Region II Fund.');}
+ try{
+  $action=(string)($_POST['action']??'');
+  if($action==='save_fund'){
+   $id=(int)($_POST['id']??0);$batch=trim((string)($_POST['batch_no']??''));$amount=(float)($_POST['downloaded_amount']??0);$date=trim((string)($_POST['date_downloaded']??''));$source=trim((string)($_POST['fund_source']??''));
+   if($batch===''||$amount<=0||$date===''||$date>date('Y-m-d')||$source==='')throw new RuntimeException('Batch No., downloaded fund amount, download date, and fund source are required.');
+   if(strtoupper(trim($batch))==='BEGINNING BALANCE')throw new RuntimeException('BEGINNING BALANCE is reserved for the verified January 1, 2026 opening balance. Enter ordinary fund additions using their actual batch number.');
+   if($id){$existing=$pdo->prepare('SELECT batch_no FROM aics_fund_downloads WHERE id=?');$existing->execute([$id]);$existingBatch=(string)$existing->fetchColumn();if(strtoupper(trim($existingBatch))==='BEGINNING BALANCE')throw new RuntimeException('Opening-balance records cannot be edited through the ordinary fund-download screen.');$pdo->prepare('UPDATE aics_fund_downloads SET batch_no=?,downloaded_amount=?,date_downloaded=?,fund_source=? WHERE id=?')->execute([$batch,$amount,$date,$source,$id]);log_action($pdo,'UPDATE_FUND_DOWNLOAD','Updated Region II fund download '.$batch.'.');$message='Fund entry updated successfully.';}
+   else{$pdo->prepare('INSERT INTO aics_fund_downloads(batch_no,downloaded_amount,date_downloaded,fund_source,created_by) VALUES(?,?,?,?,?)')->execute([$batch,$amount,$date,$source,current_user()['id']]);log_action($pdo,'ADD_FUND_DOWNLOAD','Added Region II fund download '.$batch.'.');$message='Fund entry added successfully.';}
+   flash('success',$message);
+  }
+ }catch(Throwable $e){if($popup){echo '<script>parent.postMessage({type:"fams-popup-error",message:'.json_encode($e->getMessage()).'},"*");</script>';exit;}flash('error',$e->getMessage());}
+ if($popup){echo '<script>parent.postMessage({type:"fams-popup-success",message:'.json_encode($message??'Fund entry saved.').'},"*");</script>';exit;}
+ redirect('fund.php');
+}
+require_once __DIR__.'/fund_ledger.php'; $fundPosition=aics_fund_ledger_position($pdo,date('Y-m-d',strtotime('tomorrow'))); $allot=(float)$fundPosition['available'];
+$used=(float)$fundPosition['disbursed'];
+$balance=(float)$fundPosition['remaining'];
+$txs=$pdo->query('SELECT f.*,u.full_name FROM aics_fund_downloads f LEFT JOIN aics_users u ON u.id=f.created_by ORDER BY f.date_downloaded DESC,f.id DESC')->fetchAll();
+$pageTitle='Fund Management';
+if($popup){?><!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Fund Management</title><link rel="stylesheet" href="assets/app.css?v=<?=e(APP_VERSION)?>"></head><body class="popup-form-body"><section class="card card-pad focused-popup-form"><div class="section-head"><div><span class="section-kicker">FUND MANAGEMENT</span><h2><?= $editFund?'Edit Fund Download':'Add Fund Download' ?></h2><span class="muted">Centralized Region II fund ledger.</span></div></div><form method="post" class="record-form modern-editor-form"><input type="hidden" name="csrf_token" value="<?=e(csrf_token())?>"><input type="hidden" name="action" value="save_fund"><input type="hidden" name="popup" value="1"><input type="hidden" name="id" value="<?=e((string)$editId)?>"><div class="form-grid"><div><label>Batch No. *</label><input class="input" name="batch_no" value="<?=e($editFund['batch_no']??'')?>" required></div><div><label>Downloaded Fund Amount *</label><input class="input" type="number" name="downloaded_amount" min="0.01" step="0.01" value="<?=isset($editFund['downloaded_amount'])?e(number_format((float)$editFund['downloaded_amount'],2,'.','')):''?>" required></div><div><label>Download Date *</label><input class="input" type="date" name="date_downloaded" max="<?=date('Y-m-d')?>" value="<?=e($editFund['date_downloaded']??date('Y-m-d'))?>" required></div><div><label>Fund Source *</label><input class="input" name="fund_source" value="<?=e($editFund['fund_source']??'')?>" placeholder="e.g. DSWD / Fund Transfer" required></div></div><div class="form-actions"><button type="button" class="btn btn-secondary" onclick="parent.postMessage({type:'fams-close-popup'},'*')">Close</button><button class="btn btn-primary"><?= $editFund?'Update Fund':'Add Fund' ?></button></div></form></section></body></html><?php exit;}
+require __DIR__.'/partials/header.php';?>
+<div class="fund-management-page">
+<section class="fund-dashboard-grid"><div class="panel summary-card"><span class="section-kicker">TOTAL ALLOTMENT</span><strong><?=money($allot)?></strong><p>Sum of all fund downloads.</p></div><div class="panel summary-card"><span class="section-kicker">TOTAL UTILIZED</span><strong><?=money($used)?></strong><p>Released assistance.</p></div><div class="panel summary-card fund-balance-emphasis"><span class="section-kicker">REMAINING FUND</span><strong><?=money($balance)?></strong><p>Total downloads less released assistance.</p></div></section>
+<section class="panel fund-page-section"><div class="panel-heading"><div><span class="section-kicker">FUND BREAKDOWN</span><h3>Downloaded Funds</h3></div><div class="toolbar-actions"><?php if(user_is_admin()):?><button class="primary-btn" type="button" onclick="openGlobalPopup('fund.php?popup=1')">＋ Add Fund Download</button><?php endif;?></div></div><div class="table-wrap fund-ledger-table"><table><thead><tr><th>Batch No.</th><th>Downloaded Fund</th><th>Download Date</th><th>Fund Source</th><th>Actions</th></tr></thead><tbody><?php if(!$txs):?><tr><td colspan="5" class="empty-cell">No fund downloads have been encoded yet.</td></tr><?php endif;?><?php foreach($txs as $f):?><tr><td><strong><?=e($f['batch_no'])?></strong></td><td><?=money((float)$f['downloaded_amount'])?></td><td><?=e(date('F d, Y',strtotime($f['date_downloaded'])))?></td><td><?=e($f['fund_source'])?></td><td><?php if($userRole==='manager'):?><span class="muted">View only</span><?php else:?><button class="btn btn-secondary" type="button" onclick="openGlobalPopup('fund.php?popup=1&edit=<?=(int)$f['id']?>')">Edit</button><?php endif;?></td></tr><?php endforeach;?></tbody></table></div></section>
+</div><?php require __DIR__.'/partials/footer.php';?>

@@ -1,0 +1,29 @@
+VISUAL REGRESSION REPORT — v0.0180
+
+METHOD
+Representative static HTML fixtures were built from the actual AICS/MAIFIP app.css files, shared shell stylesheets, and the component class structures used by the target PHP pages. Fixtures are intentionally not presented as live PHP pages because the authenticated database environment is not available in this validation run.
+
+COVERAGE
+- Workspaces: AICS and MAIFIP.
+- Page groups: Dashboard, Masterlist, Reporting, Ticket Management, Action Logs, Account Management, Forms.
+- Viewports: 1440, 1024, 800, 768, 767, 560, 390px.
+- Total: 14 fixture pages x 7 widths = 98 scenarios.
+
+ASSERTIONS
+- Pageview padding-top/right/bottom/left are equal at each breakpoint.
+- Pageview outer margins are zero.
+- Pageview begins immediately after the runtime-measured fixed header.
+- No document-level horizontal overflow in the tested fixtures.
+- Shared footer remains fixed and aligned with the sidebar/content column.
+- Common card/panel padding follows the responsive contract.
+- Wide masterlist content remains contained by its table wrapper.
+
+RESULT
+- Layout scenarios: 98 passed, 0 failed.
+- Pageview/card contract checks: 98 passed, 0 failed.
+- Responsive Pageview gutter values: 28px / 22px / 16px / 12px.
+- Common card/panel insets: 18px / 16px / 13px.
+
+LIMITATIONS
+- Fixtures do not execute the authenticated PHP pages or database queries.
+- No live role/permission, fund calculation, record mutation, or production integration test was performed.

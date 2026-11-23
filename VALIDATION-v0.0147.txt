@@ -1,0 +1,19 @@
+FAMS Region II Unified — v0.0147 Validation Report
+
+Source baseline: v0.0146 package
+Release version: v0.0147
+
+PHP syntax: 108 files checked; 0 failures.
+JavaScript syntax: 13 files checked; 0 failures.
+CSS brace-balance: 7 files checked; 0 failures.
+
+Targeted source assertions:
+PASS — AICS status editor supports id and record aliases
+PASS — AICS SWAD social-worker masterlist scoped to assigned office
+PASS — AICS current user initialized before workspace role check
+PASS — MAIFIP status endpoint permits staff alias
+PASS — MAIFIP status helper recognizes staff alias
+PASS — MAIFIP ticket create permits staff alias
+PASS — Both applications versioned 0.0147
+
+Scope note: static source checks only; live browser/database role tests not performed.

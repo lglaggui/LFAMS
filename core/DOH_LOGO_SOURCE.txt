@@ -1,0 +1,5 @@
+DOH logo source for FAMS v0.0154 and later:
+- User-supplied file: DOH LOGO.jpg
+- core/branding/doh-logo.webp is the optimized local PNG used by the portal system selector.
+- core/branding/doh-logo.jpg is the canonical shared JPEG used by the MAIFIP sidebar and DOH dashboard.
+- The images are stored locally; no external CDN is required at runtime.

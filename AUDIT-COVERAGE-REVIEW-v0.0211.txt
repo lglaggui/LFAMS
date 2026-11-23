@@ -1,0 +1,17 @@
+FAMS v0.0211 — Audit Coverage Review
+
+Critical business mutation coverage was reviewed across the registered endpoints and existing transaction-bound workspace handlers.
+
+Changes
+- Transaction-bound MAIFIP audit writes no longer perform reverse-DNS lookups inside the business transaction; client IP remains recorded and hostname enrichment is limited to non-transactional audit writes.
+- Added REGISTER_ACCOUNT to the critical audit action classifier.
+- MAIFIP pending registration now writes its account row and audit event in one transaction.
+- MAIFIP monthly downloaded-balance changes now persist their setting and critical audit event in one transaction.
+
+Existing coverage retained
+- Record create/edit/status changes, ticket lifecycle, deletion/restoration, user administration, imports, offline conflict resolution and export events retain their existing workspace audit/history mechanisms.
+- Chat message edits/deletions retain their dedicated user_message_trails history; they are not substituted with generic record audit rows.
+- PSGC address lookup/cache refresh writes are derived reference-cache maintenance and remain outside business mutation audit classification.
+- Notification read-state changes and dashboard layout preferences remain non-critical user-interface state, not beneficiary/patient/fund/ticket mutations.
+
+No production audit data was read, altered or backfilled. Audit table schemas were not inspected against a live database in this environment.

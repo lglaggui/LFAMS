@@ -1,0 +1,18 @@
+FAMS Region II Unified — v0.0121
+
+MAIFIP
+- Account photo editor button label is standardized to “Position / Crop”.
+- Record revision-ticket action remains an icon link with title and accessible label.
+
+AICS
+- Added Import / Update Sheet action for authorized admin/staff users.
+- Added spreadsheet import workflow supporting CSV and XLSX first worksheet, preview checks, matching existing Control Numbers for updates, new control-number assignment, pre-import SQL backup, transaction rollback on failure, and action logging.
+
+MAIFIP + AICS
+- Shared dashboard reporting-period refresh preserves the existing Hero Banner action if the refreshed fragment omits it.
+- Bumped application version to 0.0121.
+
+Important limitations
+- AICS import requires a sheet containing the expected AICS column headers. Import preview is intended to be reviewed before applying.
+- XLSX import requires PHP ZipArchive and reads the first worksheet; CSV is the compatibility fallback.
+- Static validation does not replace live browser/database tests. Back up the database before deployment.

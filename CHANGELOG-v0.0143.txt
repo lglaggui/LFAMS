@@ -1,0 +1,12 @@
+FAMS Region II Unified — v0.0143
+
+Changes
+- Enabled direct status changes for WAITING records for authorized non-LPGMA facility users in both AICS and MAIFIP, while preserving facility scope and ticket requirements for RELEASED/CANCELLED records.
+- Corrected MAIFIP ticket edit access to include eligible ticket submitters across supported roles and use the ticket's linked or archived facility reference for ownership-scoped lookup.
+- Corrected MAIFIP own-ticket deletion handling to avoid a blanket read-only block for managers; non-admins remain limited to deleting their own tickets within the active facility.
+- Restored Edit Ticket and Delete Ticket actions for owners regardless of non-admin role, while preserving admin-only review/decision and bulk deletion controls.
+- Bumped AICS and MAIFIP application asset version to 0.0143.
+
+Validation
+- PHP syntax checks and JavaScript syntax checks passed; ZIP integrity verified.
+- Live browser/database permission workflows still require staging verification.

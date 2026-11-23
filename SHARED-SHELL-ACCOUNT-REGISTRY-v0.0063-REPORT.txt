@@ -1,0 +1,27 @@
+FAMS REGION II UNIFIED BUILD v0.0064
+HEADER / SIDEBAR / FOOTER PARITY AND LPGMA ACCOUNT REGISTRY
+
+CHANGES
+1. Both MAIFIP and AICS continue to render the same shared header (core/shared_topbar.php), sidebar frame (core/shared_sidebar.php), navigation list (core/shared_navigation.php), and footer (core/unified_footer.php).
+2. Added one canonical shared header sizing/presentation rule set in core/shared-shell.css for the fund summary and header groups. It defines expanded desktop presentation and a collapsed responsive presentation with shortened labels and compact currency amounts.
+3. Fund summary continues to use workspace-specific values supplied by the active system; the shared presentation never queries or mixes the other workspace's fund records.
+4. Both system footers now display the exact copyright line: (c) 2026 LPGMA Isabela District.
+5. Added fams_list_lpgma_accounts() in core/unified.php as the canonical LPGMA account registry query against the shared users table. It is filtered to LPGMA-level accounts (blank/LPGMA facility and LPGMA roles).
+6. AICS Account Management now shows the central LPGMA user list as a read-only shared registry, alongside separate local SWAD/AICS accounts. The AICS bridge rows remain technical compatibility rows and are excluded from the local account list. LPGMA identity fields remain managed in the central users table; they are not maintained as independent AICS accounts.
+7. Shared LPGMA account identity and avatar rendering continue to resolve from the central users table. Local AICS accounts remain in aics_users. MAIFIP facility accounts remain in the central users table but are not included in the LPGMA account list unless their facility is LPGMA/blank.
+8. Version labels/cache keys updated to 0.0064.
+
+SHARED HEADER SIZE MAP
+- Header: same shared renderer; full layout at >=1120px header width, collapsed summary below that threshold.
+- Fund summary expanded: maximum 520px, three equal-width cards, full labels, full currency amounts, utilization label/bar/percentage.
+- Fund summary collapsed: maximum 460px, same three-card grid, shortened labels, abbreviated currency amounts (e.g. ₱1M / ₱10M), utilization label/bar/percentage.
+- Sidebar: same shared renderer and 250px desktop frame (responsive/mobile behavior retained).
+- Profile avatar: 52px circular container in the canonical shared profile rule; image is contained in the circle.
+- Logout: shared full-width row, icon and label remain in one line.
+- Footer: shared renderer and exact common copyright text.
+
+VALIDATION
+- PHP syntax checks are performed on every PHP file in this package.
+- JavaScript syntax check is performed when Node.js is available.
+- Archive integrity is checked after packaging.
+- Browser rendering and live database behavior still require runtime verification; this package does not modify the hosted site or migrate the production database.

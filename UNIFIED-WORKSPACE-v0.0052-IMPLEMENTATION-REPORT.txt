@@ -1,0 +1,16 @@
+LFAMS REGION II — UNIFIED WORKSPACE v0.0052
+Date: 2026-10-23
+Source: FAMS-Region-II-Unified-htdocs-v0.0051-SIDEBAR-DASHBOARD-FUND.zip
+
+Changes in this build
+- Incremented the application version to 0.0052 across the AICS, MAIFIP, portal and shared version helpers.
+- Updated shared asset cache-busting tokens so browsers fetch the current shared-shell CSS/JS.
+- Refined the shared sidebar workspace switcher for clearer contrast, consistent sizing, hover/focus feedback and reduced-motion accessibility.
+- Updated the system switcher accessible labels to explicitly identify the active/target workspace.
+- Retained the existing system-specific authorization gates and facility/business logic.
+- Kept AICS and MAIFIP module data/workflows separate while using the existing shared shell and unified identity bridge.
+
+Validation
+- PHP syntax validation is run on all PHP files in this package.
+- This is a source-level validation only; live database-backed login, cross-workspace switching, fund values and permissions still require testing against the configured deployment database.
+- No database migration was applied by this package.

@@ -1,0 +1,23 @@
+FAMS REGION II — SHARED IDENTITY / DASHBOARD REFACTOR
+Version: 0.0064
+
+Implemented in this build
+- Added core/shared identity resolution for LPGMA-bridged sessions. Display name, username, email, role/type, and central avatar source are resolved from the authoritative `users` table when the session is a bridged LPGMA identity.
+- Added a central avatar endpoint so the same LPGMA avatar can be served in both workspaces without relying on a workspace-specific login guard.
+- Changed both workspaces to use one canonical LPGMA logo asset in core/branding/lpgma-shared-logo.webp.
+- Changed the shared sidebar and topbar to use the shared identity/role/avatar render helpers.
+- Replaced the two duplicated sidebar navigation templates with thin wrappers around core/shared_navigation.php; equivalent labels, icons, badges, and active-state rules now come from one source while route targets remain workspace-aware.
+- AICS account management now lists and edits only local SWAD accounts; LPGMA-bridged shadow rows are excluded from the list and protected from edit/disable so LPGMA identity remains centrally managed.
+- Established shared typography and scrollbar rules in core/shared-shell.css.
+- Stabilized the shared sidebar profile: circular, contained avatar; truncating profile text; logout button with icon and label on one line in its own row.
+- Rebuilt the AICS dashboard markup from the MAIFIP dashboard structure and presentation classes. It now includes the matching hero, reporting filters, daily/monthly/yearly statistics, fund breakdown, monthly trend, summary metrics, daily chart, municipality rankings, ticket status, yearly summary, recent entries, activity, and at-a-glance sections.
+- AICS dashboard values are queried from AICS tables (`aics_assistance_records`, `aics_fund_downloads`, `aics_tickets`, `aics_action_logs`) and are not sourced from MAIFIP operational tables.
+- The AICS dashboard loads the MAIFIP stylesheet as the shared dashboard presentation source, followed by the shared shell styles; program-specific navigation and operational workflows remain separate.
+- Version labels bumped to 0.0064.
+
+Validation
+- PHP syntax validation passed for all 93 PHP files.
+- Live database execution, account-by-account role validation, browser layout checks, and mobile visual testing were not possible in this local file-only pass. Do these before deployment.
+
+Safety
+- No SQL data migration was executed. Existing database schema and operational data were not intentionally modified by this refactor.

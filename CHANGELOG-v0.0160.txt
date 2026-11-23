@@ -1,0 +1,9 @@
+FAMS Region II Unified — v0.0160
+
+1. Shared shell geometry: removed the extra top padding inside the page-view container so its top edge begins immediately after the fixed header's reserved space. Header, sidebar, and footer proportions are retained.
+2. MAIFIP masterlist: reduced Guardian, Remarks, and Status column widths by 10% (relative to their prior assigned widths), preserving the other assigned column widths and allowing remaining space to flow to the Action column.
+3. MAIFIP live search: corrected AJAX row rendering to preserve all table columns, including Bill Amount and GL Amount, and to render the appropriate delete action according to existing role/record permissions.
+4. AICS masterlist: added debounced server-backed live search while typing, plus proactive status, assistance-type, and office filtering without requiring the Search button.
+5. Updated application version labels to 0.0160.
+
+Validation scope: PHP syntax, JavaScript syntax, CSS brace balance, targeted source assertions, and ZIP integrity. No live browser or database-backed workflow test is claimed.

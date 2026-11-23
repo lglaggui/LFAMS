@@ -1,0 +1,43 @@
+PASS: permission catalog has the expected 15 capabilities
+PASS: AICS administrator baseline grants the complete catalog
+PASS: AICS manager is read-only for records and account administration
+PASS: AICS social worker retains limited record/status/ticket access
+PASS: MAIFIP administrator baseline grants the complete catalog
+PASS: MAIFIP manager is read-only for records and account administration
+PASS: MAIFIP social worker retains limited record/status/ticket access
+PASS: AICS staff can create records but cannot administer accounts
+PASS: MAIFIP encoder can create records but cannot administer accounts
+PASS: MAIFIP staff has its own create-record baseline
+PASS: AICS does not inherit MAIFIP encoder privileges
+PASS: known AICS staff can create records in fallback mode
+PASS: known AICS staff cannot manage accounts in fallback mode
+PASS: MAIFIP manager cannot edit records in fallback mode
+PASS: unknown custom user type fails closed without registry access
+PASS: administrator cannot authorize an unknown permission key
+PASS: unknown workspace fails closed
+PASS: custom role cannot inherit administrator access from a session base-role label
+PASS: built-in AICS administrator retains fallback privileges
+PASS: MAIFIP encoder privileges do not transfer into AICS
+PASS: database user-type lookup is strictly workspace-scoped
+PASS: inactive database user types are rejected
+PASS: missing and cross-workspace database types fail closed
+PASS: AICS account-refresh failure invalidates stale session
+PASS: MAIFIP account-refresh failure invalidates stale session
+PASS: MAIFIP ticket decisions require server-side manage_tickets capability
+PASS: AICS ticket decisions require server-side manage_tickets capability
+PASS: offline sync separates create and edit capabilities
+PASS: offline conflict application requires edit capability
+PASS: MAIFIP deletion-ticket endpoint requires submit_tickets capability
+PASS: AICS restoration requires record-edit capability and administrator role
+PASS: MAIFIP restoration requires record-edit capability and administrator role
+PASS: AICS editable-sheet API requires login and record-edit capability
+PASS: offline conflict list is permission- and facility-scoped
+PASS: public media endpoint accepts only whitelisted public media keys
+PASS: MAIFIP ticket review locks pending tickets and advances record versions
+PASS: AICS record editing uses optimistic record-version checks
+PASS: MAIFIP record editing uses optimistic record-version checks
+PASS: AICS and MAIFIP account administration use the shared transaction service
+PASS: AICS import enforces office ownership and WAITING-only edits for non-admins
+PASS: MAIFIP import enforces facility and record-status ownership before updates
+
+Permission matrix tests: 41 passed, 0 failed.

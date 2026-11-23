@@ -1,0 +1,10 @@
+FAMS Unified v0.0132
+
+- Fixed reporting-period auto-submit handlers in MAIFIP and AICS by removing the permanent one-shot pending lock. Repeated period changes can submit again when the dashboard form is reused by fragment navigation.
+- Reworked the AICS ticket management table to use the MAIFIP ticket-review layout conventions: no Priority column, clear ticket metadata, requester, request type, details/reason, status, and admin review action.
+- Removed Priority from AICS ticket creation and administration forms and stopped requiring priority writes in the existing AICS ticket schema.
+- Preserved the existing aics_tickets database structure and status workflow for compatibility; ticket submission remains a review request and does not directly modify assistance records.
+- Fixed popup detection for POST submissions so the AICS ticket popup response is retained after form submission.
+- Updated AICS and MAIFIP version labels to 0.0132.
+
+Validation note: static syntax and archive checks only; live browser and MySQL workflow tests are not represented as completed.

@@ -1,0 +1,15 @@
+FAMS Region II — v0.0197
+Endpoint Registry Reconciliation and Compact Reporting Period
+
+- Reconciled the 80-entry endpoint inventory into a route-by-route review manifest.
+- Added proposed endpoint-specific capability classifications, scope descriptions, static source-marker evidence, and required security test cases.
+- Explicitly distinguished static source observations from verified HTTP methods, CSRF behavior, and runtime authorization. No endpoint is marked security-passed based solely on static inspection.
+- Preserved the AICS and MAIFIP workspace boundaries and their separate office/facility scope models.
+- Reworked the Selected Reporting Period card in both dashboards: period label, selected month/year, and report icon now share a compact heading row; reconciliation detail remains on a second line.
+- Retained the report icon tooltip, accessible name, screen-reader text, and existing report URL parameters.
+- Updated application version markers to 0.0197.
+
+Validation boundary:
+- PHP syntax checks: 132 files passed.
+- Endpoint registry: 80 routes (35 AICS, 44 MAIFIP, 1 portal), valid JSON, required route metadata present.
+- Authenticated endpoint, CSRF, database-effect, and cross-scope tests require a MySQL staging environment and dedicated test accounts; they are not claimed as passed in this release.

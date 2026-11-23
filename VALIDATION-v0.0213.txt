@@ -1,0 +1,28 @@
+FAMS Region II Unified — v0.0213 Validation
+
+Scope: source-only fund-ledger reconciliation corrections based on v0.0212.
+
+Implemented calculation rules:
+- BEGINNING BALANCE is an opening anchor, never a monthly addition.
+- The latest effective anchor is selected per workspace (and per facility in MAIFIP).
+- Subsequent additions and releases roll forward from the anchor date.
+- Zero and negative opening/carry-forward balances are valid and are not replaced with unrelated transactions.
+- MAIFIP historical monthly summary values are fallback-only when the month has no live RELEASED records.
+- AICS monthly report, dashboard, header, and fund-management totals use the same ledger service.
+- MAIFIP monthly report opening-balance logic, dashboard, header, and fund-management totals use facility-scoped ledger calculations.
+
+Validation actually performed:
+- PHP syntax lint: 152 PHP files, 0 syntax errors.
+- JavaScript syntax: 21 files passed Node.js syntax checks.
+- CSS parsing: 11 files, 0 parse errors.
+- Maintenance PHP test files: 25 total; 23 passed; 2 database-concurrency tests safely refused execution because no explicit FAMS_ALLOW_DB_TESTS=1 and staging/test DSN were supplied.
+- New fund-ledger anchor regression test: 16 checks, 0 failures.
+- Existing data-lifecycle audit: 26 checks, 0 failures.
+- ZIP integrity: passed (unzip -t).
+
+Limitations:
+- No live MySQL/MariaDB integration test was run.
+- No production database was accessed or modified.
+- The user's AICS migration is treated as applied based on their confirmation; the live row was not independently queried.
+- No authenticated browser/E2E test or live Excel/PDF application interoperability test was performed.
+- For a beginning-balance anchor dated mid-month, historical monthly summary fallback cannot safely be prorated; the implementation uses record-level releases for the partial anchor month and only uses summary fallback for complete months. A beginning-balance anchor should normally be dated on the first day of its reporting month.

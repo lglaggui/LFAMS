@@ -1,0 +1,14 @@
+FAMS REGION II — UNIFIED RELEASE v0.0194
+Dashboard Reporting Layout and Tablet Responsiveness
+Baseline: v0.0193
+
+IMPLEMENTED
+- Corrected the selected reporting-period status card padding so its label, period, and reconciliation text remain comfortably inset.
+- Prevented the Display Selected Period Report action from overflowing narrow reporting-control columns; the label may wrap cleanly and the action remains within its card.
+- Explicitly collapsed the unified sign-in grid at tablet widths where the brand panel is hidden, removing the unused second grid track and right-side blank space.
+- Aligned unified login stylesheet cache keys and displayed version with the shared APP_VERSION constant.
+- Updated AICS and MAIFIP application version markers to 0.0194.
+
+VALIDATION
+- PHP syntax and static layout assertions are recorded in VALIDATION-v0.0194.txt.
+- Full authenticated dashboard/browser testing still requires a staging MySQL database and test accounts.

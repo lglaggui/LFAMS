@@ -1,0 +1,12 @@
+FAMS Region II Unified v0.0087
+
+Changes
+- Standardized page-specific loading skeleton generation in core/shared-page-skeleton.js for MAIFIP and AICS. MAIFIP partial navigation consumes the shared builder; AICS standard navigation displays the same page-shaped skeleton before navigation. Shared skeleton geometry and responsive styles are in core/shared-components.css.
+- Shared shell state now saves the intended sidebar navigation target and navigation scrollbar before full-page navigation, and restores scroll state on same-page refresh as well as workspace switching. Destination-side active navigation remains server-authoritative on refresh.
+- Renamed MAIFIP facility_management.php to offices.php, updated the page's self-links, shared sidebar navigation, and switch aliases. Both workspaces now use offices.php for their office/facility management destination while retaining different underlying data and rules.
+- AICS users.php gained a guarded local-account removal action modeled after MAIFIP's account-management pattern. It blocks self-removal and refuses to remove centrally bridged LPGMA accounts; these must be managed in the central registry. Existing AICS-specific schema, office assignment validation, role rules, password handling, and avatar workflow remain intact.
+- Updated application version and shared asset cache token to 0.0087.
+
+Validation notes
+- Run PHP syntax checks for every PHP file and JavaScript syntax checks for core/shared-page-skeleton.js, core/shared-shell.js, and both application bundles.
+- This is source-level validation only; no production database or live hosted browser was used.

@@ -1,0 +1,25 @@
+FAMS v0.0207 — Automated Test Results
+
+Environment: PHP CLI 8.4.24; Node.js v22.16.0.
+
+- PHP syntax lint: 144 PHP files, all passed.
+- JavaScript syntax: all discovered .js files passed node --check (no syntax errors emitted).
+- Existing/new PHP test suites: 17 suites executed, all exited 0.
+- New control_number_lock_audit_test.php: 22 checks, 0 failures.
+- Account permission enforcement: 11 checks, 0 failures.
+- Authorization model: 16 passed, 0 failed.
+- Dashboard reporting action: 12 passed, 0 failed.
+- Deletion/restoration enforcement: 18/18 passed.
+- Import/export/sync enforcement: 12 checks, 0 failures.
+- Import preview concurrency: 8 checks, 0 failures.
+- Payload fingerprint: 4 passed, 0 failed.
+- Permission matrix: 52 passed, 0 failed.
+- Staging preflight guard: 8 checks, 0 failures.
+- Status endpoint enforcement: 9 checks, 0 failures.
+- Ticket lifecycle: 12/12 passed.
+- Shared transaction runtime: 4 passed, 0 failed.
+- Endpoint registry, endpoint security reconciliation, reporting layout, and repository contract suites also exited 0.
+
+MySQL concurrency suite: deliberately refused (exit 2) because FAMS_ALLOW_DB_TESTS=1 and an explicit FAMS_TEST_DSN naming a test/staging database were not supplied. No database concurrency test was attempted.
+
+No production database access or changes. These results are source-level and local CLI checks only.

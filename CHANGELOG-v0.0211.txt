@@ -1,0 +1,26 @@
+FAMS Region II Unified — v0.0211
+Final Application-Wide Consistency and Resilience Review
+Baseline: v0.0210
+
+SECURITY AND ENDPOINT CONSISTENCY
+- Reconciled the registered application endpoint inventory against the PHP source tree: all 81 registered routes are unique and resolve to existing PHP entry points.
+- Reviewed registered write paths for authorization, CSRF, workspace ownership and mutation/audit behavior. All registered SQL-mutating routes have a source-level CSRF verification path. Existing AICS Region II visibility and MAIFIP facility scoping were preserved.
+- Avoided reverse-DNS network lookups during transaction-bound audit writes so retryable critical mutations remain database-only.
+- Added an atomic, auditable pending-account registration flow for MAIFIP. The user insert and REGISTER_ACCOUNT audit event now commit together; duplicate-key races return a safe duplicate-registration message.
+- Classified REGISTER_ACCOUNT as a critical audit action.
+- Kept address-cache refreshes outside business audit classification; these are derived PSGC reference-cache maintenance, not beneficiary, patient, account, ticket or fund mutations.
+
+VALIDATION AND TRANSACTION SAFETY
+- Hardened MAIFIP monthly-report downloaded-balance input validation to match DECIMAL(15,2): non-negative decimal input, at most 13 integer digits and two fractional digits, plus valid year/month bounds.
+- Made monthly-report setting updates and their critical audit event atomic, with the shared bounded transient-transaction retry wrapper.
+- Added explicit POST-only response handling and safe server-side error reporting for monthly-report settings.
+- Added application-consistency regression coverage for route inventory, CSRF coverage, business-mutation audit paths, registration atomicity and monthly-report validation/audit behavior.
+
+FRONTEND CONSISTENCY REVIEW
+- Validated all 19 JavaScript files with Node syntax checks and all 11 CSS files with a CSS parser; no syntax errors were found.
+- Ran the existing reporting-period responsive visual regression suite at desktop, tablet-wide, tablet, mobile and small-mobile widths; all five checks passed.
+- Did not flatten repeated selectors or remove cascade layers wholesale. Inspection found the repeated declarations in the scanned rules are deliberate 100vh-to-100dvh viewport fallbacks; the repeated selector blocks otherwise include responsive, workspace and component-state rules. Removing them without rendered-page evidence would risk changing established layouts.
+- No broad visual redesign or workspace business-rule changes were made.
+
+VERSION
+- Updated AICS APP_VERSION/FAMS_VERSION and MAIFIP APP_VERSION to 0.0211.

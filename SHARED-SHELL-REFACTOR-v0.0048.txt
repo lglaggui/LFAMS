@@ -1,0 +1,26 @@
+LFAMS v0.0049 — Shared Sidebar Frame Refactor
+
+This build advances the shared-shell work by making core/shared_sidebar.php the only renderer of the sidebar frame.
+
+Implemented:
+- One shared sidebar <aside>, mobile close control, user identity panel, and logout row.
+- System-specific sidebar brand/facility content remains in maifip/partials/sidebar_brand.php and aics/partials/sidebar_brand.php.
+- System-specific navigation entries remain in maifip/partials/sidebar_navigation.php and aics/partials/sidebar_navigation.php so existing role and workflow rules are preserved.
+- Old partials/sidebar.php paths are compatibility shims that delegate to the shared renderer; they no longer duplicate the sidebar markup.
+- Shared topbar, footer, common shell CSS, and central database connection retained.
+- Fixed malformed uniform.css link tags in both workspace headers and updated cache-busting asset versions.
+- Updated application version to 0.0049.
+
+Database:
+- Existing consolidated lfams_unified.sql is retained; only its informational version header changed. No schema/data migration was applied as part of this UI refactor.
+- Do not import the SQL file over a live database for a code-only update.
+
+Validation performed:
+- PHP syntax lint: 87 PHP files passed.
+- Static check: only core/shared_sidebar.php contains the actual sidebar <aside> frame.
+- ZIP archive integrity check performed after packaging.
+
+Not yet validated in a live runtime:
+- Browser rendering at desktop/mobile breakpoints.
+- Real MAIFIP/AICS switching, account permissions, and database-backed page workflows.
+- Production database import or query execution.

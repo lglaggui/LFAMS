@@ -1,0 +1,104 @@
+FAMS REGION II — CSS DUPLICATE SELECTOR AUDIT v0.0193
+
+This is a structural inventory, not an instruction to delete every repeated selector. Many repeats occur in responsive media queries, layered workspace styles, and intentional later state rules. Declarations were not flattened automatically because that could change cascade behavior.
+
+aics/assets/app.css: 405 selector groups repeated
+  - 2 occurrences: *
+  - 4 occurrences: body
+  - 13 occurrences: .sidebar
+  - 4 occurrences: .brand
+  - 2 occurrences: .brand img
+  - 2 occurrences: .brand-row
+  - 2 occurrences: .brand-title
+  - 2 occurrences: .brand-sub
+  - 3 occurrences: .office-pill
+  - 5 occurrences: .nav
+  - 4 occurrences: .nav a
+  - 2 occurrences: .nav a:hover,.nav a.active
+core/portal.css: 10 selector groups repeated
+  - 2 occurrences: .portal-body
+  - 2 occurrences: .portal-header
+  - 2 occurrences: .portal-brand
+  - 2 occurrences: .portal-mark
+  - 2 occurrences: .portal-region
+  - 2 occurrences: .portal-main
+  - 2 occurrences: .system-card
+  - 3 occurrences: .portal-footer
+  - 2 occurrences: .portal-system-logo img
+  - 2 occurrences: .system-card:after
+core/shared-components.css: 25 selector groups repeated
+  - 3 occurrences: :root
+  - 2 occurrences: .fams-header-profile-compactable
+  - 2 occurrences: .fams-header-profile-compactable .top-profile-full-name
+  - 2 occurrences: .fams-shared-dialog-backdrop
+  - 2 occurrences: .fams-shared-dialog
+  - 2 occurrences: .fams-shared-dialog-head
+  - 2 occurrences: .fams-shared-dialog-title
+  - 2 occurrences: .fams-shared-dialog-close
+  - 2 occurrences: .fams-shared-dialog-frame
+  - 6 occurrences: body.app-body #topProfile.fams-header-profile-compactable,
+body.app-body.aics-app #topProfile.fams-header-profile-compactable
+  - 2 occurrences: body.app-body #topProfile.fams-header-profile-compactable:not(.is-profile-open) .top-profile-expanded-copy,
+body.app-body.aics-app #topProfile.fams-header-profile-compactable:not(.
+  - 5 occurrences: body.app-body #topProfile.fams-header-profile-compactable .top-logout,
+body.app-body.aics-app #topProfile.fams-header-profile-compactable .top-logout
+core/shared-shell.css: 10 selector groups repeated
+  - 2 occurrences: body.app-body .sidebar-system-switch,
+body.app-body.aics-app .sidebar-system-switch
+  - 2 occurrences: body.app-body .sidebar-system-current,
+body.app-body.aics-app .sidebar-system-current
+  - 2 occurrences: body.app-body .sidebar-user-panel,
+body.app-body.aics-app .sidebar-user-panel
+  - 2 occurrences: body.app-body .sidebar-profile-avatar,
+body.app-body.aics-app .sidebar-profile-avatar
+  - 2 occurrences: body.app-body .sidebar-user-copy,
+body.app-body.aics-app .sidebar-user-copy
+  - 2 occurrences: body.app-body .sidebar-logout,
+body.app-body.aics-app .sidebar-logout
+  - 2 occurrences: body.app-body .topbar.fams-branded-topbar,
+body.app-body.aics-app .topbar.fams-branded-topbar
+  - 2 occurrences: body.app-body .topbar.fams-branded-topbar .topbar-left,
+body.app-body.aics-app .topbar.fams-branded-topbar .topbar-left
+  - 2 occurrences: body.app-body .topbar.fams-branded-topbar .topbar-right,
+body.app-body.aics-app .topbar.fams-branded-topbar .topbar-right
+  - 3 occurrences: :root
+core/shared-tables.css: 1 selector groups repeated
+  - 2 occurrences: .page-view table.fams-standard-table .table-action,
+.page-view table.fams-standard-table .admin-action-link
+core/uniform.css: 56 selector groups repeated
+  - 8 occurrences: :root
+  - 2 occurrences: .sidebar
+  - 2 occurrences: .alert
+  - 2 occurrences: .aics-dashboard
+  - 2 occurrences: .aics-dashboard-block
+  - 2 occurrences: .aics-hero
+  - 2 occurrences: .aics-hero h2
+  - 2 occurrences: .aics-section-head
+  - 2 occurrences: .aics-section-head h2
+  - 2 occurrences: .aics-table-head
+  - 2 occurrences: .aics-ranking,.aics-type-row,.aics-activity
+  - 2 occurrences: .aics-year-grid
+maifip/assets/app.css: 389 selector groups repeated
+  - 6 occurrences: :root
+  - 2 occurrences: html,body
+  - 2 occurrences: .primary-btn
+  - 2 occurrences: .secondary-btn
+  - 7 occurrences: .app-layout
+  - 13 occurrences: .sidebar
+  - 4 occurrences: .sidebar-brand
+  - 5 occurrences: .sidebar nav
+  - 5 occurrences: .sidebar nav a
+  - 3 occurrences: .nav-icon
+  - 2 occurrences: .sidebar-footer
+  - 13 occurrences: .main-content
+
+Targeted cleanup in v0.0193:
+- Removed the redundant `.doh-excel-table td { position: relative; }` rule from maifip/assets/doh-dashboard.css because the base cell rule already declares position:relative.
+- Retained other duplicate selector groups pending declaration-level and viewport-level review.
+
+Recommended frontend consolidation order:
+1. Extract shared tokens and primitives into core/shared-components.css and core/uniform.css.
+2. Separate AICS/MAIFIP page-specific layout styles from shared shell styles.
+3. For each duplicate selector, compare declarations, specificity, source order, and enclosing media/support conditions before merging.
+4. Remove only confirmed dead declarations after desktop/tablet/mobile screenshot comparison.
+5. Add CSS ownership comments or component boundaries to prevent future cascade drift.

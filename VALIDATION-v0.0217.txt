@@ -1,0 +1,36 @@
+FAMS v0.0217 — Validation Report
+
+Scope
+- MAIFIP signed fund movement handling and monthly reconciliation source audit.
+- Based on the supplied v0.0216 source package and the supplied MariaDB SQL dump.
+
+Code changes
+- MAIFIP downloaded-balance helper now preserves negative net sums rather than applying max(0, total).
+- MAIFIP fund entry accepts negative values for reversals/corrections, validates numeric signed values against DECIMAL(14,2) range, and removes the HTML min=0 restriction.
+- Monthly worksheet and print view identify the value as NET FUND DOWNLOADS.
+- Fund Management describes positive entries as additions and negative entries as reversals/corrections.
+- Shared ending-balance equation remains opening + net downloads + adjustments - released assistance.
+
+Source validation
+- PHP syntax: 154 files passed php -l.
+- JavaScript syntax: 21 files passed node --check.
+- PHP test scripts: 25 passed.
+- MySQL concurrency integration test was not run because no isolated MySQL staging DSN and explicit opt-in were supplied. Its worker script is not a standalone test and was not run independently.
+- Reporting-period visual test: 5 viewport checks passed (desktop, tablet-wide, tablet, mobile, small mobile).
+- Monthly reconciliation contract test: 17 checks, 0 failures.
+- Fund opening classification test: 15 checks, 0 failures.
+- Fund ledger anchor test: 16 checks, 0 failures.
+- Monthly sheet standardization test: 11 checks, 0 failures.
+- Data lifecycle audit test: 26 checks, 0 failures.
+- ZIP integrity is checked on the generated release archive.
+
+Supplied database dump review
+- The fund_downloads.downloaded_amount column is DECIMAL(14,2), signed (not declared UNSIGNED), so it can store negative entries without a schema change.
+- No negative fund_downloads rows were present in the supplied dump. Therefore, the negative-value behavior is covered by source-contract checks, not a live negative-row database execution.
+- The supplied dump contains sensitive operational and beneficiary information. It was inspected locally; no such data is reproduced in this report.
+
+Limitations
+- The runtime has PDO but no pdo_mysql/pdo_sqlite driver and no MySQL/MariaDB server or CLI. The supplied SQL dump could not be imported or executed.
+- No database-backed monthly reconciliation, transaction, authorization, or concurrency test was performed.
+- No production database was accessed or modified.
+- This release introduces no SQL migration.

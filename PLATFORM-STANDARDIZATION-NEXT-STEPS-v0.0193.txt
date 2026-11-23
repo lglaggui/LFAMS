@@ -1,0 +1,28 @@
+NEXT DEVELOPMENT PASS AFTER v0.0193
+
+1. Finish endpoint registry
+   - Verify exact HTTP methods and capability keys for all 80 registered entry points.
+   - Add authenticated HTTP tests for each active role/user type, CSRF failures, and direct URL access.
+   - Only after verification, migrate endpoint guards to a shared runtime contract.
+
+2. Complete repository extraction
+   - Move record/ticket/account/facility/offline/reporting SQL into separate AICS and MAIFIP adapters.
+   - Make office/facility scope mandatory on update/delete methods.
+   - Add MySQL integration tests for all adapters.
+
+3. Finish idempotency coverage
+   - Add idempotency to ticket decisions/edits, account approvals, and remaining retryable batch writes.
+   - Add expiry/retention policy and duplicate/conflict monitoring.
+   - Verify same-key/same-payload, same-key/different-payload, and two-process contention on MySQL.
+
+4. Frontend consolidation
+   - Consolidate shared tokens/components and split shared shell from workspace page styles.
+   - Review duplicate selectors declaration-by-declaration; do not blindly remove media-query or cascade rules.
+   - Add desktop/tablet/mobile screenshots and interaction regression checks.
+
+5. Release engineering
+   - Move remaining runtime DDL to ordered migrations with preflight and rollback notes.
+   - Add staging migration rehearsal, backup/restore verification, and a release manifest gate.
+
+PRODUCTION GATE
+Do not label production-ready until staging MySQL concurrency tests, authenticated HTTP authorization tests, browser regression tests, and backup/restore rehearsal all pass.

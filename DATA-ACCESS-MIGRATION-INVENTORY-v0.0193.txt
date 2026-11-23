@@ -1,0 +1,27 @@
+FAMS REGION II — DATA ACCESS MIGRATION INVENTORY v0.0193
+
+SHARED PLATFORM
+- Shared request/response and transaction primitives live in core/shared_runtime.php.
+- Workspace repository adapters live in core/workspace_repositories.php.
+- AICS and MAIFIP continue to use separate record tables and workspace-specific policy helpers.
+
+REPOSITORY ADAPTERS ADDED
+AICS — FamsAicsRecordRepository
+- findInOffice(recordId, officeId, forUpdate)
+- findAnyForDistrictRead(recordId, forUpdate)
+- updateInOfficeAtVersion(recordId, officeId, expectedVersion, allowlistedFields)
+- updateAnyAtVersion(recordId, expectedVersion, allowlistedFields); caller must already have authorized broad scope.
+
+MAIFIP — FamsMaifipRecordRepository
+- findInFacility(recordId, facility, forUpdate)
+- updateInFacilityAtVersion(recordId, facility, expectedVersion, allowlistedFields)
+
+MIGRATED CALLERS
+- AICS status_update.php uses the AICS adapter; broad update is limited to the existing administrator/manager and LPGMA-office staff policy, while other roles remain office-scoped.
+- MAIFIP status_update.php uses the MAIFIP adapter and exact active facility scope.
+- Both paths increment record_version with compare-and-swap and retain status history/audit writes inside the surrounding transaction.
+
+REMAINING
+- Migrate remaining AICS/MAIFIP record edit, archive/restore, ticket review, import, offline sync, account, facility, report, export, and sheet queries into narrowly scoped repositories.
+- Do not use the new adapter methods as authorization substitutes; endpoint capability checks remain mandatory.
+- Add database-backed adapter tests against disposable MySQL fixtures before expanding use.

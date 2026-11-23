@@ -1,0 +1,5 @@
+FAMS Region II v0.0098
+- Stabilized card/panel hover behavior by removing transform movement from hover targets while preserving colors, borders, and shadows.
+- Added administrator-only permanent deletion for AICS masterlist records, replacing the Print action with Delete for administrators.
+- Delete is protected by CSRF validation, confirmation, and action logging; non-administrators retain Print.
+- Version updated in AICS and MAIFIP.

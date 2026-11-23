@@ -1,0 +1,17 @@
+FAMS REGION II — CHANGELOG v0.0192
+
+STANDARDIZATION / CONCURRENCY HARDENING
+- Bound AICS record-revision proposals to the exact record_version observed when the ticket was submitted.
+- AICS revision-ticket approval now locks the linked record, rejects stale proposals, and performs a guarded versioned update before resolving the ticket.
+- AICS delete-request tickets now persist the source record version; approval refuses to archive a record that has changed since the request was filed.
+- Bound MAIFIP revision and delete-request proposals to their source record_version.
+- MAIFIP ticket approval and delete approval now re-read the ticket under lock, verify the source record version, and reject stale or legacy proposals that lack a safe base version.
+- MAIFIP ticket editing now locks the pending ticket and linked record, refreshes the proposal's base version, and commits the ticket update with its audit event.
+- Expanded the permission/source regression suite with ticket version-guard checks.
+
+COMPATIBILITY NOTE
+- Pending legacy revision/delete tickets created before v0.0192 may not contain a base record version. They are intentionally blocked from approval rather than risking a stale overwrite or deletion. The requester should edit/re-submit the ticket to refresh its base version, or an administrator should verify the latest record and create a new request. AICS office-reassignment proposals also carry a base version.
+- No data tables are renamed and no existing assistance records are rewritten by this release. The existing shared database remains in use.
+
+PACKAGE
+- The unrelated MG Tracking Android application remains excluded from the FAMS package.

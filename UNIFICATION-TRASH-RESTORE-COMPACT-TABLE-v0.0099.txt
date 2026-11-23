@@ -1,0 +1,1 @@
+v0.0099: Admin trash/archive for MAIFIP and AICS; restore creates a new record with new control number/date and retains original archive; tighter table spacing. Database archive table is created on application startup.

@@ -1,0 +1,11 @@
+FAMS Region II v0.0093
+
+Changes:
+- Compact MAIFIP masterlist column sizing and reduce horizontal overflow where practical.
+- Correct MAIFIP masterlist edit-popup title from SWAD FAMS to MAIFIP FAMS.
+- MAIFIP record form explicitly distinguishes Patient and Guardian.
+- MAIFIP monthly disbursement editor uses Patient and Guardian labels.
+- Improve accessibility and click handling for editable disbursement sheet toolbar actions.
+- Version updated to 0.0093.
+
+Validation scope: static source checks only; no live database/browser test performed.

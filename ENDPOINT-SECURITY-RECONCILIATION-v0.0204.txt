@@ -1,0 +1,138 @@
+FAMS REGION II — FULL ENDPOINT SECURITY RECONCILIATION
+Release baseline: v0.0203
+Audit package: v0.0204
+Date: 2026-11-05
+
+Registered application endpoints: 81
+Scope: static source reconciliation of every registered PHP entry point.
+Runtime/authenticated staging status: NOT RUN; no test database/service or separate AICS, MAIFIP and LPGMA staging credentials were supplied.
+
+IMPORTANT INTERPRETATION:
+- Marker counts below are source-discovery evidence, not proof that a control is correctly applied to every branch.
+- `methods_to_verify` is a test plan, not a statement that all listed methods are accepted.
+- No route is marked runtime verified or production ready by this report.
+
+SOURCE MARKER COVERAGE (routes with at least one matching marker):
+- auth: 77 / 81
+- csrf: 50 / 81
+- method: 65 / 81
+- permission: 61 / 81
+- scope: 49 / 81
+- idempotency: 13 / 81
+- transaction: 28 / 81
+- audit: 56 / 81
+
+ROUTE-BY-ROUTE SOURCE MARKER MATRIX:
+Path | Workspace | Methods to test | Auth | CSRF | Method guard | Permission | Scope | Idempotency | Transaction/lock | Audit
+aics/_chat_directory.php | aics | GET,POST | N | N | N | N | Y | N | N | N
+aics/account.php | aics | GET,POST | Y | Y | Y | N | Y | N | Y | Y
+aics/address_api.php | aics | GET,POST | Y | Y | Y | Y | N | N | Y | N
+aics/address_options.php | aics | GET,POST | Y | N | N | N | N | N | N | N
+aics/avatar.php | aics | GET,POST | Y | N | N | N | N | N | N | N
+aics/chat.php | aics | GET,POST | Y | Y | N | Y | Y | N | N | N
+aics/chat_api.php | aics | GET,POST | Y | Y | N | Y | Y | N | N | Y
+aics/dashboard.php | aics | GET,POST | Y | N | N | Y | Y | N | N | Y
+aics/delete_ticket_request.php | aics | GET,POST | Y | Y | Y | Y | N | Y | Y | Y
+aics/export_csv.php | aics | GET,POST | Y | N | N | Y | Y | N | N | Y
+aics/export_event.php | aics | POST | Y | Y | Y | Y | N | N | N | Y
+aics/export_logs.php | aics | GET,POST | Y | N | N | Y | N | N | N | Y
+aics/fund.php | aics | GET,POST | Y | Y | Y | Y | N | N | N | Y
+aics/help.php | aics | GET,POST | Y | N | N | Y | N | N | N | N
+aics/import_sheet.php | aics | GET,POST | Y | Y | Y | Y | Y | Y | Y | Y
+aics/index.php | aics | GET,POST | Y | N | N | N | Y | N | N | N
+aics/login.php | aics | GET,POST | N | N | N | N | N | N | N | N
+aics/logout.php | aics | GET,POST | Y | N | N | N | N | N | N | Y
+aics/logs.php | aics | GET,POST | Y | N | N | Y | N | N | N | Y
+aics/masterlist_sheet.php | aics | GET,POST | Y | Y | N | Y | Y | N | N | Y
+aics/monthly_report.php | aics | GET,POST | Y | N | N | Y | N | N | N | N
+aics/notifications_api.php | aics | GET,POST | Y | N | N | N | N | N | N | N
+aics/office_reassignment_ticket.php | aics | GET,POST | Y | Y | Y | Y | Y | Y | Y | Y
+aics/offices.php | aics | GET,POST | Y | Y | Y | Y | Y | N | N | Y
+aics/print_record.php | aics | GET,POST | Y | N | N | Y | Y | N | N | N
+aics/record_form.php | aics | GET,POST | Y | Y | Y | Y | Y | Y | Y | Y
+aics/records.php | aics | GET,POST | Y | Y | Y | Y | Y | N | Y | Y
+aics/revision_ticket.php | aics | GET,POST | Y | Y | Y | Y | Y | Y | Y | Y
+aics/sheet_save.php | aics | GET,POST | Y | Y | Y | Y | N | N | Y | Y
+aics/status_update.php | aics | GET,POST | Y | Y | Y | Y | Y | N | Y | Y
+aics/switch.php | aics | GET,POST | Y | N | N | N | Y | N | N | N
+aics/tickets.php | aics | GET,POST | Y | Y | Y | Y | Y | Y | Y | Y
+aics/trash.php | aics | GET,POST | Y | Y | Y | Y | Y | N | Y | Y
+aics/user.php | aics | GET,POST | Y | N | N | N | N | N | N | N
+aics/users.php | aics | GET,POST | Y | Y | Y | Y | Y | N | Y | Y
+aics/usertypes.php | aics | GET,POST | Y | Y | Y | Y | N | N | N | Y
+maifip/account.php | maifip | GET,POST | Y | Y | Y | N | N | N | Y | Y
+maifip/address_api.php | maifip | GET,POST | Y | Y | Y | Y | N | N | Y | N
+maifip/avatar.php | maifip | GET,POST | Y | N | N | N | N | N | N | N
+maifip/chat.php | maifip | GET,POST | Y | Y | N | Y | Y | N | N | N
+maifip/chat_api.php | maifip | GET,POST | Y | Y | N | Y | Y | N | N | Y
+maifip/dashboard.php | maifip | GET,POST | Y | N | N | Y | Y | N | N | Y
+maifip/delete_record.php | maifip | POST | Y | Y | Y | Y | Y | N | Y | Y
+maifip/delete_request.php | maifip | GET,POST | Y | Y | Y | Y | Y | Y | N | Y
+maifip/doh_dashboard.php | maifip | GET,POST | Y | Y | Y | Y | Y | N | N | Y
+maifip/export_csv.php | maifip | GET,POST | Y | N | N | Y | Y | N | N | Y
+maifip/export_event.php | maifip | POST | Y | Y | Y | Y | Y | N | N | Y
+maifip/export_logs.php | maifip | GET,POST | Y | N | N | Y | N | N | N | Y
+maifip/fams_sheet_editor.php | maifip | GET,POST | Y | Y | N | Y | Y | N | N | Y
+maifip/fund.php | maifip | GET,POST | Y | Y | Y | Y | Y | N | N | Y
+maifip/help.php | maifip | GET,POST | Y | Y | N | Y | N | N | N | Y
+maifip/import_sheet.php | maifip | GET,POST | Y | Y | Y | Y | Y | Y | Y | Y
+maifip/index.php | maifip | GET,POST | Y | N | N | N | N | N | N | N
+maifip/login.php | maifip | GET,POST | N | N | N | N | N | N | N | N
+maifip/logout.php | maifip | GET,POST | Y | N | N | N | N | N | N | Y
+maifip/logs.php | maifip | GET,POST | Y | N | N | Y | N | N | N | Y
+maifip/media.php | maifip | GET,POST | N | N | N | N | N | N | N | N
+maifip/monthly_report.php | maifip | GET,POST | Y | Y | N | Y | Y | N | N | Y
+maifip/monthly_report_export.php | maifip | GET,POST | Y | N | N | Y | Y | N | N | Y
+maifip/monthly_report_print.php | maifip | GET,POST | Y | N | N | Y | Y | N | N | Y
+maifip/monthly_report_settings.php | maifip | GET,POST | Y | Y | Y | Y | N | N | N | Y
+maifip/notifications_api.php | maifip | GET,POST | Y | N | N | N | N | N | N | N
+maifip/offices.php | maifip | GET,POST | Y | Y | Y | Y | Y | N | Y | Y
+maifip/offline_changes.php | maifip | GET,POST | Y | N | N | Y | Y | Y | N | Y
+maifip/offline_resolve.php | maifip | GET,POST | Y | Y | Y | Y | Y | Y | Y | Y
+maifip/offline_sync.php | maifip | GET,POST | Y | Y | Y | Y | Y | Y | Y | Y
+maifip/record_form.php | maifip | GET,POST | Y | Y | Y | Y | Y | Y | Y | Y
+maifip/records.php | maifip | GET,POST | Y | Y | N | Y | Y | N | N | Y
+maifip/records_search.php | maifip | GET,POST | Y | Y | N | Y | Y | N | N | N
+maifip/register.php | maifip | GET,POST | Y | Y | Y | N | Y | N | N | N
+maifip/status_update.php | maifip | GET,POST | Y | Y | Y | Y | Y | N | Y | Y
+maifip/switch.php | maifip | GET,POST | Y | N | N | N | N | N | N | N
+maifip/ticket_create.php | maifip | GET,POST | Y | Y | Y | Y | Y | Y | Y | Y
+maifip/ticket_edit.php | maifip | GET,POST | Y | Y | Y | Y | Y | N | Y | Y
+maifip/ticket_review.php | maifip | GET,POST | Y | Y | Y | Y | Y | N | Y | Y
+maifip/tickets.php | maifip | GET,POST | Y | Y | Y | Y | Y | N | Y | Y
+maifip/trash.php | maifip | GET,POST | Y | Y | Y | Y | Y | N | Y | Y
+maifip/user.php | maifip | GET,POST | Y | N | N | N | N | N | N | N
+maifip/users.php | maifip | GET,POST | Y | Y | Y | Y | Y | N | Y | Y
+maifip/usertypes.php | maifip | GET,POST | Y | Y | Y | Y | N | N | N | Y
+portal/select-system.php | portal | GET,POST | Y | Y | Y | Y | N | N | N | N
+
+MANUAL REVIEW FINDINGS / TEST REQUIREMENTS:
+1. Portal selector is `portal/select-system.php`; its POST selection requires the portal CSRF token and an authenticated LPGMA identity in the portal session.
+2. AICS record visibility is intentionally centralized across SWAD offices. Mutation checks remain office-scoped; test both permitted cross-office viewing and denied cross-office editing/status/deletion.
+3. MAIFIP records and CSV exports must remain qualified by the authenticated active facility. Test identifier replay against a second facility.
+4. AICS and MAIFIP import paths require independent negative tests for cross-workspace data, duplicate Control No./legacy number, duplicate rows, locked/finalized records, malformed uploads, oversized uploads and stale preview submissions.
+5. Offline synchronization is MAIFIP-only in this package. Test CREATE vs UPDATE permissions, facility binding, replayed client_change_id, duplicate payload mismatch, stale record_version, conflict resolution, and the 100-change request cap.
+6. Retryable business mutations must be tested for atomic business-write + idempotency/audit/history behavior, including rollback on injected failure.
+7. CSV record/report exports and browser-generated Excel sheets now neutralize spreadsheet formula prefixes in text cells. Browser-generated AICS/MAIFIP sheet exports and print/PDF actions now call workspace-specific POST+CSRF+export-capability audit endpoints before generating the file. Test payloads beginning with =, +, -, @, tab and leading whitespace before formula prefixes in Excel and LibreOffice.
+8. AICS expiry is an application-triggered system batch: it locks expired WAITING records, increments record versions, writes status history and system audit events in a transaction. It is not a separate cron worker. Test repeated concurrent page requests and ensure each record is cancelled/audited once.
+9. No dedicated scheduled import/export/offline worker was found in the registered PHP workspace endpoints. Deployment-level cron, hosting scheduler, queue workers and external scripts still require operator inventory.
+
+REQUIRED STAGING ACCOUNT MATRIX:
+- AICS local SWAD Social Worker: own-office mutation allowed; other-office read visibility according to Region II policy; other-office mutation denied.
+- AICS LPGMA Administrator: authorized cross-office administration, but workspace permission checks still apply.
+- MAIFIP facility Social Worker / Encoder: own-facility records only; disallowed create/edit/status operations denied according to role capabilities.
+- MAIFIP LPGMA Administrator: authorized central administration; verify cross-facility policy and no AICS permission inheritance.
+- Central LPGMA non-admin: only explicit target-workspace capabilities; no administrator escalation or role inheritance.
+
+STAGING EXECUTION GATE:
+- Configure an isolated MySQL/MariaDB database whose name contains `staging` or `test`; never point tests at production.
+- Enable PDO MySQL in the PHP CLI used for tests.
+- Create separate test accounts and synthetic records in at least two SWAD offices and two MAIFIP facilities.
+- Execute every route-specific test in the registry: anonymous, wrong method, missing/expired CSRF, denied capability, cross-scope identifier replay, workflow-state violation, duplicate/replay, rollback, audit outcome.
+- Verify session invalidation after account role/user-type policy changes across two independent sessions.
+- Execute concurrency tests for idempotency keys, version compare-and-swap, imports, status transitions, ticket review and offline conflict resolution.
+- Capture HTTP status, response, database before/after state, audit rows, session state and generated export contents.
+- Any failed or untested critical case blocks production-readiness sign-off.
+
+CONCLUSION:
+The source-level reconciliation, CSV neutralization, and browser-generated export authorization/audit hooks are complete for this package. The authorization foundation is NOT certified production-ready until the isolated authenticated staging matrix above is executed and signed off.

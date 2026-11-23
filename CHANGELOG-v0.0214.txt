@@ -1,0 +1,23 @@
+FAMS Region II Unified — v0.0214
+Fund opening-balance safeguards and MAIFIP audited adjustments
+
+AICS
+- Added an explicit duplicate BEGINNING BALANCE guard to the AICS fund ledger position calculation.
+- The calculation now stops with a clear conflict message rather than silently choosing the latest of multiple applicable opening-balance rows.
+
+MAIFIP
+- Added duplicate BEGINNING BALANCE guards to both monthly opening-balance and current fund-position calculations, scoped to the active facility.
+- Removed monthly_report_settings.downloaded_balance from the authoritative downloaded-funds calculation. Existing saved values are retained and are no longer used to replace actual fund_downloads totals.
+- Added a facility-scoped append-only adjustment ledger contract and a separate SQL migration.
+- Replaced the old monthly downloaded-balance update endpoint behavior with an authorized, CSRF-protected, reason-required signed adjustment entry, recorded in the same transaction as a critical audit event.
+- Included adjustment amounts in monthly opening-balance roll-forward and MAIFIP fund-position calculations.
+- The monthly report worksheet and print report now distinguish actual downloads from adjustments in the balance calculation; print output discloses the period adjustment total.
+
+Database
+- Apply MIGRATION-v0.0214-MAIFIP-FUND-ADJUSTMENTS.sql before using MAIFIP fund adjustments or loading MAIFIP monthly reports under this release.
+- Migration is additive. It does not delete or rewrite monthly_report_settings values and does not modify production data automatically.
+
+Limitations
+- No live database, staging database, or beneficiary data was accessed.
+- No database integration, browser end-to-end, concurrency, or export interoperability tests were possible in this source-only pass.
+- Historical manual monthly overrides are preserved as legacy reference data; this release no longer applies them to calculated balances. Reconciliation of their intended accounting treatment remains an administrative review task.

@@ -1,0 +1,12 @@
+FAMS Region II Unified — v0.0170
+MAIFIP masterlist native table scrolling reconstruction
+
+- Replaced the custom four-sided synchronized scrollbar structure with one native .table-wrap viewport around the MAIFIP masterlist table.
+- Removed mirrored top/bottom horizontal and left/right vertical scrollbar elements from records.php.
+- Removed the obsolete scroll-position synchronization logic from MAIFIP app.js; retained a compatibility no-op for existing partial-navigation callers.
+- Removed legacy custom-scrollbar CSS selectors and competing scroll geometry declarations from MAIFIP app.css.
+- Established one canonical MAIFIP masterlist scrollport: horizontal overflow belongs to the table wrapper; vertical scrolling remains with the page rather than an enclosing section or mirrored scrollbar.
+- Preserved the table's nine-column proportions and action/status controls; set a stable 1450px table width so narrow viewports scroll the table itself.
+- Updated AICS and MAIFIP application cache versions to 0.0170.
+
+Validation scope: PHP syntax, JavaScript syntax, CSS structural checks, markup/source assertions, and ZIP integrity. Live authenticated browser interaction and database workflows are not available in this build environment.

@@ -1,0 +1,22 @@
+FAMS Region II Unified — v0.0215
+Fund Ledger Classification and 2026 Opening-Balance Baseline
+
+Changes
+- Established January 1, 2026 as the effective opening date for the current fund ledger in AICS and MAIFIP.
+- A verified 2025 remaining balance is the opening amount. If no carryover exists, the calculation baseline is zero and the supplied migration creates an explicit zero opening row.
+- Ordinary fund downloads dated January 1, 2026 or later are additions, not opening balances.
+- AICS and MAIFIP fund-entry endpoints now reject the reserved BEGINNING BALANCE batch label and prevent ordinary fund-entry editing of existing opening-balance rows.
+- MAIFIP monthly downloaded-balance calculation now checks the entire reporting-month boundary for invalid or duplicate 2026 opening-balance classifications.
+- AICS and MAIFIP 2026 ledger calculations use the single January 1, 2026 anchor (or zero when absent) and exclude pre-2026 historical balances from the new baseline.
+- MAIFIP retains its facility-scoped calculations and monthly-summary fallback for completed months without live released records.
+- Synchronized AICS and MAIFIP application version markers to 0.0215.
+
+Retroactive data correction
+- Added MIGRATION-v0.0215-2026-FUND-OPENING-CLASSIFICATION.sql.
+- The migration preserves rows whose fund_source explicitly identifies 2025 REMAINING BALANCE, normalizes those carryovers to January 1, 2026, reclassifies other 2026+ BEGINNING BALANCE rows as ordinary FUND DOWNLOAD entries, and inserts zero opening rows where no carryover is identified.
+- Review the migration preflight result and back up the database before manual execution. The migration is not run by the application and has not been applied to production.
+
+Scope and limitations
+- AICS retains its existing no-adjustment ledger policy. MAIFIP retains its audited adjustment ledger.
+- This release does not claim database-backed reconciliation or runtime authorization testing. A staging database with MySQL access is required for those tests.
+- Existing MAIFIP report/print/export calculation parity still requires a separate shared monthly calculation-result pass; this release addresses opening-balance classification and baseline behavior only.

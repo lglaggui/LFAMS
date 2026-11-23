@@ -1,0 +1,8 @@
+FAMS Region II v0.0094
+
+- Tightened MAIFIP masterlist horizontal cell spacing while retaining columns.
+- Added an explicit My Account shortcut to AICS admin account management, using the existing self-service profile/avatar/password interface.
+- Added administrator-only SWAD office removal, guarded against assigned users, assistance records, and child offices; actions are logged.
+- Refined MAIFIP action-log pagination with compact page numbers, first/previous/next/last controls, disabled states, and a filtered page-jump form.
+- Adjusted logout label overflow constraints to prevent clipping in expanded desktop profile cards; narrow layouts retain the icon-only treatment.
+- Updated MAIFIP and AICS version to 0.0094.
